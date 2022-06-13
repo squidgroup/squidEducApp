@@ -1,0 +1,2 @@
+# squidEducApp
+SQuID educational material
