@@ -5,7 +5,7 @@
 5) global.R sources all files required anywhere else, as  stored under any folder in ./sources, except for some CSS and javascript files. global.R never has to be modified, unless a library is added since those are also loaded here.
 6) upon making a new app from "base_structure", various include files and folders will need to be cleaned up, since everything that is stored in /sources is loaded by default.
 
-
+--to be updated--
 Apps 1-4: previously module 1 steps 1-4
 Apps 5-7: previously module 2 steps 1-3
 Apps 8-10: previously module 3 steps 1-3
