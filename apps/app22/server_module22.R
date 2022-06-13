@@ -118,12 +118,12 @@ c(
             Phenotype_mean <- as.matrix(predictors) %*% as.vector(input$Mod5Step1_B)
             Phenotype_mean <- t(matrix(Phenotype_mean, nrow = length(X_seq), ncol = length(X_seq)))
             
-            plotly::plot_ly(hoverinfo = "none")  %>%
-               plotly::add_surface(x = X_seq, y = X_seq, z = Phenotype_mean, opacity = 0.7,
+            plot_ly(hoverinfo = "none")  %>%
+               add_surface(x = X_seq, y = X_seq, z = Phenotype_mean, opacity = 0.7,
                            colorscale = list(c(0, 1), c("black", "black"))) %>%
-               plotly::add_markers(data = data, x = ~X1, y = ~X2, z = ~Phenotype, color = ~Individual, size=4) %>%
-               plotly::layout(showlegend = FALSE) %>%
-               plotly::hide_colorbar()
+               add_markers(data = data, x = ~X1, y = ~X2, z = ~Phenotype, color = ~Individual, size=4) %>%
+               layout(showlegend = FALSE) %>%
+               hide_colorbar()
             
          }else{defaultPlot()}
       
@@ -154,12 +154,12 @@ c(
             data <- as.data.table(data)
             data <- data[I %in% c(I.min, I.med, I.max)]
             
-            plotly::plot_ly(hoverinfo = "none")  %>%
-               plotly::add_surface(x = X_seq, y = X_seq, z = Phenotype_mean, opacity = 0.7,
+            plot_ly(hoverinfo = "none")  %>%
+               add_surface(x = X_seq, y = X_seq, z = Phenotype_mean, opacity = 0.7,
                            colorscale = list(c(0, 1), c("black", "black"))) %>%
-               plotly::add_markers(data = data, x = ~X1, y = ~X2, z = ~Phenotype, color = ~Individual, size=4) %>%
-               plotly::layout(showlegend = FALSE) %>%
-               plotly::hide_colorbar()
+               add_markers(data = data, x = ~X1, y = ~X2, z = ~Phenotype, color = ~Individual, size=4) %>%
+               layout(showlegend = FALSE) %>%
+               hide_colorbar()
             
          }else{defaultPlot()}
          
