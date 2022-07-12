@@ -1,0 +1,228 @@
+---
+title: "SQuID"
+output:
+  learnr::tutorial:
+    progressive: true
+    allow_skip: true
+    theme: cosmo
+    css: stylesheet.css
+runtime: shiny_prerendered
+description: >
+  Learn how to set up R and RStudio on your machine. We will also demonstrate
+  how to install R packages from CRAN, and install the tidyverse package.
+---
+<!--bootstrap, cerulean, cosmo, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, spacelab, united, yeti-->
+```{r setup, include=FALSE}
+library(learnr)
+knitr::opts_chunk$set(echo = FALSE)
+source("./variables/var_general.R")
+source("./variables/var_fullmodel.R")
+source("./variables/var_modules.R")
+source("./text/text.R")
+```
+
+## Start
+
+```{r, results="asis"}
+      cat(paste("###",portal_txt$parag0_title))
+      div(p(HTML(portal_txt$patag1_image),
+        HTML(portal_txt$parag0_contents_1)),
+      p(HTML(portal_txt$parag0_contents_2)))
+
+      cat(paste("###","Guidance for users"))
+      fluidRow(
+        column(width = 4,
+          h5("For Beginners"),
+          p(HTML(portal_txt$beginners))
+        ),
+        column(width = 4,
+          h5("For Teachers"),
+          p(HTML(portal_txt$teachers))
+        ),
+        column(width = 4,
+          h5("For Experts"),
+          p(HTML(portal_txt$experts))
+        )
+      )
+
+      cat(paste("###",portal_txt$parag3_title))
+      p(HTML(portal_txt$parag3_contents1))
+      p(HTML(portal_txt$parag3_contents2))
+
+      p(strong("References:"))
+      p(HTML("Allegue, H., Araya-Ajoy, Y. G., Dingemanse, N. J., Dochtermann, N. A., Garamszegi, L. Z., 
+              Nakagawa, S., Réale, D., Schielzeth, H.& Westneat, D. F. (2016) Statistical Quantification of 
+              Individual Differences: an educational and statistical tool for understanding multi-level phenotypic 
+              data in linear mixed models. <i>Methods in Ecology and Evolution</i>, 8, 257-267.
+              <a href='https://doi.org/10.1111/2041-210X.12659' target='_blank'>doi: 10.1111/2041-210X.12659</a>"))
+      p(HTML("Dingemanse, N. J.& Dochtermann, N. A. (2013) Quantifying individual variation in behaviour: 
+              mixed-effect modelling approaches. <i>Journal of Animal Ecology</i>, 82, 39-54.
+              <a href='https://doi.org/10.1111/1365-2656.12013' target='_blank'>doi: 10.1111/1365-2656.12013</a>"))
+
+```
+
+<!-- ## ![](images/logo_2.png){width="85"}**SQuID** -->
+
+<!-- ### Demonstration by Simulation -->
+
+
+<!-- ### Ecological model -->
+
+
+<!-- ### Modules -->
+
+
+###  Shiny
+
+We will make use of various shiny apps throughout this course to present key concepts in exploring individual differences and multilevel variation. A list ,and the code, for all shiny apps is available [here](https://github.com/squidgroup/squidEducApp).
+
+```{r quiz1, echo = FALSE}
+question("Which answer describes you best?",
+  answer("Beginner: I have little knowledge of LMMs or multilevel variation.", message = "*Start with Module 1", correct = TRUE),
+  answer("Intermediate user: I have prior knowledge of LMMs, multilevel variation, and/or statistical distributions.", message = "*Start with Module 3", correct = TRUE),
+  answer("Expert: I have extensive knowledge of the mixed-effects modeling framework and individual differences.", message = "*Fully explore the SQuID concept with the 'full model' modules", correct = TRUE),
+  answer("Teacher: I want my student to learn about mixed-effects models and patterns of phenotypic variance. ", message = "*Please skim the module titles to assess which are of most use for your student", correct = TRUE),
+  answer("None of the above.", correct = FALSE),
+  type = "single",
+  incorrect = "Eek, this might not  be the right place for you.",
+  correct=""
+)
+```
+
+## Module 1: Basic lessons about variance
+
+<!-- ```{r} -->
+<!-- knitr::include_app("https://gallery.shinyapps.io/001-hello/", height = "500px") -->
+<!-- ``` -->
+
+This module will help you to develop an understanding of hierarchies in variance, when individuals express traits repeatedly.
+
+In every case that we measure a trait, it is likely that we have some form of error in the measurement (for example due to poorly calibrated equipment). This error is assumed to be non-directional and represents only a small portion of the total variance `r paste0("$V_",NOT$total,"$")`.
+
+<object data='https://bertvdveen.shinyapps.io/app1/' frameborder="0" style="width: 100%; height: 850px;overflow:hidden;display:block"></object>
+
+
+```{r quizn, echo = FALSE}
+question("What did you explore in the above app?",
+  answer("Measurement error", correct = TRUE),
+  answer("Number of individuals", correct = FALSE),
+  type = "learnr_radio",
+  allow_retry = TRUE,
+  random_answer_order = TRUE
+)
+```
+
+
+<!-- ```{css, echo=FALSE} -->
+<!-- .iframe{ -->
+<!-- box-shadow: none !important; -->
+<!-- border: none; -->
+<!-- frameborder: 0; -->
+<!-- } -->
+<!-- ``` -->
+
+
+<!-- ```{r, out.width="105%",screenshot.opts = list(delay = 10)} -->
+<!-- knitr::include_app("https://bertvdveen.shinyapps.io/app1/", height="1000px") -->
+<!-- ``` -->
+
+-- exercise Use the below app to explore contribution of the measurement error term. Measurement error variance should not be high in real world examples, lower than 5% of the total variance, but of course some traits can be associated with much higher measurement error. 
+
+An explanation of notation: There are several kinds of unaccounted variance in a statistical model. This are called, variously, “error variance” or “residual variance”.  Measurement error is one source of this variance, but as you will see below, not all unaccounted variance is the result of error. To distinguish these with notation, we will use “Vm” for measurement error and VR for the more general residual variance. In this particular step, VR = Vm. 
+
+Note that in this module, the total phenotypic variance (VP) is restrained to 1. This will allow a better understanding of the proportions of the different model variance components.
+
+
+
+*Here's a simple exercise with an empty code chunk provided for entering the answer.*
+
+Write the R code required to add two plus two:
+
+```{r two-plus-two, exercise=TRUE}
+
+```
+
+### Exercise with Code
+
+*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
+
+Now write a function that adds any two numbers and then call it:
+
+```{r add-function, exercise=TRUE, exercise.lines = 5}
+add <- function() {
+  
+}
+```
+
+## Module 2
+
+### Exercise with Hint
+
+*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
+
+Modify the following code to limit the number of rows printed to 5:
+
+```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
+mtcars
+```
+
+```{r print-limit-hint}
+head(mtcars)
+```
+
+### Quiz
+
+*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+
+Some questions to verify that you understand the purposes of various base and recommended R packages:
+
+```{r quiz}
+quiz(
+  question("Which package contains functions for installing other R packages?",
+    answer("base"),
+    answer("tools"),
+    answer("utils", correct = TRUE),
+    answer("codetools")
+  ),
+  question("Which of the R packages listed below are used to create plots?",
+    answer("lattice", correct = TRUE),
+    answer("tools"),
+    answer("stats"),
+    answer("grid", correct = TRUE)
+  )
+)
+```
+
+## Module 3
+
+## Module 4
+
+## Module 5
+
+## Module 6
+
+### Test your knowledge
+
+```{r quiz2, echo=FALSE}
+quiz(caption = "Quiz - Install R",
+  question("Is R free to download and use?",
+    answer("Yes!", correct = TRUE, message = "R is free _and_ open source, which means that anyone can read, use, and copy the source code of the R language."),
+    answer("No.")
+  ),
+  question("Where do you download R?",
+    answer("www.rstudio.com/download"),
+    answer("[cloud.r-project.org](http://cloud.r-project.org)", correct = TRUE, message = "You can also download R from [cran.r-project.org](http://cran.r-project.org)"),
+    answer("www.r-project.org", message = "Good try, but not exactly. www.r-project.org doesn't provide a download link, but it does provide a link to one the websites above."),
+    answer("www.r.com"),
+    allow_retry = TRUE
+  ),
+  question("How often should you update R?",
+    answer("Everytime you use it", message = "This will be too often unless you use R very rarely!"),
+    answer("About once a year", correct = TRUE, "A new version of R is released about once a year. Update sooner if you encounter a bug that you cannot explain."),
+    answer("Never", message = "A new version of R is released about once a year. I'll assume that you are using the newest version of R, which will be the fastest version with the fewest unexpected behaviors." ),
+    allow_retry = TRUE
+  )
+)
+```
+
+## List of separate shiny apps

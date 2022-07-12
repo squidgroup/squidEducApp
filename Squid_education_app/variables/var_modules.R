@@ -4,7 +4,7 @@ nb.IS <- 4
 
 Modules_VAR <- list(
   # Plot
-  "Plot"       = list( "width"  = "600px"
+  "Plot"       = list( "width"  = "80%"
   ),
   
   # Run Button
@@ -253,7 +253,7 @@ Modules_VAR <- list(
   "NR"   = list( "label"       = "Number of trait expressions:",
                  "infoTxt"     = "Number of measurements per individual.",
                  "value"       = 5,
-                 "min"         = 1,
+                 "min"         = 2,
                  "max"         = 100,
                  "step"        = 1,
                  "errorTxt"    = "Number of trait expressions must be an integer between 1 and 100."
@@ -415,7 +415,7 @@ Modules_VAR <- list(
   
   "share" = list("label"    = "Shared environment", 
                  "infoTxt"  = "(Shared) Individuals experience the same environment.",
-                 "value"    = TRUE
+                 "value"    = c(FALSE,TRUE)
   ),
   
   # Number of trait per individual
