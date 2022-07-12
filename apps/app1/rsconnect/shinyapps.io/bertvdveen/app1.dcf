@@ -1,0 +1,13 @@
+name: app1
+title: app1
+username:
+account: bertvdveen
+server: shinyapps.io
+hostUrl: https://api.shinyapps.io/v1
+appId: 6611014
+bundleId: 6082336
+url: https://bertvdveen.shinyapps.io/app1/
+when: 1657301578.54382
+lastSyncTime: 1657301578.54386
+asMultiple: FALSE
+asStatic: FALSE
