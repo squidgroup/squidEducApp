@@ -4,7 +4,7 @@ nb.IS <- 4
 
 Modules_VAR <- list(
   # Plot
-  "Plot"       = list( "width"  = "600px"
+  "Plot"       = list( "width"  = "80%"
   ),
   
   # Run Button

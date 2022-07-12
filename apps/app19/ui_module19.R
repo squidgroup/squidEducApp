@@ -45,9 +45,11 @@ span(
 	column(5,
 	       plotOutput("Mod4Step3_correlationplot2", width = Modules_VAR$Plot$width)
 	)
-),
-
+	),
+	fluidRow(align="center",
+	         
 	plotOutput("Mod4Step3_correlationplot3", width = Modules_VAR$Plot$width),
+	),	
 	
 	fluidRow(align="center",
 	         actionButton("show", label = "Show some maths"),

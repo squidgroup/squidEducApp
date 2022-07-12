@@ -17,7 +17,10 @@ shinyUI(
                           console.log(message)
                           eval(message.code); 
                         });')),
-      tags$script( "MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ]}});", type='text/x-mathjax-config')
+      tags$script( "MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ]}});", type='text/x-mathjax-config'),
+      tags$style(
+        "body {overflow-x: hidden;}"
+      )
     ),
     #################### Module ##################################################################################################
     isolate({

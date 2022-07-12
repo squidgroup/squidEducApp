@@ -4,6 +4,7 @@ library(shiny)
 library(squid)
 library(ggtext)
 library(ggplot2)
+library(lme4)
 
 # Obtain directories in /source for loading
 dirs <- list.dirs("./source",recursive = F)

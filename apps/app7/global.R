@@ -1,5 +1,4 @@
 library(shinyMatrix)
-library(plotly)
 library(shiny)
 library(squid)
 library(ggtext)

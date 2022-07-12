@@ -4,6 +4,7 @@
 
 shinyUI(
   fluidPage(
+    useShinyjs(),
     #### Header  ####
     #### CSS and Javascipt file ####  
     tags$head(
@@ -16,12 +17,15 @@ shinyUI(
                           console.log(message)
                           eval(message.code); 
                         });')),
-      tags$script( "MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ]}});", type='text/x-mathjax-config')
+      tags$script( "MathJax.Hub.Config({tex2jax: {inlineMath: [['$','$'], ]}});", type='text/x-mathjax-config'),
+      tags$style(
+        "body {overflow-x: hidden;}"
+      )
     ),
     #################### Module ##################################################################################################
     isolate({
     path <- paste0("./","ui_module",gsub("[^0-9.-]", "", getwd()),".R")
-    source(path, local=TRUE)
+    source(path, local=TRUE)[1]
     }),
     ################### End ###################################################################################################
     #### Footer ####

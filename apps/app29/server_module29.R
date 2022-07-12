@@ -62,10 +62,10 @@ c(
             data <- squid::squidR(input, module = "Mod8Step2")  
             
             # model [1] with witouth random slope in X interaction
-            LMR1      <- lme4::lmer(Phenotype ~ 1 + X1*X2 + (1+X1+X2|Individual), data = data$sampled_data)
-            FIXEF1    <- lme4::fixef(LMR1)
+            LMR1      <- lmer(Phenotype ~ 1 + X1*X2 + (1+X1+X2|Individual), data = data$sampled_data)
+            FIXEF1    <- fixef(LMR1)
             SE.FIXEF1 <- arm::se.fixef(LMR1)
-            RANDEF1   <- as.data.frame(lme4::VarCorr(LMR1))$vcov
+            RANDEF1   <- as.data.frame(VarCorr(LMR1))$vcov
             
             data$LMR1        <- LMR1
 
@@ -90,10 +90,10 @@ c(
             data$se.B12_1    <- round(SE.FIXEF1["X1:X2"],2)
             
             # model [2] with witouth random slope in X interaction
-            LMR2      <- lme4::lmer(Phenotype ~ 1 + X1*X2 + (1+X1*X2|Individual), data = data$sampled_data)
-            FIXEF2    <- lme4::fixef(LMR2)
+            LMR2      <- lmer(Phenotype ~ 1 + X1*X2 + (1+X1*X2|Individual), data = data$sampled_data)
+            FIXEF2    <- fixef(LMR2)
             SE.FIXEF2 <- arm::se.fixef(LMR2)
-            RANDEF2   <- as.data.frame(lme4::VarCorr(LMR2))$vcov
+            RANDEF2   <- as.data.frame(VarCorr(LMR2))$vcov
             
             data$LMR2        <- LMR2
             
@@ -255,7 +255,7 @@ c(
                                                "X2" = X2_seq))
                     X$X1X2 <- X$X1 * X$X2
                     
-                    blup <- as.numeric(lme4::ranef(lmr)$Individual[id, ])
+                    blup <- as.numeric(ranef(lmr)$Individual[id, ])
                     
                     Phenotype <- as.matrix(X) %*% (as.vector(input$Mod8Step2_B) + blup)
                     Phenotype <- t(matrix(Phenotype, nrow = length(X1_seq), ncol = length(X2_seq)))
