@@ -5,49 +5,196 @@ output:
     progressive: true
     allow_skip: true
     theme: cosmo
-    css: stylesheet.css
+    css: css/stylesheet.css
 runtime: shiny_prerendered
 description: >
-  Learn how to set up R and RStudio on your machine. We will also demonstrate
-  how to install R packages from CRAN, and install the tidyverse package.
+  SQuID integrated learning environment
 ---
-<!--bootstrap, cerulean, cosmo, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, spacelab, united, yeti-->
+<!--bootstrap, cerulean, cosmo, darkly, flatly, journal, lumen, paper, readable, sandstone, simplex, spacelab, united, yeti rmarkdown themes-->
 ```{r setup, include=FALSE}
+#devtools::install_github("rundel/learnrhash")
+library(shiny)
 library(learnr)
 knitr::opts_chunk$set(echo = FALSE)
 source("./variables/var_general.R")
 source("./variables/var_fullmodel.R")
 source("./variables/var_modules.R")
-source("./text/text.R")
+source("./text/text.R")  
+#any text with equation in it should be wrapped in a <p></p> in order for cat(.) to properly print it. 
+#but not titles because then things get messed up.
+for(i in 1:length(text)){
+  list.idx <- !grepl("*[t]itle*|*image*",names(text[[i]]),ignore.case = T)
+  if(any(list.idx)){
+    text[[i]][list.idx] <- rapply(text[[i]][list.idx],function(x)paste0("<p>",x,"</p>"),how="replace")
+  }
+}
+#place each list element into the global environment
+list2env(text, names(text),envir=.GlobalEnv)
+source("./submission.R")
+ 
+# display R code in console format
+displayRCode <- function(RCode){
+  return(wellPanel(class="highlight-source-r ", HTML(paste0("<h3>R code:</h3>", RCode))))
+}
+tut_reptitle <- "SQuID course"
+
+#code to allow a certain amount of retries: question_module_server_impl <- function(
+question_module_server_impl <-function (input, output, session, question, question_state = NULL) 
+{
+  ns <- getDefaultReactiveDomain()$ns
+  # new ============================
+  # set counter
+  val <- reactiveValues(
+    numtry = 0
+  )
+  # ================================
+  
+  question$seed <- learnr:::random_seed()
+  submitted_answer <- reactiveVal(NULL, label = "submitted_answer")
+  is_correct_info <- reactive(label = "is_correct_info", {
+    if (is.null(submitted_answer())) 
+      return(NULL)
+    ret <- question_is_correct(question, submitted_answer())
+    # new : Increment counter =======
+    isolate(val$numtry <- val$numtry+1)
+    # ===============================
+    if (!inherits(ret, "learnr_mark_as")) {
+      stop("`question_is_correct(question, input$answer)` must return a result from `correct`, `incorrect`, or `mark_as`")
+    }
+    ret
+  })
+  is_done <- reactive(label = "is_done", {
+    if (is.null(is_correct_info())) 
+      return(NULL)
+    # updated ====================================================
+    (!isTRUE(question$allow_retry>0)) || is_correct_info()$correct
+    # ============================================================
+  })
+  button_type <- reactive(label = "button type", {
+    if (is.null(submitted_answer())) {
+      "submit"
+    }
+    else {
+      if (is.null(is_correct_info())) {
+        stop("`is_correct_info()` is `NULL` in a place it shouldn't be")
+      }
+      if (is_correct_info()$correct) {
+        "correct"
+      } else {
+        # not correct
+        # updated =====================================
+        if (isTRUE(val$numtry<question$allow_retry)|(question$allow_retry&is.logical(question$allow_retry))) {
+          # not correct, but may try again
+          "try_again"
+        } else {
+          # not correct and can not try again
+          "incorrect"
+        }
+      }
+    }
+  })
+  answer_is_valid <- reactive(label = "answer_is_valid", {
+    if (is.null(submitted_answer())) {
+      learnr:::question_is_valid(question, input$answer)
+    }
+    else {
+      learnr:::question_is_valid(question, submitted_answer())
+    }
+  })
+  init_question <- function(restoreValue = NULL) {
+    if (question$random_answer_order) {
+      is_visible_option <- !learnr:::answer_type_is_function(question$answers)
+      question$answers[is_visible_option] <<- learnr:::shuffle(question$answers[is_visible_option])
+    }
+    submitted_answer(restoreValue)
+  }
+  past_submission_answer <- learnr:::retrieve_question_submission_answer(session, 
+                                                                question$label)
+  init_question(past_submission_answer)
+  output$action_button_container <- renderUI({
+    learnr:::question_button_label(question, button_type(), answer_is_valid())
+  })
+  output$message_container <- renderUI({
+    req(!is.null(is_correct_info()), !is.null(is_done()))
+    learnr:::withLearnrMathJax(learnr:::question_messages(question, messages = is_correct_info()$messages, 
+                                        is_correct = is_correct_info()$correct, is_done = is_done()))
+  })
+  output$answer_container <- renderUI({
+    if (is.null(submitted_answer())) {
+      return(learnr:::withLearnrMathJax(question_ui_initialize(question, 
+                                                      isolate(input$answer))))
+    }
+    if (is.null(is_done())) {
+      return(NULL)
+    }
+    if (is_done()) {
+      return(learnr:::withLearnrMathJax(question_ui_completed(question, 
+                                                     submitted_answer())))
+    }
+    return(learnr:::withLearnrMathJax(question_ui_try_again(question, 
+                                                   submitted_answer())))
+  })
+  observeEvent(input$action_button, {
+    if (button_type() == "try_again") {
+      submitted_answer(NULL)
+      learnr:::event_trigger(session, "reset_question_submission", 
+                    data = list(label = as.character(question$label), 
+                                question = as.character(question$question)))
+      return()
+    }
+    submitted_answer(input$answer)
+    learnr:::event_trigger(session = session, event = "question_submission", 
+                  data = list(label = as.character(question$label), 
+                              question = as.character(question$question), answer = as.character(input$answer), 
+                              correct = is_correct_info()$correct))
+  })
+  observe({
+    req(submitted_answer(), is.reactive(question_state))
+    current_answer_state <- list(type = "question", answer = submitted_answer(), 
+                                 correct = is_correct_info()$correct)
+    question_state(current_answer_state)
+  })
+}
+assignInNamespace("question_module_server_impl",question_module_server_impl,ns="learnr")
+
 ```
 
 ## Start
 
-```{r, results="asis"}
-      cat(paste("###",portal_txt$parag0_title))
-      div(p(HTML(portal_txt$patag1_image),
-        HTML(portal_txt$parag0_contents_1)),
-      p(HTML(portal_txt$parag0_contents_2)))
+```{r portal, results="asis"}
+#1st section
+      cat("###",portal_txt$parag0_title)
 
-      cat(paste("###","Guidance for users"))
+      cat(portal_txt$patag1_image)
+      HTML(portal_txt$parag0_contents_1)
+      cat(portal_txt$parag0_contents_2)
+
+      #2nd section
+      cat("###","Guidance for Users")
+            
       fluidRow(
         column(width = 4,
           h5("For Beginners"),
-          p(HTML(portal_txt$beginners))
+          HTML(portal_txt$beginners)
         ),
         column(width = 4,
           h5("For Teachers"),
-          p(HTML(portal_txt$teachers))
+          HTML(portal_txt$teachers)
         ),
         column(width = 4,
           h5("For Experts"),
-          p(HTML(portal_txt$experts))
+          HTML(portal_txt$experts)
         )
       )
+      
 
-      cat(paste("###",portal_txt$parag3_title))
-      p(HTML(portal_txt$parag3_contents1))
-      p(HTML(portal_txt$parag3_contents2))
+      #3rd section
+      cat("###",portal_txt$parag3_title)
+
+      HTML(portal_txt$parag3_contents1)
+      cat(portal_txt$parag3_contents2)
+
+      cat(portal_txt$patag3_image)
 
       p(strong("References:"))
       p(HTML("Allegue, H., Araya-Ajoy, Y. G., Dingemanse, N. J., Dochtermann, N. A., Garamszegi, L. Z., 
@@ -59,18 +206,9 @@ source("./text/text.R")
               mixed-effect modelling approaches. <i>Journal of Animal Ecology</i>, 82, 39-54.
               <a href='https://doi.org/10.1111/1365-2656.12013' target='_blank'>doi: 10.1111/1365-2656.12013</a>"))
 
+
+
 ```
-
-<!-- ## ![](images/logo_2.png){width="85"}**SQuID** -->
-
-<!-- ### Demonstration by Simulation -->
-
-
-<!-- ### Ecological model -->
-
-
-<!-- ### Modules -->
-
 
 ###  Shiny
 
@@ -78,29 +216,34 @@ We will make use of various shiny apps throughout this course to present key con
 
 ```{r quiz1, echo = FALSE}
 question("Which answer describes you best?",
-  answer("Beginner: I have little knowledge of LMMs or multilevel variation.", message = "*Start with Module 1", correct = TRUE),
+  answer("Beginner: I have little knowledge of LMMs or multilevel variation.", message = "Start with Module 1", correct = TRUE),
   answer("Intermediate user: I have prior knowledge of LMMs, multilevel variation, and/or statistical distributions.", message = "*Start with Module 3", correct = TRUE),
-  answer("Expert: I have extensive knowledge of the mixed-effects modeling framework and individual differences.", message = "*Fully explore the SQuID concept with the 'full model' modules", correct = TRUE),
+  answer("Expert: I have extensive knowledge of the mixed-effects modeling framework and individual differences.", message = "Fully explore the SQuID concept with the 'full model' modules", correct = TRUE),
   answer("Teacher: I want my student to learn about mixed-effects models and patterns of phenotypic variance. ", message = "*Please skim the module titles to assess which are of most use for your student", correct = TRUE),
   answer("None of the above.", correct = FALSE),
   type = "single",
   incorrect = "Eek, this might not  be the right place for you.",
-  correct=""
+  correct=NULL
 )
+
 ```
 
-## Module 1: Basic lessons about variance
+```{r quiz2}
+question("Which is good",answer("good",correct=TRUE),
+         answer("bad",correct=F),
+         allow_retry=2)
+```
+### (optional) Save progress report
 
-<!-- ```{r} -->
-<!-- knitr::include_app("https://gallery.shinyapps.io/001-hello/", height = "500px") -->
-<!-- ``` -->
+```{r context="setup"}
+submission_ui
+```
 
-This module will help you to develop an understanding of hierarchies in variance, when individuals express traits repeatedly.
+```{r context="server"}
+submission_server()
+```
 
-In every case that we measure a trait, it is likely that we have some form of error in the measurement (for example due to poorly calibrated equipment). This error is assumed to be non-directional and represents only a small portion of the total variance `r paste0("$V_",NOT$total,"$")`.
-
-<object data='https://bertvdveen.shinyapps.io/app1/' frameborder="0" style="width: 100%; height: 850px;overflow:hidden;display:block"></object>
-
+<!-- <object data='https://bertvdveen.shinyapps.io/app1/' frameborder="0" style="width: 100%; height: 850px;overflow:hidden;display:block"></object> 
 
 ```{r quizn, echo = FALSE}
 question("What did you explore in the above app?",
@@ -111,118 +254,839 @@ question("What did you explore in the above app?",
   random_answer_order = TRUE
 )
 ```
+-->
 
+## Module 1: Basic lessons about variance
 
-<!-- ```{css, echo=FALSE} -->
-<!-- .iframe{ -->
-<!-- box-shadow: none !important; -->
-<!-- border: none; -->
-<!-- frameborder: 0; -->
-<!-- } -->
-<!-- ``` -->
-
-
-<!-- ```{r, out.width="105%",screenshot.opts = list(delay = 10)} -->
-<!-- knitr::include_app("https://bertvdveen.shinyapps.io/app1/", height="1000px") -->
-<!-- ``` -->
-
--- exercise Use the below app to explore contribution of the measurement error term. Measurement error variance should not be high in real world examples, lower than 5% of the total variance, but of course some traits can be associated with much higher measurement error. 
-
-An explanation of notation: There are several kinds of unaccounted variance in a statistical model. This are called, variously, “error variance” or “residual variance”.  Measurement error is one source of this variance, but as you will see below, not all unaccounted variance is the result of error. To distinguish these with notation, we will use “Vm” for measurement error and VR for the more general residual variance. In this particular step, VR = Vm. 
-
-Note that in this module, the total phenotypic variance (VP) is restrained to 1. This will allow a better understanding of the proportions of the different model variance components.
-
-
-
-*Here's a simple exercise with an empty code chunk provided for entering the answer.*
-
-Write the R code required to add two plus two:
-
-```{r two-plus-two, exercise=TRUE}
-
+```{r mod1_step1_title, results="asis"}
+  cat("###",Mod1Step1_txt$title)
 ```
 
-### Exercise with Code
+```{r mod1_step1, results="asis"}
+  #### Subgoal ####
+  cat(Mod1Step1_txt$subgoal)   # Text: subgoal
+  #### Introduction ####
+  cat(Mod1Step1_txt$intro)      # Text: introduction
 
-*Here's an exercise with some prepopulated code as well as `exercise.lines = 5` to provide a bit more initial room to work.*
-
-Now write a function that adds any two numbers and then call it:
-
-```{r add-function, exercise=TRUE, exercise.lines = 5}
-add <- function() {
   
+cat(Mod1Step1_txt$para1) # Text: Paragraph 1
+ 
+cat(Mod1Step1_txt$explanation1)  # Text: Notation explanation
+
+    #### Exercice ####
+    cat(Mod1Step1_txt$exercise)   # Text: exercise
+    cat(placeholder_image)
+    
+  #### Point ####
+    cat(Mod1Step1_txt$point) # Text: point
+  #### Solution ####
+  cat(Mod1Step1_txt$solutions)   # Text: solutions
+  
+  #### Statistical model ####
+  cat(module1_txt$statModTitle)
+  cat(Mod1Step1_txt$statmodel1)        # Text: statistical model paragraph 1
+  #### Eqaution 1 ####
+  p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$",sep=""))
+  cat(Mod1Step1_txt$statmodel2) # Text: statistical model paragraph 2
+
+  cat(Mod1Step1_txt$statmodel3)  # Text: statistical model paragraph 3
+  #### Eqaution 2 ####
+  p(paste("$$V_p=V_",NOT$devI,"+V_",NOT$mError,"$$",sep=""))
+```
+
+```{r mod1_step2_title, results="asis"}
+  cat("###",Mod1Step2_txt$title)
+```
+
+```{r mod1_step2, results="asis"}
+  cat(Mod1Step2_txt$subgoal)    # Text: subgoal
+  cat(Mod1Step2_txt$intro)      # Text: introduction
+  cat(Mod1Step2_txt$exercise)   # Text: exercise
+  cat(placeholder_image)
+  
+  cat(Mod1Step2_txt$para1)  # Text: paragraph 1
+
+  cat(Mod1Step2_txt$para2)
+  
+  cat(Mod1Step2_txt$para3)  # Text: paragraph 3
+  
+    cat(Mod1Step4_txt$para3)    # Text: statistical result
+    cat(Mod1Step2_txt$point)  # Text: point
+  
+    cat(Mod1Step2_txt$para4)  # Text: paragraph 4
+    p(withMathJax(paste("$$Repeatability=\\frac{V^\\prime_",NOT$devI,"}{V^\\prime_",NOT$devI,"+V^\\prime_",NOT$mError,"}$$",sep="")))
+    
+    cat(Mod1Step2_txt$para5)  # Text: paragraph 5
+  
+    # Scatter plot: measurements correlation
+    cat(Mod1Step2_txt$para6)  # Text: paragraph 6
+  
+  cat(module1_txt$statModTitle)
+  p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$",sep=""))
+  p(paste("$$V_",NOT$total,"=V_",NOT$devI,"+V_",NOT$mError,"$$",sep=""))
+```
+
+```{r mod1_step3_title, results="asis"}
+cat("###",Mod1Step3_txt$title)
+```
+
+```{r mod1_step3, results="asis"}
+  cat(Mod1Step3_txt$subgoal)   # Text: subgoal
+  cat(Mod1Step3_txt$intro)     # Text: introduction
+  cat(Mod1Step3_txt$exercise)  # Text: exercise
+  cat(Mod1Step3_txt$exercise2) # Text: exercise 2
+  
+  cat(placeholder_image) #app
+
+    cat(Mod1Step4_txt$para3)    # Text: statistical result
+
+  # Repeatability equation
+  cat(Mod1Step3_txt$para1)         # Text: paragraph 1
+  p(paste("$$Repeatability=\\frac{V^\\prime_",NOT$devI,"}{V^\\prime_",NOT$devI,"+V^\\prime_",NOT$residualUpper,"}$$",sep=""))
+
+  cat(Mod1Step3_txt$point)        # Text: point
+  cat(Mod1Step3_txt$point2)       # Text: point 2
+  cat(Mod1Step3_txt$point3)       # Text: point 3
+
+  cat(module1_txt$statModTitle)
+  cat(Mod1Step3_txt$statmodel)       # Text: statistical model 1
+  p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",
+          NOT$devI,"_",NOT$ind,"+",
+          NOT$error,"_{",NOT$time,NOT$ind,"}$$",sep=""))
+  cat(Mod1Step3_txt$statmodel2)     # Text: statistical model 2
+  p("The variance equation is now")
+  p(paste("$$V_",NOT$total,"=V_",NOT$devI,"+V_",NOT$residualUpper,"$$",sep=""))
+  p("where")
+  p(paste("$$V_",NOT$residualUpper,"=V_{",NOT$mean," ",NOT$env,"}+V_",NOT$mError,"$$",sep=""))
+```
+
+```{r ex1-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(squidSim)
+library(lme4)
+
+get_data <- function(n,r,Vi,Vr){
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("individual(",n,")"), repeat_obs=r),
+  parameters = list(
+    individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    )
+  )
+)
+  data <- get_population_data(squid_data)
+  colnames(data)[c(1,4)] <- c("Phenotype","Individual")
+  return(data)
+
 }
 ```
 
-## Module 2
-
-### Exercise with Hint
-
-*Here's an exercise where the chunk is pre-evaulated via the `exercise.eval` option (so the user can see the default output we'd like them to customize). We also add a "hint" to the correct solution via the chunk immediate below labeled `print-limit-hint`.*
-
-Modify the following code to limit the number of rows printed to 5:
-
-```{r print-limit, exercise=TRUE, exercise.eval=TRUE}
-mtcars
+```{r ex1, exercise=TRUE, warning=F, message=F}
+# n is the number of individuals
+# r is the number of repetitions for each individual
+# Vi is the variance for individuals
+# Vr is residual variance 
+data <- get_data(n = 50, r = 2, Vi = 0.5, Vr = 0.5)
+LMM <- lmer(Phenotype ~ 0 + (1|Individual), data = data)
+summary(LMM)
 ```
 
-```{r print-limit-hint}
-head(mtcars)
+```{r mod1_step4_title, results="asis"}
+  cat("###",Mod1Step4_txt$title)
 ```
 
-### Quiz
+```{r mod1_step4, results="asis"}
+  HTML(Mod1Step4_txt$subgoal)     # Text: subgoal
+  cat(Mod1Step4_txt$intro)       # Text: introduction
+  cat(Mod1Step4_txt$exercise)    # Text: exercise
+      cat(placeholder_image)
+      
+  cat(Mod1Step4_txt$para1)    # Text: paragraph 1
+  p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",
+          EQ3$mean0, "+",
+          NOT$devI,"_",NOT$ind,"+",
+          NOT$mean," ",
+          NOT$env,"_{",NOT$time,NOT$ind,"} +",
+          NOT$error,"_{",NOT$time,NOT$ind,"}$$",sep=""))
+  cat(Mod1Step4_txt$para2)      # Text: paragraph 2
 
-*You can include any number of single or multiple choice questions as a quiz. Use the `question` function to define a question and the `quiz` function for grouping multiple questions together.*
+    cat(Mod1Step4_txt$para3)    # Text: paragraph 3
+  
+    cat(Mod1Step4_txt$para4)   # Text: paragraph 4
+  cat(Mod1Step4_txt$para5)   # Text: paragraph 5
+  cat(Mod1Step4_txt$para6)   # Text: paragraph 6
+  cat(Mod1Step4_txt$point)   # Text: point
+  
+  cat(module1_txt$statModTitle)
+  p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",
+          EQ3$mean0, "+",
+          NOT$devI,"_",NOT$ind,"+",
+          NOT$mean," ",
+          NOT$env,"_{",NOT$time,NOT$ind,"} +",
+          NOT$error,"_{",NOT$time,NOT$ind,"}$$",sep=""))
+  p(paste("$$V_",NOT$total,"=V_",NOT$devI,"+V_{",NOT$mean," ",NOT$env,"}+V_",NOT$mError,"$$",sep=""))
+```
 
-Some questions to verify that you understand the purposes of various base and recommended R packages:
+## Module 2: Non-Gaussian traits
 
-```{r quiz}
-quiz(
-  question("Which package contains functions for installing other R packages?",
-    answer("base"),
-    answer("tools"),
-    answer("utils", correct = TRUE),
-    answer("codetools")
+```{r mod2_step1_title, results="asis"}
+cat("###", Mod2Step1_txt$title)
+```
+
+```{r mod2_step1, results="asis"}
+  #### Title ####
+  
+  
+  #### Subgoal ####
+  cat(Mod2Step1_txt$subgoal)
+  
+  #### Introduction ####
+  cat(Mod2Step1_txt$intro)
+
+  cat(Mod2Step1_txt$para1)
+  
+  
+  cat(Mod2Step1_txt$para1_image)
+  cat(Mod2Step1_txt$para1_image_caption)
+
+    cat(placeholder_image)
+
+  cat(Mod2Step1_txt$para2)
+  
+  cat(Mod2Step1_txt$para3)
+
+    cat(placeholder_image)
+
+    
+  cat(Mod2Step1_txt$para4)
+
+  cat(Mod2Step1_txt$para5)
+  
+  cat("###",Mod2Step1_txt$para6_title)
+  
+  HTML(Mod2Step1_txt$para6)
+  
+  
+  cat(Mod2Step1_txt$exercise)
+  
+    cat(placeholder_image)
+
+  
+  cat(Mod2Step1_txt$para7)
+
+  cat("###", Mod2Step1_txt$para8_title)  
+  
+  HTML(Mod2Step1_txt$para8)
+  
+  cat("###",Mod2Step1_txt$para9_title)
+  
+  HTML(placeholder_image)
+
+  
+  HTML(Mod2Step1_txt$para9)
+```
+
+
+```{r mod2_step2_title, results="asis"}
+cat("###", Mod2Step2_txt$title)
+```
+
+```{r mod2_step2, results="asis"}
+  #### Subgoal ####
+  cat(Mod2Step2_txt$subgoal)
+  
+  #### Introduction ####
+  cat(Mod2Step2_txt$intro)
+  
+  cat(Mod2Step2_txt$para1)
+  
+  cat(Mod2Step2_txt$para1_eq1)
+  cat(Mod2Step2_txt$para1_eq2)
+  cat(Mod2Step2_txt$para1_eq3)
+  
+  cat(Mod2Step2_txt$para2)
+  
+  cat(Mod2Step2_txt$para2_eq1)
+  cat(Mod2Step2_txt$para2_eq1)
+  cat(Mod2Step2_txt$para2_eq1)
+ 
+  cat(Mod2Step2_txt$para3)
+  
+  cat(Mod2Step2_txt$para3_eq1)
+  cat(Mod2Step2_txt$para3_eq2)
+  cat(Mod2Step2_txt$para3_eq3)
+  
+  cat(Mod2Step2_txt$para4)
+  
+  cat(Mod2Step2_txt$para4_eq1)
+  
+  cat(Mod2Step2_txt$exercise)
+  
+
+  cat(Mod2Step2_txt$para5)
+  
+    cat(placeholder_image)
+
+```
+
+```{r mod2_step3_title, results="asis"}
+cat("###", Mod2Step3_txt$title)
+```
+
+```{r mod2_step3, results="asis"}
+#### Subgoal ####
+  cat(Mod2Step3_txt$subgoal)
+
+  #### Introduction 1 ####
+  cat(Mod2Step3_txt$para1)
+  
+  
+  cat(Mod2Step3_txt$para1_eq1)
+  cat(Mod2Step3_txt$para1_eq2)
+  cat(Mod2Step3_txt$para1_eq3)
+  
+  cat(Mod2Step3_txt$para2)
+  
+  cat(Mod2Step3_txt$exercise)
+  
+    cat(placeholder_image)
+
+```
+
+```{r ex2, exercise=TRUE, warning=F, message=F}
+# number of values generated
+n <- 10000
+# Use the Gaussian distribution to generate n values
+# with a mean of 0 and a standard-deviation of 1.
+y_prime <- rnorm(n, 0, 1)
+# Convert these values to probabilities
+# using the inverse-logit function.
+p <- plogis(y_prime)
+# Use the Bernoulli distribution to generate n values
+# with the probability vector p.
+y <- rbinom(n, size = 1, prob = p)
+# Note that we used the binomial function with one trial,
+# which is equivalent to the Bernoulli distribution.
+```
+
+```{r mod2_step3_con, results="asis"}
+  cat(Mod2Step3_txt$para3)
+
+  #### Introduction 2 ####
+  cat(Mod2Step3_txt$intro2)
+  
+  cat(Mod2Step3_txt$intro2_eq1)
+  cat(Mod2Step3_txt$intro2_eq2)
+  cat(Mod2Step3_txt$intro2_eq3)
+  cat(Mod2Step3_txt$intro2_e43)
+
+  cat(Mod2Step3_txt$para4)
+  
+  cat(Mod2Step3_txt$para5)
+  
+  cat(Mod2Step3_txt$para5_eq1)
+  cat(Mod2Step3_txt$para5_eq2)
+  cat(Mod2Step3_txt$para5_eq3)
+  cat(Mod2Step3_txt$para5_eq4)
+
+  cat(Mod2Step3_txt$exercise2)
+  
+    cat(placeholder_image)
+
+```
+
+```{r ex3-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+get_data <- function(n,r,Vi,Vr){
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("individual(",n,")"), repeat_obs=r),
+  parameters = list(
+    individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    )
   ),
-  question("Which of the R packages listed below are used to create plots?",
-    answer("lattice", correct = TRUE),
-    answer("tools"),
-    answer("stats"),
-    answer("grid", correct = TRUE)
+  family = "poisson", 
+  link = "log"
+)
+  data <- get_population_data(squid_data)
+  colnames(data)[c(1,4)] <- c("Phenotype","Individual")
+  return(data)
+}
+```
+
+```{r ex3, exercise=TRUE, exercise=TRUE, warning=FALSE, message=FALSE}
+# n is the number of individuals
+# r is the number of repetitions for each individual
+# Vi is the variance for individuals
+# Vr is residual variance 
+data <- get_data(n = 50, r = 2, Vi = 0.5, Vr = 0.5)
+GLMM <- glmer(Phenotype ~ 0 + (1|Individual), family = poisson(link=log), data = data)
+summary(GLMM)
+```
+
+```{r mod2_step3_con2, results="asis"}
+  cat(Mod2Step3_txt$conclusion)
+  
+  p(strong("References:"))
+  p(HTML("Nakagawa, S. & Schielzeth, H (2010) Repeatability for Gaussian and non-Gaussian data: a practical guide for biologists. 
+          <i>Biological Reviews</i>, 85, 935-956.
+          <a href='https://doi.org/10.1111/j.1469-185X.2010.00141.x' target='_blank'>doi: 10.1111/j.1469-185X.2010.00141.x</a>"))
+```
+
+## Module 3: Non-stochastic environments
+
+```{r mod3_step1_title, results="asis"}
+
+cat("###", Mod3Step1_txt$title)
+
+```
+
+```{r mod3_step1, results="asis"}
+  cat(Mod3Step1_txt$subgoal)    # Text: subgoal
+  cat(Mod3Step1_txt$intro)      # Text: introduction
+  cat(Mod3Step1_txt$exercise)   # Text: exercise
+
+  cat(Mod3Step1_txt$para1)      # Text: paragraph 1
+
+  cat(placeholder_image)
+
+  cat(Mod3Step1_txt$para2)       # Text: paragraph 2      
+  cat(Mod3Step1_txt$para3)       # Text: paragraph 3
+  
+  # Figure of 2 examples of sampling design when among-individual variance in sampling timing is 0.1 and 0.9
+  cat(Mod3Step1_txt$para3_image)
+  cat(Mod3Step1_txt$para3_image_caption)
+  
+  cat(Mod3Step1_txt$para4)       # Text: paragraph 4
+  
+  cat(Mod3Step1_txt$para5)       # Text: paragraph 5
+  
+   cat(placeholder_image)
+
+  cat(Mod3Step1_txt$results)     # Text: results
+  
+  cat(Mod3Step1_txt$para6)       # Text: para6
+  
+  p(paste0("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$"))
+  
+```
+
+```{r mod3_step1_con, results="asis"}
+  cat(Mod3Step1_txt$para7)       # Text: para7
+  
+  cat(Mod3Step1_txt$para8)       # Text: para8
+  
+  cat(Mod3Step1_txt$conclusion)  # Text: conclusion
+  
+  cat(Mod3Step1_txt$para9)       # Text: para9
+  cat(Mod3Step1_txt$para10)      # Text: para10
+  cat(Mod3Step1_txt$para11)      # Text: para11
+```
+
+```{r mod3_step2_title, results="asis"}
+cat("###", Mod3Step2_txt$title)
+```
+
+```{r mod3_step2, results="asis"}
+  cat(Mod3Step2_txt$subgoal)    # Text: subgoal
+  cat(Mod3Step2_txt$intro)      # Text: introduction
+  cat(Mod3Step2_txt$exercise)   # Text: exercise
+  
+    cat(placeholder_image)
+
+  cat(Mod3Step2_txt$para1)      # Text: paragraph 1
+  
+    cat(placeholder_image)
+
+  cat(Mod3Step2_txt$para2)      # Text: paragraph 2
+  
+  cat(Mod3Step2_txt$para3)      # Text: paragraph 3
+  
+  cat(Mod3Step2_txt$results)    # Text: results
+  
+  cat(Mod3Step2_txt$para4)      # Text: paragraph 4
+  
+  p(paste0("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$"))
+  
+  cat(Mod3Step2_txt$para5)      # Text: paragraph 5
+  
+    cat(placeholder_image)
+
+  cat(Mod3Step2_txt$conclusion_title) # Text: conclusion
+  
+  cat(Mod3Step2_txt$para6)      # Text: paragraph 6
+  
+  cat(Mod3Step2_txt$para7)      # Text: paragraph 7
+  
+  cat(Mod3Step2_txt$para8)      # Text: paragraph 8
+```
+
+```{r mod3_step3_title, results="asis"}
+cat("###", Mod3Step3_txt$title)
+```
+
+```{r mod3_step3, results="asis"}
+  cat(Mod3Step3_txt$subgoal)    # Text: subgoal
+  cat(Mod3Step3_txt$intro)      # Text: introduction
+  cat(Mod3Step3_txt$exercise1)  # Text: exercise 1
+  
+    cat(placeholder_image)
+
+  cat(Mod3Step3_txt$para1)      # Text: paragraph 1
+  
+    cat(placeholder_image)
+
+  cat(Mod3Step3_txt$para2)      # Text: paragraph 2
+  
+  cat(Mod3Step3_txt$para3)      # Text: paragraph 3
+
+  cat(placeholder_image)
+  
+  cat(Mod3Step3_txt$results)         # Text: results
+  
+  p(paste0("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",EQ3$mean0,"+",NOT$devI,"_",NOT$ind,"+",NOT$mean," ",NOT$env,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$"))
+```
+
+
+```{r ex4-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+get_data <- function(n,r,Vi,Vr){
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("individual(",n,")"), repeat_obs=r),
+  parameters = list(
+    individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    )
   )
 )
+  data <- get_population_data(squid_data)
+  colnames(data)[c(1,4)] <- c("Phenotype","Individual")
+  return(data)
+}
 ```
 
-## Module 3
+```{r ex4, exercise=TRUE, exercise=TRUE, warning=FALSE, message=FALSE}
+# n is the number of individuals
+# r is the number of repetitions for each individual
+# Vi is the variance for individuals
+# Vr is residual variance 
+data <- get_data(n = 50, r = 2, Vi = 0.5, Vr = 0.5)
+LMM <- lmer(Phenotype ~ 1 + (1|Individual), data = data)
+summary(LMM)
+```
 
-## Module 4
+```{r mod3_step3_con, results="asis"}
+  cat(Mod3Step3_txt$para4)      # Text: paragraph 4
+  
+  p(paste0("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",EQ3$mean0,"+",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$"))
 
-## Module 5
+  cat(Mod3Step3_txt$para5)      # Text: paragraph 5
+  
+    cat(placeholder_image)
 
-## Module 6
+  cat(Mod3Step3_txt$para6)      # Text: paragraph 6
+  cat(Mod3Step3_txt$reminder)   # Text: notation reminder
+  
+  cat(Mod3Step3_txt$exercise2)  # Text: exercise 2
+  
+    cat(placeholder_image)
 
-### Test your knowledge
+  cat(Mod3Step3_txt$para8)      # Text: paragraph 8
+  
+  cat(Mod3Step3_txt$para9)      # Text: paragraph 9
+  
+    cat(placeholder_image)
 
-```{r quiz2, echo=FALSE}
-quiz(caption = "Quiz - Install R",
-  question("Is R free to download and use?",
-    answer("Yes!", correct = TRUE, message = "R is free _and_ open source, which means that anyone can read, use, and copy the source code of the R language."),
-    answer("No.")
-  ),
-  question("Where do you download R?",
-    answer("www.rstudio.com/download"),
-    answer("[cloud.r-project.org](http://cloud.r-project.org)", correct = TRUE, message = "You can also download R from [cran.r-project.org](http://cran.r-project.org)"),
-    answer("www.r-project.org", message = "Good try, but not exactly. www.r-project.org doesn't provide a download link, but it does provide a link to one the websites above."),
-    answer("www.r.com"),
-    allow_retry = TRUE
-  ),
-  question("How often should you update R?",
-    answer("Everytime you use it", message = "This will be too often unless you use R very rarely!"),
-    answer("About once a year", correct = TRUE, "A new version of R is released about once a year. Update sooner if you encounter a bug that you cannot explain."),
-    answer("Never", message = "A new version of R is released about once a year. I'll assume that you are using the newest version of R, which will be the fastest version with the fewest unexpected behaviors." ),
-    allow_retry = TRUE
-  )
+  cat(Mod3Step3_txt$conclusion) # Text: conclusion
+  cat(Mod3Step3_txt$conclusion2) # Text: conclusion 2
+  
+  cat(Mod3Step3_txt$finalcaveat) # Text: a final caveat
+  
+```
+
+## Module 4: Multiple traits
+
+```{r mod4_step1_title, results="asis"}
+cat("###", Mod4Step1_txt$title)
+```
+
+
+```{r mod4_step1, results="asis"}
+  # Sub-goal
+  cat(Mod4Step1_txt$subgoal)
+
+    # Introduction
+  cat(Mod4Step1_txt$intro)
+  
+  cat(Mod4Step1_txt$para1)
+  
+  # Exercise
+  cat(Mod4Step1_txt$exercise)
+  
+  cat(Mod4Step1_txt$exercise_eq2)
+  
+  cat(Mod4Step1_txt$para2)
+
+  cat(Mod4Step1_txt$para2_eq1)
+  
+  cat(Mod4Step1_txt$para3)
+  
+  cat(Mod4Step1_txt$para3_eq1)
+  
+  cat(placeholder_image)
+  
+  cat(Mod4Step1_txt$para4)
+
+  cat(Mod4Step1_txt$para5)
+  
+  cat(Mod4Step1_txt$conclusion)
+```
+
+```{r mod4_step2_title, results="asis"}
+cat("###",Mod4Step2_txt$title)
+```
+
+```{r mod4_step2, results="asis"}
+  # Sub-goal
+  cat(Mod4Step2_txt$subgoal)
+  
+  # Introduction
+	cat(Mod4Step2_txt$intro)
+
+	### Model equations
+	cat(Mod4Step2_txt$intro_eq1)
+	
+	cat(Mod4Step2_txt$para1)
+
+  ####### eq 1
+  cat(Mod4Step2_txt$para1_eq1)
+  
+  cat(Mod4Step2_txt$para2)
+  
+  ####### eq 2 
+  cat(Mod4Step2_txt$para2_eq1)
+  
+  cat(Mod4Step2_txt$para3)
+  
+  cat(Mod4Step2_txt$para4)
+  
+  cat(Mod4Step2_txt$para5)
+  
+  ####### eq 1
+  cat(Mod4Step2_txt$para5_eq1)
+  
+  cat(Mod4Step2_txt$para6)
+  
+  cat(Mod4Step2_txt$para6_eq1)
+  
+  cat(Mod4Step2_txt$para7)
+
+  cat(Mod4Step2_txt$para8)
+  cat(Mod4Step2_txt$para8_eq1)
+ 
+  cat(placeholder_image)
+
+
+  cat(Mod4Step2_txt$para9)
+  cat(Mod4Step2_txt$para9_eq1)
+
+  cat(Mod4Step2_txt$para10)
+  ####### eq 1
+  cat(Mod4Step2_txt$para10_eq1)
+
+  cat(Mod4Step2_txt$para11)
+  
+  cat(Mod4Step2_txt$para11_eq1)
+  
+  cat(Mod4Step2_txt$para12)
+  
+  cat(Mod4Step2_txt$conclusion)
+  
+  p(strong("References:"))
+  p(HTML("Dingemanse, N.J. & Dochtermann, N.A. (2013) Quantifying individual variation in behaviour: 
+         mixed-effect modelling approaches. <i>Journal of Animal Ecology</i>, 82, 39-54.
+         <a href='https://doi.org/10.1111/1365-2656.12013' target='_blank'>doi: 10.1111/1365-2656.12013</a>"))
+  p(HTML('Dingemanse, N.J., Dochtermann, N.A. & Nakagawa, S. (2012) Defining behavioural syndromes and the role of 
+         "syndrome deviation" to study its evolution. <i>Behavioral Ecology and Sociobiology</i>, 66, 1543-1548.
+         <a href="https://doi.org/10.1007/s00265-012-1416-2" target="_blank">doi: 10.1007/s00265-012-1416-2</a>'))
+  p(HTML("Nicolaus, M., Brommer, J.E., Ubels, R., Tinbergen, J.M. & Dingemanse, N.J. (2013) 
+          Exploring patterns of variation in clutch size-density reaction norms in a wild passerine bird. 
+          <i>Journal of Evolutionary Biology</i>, 26, 2031-2043.
+          <a href='https://doi.org/10.1111/jeb.12210' target='_blank'>doi: 10.1111/jeb.12210</a>"))
+	
+```
+
+```{r mod4_step3_title, results="asis"}
+cat("###",Mod4Step3_txt$title)
+```
+
+```{r Mod4Step3, results="asis"}
+	# Sub-goal
+  cat(Mod4Step3_txt$subgoal)	
+	
+ cat(Mod4Step3_txt$intro)
+	
+	# Exercise
+  cat(Mod4Step3_txt$exercise)	
+
+  cat(placeholder_image)
+
+  cat(placeholder_image)
+
+	cat(Mod4Step3_txt$results)
+	cat(Mod4Step3_txt$results_eq1)
+	
+	cat(Mod4Step3_txt$para1)
+	cat(Mod4Step3_txt$para1_eq1)
+
+
+	cat(Mod4Step3_txt$para2)
+	
+	cat(Mod4Step3_txt$para2_eq1)
+	
+	cat(Mod4Step3_txt$para3)
+	
+	cat(Mod4Step3_txt$para4)
+
+	cat(Mod4Step3_txt$conclusion)
+
+	p(strong("References:"))
+	p(HTML("van Noordwijk, A.J. & de Jong, G. (1986) Acquisition and allocation of resources - 
+	       Their influence on variation in life-history tactics. <i>American Naturalist</i>, 128, 137-142.
+	       <a href='https://doi.org/10.1086/284547' target='_blank'>doi: 10.1086/284547</a>"))
+```
+
+```{r mod4_step4_title,results="asis"}
+cat("###",Mod4Step4_txt$title)
+```
+
+```{r mod4_step4,results="asis"}
+	# Sub-goal
+	cat(Mod4Step4_txt$subgoal)
+	
+	
+	cat(Mod4Step4_txt$intro)
+	
+	cat(Mod4Step4_txt$intro_eq1)
+	
+	cat(Mod4Step4_txt$para1)
+	
+	cat(Mod4Step4_txt$para1_eq1)
+	
+	cat(Mod4Step4_txt$para2)
+	
+	cat(Mod4Step4_txt$para2_eq1)
+	
+	cat(Mod4Step4_txt$para3)
+
+	cat(Mod4Step4_txt$para3_eq1)
+	
+  cat(Mod4Step4_txt$para4)
+	
+	
+	cat(Mod4Step4_txt$para4_eq1)
+	
+	cat(Mod4Step4_txt$para5)
+	
+	cat(Mod4Step4_txt$para5_eq1)
+	
+	cat(Mod4Step4_txt$para6)
+	
+	cat(Mod4Step4_txt$para6_eq1)
+	
+	cat(Mod4Step4_txt$para7)
+	
+	cat(Mod4Step4_txt$para7_eq1)
+	
+	cat(Mod4Step4_txt$para8)
+	
+	cat(Mod4Step4_txt$para8_eq1)
+	
+	cat(Mod4Step4_txt$conclusion)
+```
+
+```{r mod4_step5_title, results = "asis"}
+	cat("###",Mod4Step5_txt$title)
+```
+
+```{r mod4_step5, results = "asis"}
+	# Sub-goal
+	cat(Mod4Step5_txt$subgoal)
+
+	# Introduction
+	cat(Mod4Step5_txt$intro)
+
+	cat(Mod4Step5_txt$intro_eq1)
+	
+  cat(Mod4Step5_txt$para1)
+	
+	cat(Mod4Step5_txt$para1_eq1)
+
+	cat(Mod4Step5_txt$para2)
+	
+	# Exercise
+	cat(Mod4Step5_txt$exercise)
+    
+	cat(placeholder_image)
+	
+	cat(Mod4Step5_txt$para3)
+	
+	cat(Mod4Step5_txt$para3_eq1)
+	
+	cat(Mod4Step5_txt$para4)
+
+	cat(Mod4Step5_txt$para4_eq1)
+
+  cat(placeholder_image)
+```
+
+```{r ex5-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(brms)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("individual(",n,")"), repeat_obs=r),
+  n_response = 2,
+  parameters=list(
+    individual = list(
+      vcov = matrix(c(1,Vi,Vi,1),nrow=2,ncol=2)
+    ),
+    residual = list(
+      vcov = matrix(c(1,Vr,Vr,1),nrow = 2,ncol = 2)
+    )
+  )  
 )
+  data <- get_population_data(squid_data)
+  colnames(data)[c(1,2,7)] <- c("Phenotype_1","Phenotype_2","Individual")
+  return(data)
+
+}
 ```
 
-## List of separate shiny apps
+```{r ex5, exercise=TRUE, exercise.timelimit	= 300}
+data <- get_data(n = 50, r = 2,  Vi = 0.5, Vr = 0.5)
+bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ (1|Individual), data = data, silent = 0)
+summary(bLMM)
+```
+
+```{r mod4_step5_con,results="asis"}
+	cat(Mod4Step4_txt$para5)
+	
+	cat(Mod4Step5_txt$para5_eq1)
+
+	cat(Mod4Step5_txt$para6)
+	
+	cat(Mod4Step5_txt$conclusion)
+```

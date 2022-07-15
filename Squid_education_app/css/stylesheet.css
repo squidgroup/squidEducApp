@@ -1,0 +1,62 @@
+/*@media screen and (max-width: 4000px) {
+  .topics {
+    width: 99%;
+  }
+
+  .topics .tutorialTitle {
+    display: block;
+    cursor: pointer;
+  }
+
+  .topicsContainer {
+    width: 1%;
+    min-width: 1px;
+    margin-right: 0;
+  }
+
+  .topicsList {
+    padding: 0px 10px 20px 1%;
+    background-color: rgba(255, 255, 255, 0.98);
+
+    box-shadow: 0 5px 25px 0px rgba(0, 0, 0, 0.15);
+    -webkit-box-shadow: 0 5px 25px 0px rgba(0, 0, 0, 0.15);
+  }
+
+  .topicsList.hideFloating {
+    display: none;
+  }
+
+  .paneCloser {
+    display: inline-block;
+  }
+}*/
+
+body {
+  background-color: white;
+  font-size: 12;
+}
+.topicsList .topic {
+    line-height: 40px;
+    font-size: 15px;
+    padding-left: 10px;
+    cursor: pointer;
+    background-repeat: no-repeat;
+    background-size: 2px 80px;
+    background-position: left 100%;
+        background-position-y: 100%;
+    background-image: url(images/topicProgress.png);
+    background-color: white;
+    border-top: 1px dashed lightblue;
+    border-bottom: 1px dashed lightblue;
+    -webkit-transition-property: background-position;
+    transition-property: background-position;
+    -webkit-transition-duration: 0.25s;
+    transition-duration: 0.25s;
+}
+.topicsList .topic.current {
+    background-color: #F5F5F5; /*#E8E8E*/
+    color: #ffffff;
+    border: 2px;
+    border-top: 1px solid lightblue;
+    border-bottom: 1px solid lightblue;
+}
