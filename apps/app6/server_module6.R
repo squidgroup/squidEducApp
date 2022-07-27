@@ -3,18 +3,17 @@ c(
   ######### Display results (graph) #########
   
   # Graph: proportion of each sex
-  output$Mod2Step1_plot_female_prob <- renderPlot({ 
+  output$Mod2Step1_plot_coin_flip <- renderPlot({ 
     
-    f_prob <- input$Mod2Step1_female_probability
+    size <- input$Mod2Step1_n_offspring
+    prop <- rbinom(n=1, size=size, prob=0.5) / size
+    dat  <- data.frame("Sex"        = c("Female", "Male"),
+                       "Proportion" = c(1-prop, prop))
     
-    prop <- rbinom(n=1, size=100, prob=f_prob) / 100
-    dat <- data.frame("Sex"        = c("Female", "Male"),
-                      "Proportion" = c(prop, 1-prop))
-    
-    ggplot(data=dat, aes(x=Sex, y=Proportion)) + 
-      geom_col(width=0.3) +
-      ylim(0,1) + 
-      geom_hline(yintercept=f_prob, color="red", linetype="dashed")
+    ggplot2::ggplot(data=dat, aes(x=Sex, y=Proportion)) + 
+      ggplot2::geom_col(width=0.3) +
+      ggplot2::ylim(0,1) + 
+      ggplot2::geom_hline(yintercept=0.5, color="red", linetype="dashed")
     
   })
             

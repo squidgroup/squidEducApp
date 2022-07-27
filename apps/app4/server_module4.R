@@ -43,7 +43,7 @@ c(
         output <- span(round(input$Mod1Step4_Vbx,2))
       }
       
-      p(HTML(paste(strong(Modules_VAR$Vbx$label),output,"")))
+      p(HTML(paste(withMathJax(strong(Modules_VAR$Vbx$label)),output,"")))
       
     }),
       
@@ -64,11 +64,11 @@ c(
 
           # Call app main function
           data <- squid::squidR(input, module="Mod1Step4")
-          LMR  <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data$sampled_data)
+          LMR  <- lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data$sampled_data)
           
-          FIXEF    <- lme4::fixef(LMR)
-          SE.FIXEF <- arm::se.fixef(LMR)
-          RANDEF   <- as.data.frame(lme4::VarCorr(LMR))$vcov
+          FIXEF    <- fixef(LMR)
+          SE.FIXEF <- se.fixef(LMR)
+          RANDEF   <- as.data.frame(VarCorr(LMR))$vcov
           
           # Make a mixed effect model to extract variances and slope
           data$Vp            <- round(var(data$sampled_data$Phenotype),2)
@@ -119,12 +119,16 @@ c(
           
           isolate({ 
             data$sampled_data$Individual <- as.factor(data$sampled_data$Individual)
+            modI <- lm(Phenotype ~ Individual + X1, data = data$sampled_data)
+            data$sampled_data$pred <- predict.lm(modI)
+            data$sampled_data$se <- predict.lm(modI,se.fit = T)$se
             ggplot(data$sampled_data, aes(x     = X1, 
                                                             y     = Phenotype, 
                                                             color = Individual,
                                                             group = Individual,
                                                             fill = Individual)) +
-              geom_smooth(method = "lm", se = TRUE, alpha = 0.1) +
+              geom_line(aes(y=pred,x=X1)) +
+              geom_ribbon(aes(x=X1, ymin = pred-se*1.96,ymax=pred+se*1.96),alpha = 0.1, linetype = 0,) +
               geom_point() +
               xlab("Environment") +
               ylab("Phenotype per individual")
@@ -144,16 +148,24 @@ c(
         
         data <- Mod1Step4_output()
         
-        myTable <- data.frame("True"       = c(paste("Population intercept ($",EQ3$mean0,"$) = 0"),
-                                               paste("Individual variance ($V_",NOT$devI,"$) =",input$Mod1Step4_Vi),
-                                               paste("Measurement variance ($V_",NOT$mError,"$) =",input$Mod1Step4_Ve),
-                                               "Mean of the trait ($\\mu$) = 0",
-                                               paste("Slope of environmental effect ($",NOT$mean,"$) =",round(input$Mod1Step4_B[1,2],2))),
-                              "Estimated" = c(paste("Population estimated mean ($",NOT$mean,"'_0$) = ", ifelse(!is.null(data),paste(data$B0,"\U00b1", data$se.B0, sep=" "),"...")),
-                                              paste("Individual variance in sample ($V'_",NOT$devI,"$) = ", ifelse(!is.null(data),data$Vi,"...")),
-                                              paste("Residual variance of sample ($V'_",NOT$residualUpper,"$) = ", ifelse(!is.null(data),data$Ve,"...")),
-                                              paste("Sampled mean of the trait ($\\mu'$) = ", ifelse(!is.null(data),data$phenotypeMean,"...")),
-                                              paste("Estimated slope of environmental effect ($",NOT$mean,"'$) = ", ifelse(!is.null(data),paste(data$B1,"\U00b1", data$se.B1, sep=" "),"..."))) 
+        myTable <- data.frame("Parameter" = c(
+          paste("Population intercept ($",EQ3$mean0,"$) ="),
+          paste("Individual variance ($V_",NOT$devI,"$) ="),
+          paste("Measurement variance ($V_",NOT$mError,"$) ="),
+          "Mean of the trait ($\\mu$) = ",
+          paste("Slope of environmental effect ($",NOT$mean,"$) =")
+        ),
+          
+                                "Truth"       = c(0,
+                                               input$Mod1Step4_Vi,
+                                               input$Mod1Step4_Ve,
+                                               0,
+                                               round(input$Mod1Step4_B[1,2],2)),
+                              "Estimated" = c(ifelse(!is.null(data),paste(data$B0,"\U00b1", data$se.B0, sep=" "),"..."),
+                                              ifelse(!is.null(data),data$Vi,"..."),
+                                              ifelse(!is.null(data),data$Ve,"..."),
+                                              ifelse(!is.null(data),data$phenotypeMean,"..."),
+                                              ifelse(!is.null(data),paste(data$B1,"\U00b1", data$se.B1, sep=" "),"...")) 
                              )  
         
         getTable(myTable)
