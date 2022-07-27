@@ -6,7 +6,7 @@ c(
   output$Mod2Step1_plot_coin_flip <- renderPlot({ 
     
     size <- input$Mod2Step1_n_offspring
-    prop <- rbinom(n=1, size=size, prob=0.5) / size
+    prop <- sum(rbinom(n=size, size=1, prob=0.5)) / size
     dat  <- data.frame("Sex"        = c("Female", "Male"),
                        "Proportion" = c(1-prop, prop))
     

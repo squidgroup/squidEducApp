@@ -7,7 +7,7 @@ c(
     
     f_prob <- input$Mod2Step1_female_probability
     
-    prop <- rbinom(n=1, size=100, prob=f_prob) / 100
+    prop <- sum(rbinom(n=100, size=1, prob=f_prob)) / 100
     dat <- data.frame("Sex"        = c("Female", "Male"),
                       "Proportion" = c(prop, 1-prop))
     
