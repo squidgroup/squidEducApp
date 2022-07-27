@@ -102,7 +102,7 @@ c(
               geom_point() + 
               xlab("Environment") +
               ylab("Phenotype") + 
-              ggtitle(bquote(italic(beta[(estimated)]) == .(data$B1) %+-% .(data$se.B1) ~~ (italic(beta[(true)]) == .(round(input$Mod1Step4_B[1,2],2)))))
+              ggtitle(bquote(italic(hat(beta)) == .(data$B1) %+-% .(data$se.B1) ~~ (italic(beta[(true)]) == .(round(input$Mod1Step4_B[1,2],2)))))
         
           })
           

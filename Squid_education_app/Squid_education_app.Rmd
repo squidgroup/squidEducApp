@@ -165,7 +165,7 @@ assignInNamespace("question_module_server_impl",question_module_server_impl,ns="
 #1st section
       cat("###",portal_txt$parag0_title)
 
-      cat(portal_txt$patag1_image)
+      cat(portal_txt$parag1_image)
       HTML(portal_txt$parag0_contents_1)
       cat(portal_txt$parag0_contents_2)
 
@@ -212,7 +212,7 @@ assignInNamespace("question_module_server_impl",question_module_server_impl,ns="
 
 ###  Shiny
 
-We will make use of various shiny apps throughout this course to present key concepts in exploring individual differences and multilevel variation. A list ,and the code, for all shiny apps is available [here](https://github.com/squidgroup/squidEducApp).
+We will make use of various shiny apps throughout this course to present key concepts in exploring individual differences and multilevel variation. A list,  and the code, for all shiny apps is available [on github](https://github.com/squidgroup/squidEducApp).
 
 ```{r quiz1, echo = FALSE}
 question("Which answer describes you best?",
@@ -228,20 +228,13 @@ question("Which answer describes you best?",
 
 ```
 
+<!--
 ```{r quiz2}
 question("Which is good",answer("good",correct=TRUE),
          answer("bad",correct=F),
          allow_retry=2)
 ```
-### (optional) Save progress report
-
-```{r context="setup"}
-submission_ui
-```
-
-```{r context="server"}
-submission_server()
-```
+-->
 
 <!-- <object data='https://bertvdveen.shinyapps.io/app1/' frameborder="0" style="width: 100%; height: 850px;overflow:hidden;display:block"></object> 
 
@@ -263,8 +256,8 @@ question("What did you explore in the above app?",
 ```
 
 ```{r mod1_step1, results="asis"}
-  #### Subgoal ####
-  cat(Mod1Step1_txt$subgoal)   # Text: subgoal
+  #### goal ####
+  cat(Mod1Step1_txt$goal)   # Text: goal
   #### Introduction ####
   cat(Mod1Step1_txt$intro)      # Text: introduction
 
@@ -275,18 +268,40 @@ cat(Mod1Step1_txt$explanation1)  # Text: Notation explanation
 
     #### Exercice ####
     cat(Mod1Step1_txt$exercise)   # Text: exercise
-    cat(placeholder_image)
     
+```
+
+```{r app1, echo=FALSE, results="asis"}
+cat(placeholder_image) #app1
+```
+ 
+ 
+```{r quiz1_app1, echo = FALSE}
+question("Which answer describes you best?",
+  answer("Beginner: I have little knowledge of LMMs or multilevel variation.", message = "Start with Module 1", correct = TRUE),
+  answer("Intermediate user: I have prior knowledge of LMMs, multilevel variation, and/or statistical distributions.", message = "*Start with Module 3", correct = TRUE),
+  answer("Expert: I have extensive knowledge of the mixed-effects modeling framework and individual differences.", message = "Fully explore the SQuID concept with the 'full model' modules", correct = TRUE),
+  answer("Teacher: I want my student to learn about mixed-effects models and patterns of phenotypic variance. ", message = "*Please skim the module titles to assess which are of most use for your student", correct = TRUE),
+  answer("None of the above.", correct = FALSE),
+  type = "single",
+  incorrect = "Eek, this might not  be the right place for you.",
+  correct=NULL
+)
+
+```
+
+```{r mod1_step1_con, results="asis"}
   #### Point ####
     cat(Mod1Step1_txt$point) # Text: point
   #### Solution ####
   cat(Mod1Step1_txt$solutions)   # Text: solutions
   
   #### Statistical model ####
-  cat(module1_txt$statModTitle)
+  cat(Mod1Step1_txt$statModTitle)
   cat(Mod1Step1_txt$statmodel1)        # Text: statistical model paragraph 1
-  #### Eqaution 1 ####
-  p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$",sep=""))
+  #### Equation 1 ####
+  cat(Mod1Step1_txt$statmodel1_eq1)
+  
   cat(Mod1Step1_txt$statmodel2) # Text: statistical model paragraph 2
 
   cat(Mod1Step1_txt$statmodel3)  # Text: statistical model paragraph 3
@@ -299,31 +314,31 @@ cat(Mod1Step1_txt$explanation1)  # Text: Notation explanation
 ```
 
 ```{r mod1_step2, results="asis"}
-  cat(Mod1Step2_txt$subgoal)    # Text: subgoal
+  cat(Mod1Step2_txt$goal)    # Text: goal
   cat(Mod1Step2_txt$intro)      # Text: introduction
   cat(Mod1Step2_txt$exercise)   # Text: exercise
-  cat(placeholder_image)
   
-  cat(Mod1Step2_txt$para1)  # Text: paragraph 1
+    cat(Mod1Step2_txt$para1)  # Text: paragraph 1
+    
+    cat(Mod1Step2_txt$para2)
+```
 
-  cat(Mod1Step2_txt$para2)
-  
+```{r app2, echo=FALSE, results="asis"}
+  cat(placeholder_image) #app2
+```
+
+```{r mod1_step2_con, results="asis"}
   cat(Mod1Step2_txt$para3)  # Text: paragraph 3
   
-    cat(Mod1Step4_txt$para3)    # Text: statistical result
     cat(Mod1Step2_txt$point)  # Text: point
   
     cat(Mod1Step2_txt$para4)  # Text: paragraph 4
-    p(withMathJax(paste("$$Repeatability=\\frac{V^\\prime_",NOT$devI,"}{V^\\prime_",NOT$devI,"+V^\\prime_",NOT$mError,"}$$",sep="")))
+    cat(Mod1Step2_txt$para4_eq1)
     
     cat(Mod1Step2_txt$para5)  # Text: paragraph 5
   
     # Scatter plot: measurements correlation
     cat(Mod1Step2_txt$para6)  # Text: paragraph 6
-  
-  cat(module1_txt$statModTitle)
-  p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"}$$",sep=""))
-  p(paste("$$V_",NOT$total,"=V_",NOT$devI,"+V_",NOT$mError,"$$",sep=""))
 ```
 
 ```{r mod1_step3_title, results="asis"}
@@ -331,24 +346,22 @@ cat("###",Mod1Step3_txt$title)
 ```
 
 ```{r mod1_step3, results="asis"}
-  cat(Mod1Step3_txt$subgoal)   # Text: subgoal
+  cat(Mod1Step3_txt$goal)   # Text: goal
   cat(Mod1Step3_txt$intro)     # Text: introduction
   cat(Mod1Step3_txt$exercise)  # Text: exercise
   cat(Mod1Step3_txt$exercise2) # Text: exercise 2
-  
-  cat(placeholder_image) #app
+
+  cat(placeholder_image) #app 3
 
     cat(Mod1Step4_txt$para3)    # Text: statistical result
 
   # Repeatability equation
   cat(Mod1Step3_txt$para1)         # Text: paragraph 1
-  p(paste("$$Repeatability=\\frac{V^\\prime_",NOT$devI,"}{V^\\prime_",NOT$devI,"+V^\\prime_",NOT$residualUpper,"}$$",sep=""))
+  p(paste("$$Repeatability=\\frac{\\hat{V}_",NOT$devI,"}{\\hat{V}_",NOT$devI,"+\\hat{V}_",NOT$residualUpper,"}$$",sep=""))
 
   cat(Mod1Step3_txt$point)        # Text: point
   cat(Mod1Step3_txt$point2)       # Text: point 2
-  cat(Mod1Step3_txt$point3)       # Text: point 3
 
-  cat(module1_txt$statModTitle)
   cat(Mod1Step3_txt$statmodel)       # Text: statistical model 1
   p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",
           NOT$devI,"_",NOT$ind,"+",
@@ -399,7 +412,7 @@ summary(LMM)
 ```
 
 ```{r mod1_step4, results="asis"}
-  HTML(Mod1Step4_txt$subgoal)     # Text: subgoal
+  HTML(Mod1Step4_txt$goal)     # Text: goal
   cat(Mod1Step4_txt$intro)       # Text: introduction
   cat(Mod1Step4_txt$exercise)    # Text: exercise
       cat(placeholder_image)
@@ -420,7 +433,7 @@ summary(LMM)
   cat(Mod1Step4_txt$para6)   # Text: paragraph 6
   cat(Mod1Step4_txt$point)   # Text: point
   
-  cat(module1_txt$statModTitle)
+  cat(Mod1Step1_txt$statModTitle)
   p(paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",
           EQ3$mean0, "+",
           NOT$devI,"_",NOT$ind,"+",
@@ -440,8 +453,8 @@ cat("###", Mod2Step1_txt$title)
   #### Title ####
   
   
-  #### Subgoal ####
-  cat(Mod2Step1_txt$subgoal)
+  #### goal ####
+  cat(Mod2Step1_txt$goal)
   
   #### Introduction ####
   cat(Mod2Step1_txt$intro)
@@ -495,8 +508,8 @@ cat("###", Mod2Step2_txt$title)
 ```
 
 ```{r mod2_step2, results="asis"}
-  #### Subgoal ####
-  cat(Mod2Step2_txt$subgoal)
+  #### goal ####
+  cat(Mod2Step2_txt$goal)
   
   #### Introduction ####
   cat(Mod2Step2_txt$intro)
@@ -537,8 +550,8 @@ cat("###", Mod2Step3_txt$title)
 ```
 
 ```{r mod2_step3, results="asis"}
-#### Subgoal ####
-  cat(Mod2Step3_txt$subgoal)
+#### goal ####
+  cat(Mod2Step3_txt$goal)
 
   #### Introduction 1 ####
   cat(Mod2Step3_txt$para1)
@@ -650,7 +663,7 @@ cat("###", Mod3Step1_txt$title)
 ```
 
 ```{r mod3_step1, results="asis"}
-  cat(Mod3Step1_txt$subgoal)    # Text: subgoal
+  cat(Mod3Step1_txt$goal)    # Text: goal
   cat(Mod3Step1_txt$intro)      # Text: introduction
   cat(Mod3Step1_txt$exercise)   # Text: exercise
 
@@ -696,7 +709,7 @@ cat("###", Mod3Step2_txt$title)
 ```
 
 ```{r mod3_step2, results="asis"}
-  cat(Mod3Step2_txt$subgoal)    # Text: subgoal
+  cat(Mod3Step2_txt$goal)    # Text: goal
   cat(Mod3Step2_txt$intro)      # Text: introduction
   cat(Mod3Step2_txt$exercise)   # Text: exercise
   
@@ -734,7 +747,7 @@ cat("###", Mod3Step3_txt$title)
 ```
 
 ```{r mod3_step3, results="asis"}
-  cat(Mod3Step3_txt$subgoal)    # Text: subgoal
+  cat(Mod3Step3_txt$goal)    # Text: goal
   cat(Mod3Step3_txt$intro)      # Text: introduction
   cat(Mod3Step3_txt$exercise1)  # Text: exercise 1
   
@@ -827,7 +840,7 @@ cat("###", Mod4Step1_txt$title)
 
 ```{r mod4_step1, results="asis"}
   # Sub-goal
-  cat(Mod4Step1_txt$subgoal)
+  cat(Mod4Step1_txt$goal)
 
     # Introduction
   cat(Mod4Step1_txt$intro)
@@ -862,7 +875,7 @@ cat("###",Mod4Step2_txt$title)
 
 ```{r mod4_step2, results="asis"}
   # Sub-goal
-  cat(Mod4Step2_txt$subgoal)
+  cat(Mod4Step2_txt$goal)
   
   # Introduction
 	cat(Mod4Step2_txt$intro)
@@ -936,7 +949,7 @@ cat("###",Mod4Step3_txt$title)
 
 ```{r Mod4Step3, results="asis"}
 	# Sub-goal
-  cat(Mod4Step3_txt$subgoal)	
+  cat(Mod4Step3_txt$goal)	
 	
  cat(Mod4Step3_txt$intro)
 	
@@ -976,7 +989,7 @@ cat("###",Mod4Step4_txt$title)
 
 ```{r mod4_step4,results="asis"}
 	# Sub-goal
-	cat(Mod4Step4_txt$subgoal)
+	cat(Mod4Step4_txt$goal)
 	
 	
 	cat(Mod4Step4_txt$intro)
@@ -1025,7 +1038,7 @@ cat("###",Mod4Step4_txt$title)
 
 ```{r mod4_step5, results = "asis"}
 	# Sub-goal
-	cat(Mod4Step5_txt$subgoal)
+	cat(Mod4Step5_txt$goal)
 
 	# Introduction
 	cat(Mod4Step5_txt$intro)
@@ -1105,7 +1118,7 @@ cat("###", Mod5Step1_txt$title)
 
 ```{r mod5_step1, results="asis"}
   # Sub-goal
-  cat(Mod5Step1_txt$subgoal)
+  cat(Mod5Step1_txt$goal)
 
   # Introduction
   cat(Mod5Step1_txt$intro)
@@ -1242,7 +1255,7 @@ cat("###",Mod5Step2_txt$title)
 
 ```{r mod5_step2, results="asis"}
 # Sub-goal
-  cat(Mod5Step2_txt$subgoal)
+  cat(Mod5Step2_txt$goal)
 
   # Introduction
   cat(Mod5Step2_txt$intro)
@@ -1326,7 +1339,7 @@ summary(LMM)
   cat("###",Mod6Step1_txt$title)
 ```
 ```{r mod6_step1, results="asis"}
-    cat(Mod6Step1_txt$subgoal)
+    cat(Mod6Step1_txt$goal)
     cat(Mod6Step1_txt$intro)
     cat(Mod6Step1_txt$exercise)
     
@@ -1442,7 +1455,7 @@ summary(LMM)
 cat("###",Mod6Step2_txt$title)
 ```
 ```{r mod6_step2, results="asis"}
-    cat(Mod6Step2_txt$subgoal)
+    cat(Mod6Step2_txt$goal)
     cat(Mod6Step2_txt$intro)
     cat(Mod6Step2_txt$para1)
     
@@ -1523,7 +1536,7 @@ summary(LMM)
     cat("###",Mod6Step3_txt$title)
 ```
 ```{r mod6_step3, results="asis"}
-    cat(Mod6Step3_txt$subgoal)
+    cat(Mod6Step3_txt$goal)
     cat(Mod6Step3_txt$intro)
     cat(Mod6Step3_txt$exercise)
     
@@ -1548,7 +1561,7 @@ cat("###",Mod7Step1_txt$title)
 ```
 ```{r mod7_step1, results="asis"}
   # Sub-goal
-  cat(Mod7Step1_txt$subgoal)
+  cat(Mod7Step1_txt$goal)
 
   # Introduction
   cat(Mod7Step1_txt$intro)
@@ -1774,4 +1787,15 @@ summary(LMM)
 
   # Conclusion
   cat(Mod7Step2_txt$conclusion)
+```
+
+
+## (optional) Save progress report
+
+```{r context="setup"}
+submission_ui
+```
+
+```{r context="server"}
+submission_server()
 ```

@@ -2,6 +2,7 @@ library(shinyMatrix)
 library(plotly)
 library(shiny)
 library(squid)
+library(shinyjs)
 
 # Obtain directories in /source for loading
 dirs <- list.dirs("./source",recursive = F)

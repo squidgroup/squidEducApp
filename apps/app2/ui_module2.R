@@ -26,6 +26,8 @@ span(
   
   # Simulation run button
   fluidRow(align="center",
+           # Repeatability output
+           textOutput("Mod1Step2_Rep_txt"),
            actionButton("Mod1Step2_Run", label = Modules_VAR$Run$label, icon= Modules_VAR$Run$icon, class="runButton"),
            runningIndicator(),
            sim_msg(),
@@ -34,15 +36,13 @@ span(
     #        density distribution of blups (Vi)
     #        density distribution of deviation from blups (Vme)
   
-    plotOutput("Mod1Step2_plot", width = Modules_VAR$Plot$width),
+  plotOutput("Mod1Step2_plot", width = Modules_VAR$Plot$width),
 
   fluidRow(align="center",
   actionButton("show", label = Modules_VAR$Show$label),
   actionButton("hide", label = Modules_VAR$Hide$label)
   ),
   
-  # Repeatability output
-  textOutput("Mod1Step2_Rep_txt"),
   # Table : display true and measured values (Vp, Vi, Vme and mean)
     uiOutput("Mod1Step2_summary_table", style = "display: inline-block;"),
 

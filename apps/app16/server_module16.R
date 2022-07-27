@@ -82,17 +82,17 @@ c(
                                              paste("Environmental effect variance $(V_",NOT$envEffect,")$ =",input$Mod3Step3_Vbx),
                                              paste("Mean environmental effect $(",NOT$mean,")$ =",round(input$Mod3Step3_B[2],2))),
                             "Totally unknown environment" = c("Totally unknown environment",
-                                                              paste("Population estimated mean $(",NOT$mean,"'_0)$ = ", ifelse(!is.null(data),paste(data$B0,"\U00b1", data$se.B0, sep=" "),"...")),
-                                                              paste("Individual variance $(V'_",NOT$devI,")$ = "      ,ifelse(!is.null(data),data$Vi,"...")),
-                                                              paste("Residual variance $(V'_",NOT$residualUpper,")$ = "        ,ifelse(!is.null(data),data$Vr,"...")),
+                                                              paste("Population estimated mean $(\\hat{",NOT$mean,"})$ = ", ifelse(!is.null(data),paste(data$B0,"\U00b1", data$se.B0, sep=" "),"...")),
+                                                              paste("Individual variance $(\\hat{V}^_",NOT$devI,")$ = "      ,ifelse(!is.null(data),data$Vi,"...")),
+                                                              paste("Residual variance $(\\hat{V}_",NOT$residualUpper,")$ = "        ,ifelse(!is.null(data),data$Vr,"...")),
                                                               "",
                                                               ""),
                             "Environment known" = c(paste0("Environment known (proportion=",proportion,")"),
-                                                    paste("Population estimated mean $(",NOT$mean,"'_0)$ = ", ifelse(!is.null(data),paste(data$B0_2,"\U00b1", data$se.B0_2, sep=" "),"...")),
-                                                    paste("Individual variance $(V'_",NOT$devI,")$ = ", ifelse(!is.null(data),data$Vi_2,"...")),
-                                                    paste("Residual variance $(V'_",NOT$residualUpper,")$ = ", ifelse(!is.null(data),data$Vr_2,"...")),
-                                                    paste0("Estimate of known environmental variance $(V'_{",NOT$mean," ",NOT$env,"})$ = ", ifelse(!is.null(data),data$B1_2^2,"...")),
-                                                    paste0("Mean environmental effect ($",NOT$mean,"')$ = ", ifelse(!is.null(data),paste(data$B1_2,"\U00b1", data$se.B1_2, sep=" "),"...")))
+                                                    paste("Population estimated mean $(\\hat{",NOT$mean,"}_0)$ = ", ifelse(!is.null(data),paste(data$B0_2,"\U00b1", data$se.B0_2, sep=" "),"...")),
+                                                    paste("Individual variance $(\\hat{V}_",NOT$devI,")$ = ", ifelse(!is.null(data),data$Vi_2,"...")),
+                                                    paste("Residual variance $(\\hat{V}_",NOT$residualUpper,")$ = ", ifelse(!is.null(data),data$Vr_2,"...")),
+                                                    paste0("Estimate of known environmental variance $(\\hat{V}_{",NOT$mean," ",NOT$env,"})$ = ", ifelse(!is.null(data),data$B1_2^2,"...")),
+                                                    paste0("Mean environmental effect ($\\hat{",NOT$mean,"})$ = ", ifelse(!is.null(data),paste(data$B1_2,"\U00b1", data$se.B1_2, sep=" "),"...")))
       )  
     
         return(getTable(myTable, header=TRUE))

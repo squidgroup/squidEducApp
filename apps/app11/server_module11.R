@@ -58,10 +58,10 @@ c(
                        paste("Among-individual variance in intercept ($V_",NOT$devI,"$) =",input$Mod2Step3_Vi),
                        paste("Overdispersion variance ($V_o$) =",input$Mod2Step3_Vo)),
       "Estimated" = c("$\\text{Fixed effects}$",
-                      paste("Sampled mean of the trait ($",NOT$mean,"'_0$) =",ifelse(!is.null(data),paste(B0,"\U00b1", B0_SE, sep=" "),"...")),
+                      paste("Sampled mean of the trait ($\\hat{",NOT$mean,"}_0$) =",ifelse(!is.null(data),paste(B0,"\U00b1", B0_SE, sep=" "),"...")),
                       "$\\text{Random effects}$",
-                      paste("Sampled among-individual variance in intercept ($V'_",NOT$devI,"$) = ", ifelse(!is.null(data), Vi,"...")),
-                      paste("Overdispersion variance of sample ($V'_o$) = ", ifelse(!is.null(data),Vo,"...")))
+                      paste("Sampled among-individual variance in intercept ($\\hat{V}_",NOT$devI,"$) = ", ifelse(!is.null(data), Vi,"...")),
+                      paste("Overdispersion variance of sample ($\\{V}_o$) = ", ifelse(!is.null(data),Vo,"...")))
     ) 
     
     return(getTable(myTable))

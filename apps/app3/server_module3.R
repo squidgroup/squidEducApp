@@ -43,7 +43,7 @@ observeEvent(input$Mod1Step3_Vi, {
 	      output <- span(round(input$Mod1Step3_Vbx,2))
 	    }
 
-	    p(HTML(paste(strong(Modules_VAR$Vbx$label), output,"")))
+	    p(withMathJax(HTML(paste(strong(Modules_VAR$Vbx$label), output,""))))
 	  }),
 
     ######### Run simulation #########
@@ -54,8 +54,7 @@ observeEvent(input$Mod1Step3_Vi, {
    	  #hide extra results if sim was run before
    	  hide("Mod1Step3_plot2")
    	  hide("Mod1Step3_summary_table")
-   	  hide("Mod1Step3_Rep_txt")
-   	  
+
    	  hide("hide")
    	  show("show")
    	  
@@ -107,17 +106,23 @@ observeEvent(input$Mod1Step3_Vi, {
      	    	geom_density(alpha = 0.1) +
      	    	geom_rug(aes(col=lines)) +
      	    	facet_wrap(~ lines) +
-     	    	xlab("Model component values") +
+     	    	xlab("Simulated values") +
      	    	ylab("Density") +
      	      theme(plot.title      = element_text(hjust = 0.5),
      	                     legend.title    = element_blank(),
-     	                     legend.position = "bottom")
+     	                     legend.position = "bottom") + ggtitle("Measurement error variance (spread)")
 
      	  }else{
      	    defaultPlot()
      	  }
 
    	}),
+# display results: repeatability (text)
+output$Mod1Step3_Rep_txt   <- renderText({
+  data <- Mod1Step3_output()
+  HTML(paste("Your repeatability is ", ifelse(!is.null(data), data$R,"...")))
+}),
+
   #button to show extra results, keeps things clean
   observeEvent(input$show, {
  	  # Scatter plot: measurements correlation
@@ -143,24 +148,26 @@ observeEvent(input$Mod1Step3_Vi, {
 
    	  data      <- Mod1Step3_output()
 
-   	  myTable <- data.frame("True"     = c(paste("Total phenotypic variance ($V_",NOT$total,"$) = 1",sep=""),
-   	                                       paste("Individual variance ($V_",NOT$devI,"$) =",input$Mod1Step3_Vi),
-   	                                       paste("Residual variance ($V_{",NOT$mean," ",NOT$env,"}+V_",NOT$mError,"$) =",input$Mod1Step3_Ve+input$Mod1Step3_Vbx),
-   	                                       "Mean of the trait ($\\mu$) = 0"),
-   	                        "Estimated" = c(paste("Total Phenotypic variance in sample ($V'_",NOT$total,"$) = ",ifelse(!is.null(data),data$Vp,"...")),
-               	                            paste("Sampled Individual variance ($V'_",NOT$devI,"$) = "      ,ifelse(!is.null(data),data$Vi,"...")),
-               	                            paste("Residual variance of sample ($V'_",NOT$residualUpper,"$) = "        ,ifelse(!is.null(data),data$Vr,"...")),
-               	                            paste("Sampled mean of the trait ($\\mu'$) = "        ,ifelse(!is.null(data),data$phenotypeMean,"...")))
+   	  myTable <- data.frame("Parameter" = c(
+   	    paste("Total phenotypic variance ($V_",NOT$total,"$) ="),
+   	    paste("Individual variance ($V_",NOT$devI,"$) ="),
+   	    paste("Residual variance ($V_{",NOT$mean," ",NOT$env,"}+V_",NOT$mError,"$) ="),
+   	    "Mean of the trait ($\\mu$) ="
+   	  ),
+   	                      "Truth"     = c(1,
+   	                                       input$Mod1Step3_Vi,
+   	                                       input$Mod1Step3_Ve+input$Mod1Step3_Vbx,
+   	                                       0),
+   	                        "Estimated" = c(ifelse(!is.null(data),data$Vp,"..."),
+               	                            ifelse(!is.null(data),data$Vi,"..."),
+               	                            ifelse(!is.null(data),data$Vr,"..."),
+               	                            ifelse(!is.null(data),data$phenotypeMean,"..."))
                	)
 
    	  getTable(myTable)
    	})
 
-   	# display results: repeatability (text)
-   	output$Mod1Step3_Rep_txt   <- renderText({
-   	  data <- Mod1Step3_output()
-   	  HTML(paste("Your repeatability is ", ifelse(!is.null(data), data$R,"...")))
-   	})
+
     ######### Manage errors #########
      	# display error message
      	observe({
@@ -174,8 +181,7 @@ observeEvent(input$Mod1Step3_Vi, {
  	    
  	    show("Mod1Step3_plot2")
  	    show("Mod1Step3_summary_table")
- 	    show("Mod1Step3_Rep_txt")
- 	    
+
  	    hide("show")
  	    show("hide")
  	    
@@ -184,8 +190,7 @@ observeEvent(input$Mod1Step3_Vi, {
   observeEvent(input$hide, {
     hide("Mod1Step3_plot2")
     hide("Mod1Step3_summary_table")
-    hide("Mod1Step3_Rep_txt")
-    
+
     hide("hide")
     
     show("show")

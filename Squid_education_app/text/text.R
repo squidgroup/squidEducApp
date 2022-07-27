@@ -85,7 +85,7 @@ text <- list(
                           Lastly there is a possibility to implement an interaction between $",NOT$env,"_1$ and $",NOT$env,"_2$ 
                           [$(",EQ$mean12.1,"+",EQ$dev12.1,")",EQ$env12,"$].",sep=""),
   
-  "indSpecResponses"    = paste("Below we show the way we generate the different values of each individual-level random effect for 
+  "indSpecResponses"    = paste("Below we show the way we generate the different values of each individual-level random-effect for 
                           both traits $",NOT$trait.1,"$ and $",NOT$trait.2,"$. The vector of individual deviation of the intercept and slopes for 
                           the two traits follows a multivariate normal distribution (MNV) with a zero-mean and covariance/variance 
                           matrix structure $\\Omega_{",NOT$devI,NOT$devS,"}$. On the right hand side is shown (co)variance matrix 
@@ -380,152 +380,147 @@ text <- list(
   
 ),
 
-"module1_txt" = list(
-  "title"         = paste("Partitioning variances: Differences between $V_",NOT$total,"$, $V_",NOT$devI,"$ and 
-                           measurement error variance",sep=""),
-  "goal"          = "<b>Goal:</b> to develop understanding of hierarchies in variance when individuals express traits repeatedly.",
-  "statModTitle"  = "<b>Statistical model:</b>"
-),
-
 # Step 1 --------------
 "Mod1Step1_txt" = list(
   
   "title"      = "Step 1: Mean and variance when the trait is expressed once and does not change",
-  "subgoal"    = "<b>Sub-goal:</b> Illustrating the concept of variance and mean, 
-                  for traits with no within-individual variance but which is measured with error.",
-  "intro"      = paste("<b>Introduction:</b> This is the simplest possible situation. 
-                       A trait as measured for a group of individuals from a population 
-                       is characterised by a mean ($",NOT$mu,"$) and a variance ($V_",NOT$total,"$).",sep=""),
-  "exercise"   = "<b>Exercise:</b> In this situation we assume that we only have one value of the trait for each individual. 
-                  You first have to decide how many individuals to measure.",
+  "goal"    = "In step 1 of this module we aim to illustrate the concepts of mean and (partitioning) variance, 
+                  for traits with no within-individual variance, but that include measurement error.",
+  "intro"      = paste("<b>Introduction</b> <br>
+                       Imagine a trait as it is typically measured: for a group of individuals from a population that is
+                       is characterised by its mean ($",NOT$mu,"$) and its variance ($V_",NOT$total,"$).",sep=""),
+
+  "para1"      = paste("Every time that we measure something, our measurement is likely to be in accurate, i.e. include error. For example,
+                       due to faulty or poorly calibrated equipment, or because it was raining and we rushed the measurement.
+                       We assume that this error is non-directional, for example, in the case of body size we could measure an individual as
+                       both too large and too small. Ideally, measurement error represents only a small portion of 
+                       the total variance $V_",NOT$total,"$. The larger the variance of the measurement error $V_", NOT$mError, "$ the more likely it becomes
+                       that our inference on other variance components is inaccurate, if it is not controlled for. Thus, generally we want the variance 
+                       of our measurement error to be low, for example lower than 5% of the total variance. However, measuring some traits is more involved
+                      than the measurement of other traits, so that some traits are associated with much higher measurement error.",sep=""),
   
-  "para1"      = paste("In every case that we measure something, we know that we are making an error in the measurement. 
-                       This error is assumed to be non-directional and hopefully represents only a small portion of 
-                       the total variance $V_",NOT$total,"$. Below play with the error term. 
-                       Generally measurement error variance should not be high, 
-                       ideally lower than 5% of the total variance, but of course some traits 
-                       can be associated with much higher measurement error.",sep=""),
+  "explanation1"  = paste("A statistical model usually incorporates several kinds of variance components to control for the different aspects that
+                          drive the variance on the trait. Measurement error can be one source of variance, but another that is usually part of a
+                          statistical model is &ldquo;error variance&rdquo; or &ldquo;residual variance&rdquo;.
+                          Residual variance accounts for other sources of error, besides measurement error.
+                          To distinguish these with notation, we will use $V_",NOT$mError,"$ for the variance of the measurement error 
+                          and $V_",NOT$residualUpper,"$ for the variance of the residual (i.e. left-over) error. In this particular step we assume, 
+                          $V_",NOT$residualUpper,"=V_",NOT$mError,"$, i.e. that all of the variance in the residuals is due to measurement error. ",sep=""),
   
-  "explanation1"  = paste("An explanation of notation: There are several kinds of unaccounted variance 
-                          in a statistical model. This are called, variously, &ldquo;error variance&rdquo; or &ldquo;residual variance&rdquo;.  
-                          Measurement error is one source of this variance, but as you will see below, 
-                          not all unaccounted variance is the result of error. 
-                          To distinguish these with notation, we will use $V_",NOT$mError,"$ for measurement error 
-                          and $V_",NOT$residualUpper,"$ for the more general residual variance. In this particular step, 
-                          $V_",NOT$residualUpper,"=V_",NOT$mError,"$. ",sep=""),
+  "exercise"   = "<b>Exercise</b> <br> The following shiny app facilitates you to explore the consequences of measurement error on traits.
+                  In this instance, we assume that we only have one value of the trait for each individual. You first have to select how many 
+                  individuals you want to 'measure'. Second, you select the magnitude of the measurement error variance. Then, hitting the 'run' button
+                  visualizes the results.",
   
   "note1"      = paste("Note that in this module, the total phenotypic variance $(V_",NOT$total,")$ is restrained to 1. 
                        This will allow a better understanding of the proportions of the different model variance components.",sep=""),
   
-  "point"      = paste("<b>Point:</b> The variance of measures $(V'_",NOT$total,")$ is often higher than the variance 
-                       of true individual variance $(V_",NOT$devI,")$ if there is measurement error 
-                       (and there will always be some). The estimate of total variance includes 
-                       both individual differences $(V_",NOT$devI,")$ (not measured directly) and measurement error $(V_",NOT$mError,")$. 
-                       Note also that the estimated $V'_",NOT$total,"$ (total variance of sampled values) 
-                       typically differs slightly from 1. This is because we have sampled 
-                       from a population where the true total phenotypic variance that includes 
-                       individual (biological) variance and measurement error variance, 
-                       while equal to 1, may not be 1 in your sample. 
-                       The difference thus arises from sampling variance.",sep=""),
+  "point"      = paste("The estimate of total variance, $\\hat{V}_",NOT$total, "$ includes 
+                       both that of individual differences $(V_",NOT$devI,")$ and that associated with the measurement error $(V_",NOT$mError,")$.
+                       The variance associated with the measurement process $(\\hat{V}_",NOT$total,")$ is likely to be higher than the
+                       variance associated with differences between individuals $(V_",NOT$devI,")$, if there is measurement error (and,  let's face it, 
+                       who measures without error?!). And, the estimated total variance $\\hat{V}_",NOT$total,"$
+                       typically differs slightly from the truth. This is because we have sampled 
+                       from a population, and our sample might not perfectly represent the properties of population. 
+                       This difference is caused by <i>sampling variance</i>.",sep=""),
   
-  "solutions"  = "<b>Solutions:</b> First work to reduce the measurement error; 
-                  to do so, you need to know the magnitude of measurement error. 
-                  This requires measuring individuals more than once. 
-                  This is explained in step 2 of this module.",
+  "solutions"  = "<b>Solutions</b> <br> The impact of measurement error can be reduced by
+                  controlling for it in a statistical model. To do this, you need to measure individuals more than once.
+                  Afterall, we do not expect certain traits on an individual to change between samplings, so any difference
+                  is then caused by measurement error. This concept is further explained in step 2 of this module.",
   
-  "statmodel1"  = "Throughout these modules we will provide you with the statistical 
-                  model that we've explored. These come in two forms. 
-                  The first is an equation that describes each data point 
+  "statModTitle"  = "<b>Statistical model</b>",
+  "statmodel1"  = "Throughout these modules we will inform you of the statistical 
+                  model that we are exploring in every step. These are usually provided in the form of two different types of equations. 
+                  The first is an equation that describes the data 
                   (particular measurements on individual phenotypes). Since we are using 
                   phenotypic measures as the focus here, we call this the &ldquo;phenotypic equation&rdquo;. 
                   You have just explored the following phenotypic equation:",
+  "statmodel1_eq1" = paste("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+",NOT$error,"_{",NOT$time,NOT$ind,"},$$",sep=""),
   
   "statmodel2"  = paste0("where $",NOT$trait.1,"_{",NOT$time,NOT$ind,"}$ is the measured phenotypic 
                           value of the $h^{th}$ measurement 
-                         (in this case $",NOT$time,"$ = 1) on the $i^{th}$ individual, $",NOT$devI,"_",NOT$ind,"$ is the true deviation 
-                         of the individual's trait from the population mean 
-                         (which is assumed to be 0 for now), and $",NOT$error,"_{",NOT$time,NOT$ind,"}$  is the residual 
-                         deviation of that measurement from the true value, 
-                         caused in this scenario by measurement error."),
+                         (in this case $",NOT$time,"$ = 1) on the $i^{th}$ individual, $",NOT$devI,"_",NOT$ind,"$ is the mean
+                         of the trait (also called an intercept in a regression), and $",NOT$error,"_{",NOT$time,NOT$ind,"}$ is the residual 
+                         , i.e. the left-over information in the data after accounting for the other  components of the model.
+                         In this scenario, this represented measurement error, because that was not incorporated in the model."),
   
-  "statmodel3"  = paste0("The second type of equation is a partitioning of variance 
+  "statmodel3"  = paste0("The second type of equation demontrates how the phenotypic variance is partitioned,
                          where the terms are defined as above. These have direct connection 
                          to the values in the phenotypic equation, with the exception 
-                         that in this scenario the variance in $",NOT$error,"_{",NOT$time,NOT$ind,"}$, often called residual variance, 
-                         is measurement variance $(V_",NOT$mError,")$")
+                         that in this scenario the variance in $",NOT$error,"_{",NOT$time,NOT$ind,"}$, i.e. the residual variance,
+                         is associated with measurement error $(V_",NOT$mError,")$")
 ),
 
 # Step 2 --------------
 "Mod1Step2_txt" = list(    
   "title"     = "Step 2: Repeatability and measurement error",
-  "subgoal"   = paste0("<b>Sub-goal:</b> Learning how to estimate measurement error variance $(V_",NOT$mError,")$ 
-                  in traits varying solely among individuals."),
-  "intro"     = "<b>Introduction:</b> In the previous step, you estimated the mean and the total 
-                  variance of a sample of individuals measured once. 
-                  From this you learned that some of the observed 
-                  variation in measures might be due to measurement error, 
-                  which occurs when the measured value deviates 
-                  (for whatever reason) from the biological value. 
-                  Here we detail the sampling design that you might 
-                  use to directly estimate the magnitude of measurement error; 
-                  we do this for a trait where the true value of the trait 
-                  is constant for an individual (cf. a &lsquo;fixed&rsquo; rather than &lsquo;labile&rsquo; trait, 
-                  e.g. structural size in adulthood).  Measurement error can be estimated 
-                  by measuring the same set of individuals multiple times 
-                  (preferably in a blind and randomized order). Since their trait values are fixed, 
-                  any deviation in measured values across measurements of the same individuals should be due to measurement error.",
-  "exercise"    = paste("<b>Exercise:</b> To simulate this new situation, 
-                  we advise using the same parameters as in the previous step, 
-                  in terms of the number of individuals and measurement error 
-                  ($V_",NOT$mError,"$; expressed as a proportion of the total phenotypic variance, $V_",NOT$total,"$) 
-                  so that you can compare your output with the previous step:",sep=""),
+  "goal"   = paste0("In this second step, we will focus on measurement error variance $(V_",NOT$mError,")$ 
+                    in traits varying solely among individuals."),
+  "intro"     = "<b>Introduction</b> <br> In step 1 of this module we focussed on different sources of variance, 
+                  and variance due to measurement error in particular. From this you learned that some of the observed 
+                  variation in data might be due to measurement error, 
+                  which occurs when the measured trait value deviates 
+                  from its true biological value due to e.g. faulty equipment. 
+                  Now, we focus on how you may get an estimate of the measurement error. 
+                  Before we begin, for simplicity we first assume that the trait of focus is constant
+                  for an individual (cf. a &lsquo;fixed&rsquo; rather than &lsquo;labile&rsquo; trait, 
+                  e.g. structural size in adulthood).  Measurement error can only be estimated 
+                  if you measure the same set of individuals multiple times 
+                  (preferably in a blind and randomized order). Since the trait values are fixed, 
+                  any deviation in the measurements of the same individuals is due to measurement error.",
+  "exercise"    = paste("<b>Exercise</b> <br> In this exercise, 
+                  it is best if you start off with a set of parameters that you also explored in the app of the previous step, 
+                  for the number of individuals and for the measurement error 
+                  ($V_",NOT$mError,"$; expressed as a proportion of the total phenotypic variance, $V_",NOT$total,"$). Additionally, you will here
+                  specify how often each individual is measured. We call this variable &lsquo;number of trait expressions&rsquo;.",sep=""),
   
-  "para1"   =  "You also need to enter how often each individual is measured. 
-                We call this variable &lsquo;Number of trait expressions&rsquo;. 
-                For simplicity, we are assuming that each individual 
-                is measured the same number of times. Because we are 
-                interested in setting up a scenario where individuals are 
-                assayed repeatedly, you should set a number equal or greater than two. 
-                Play around with how often you measure each individual, 
-                because the number of repeated measurements per individual 
-                affects how well your estimated values approximate the true values.",
-  "para2"   =  "As before, we present the output in the form of a collection 
-                of figures and tables that shows you your estimated values 
-                (derived from a univariate mixed-effects model) as well as the true values. 
+  "para1"   =   "For simplicity, we assume that each individual 
+                is measured the same number of times. The minimum number of trait expressions
+                is two, since we are interested in exploring scenarios where individuals are
+                measured repeatedly. The purpose of this app is for you to explore the effects of
+                repeated measurements of an  invididual on the measurement error. The number of repeated measurements 
+                per individual affects how closesly the estimated variance for the measurement error approaches the truth.",
+  
+  "para2"   =  paste("In the bottom of the app you can find a button to show extra information. 
+                There, you find the app output in the form of a collection of figures and tables that show the estimated values.
+                The three plots show the distribution of the simulated phenotypes, and the associated estimated total phenotypic variance $(\\hat{V}_",NOT$total,")$, 
+                the estimated variance among individuals $(\\hat{V}_",NOT$devI,")$, and 
+                the estimated variance within individuals $(\\hat{V}_",NOT$mError,")$. 
+                It demonstrates graphically that $\\hat{V}_",NOT$total,"=\\hat{V}_",NOT$devI,"+\\hat{V}_",NOT$mError,"$.",sep=""),
+  
+  "para3"   =   "The 'estimated values' are coefficients from a mixed-effects model fitted to the data that was simulated. The coefficients are
+                presented next to the true values (i.e. your inputs) for comparison. 
                 Compare how the estimated values deviate from the true values; 
-                play for example with the &lsquo;number of trait expressions&rsquo; 
+                try different numbers for the &lsquo;number of trait expressions&rsquo; 
                 to see how the number of repeated measurements per individual 
-                affects your estimates and how much they deviate from the true values.",
-  "para3"   =  paste("The three density plots show the distribution of estimated total phenotypic variance $(V'_",NOT$total,")$, 
-                the estimated variance among individuals $(V'_",NOT$devI,")$, and 
-                the estimated variance within individuals $(V'_",NOT$mError,")$. 
-                It demonstrates graphically that $V'_",NOT$total,"=V'_",NOT$devI,"+V'_",NOT$mError,"$.",sep=""),
+                affects the accuracy of the estimates, how much they deviate from the true values.",
   
-  
-  "point"   =  "<b>Point: </b> If you have inputted the same parameter values as for step 1, 
-                you see that we are now (more) properly estimating the individual variance. 
-                This is because we have directly estimated the within-individual variance 
+  "point"   =  "<b>Point </b> <br> If you tried the same inputs as for step 1 you will notice
+                that we are now (more) properly estimating the individual variance. 
+                This is because we have explicitly incorporated the within-individual variance 
                 due to measurement error by measuring each individual (at least) twice.",
   
-  "para4"   =  "Measurement error can obscure true biological variance. We typically 
-                express the amount of biological variance we can measure as a proportion 
-                of the total observed variance; this standardized metric 
-                is called &quot;repeatability&quot;:",
-  "para5"   =  "Repeatability tells you how well your current measurement predicts a 
+  "para4"   =  "You will have noticed the 'repeatability' above the run button in the app. When you change the input,
+                this number changes. Repeatbility expresses the amount of biological variance as a proportion 
+                of the total observed variance in the form of a standardized metric:",
+  "para4_eq1" = paste("$$Repeatability=\\frac{\\hat{V}_",NOT$devI,"}{\\hat{V}_",NOT$devI,"+\\hat{V}_",NOT$mError,"}$$",sep=""),
+  
+  "para5"   =  "Measurement error can obscure the true biological variance, so repeatability tells you how well your current measurement predicts a 
                 future measurement of the same individual. Logically, the repeatability 
                 is 1 if there is no measurement error (try it out!). The effect 
                 of measurement error can be nicely illustrated in a graph where we plot 
                 the first vs. second measurement. ",
   
-  "para6"   =  paste0("The scatter plot shows how correlated the first and second measurements are. 
+  "para6"   =  paste0("The final scatterplot hidden under 'extra results' shows how correlated the first and second measurements are. 
                 In the absence of measurement error (i.e., $V_",NOT$mError,"=0$), 
-                all points align on a single line ($y=x$). Play around with the settings of $V_",NOT$mError,"$; 
-                the higher the value, the more widely the data points get dispersed around $y=x$, 
+                all points align on a line ($y=x$). If you have experimented with different valuees for the measurement error variance $V_",NOT$mError,"$; 
+                you might have noticed that the higher the value, the more widely the data points get dispersed around $y=x$, 
                 i.e. the higher the measurement error the lower our ability 
                 to predict an individual's phenotype based on a previous measurement. 
                 Repeatability thus provides an assessment of how well one has measured 
                 a particular phenotype. Repeatability can be used for several other purposes too, 
-                so the way it is calculated may vary some. We will develop some of these nuances later on."),
+                in which case the way it is calculated may vary. We will develop some of these nuances later on."),
   "RCode"      = "# install.packages(&quot;lme4&quot;)<br>
                   LMM <- lme4::lmer(Phenotype ~ 0 + (1|Individual), data = sampled_data)"
 ),
@@ -534,34 +529,35 @@ text <- list(
 "Mod1Step3_txt" = list(  
   "title"     = "Step 3: Within- and among-individual variance",
   
-  "subgoal"   = "<b>Sub-goal:</b> to illustrate hierarchical structure of variance when individuals 
-                         express traits multiple times (a trait varies within-individuals).",
+  "goal"   = "In this step, our goal is to illustrate the hierarchical structure of variance when individuals 
+                         express traits multiple times, when a trait varies within-individuals.",
   
   
-  "intro"     = "<b>Introduction:</b> Individuals express different values of a trait at different 
+  "intro"     = "<b>Introduction</b><br> Traits for individuals may vary at
                 times due to the influence of the environment. Collecting two or more measures 
-                for each individual provides several types of information. 
-                We have already seen that it can allow estimation of measurement error. 
-                If the measurements are spread over time, then you can also estimate 
-                how much variance is due to the environment and how the phenotype 
-                responds to the environment. Finally, repeated measurements can measure 
+                for each individual then provides additional information. 
+                We have already emphasized that measuring a trait multiple times allows for the estimation of measurement error. 
+                If the measurements are spread over time, it also becomes possible to determine
+                how much variance in the trait can be attributued to the environment and how the phenotype 
+                responds to the environment. Moreover, repeatedly measuring a trait can elaborate
                 whether differences among individuals are solely due to differences in the 
-                environment at the time of measurement versus to some other source, 
-                such as differences among individuals that were generated before the period of measurement.",
+                environment at the time of the measurement, or if there is an additional unknown source of variation.",
   
   
-  "exercise"  = paste0("<b>Exercise:</b> As in the two previous steps we will generate a new group 
-                      of individuals but we will also add a new form of variance. 
+  "exercise"  = paste0("<b>Exercise</b><br> The following app builds on the previous two apps by adding
+                       the option to select the among-individual variance of a random intercept term. 
+                       It allows you to test how the number of individuals sampled and the number 
+                       of repeated measures per individual affect the estimation of","$V_",NOT$devI,"$.
                       Previously, you generated a population of individuals that varied in 
-                      their true value $(V_",NOT$devI,")$ and also due to observer measurement error $(V_",NOT$mError,")$. 
-                      We assumed that individuals had the same trait value throughout 
+                      their true value $(V_",NOT$devI,")$ and also due to measurement error $(V_",NOT$mError,")$. 
+                      We then assumed that individuals had the same trait value throughout 
                       the duration of our study. But, what if trait values changed over time, 
                       perhaps in response to some environmental gradient? To start exploring this idea, 
                       let's assume that all individuals would respond to this gradient in the same way, 
                       but they might experience different values of the environment.  
                       This means that in addition to $V_",NOT$devI,"$ and $V_",NOT$mError,"$ there is variation caused by the population 
                       mean response to an environmental effect on the phenotype of an individual. 
-                      In this step, the environmental effect is considered as individual-specific 
+                      In this step, the environmental effect is considered individual-specific 
                       but unknown to the observer. An (individual-) specific environmental effect 
                       means that each individual of the population will experience different environmental 
                       conditions than do other individuals. For instance, the intensity of 
@@ -575,7 +571,7 @@ text <- list(
                       We will use the term $V_",NOT$envEffect,"$ to refer to all phenotypic variance caused by the environment. 
                       Known environmental variance will be indicated by $V_{",NOT$mean," ",NOT$env,"}$."),
   
-  "exercise2"  = paste0("In this simulation, let's assume there is only one environmental effect. 
+  "exercise2"  = paste0("In this exercise, let's assume there is only one environmental effect. 
                         We will specify it to generate phenotypes, so let's use the term $V_{",NOT$mean," ",NOT$env,"}$. 
                         You can thus try several combinations of $V_",NOT$mError,"$, $V_",NOT$devI,"$, and $V_{",NOT$mean," ",NOT$env,"}$ 
                         (with the constraint that they add up to 1) to uncover how the input values 
@@ -585,17 +581,15 @@ text <- list(
   
   "para1"    = "Once again you can calculate repeatability as",
   
-  "point"    = paste0("<b>Point:</b> We can now estimate a particular variance component 
+  "point"    = paste0("We can now estimate a particular variance component 
                 of $V_{",NOT$total,"}$ that represents among-individual differences that are consistent through time. 
                 This variance is also, in some circumstances, the index for individual 
                 &ldquo;personality&rdquo; differences. The residual variance combines both measurement 
-                error and the variance caused by the unmeasured (unknown) specific environment to each individual. 
+                error and the variance due to the unmeasured (unknown) specific environment to each individual. 
                 $V_{",NOT$envEffect,"}$ in general reflects plasticity to unknown environments, 
                 with $V_{",NOT$mean," ",NOT$env,"}$ indicating variance due to a specified environmental variable $(",NOT$env,")$, 
                 which so far has not been measured."),
-  "point2"    = "You can now test whether the number of individuals sampled and the number 
-                of repeated measures per individual can affect your estimation.",
-  "point3"    = "Repeatability now does not represent the same thing as previously 
+  "point2"    = "Repeatability now does not represent the same thing as previously 
                 because the denominator of the ratio includes both measurement error 
                 and variance due to plasticity. This new repeatability is not simply 
                 a measure of your skill at measuring phenotypes. 
@@ -623,16 +617,16 @@ text <- list(
 "Mod1Step4_txt" = list( 
   "title"     = "Step 4: Explaining Environmental Variance",
   
-  "subgoal"   = "<b>Sub-goal:</b> to explain unknown environmental variance.",
-  "intro"     = paste0("<b>Introduction:</b> In step 3, we introduced $V_{",NOT$mean," ",NOT$env,"}$ 
-                       as the variance caused by the environment. 
-                       We did not know what that effect was (it was unmeasured), 
-                       but often we can measure the environment and assess its influence on phenotype. 
-                       In this step, we demonstrate how that is done."),
-  "exercise"    = paste0("<b>Exercise:</b> As before, we will generate a new group of individuals, 
-                  with phenotypic variance caused by measurement error $(V_",NOT$mError,")$, individual differences $(V_",NOT$devI,")$, 
-                  and specific and measured (i.e. known) environmental effects $(V_{",NOT$mean," ",NOT$env,"})$ on the phenotype of an individual. 
-                  As before, you can set $V_",NOT$mError,"$, $V_",NOT$devI,"$ and $V_{",NOT$mean," ",NOT$env,"}$, but we suggest you use the same values you did in Step 3.
+  "goal"   = "Here we will go further explain the concept of unknown environmental variance.",
+  "intro"     = paste0("<b>Introduction</b><br> In step 3 we introduced $V_{",NOT$mean," ",NOT$env,"}$ 
+                       as the variance in a phenotype caused by changes in the environment. 
+                       At that point we were unaware of what that effect represented (it was unmeasured). However,
+                       usually we can measure the environment, and assess its influence on a phenotype. 
+                       In this step, we consider that concept a bit further."),
+  "exercise"    = paste0("<b>Exercise</b><br> As before, we will generate a new group of individuals, 
+                  with phenotypic variance due to measurement error $(V_",NOT$mError,")$, individual differences $(V_",NOT$devI,")$, but now also
+                  due to measured environmental effects $(V_{",NOT$mean," ",NOT$env,"})$. 
+                  In the app below, you can set $V_",NOT$mError,"$, $V_",NOT$devI,"$ and $V_{",NOT$mean," ",NOT$env,"}$, but we suggest to use the same values as you did in Step 3.
                   Remember that these variances must add up to 1."),
   
   "para1"    = paste0("At this point, we want to expand on the idea of statistical models. 
@@ -673,14 +667,14 @@ text <- list(
                 and $V_",NOT$devI,"$. You can also play around with the slope and the ratio of 
                 $V_{",NOT$mean," ",NOT$env,"}$ and $V_",NOT$devI,"$ to better understand the effects."),
   
-  "point"    = "<b>Point:</b> This exercise introduced explanatory variables (also known as fixed effects). 
-               Because individual is a &ldquo;random&rdquo; effect, this is thus a &ldquo;mixed effects&rdquo; model. 
-               The fixed effect part is a linear regression. Even if this is all you want to do with your data, 
+  "point"    = "This exercise introduced explanatory variables (also known as fixed-effects). 
+               Because individual is a &ldquo;random&rdquo; effect, this is thus a &ldquo;mixed-effects&rdquo; model. 
+               The fixed-effect part is a linear regression. Even if this is all you want to do with your data, 
                it is important to understand that a sampling regime in which individuals 
-               are measured more than once creates the need to do linear regression within a mixed model. 
+               are measured more than once creates the need to do linear regression within a mixed-effects model. 
                Although we do not focus much on significance testing here, the structure of data collected 
                in this simulation strongly affects inferences based on hypothesis testing. 
-               More importantly, the combination of random effects and fixed effects sets one up 
+               More importantly, the combination of random-effects and fixed-effects sets one up 
                to investigate a wide array of processes involved at one or more levels in 
                this hierarchal structure of among versus within-individual variance.",
   "RCode"    = "# install.packages(&quot;lme4&quot;)<br>
@@ -700,7 +694,7 @@ text <- list(
 "Mod2Step1_txt" = list(
   "title" = "Step 1: The biology that produces binary, proportional, and count data",
   
-  "subgoal" = "<b>Sub-goal:</b> Introducing how biology may result in non-normally distributed data.",
+  "goal" = "<b>Goal:</b> Introducing how biology may result in non-normally distributed data.",
   
   "intro" = "Introduction: Before you start analyzing your data, one thing you want to consider is the biology of 
          what you're looking at and the how the phenomenon you're interested in is expressed by organisms. 
@@ -795,7 +789,7 @@ text <- list(
 "Mod2Step2_txt" = list(
   "title" = "Step 2: Introduction to Bernoulli, binomial and Poisson distributions",
   
-  "subgoal" = "<b>Sub-goal:</b> to learn statistical properties of the three key non-Gaussian distributions.",
+  "goal" = "<b>Goal:</b> to learn statistical properties of the three key non-Gaussian distributions.",
   
   "intro" = "Introduction: In Step 1, we considered biological scenarios where non-Gaussian data could be produced. 
          The three important types of data are binary, proportional and count data, each of which corresponds to a 
@@ -842,7 +836,7 @@ text <- list(
 "Mod2Step3_txt" = list(
   "title" = "Step 3:  Introduction to generalized linear mixed-effect models (GLMMs)",
   
-  "subgoal" = "<b>Sub-goal:</b> to understand the idea of the link and inverse link function and overdispersion 
+  "goal" = "<b>Goal:</b> to understand the idea of the link and inverse link function and overdispersion 
          and how (dis)similar it is to model Gaussian and non-Gaussian traits.",
   
   "para1" = "<b>Introduction 1:</b> In other modules, we assumed the trait of interest, $y$ follows a Gaussian distribution 
@@ -851,7 +845,7 @@ text <- list(
          removing the mean-variance relationship. Then, we could use the same mixed-effects model framework 
          we have been using in other modules so far. This 'transformation' can be done using the 'link' function 
          in generalized linear models (GLMs) if y values are independent of each other or in 
-         generalized linear mixed models (GLMMs) when y values are repeated measures or have a correlational structure. 
+         generalized linear mixed-effects models (GLMMs) when y values are repeated measures or have a correlational structure. 
          Also, the 'inverse link' function can bring results from the 'link' scale ($y'$) back to the original non-Gaussian data scale. 
          This link scale is often called as the latent scale. For example, a commonly used link function for binary 
          (and proportional) data is the logit link function. The logit function and its inverse can be written as:",
@@ -883,13 +877,13 @@ text <- list(
   "para4" = paste0("where logit<sup>-1</sup> is the inverse link function and ohi is overdispersion,
            which is normally distributed as for the individual effect $",EQ1$dev0,"$ (note that we skip the notation $y^\\prime$
            which we used above). All the key parameters (population mean $",EQ3$mean0,"$ and individual-specific deviation $",EQ1$dev0,"$)
-           are estimated on the latent scale where random effects are (assumed to be) normally distributed.
+           are estimated on the latent scale where random-effects are (assumed to be) normally distributed.
            It is also interesting to notice that $o_{hi}$ is very much like $",NOT$error,"_{hi}$ (residuals),
            which we have seen in other modules; in the statistical literature, $o$ is known as additive (over)dispersion
            because there is an alternative way of implementing dispersion known as multiplicative overdispersion
            (for more details of additive and multiplicative dispersion, see Nakagawa and Schielzeth 2010).
            The overdispersion $o_{hi}$ is also known as the observation-level random factor (effect)
-           because the number of categories of this random effect matches the number of data points,
+           because the number of categories of this random-effect matches the number of data points,
            this aspect is also somewhat analogous to the residuals in a normal mixed-effects model."),
   
   "para5" = "Overall the GLMM above looks very much to normal mixed-effects models, apart from the overdispersion 
@@ -904,7 +898,7 @@ text <- list(
   "para5_eq4" = "$$o_{hi} \\sim N(0,V_o)$$",
   
   "para6" = "where exp is the inverse link function (of log), and the other notations are the same as above. 
-    Again, on the latent scale, random effects are all normally distributed, and the equation is very 
+    Again, on the latent scale, random-effects are all normally distributed, and the equation is very 
     similar to a Gaussian trait.",
   
   "exercise2" = paste0("<b>Exercise 2:</b> We now set the 3 parameters ($",EQ3$mean0,"$, $V_", NOT$devI,"$, and $V_o$) 
@@ -925,7 +919,7 @@ text <- list(
 "Mod3Step1_txt" = list(
   
   "title"      = "Step 1: Sampling and non-stochastic environment",
-  "subgoal"    = "<b>Sub-goal:</b> to explore how hidden patterns in environment combined with variance in sampling 
+  "goal"    = "<b>Goal:</b> to explore how hidden patterns in environment combined with variance in sampling 
                   affect estimates of variance parameters and their interpretation.",
   
   "intro"      = paste0("<b>Introduction:</b> In the previous module (<i>",Module_titles$mod1,"</i>), 
@@ -1007,7 +1001,7 @@ text <- list(
 # Step 2 --------------
 "Mod3Step2_txt" = list(    
   "title"      = "Step 2: Sampling to reduce effects of non-stochastic environment",
-  "subgoal"    = "<b>Sub-goal:</b> Using simulations to generate sampling regimes 
+  "goal"    = "<b>Goal:</b> Using simulations to generate sampling regimes 
                   that limit the effects of non-stochastic environments.",
   "intro"      = "<b>Introduction:</b> Step 1 revealed a problem—non-stochastic environments 
                   through time and variability in the timing of sampling can create biases 
@@ -1073,7 +1067,7 @@ text <- list(
 # Step 3 --------------
 "Mod3Step3_txt" = list(  
   "title"      = "Step 3: Biased sampling and known and unknown environments",
-  "subgoal"    = "<b>Sub-goal:</b> Accounting for the environment to control for environmental biases.",
+  "goal"    = "<b>Goal:</b> Accounting for the environment to control for environmental biases.",
   
   "intro"      = paste0("<b>Introduction:</b> Step 1 of this module illustrated that environmental 
                         effects on phenotypes can produce biases in estimates of among-individual variance $(V_",NOT$devI,")$.  
@@ -1108,7 +1102,7 @@ text <- list(
                   We will compare it to a model in which all of the environmental 
                   variance is unknown, e.g.,",
   "RCode2"    = "LMM2 <- lme4::lmer(Phenotype ~ 1 + (1|Individual), data = sampled_data)",
-  "para5"      = "A mixed effects statistical model estimates the parameters, 
+  "para5"      = "A mixed-effects statistical model estimates the parameters, 
                   which we can compare with the true values:",
   "para6"      = paste0("This should show you that when there is among-individual variance in sampling 
                         and you can account for all the environmental variance with an x variable, 
@@ -1172,7 +1166,7 @@ text <- list(
 "Mod4Step1_txt" = list(
   "title" = "Step 1: Phenotypic correlations between two repeatedly expressed traits that are not consistently different between individuals.",
   
-  "subgoal" = "<b>Sub-goal:</b> Introducing within-individual correlations and variance-covariance matrices",
+  "goal" = "<b>Goal:</b> Introducing within-individual correlations and variance-covariance matrices",
   
   "intro" = paste0("<b>Introduction:</b> As we have seen in other modules (",Module_titles$mod1,", 
 				 ",Module_titles$mod6,"), repeatedly expressed traits can vary both within and among individuals. 
@@ -1323,7 +1317,7 @@ text <- list(
   
   "para9" = paste0("As you have set both the among- and within-individual variances, you have defined the repeatabilities of both traits. 
   	As detailed in module on ",Module_titles$mod1,", repeatability ranges between 0 and 1 and is calculated as:"),
-  "para9_eq1" = paste0("$$Repeatability=\\frac{V'_",NOT$devI,"}{V'_",NOT$devI,"+V'_",NOT$error,"}$$"),
+  "para9_eq1" = paste0("$$Repeatability=\\frac{\\hat{V}_",NOT$devI,"}{\\hat{V}_",NOT$devI,"+\\hat{V}_",NOT$error,"}$$"),
   
   "para10" = "We will now return to the equation that describes the components that shape the phenotypic correlation:",
   "para10_eq1" = paste0("$$r_{",NOT$total,"_",NOT$trait.1,",",NOT$total,"_",NOT$trait.2,"} = r_{",NOT$devI,"_" ,NOT$trait.1,",",NOT$devI,"_" ,NOT$trait.2,
@@ -1358,7 +1352,7 @@ text <- list(
 # Step 3 --------------
   "Mod4Step3_txt" = list(
     "title" = "Step 3: Level-specific correlations.",
-    "subgoal" = "<b>Sub-goal:</b> Understanding the role of level-specific correlations in shaping 
+    "goal" = "<b>Goal:</b> Understanding the role of level-specific correlations in shaping 
 				 phenotypic correlations in repeatedly expressed traits.",
     
     "intro" = paste0("<b>Introduction:</b> As a final step in our analysis of the within-individual 
@@ -1435,7 +1429,7 @@ text <- list(
 # Step 4 --------------
   "Mod4Step4_txt" = list(
     "title" = "Step 4: The Bivariate mixed-effects model.",
-    "subgoal" = "<b>Sub-goal:</b> Understanding the difference between a univariate and a multivariate mixed-effects model, 
+    "goal" = "<b>Goal:</b> Understanding the difference between a univariate and a multivariate mixed-effects model, 
 				 and how level-specific correlations are modelled.",
     
     "intro" = paste0("<b>Introduction:</b> In the previous modules (",Module_titles$mod1,", ",Module_titles$mod3,", and ",
@@ -1498,12 +1492,12 @@ text <- list(
 # Step 5 -------------- 
 "Mod4Step5_txt" = list(
   "title" = "Step 5: Environmentally-induced correlations.",
-  "subgoal" = "<b>Sub-goal:</b> Introducing integration of plasticity as a mechanism causing correlations.",
+  "goal" = "<b>Goal:</b> Introducing integration of plasticity as a mechanism causing correlations.",
   
   "intro" = paste0("<b>Introduction:</b> In the previous steps we have, considered a bivariate phenotypic 
 								equation where two traits correlated among- and/or within-individuals without considering 
 								plasticity as a mechanism causing this variation. This is why the double equation 
-								that we re-print here harboured no fixed effects apart from the statistical intercepts:"),
+								that we re-print here harboured no fixed-effects apart from the statistical intercepts:"),
   "intro_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = (",EQ$mean0.1," + ",EQ$dev0.1,") + ",NOT$error,"_{",NOT$trait.1,NOT$time,NOT$ind,"}$$$$",
   NOT$trait.2,"_{",NOT$time,NOT$ind,"} = (",EQ$mean0.2," + ",EQ$dev0.2,") + ",NOT$error,"_{",NOT$trait.2,NOT$time,NOT$ind,"}$$"),
   
@@ -1545,7 +1539,7 @@ text <- list(
 		(i.e., there was no variation in the timing of sampling). This meant that the environment 
 		(food availability) varied within but not among individuals, and therefore caused correlations 
 		between egg size and number within but not among individuals either. We will now fit a bivariate mixed-effects model to these data, where we will fit the 
-		following phenotypic equation with the following random effects structures:",
+		following phenotypic equation with the following random-effects structures:",
    "para4_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"} = (",EQ$mean0.1," + ",EQ$dev0.1,") + ",NOT$error,"_{",NOT$trait.1,NOT$time,NOT$ind,
    "}$$ $$", NOT$trait.2,"_{",NOT$time,NOT$ind,"} = (",EQ$mean0.2," + ",EQ$dev0.2,") + ",NOT$error,"_{",NOT$trait.2,NOT$time,NOT$ind,"}$$"),
   
@@ -1562,7 +1556,7 @@ text <- list(
 					 You will notice that the residual within-individual covariance ($Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}$) 
 					 should now better resemble the estimate that you should have expected based on 
 					 the within-individual correlation that you entered previously. This is because 
-					 the within-individual covariance is now explained by the fixed effect covariate, 
+					 the within-individual covariance is now explained by the fixed-effect covariate, 
 					 and therefore food availability no longer contributes to the residual within-individual variances."),
 
     "conclusion" = "<b>Conclusion:</b> integration of plasticity, where the same environmental factor affects multiple phenotypic traits, 
@@ -1582,7 +1576,7 @@ text <- list(
 # Step 1 -------------- 
 "Mod5Step1_txt" = list(
   "title" = "Step 1: Population level MDPP",
-  "subgoal" = "<b>Sub-goal:</b> To understand average (population-level) effects of multiple environmental factors on the phenotype.",
+  "goal" = "<b>Goal:</b> To understand average (population-level) effects of multiple environmental factors on the phenotype.",
   
   "intro" = paste0("<b>Introduction:</b> Here we model multiple sources of environmental variance ($V_",NOT$envEffect,"$) in a single trait, 
   							expressed multiple times within individuals but measured within a single population. 
@@ -1614,7 +1608,7 @@ text <- list(
   "para4_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + ",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,"} + ",
                        EQ1$mean2,NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
   
-  "para5" = "This is a multiple regression within a mixed model. A 3-dimensional graph helps visualize
+  "para5" = "This is a multiple regression within a mixed-effects model. A 3-dimensional graph helps visualize
 		the way in which the two x variables affect a phenotype in the 2 dimensions defined by the environment.",
   
   "para6" = paste0("Individuals in this simulation vary in their intercept by the amount you entered previously in $V_{",NOT$devI,"}$.
@@ -1644,7 +1638,7 @@ text <- list(
 "Mod5Step2_txt" = list(
   
   "title" = "Step 2: Interaction terms",
-  "subgoal" = "<b>Sub-goal:</b> To account for dependencies in the effect of one factor by another factor.",
+  "goal" = "<b>Goal:</b> To account for dependencies in the effect of one factor by another factor.",
   
   "intro" = "<b>Introduction:</b> In step 1 above, we developed the idea that 2 or more environments 
 					might both have effects on a phenotype. In the case of parent birds feeding offspring, 
@@ -1665,7 +1659,7 @@ text <- list(
   be illustrated in a later module. However, high correlations between factors (colinearity) can have 
   unusual effects on statistical tests of parameter estimates&mdash;we ignore that issue for now. Instead, 
   plasticity of plasticity as described above results from non-additive effects. The factors are said 
-  to interact, the term describing them in a mixed model or any related analysis (GLM) is an 
+  to interact, the term describing them in a mixed-effects model or any related analysis (GLM) is an 
   interaction term. Biologically, interactive effects on a phenotype between 2 environmental factors 
   may have multiple fascinating implications.",
   
@@ -1702,7 +1696,7 @@ text <- list(
 "Mod6Step1_txt" = list(
   
   "title"      = "Step 1: Introduction to random slopes",
-  "subgoal"    = "<b>Sub-goal:</b> to develop understanding of hierarchies in variance when individuals 
+  "goal"    = "<b>Goal:</b> to develop understanding of hierarchies in variance when individuals 
                   express their traits as a response to a changing environmental factor, 
                   but do so differently. In other words, 
                   individuals have variable reaction norms in both intercept and slope.",
@@ -1767,7 +1761,7 @@ text <- list(
   "para4"    = "Individual-specific responses can be best visualised by plotting 
                 the individual-specific regression lines.",
   
-  "point"   = "<b>Point:</b> Again, we performed linear regression approach in a mixed model framework, 
+  "point"   = "<b>Point:</b> Again, we performed linear regression approach in a mixed-effects model framework, 
                 but in this case we generated multiple regression lines 
                 (by defining different intercepts and slopes) for each individual in a single model 
                 to describe the individual-specific effect of an explanatory variable. 
@@ -1796,7 +1790,7 @@ text <- list(
 # Step 2 --------------
 "Mod6Step2_txt" = list(    
   "title"      = "Step 2: Intercept-slope correlation",
-  "subgoal"    = "<b>Sub-goal:</b> To introduce and understand correlation (covariance) between intercepts and slopes.",
+  "goal"    = "<b>Goal:</b> To introduce and understand correlation (covariance) between intercepts and slopes.",
   "intro"      = "<b>Introduction:</b> Up until this point, we have been making the hidden and simplifying 
                   assumption that each variable in our variance partitioning is independent of other variables. 
                   In other words, we have assumed, for example, that measurement error is not correlated with 
@@ -1870,7 +1864,7 @@ text <- list(
 # Step 3 --------------
 "Mod6Step3_txt" = list(  
   "title"      = "Step 3: Sample size and precision",
-  "subgoal"    = paste0("<b>Sub-goal:</b> to develop understanding of how the level of replication 
+  "goal"    = paste0("<b>Goal:</b> to develop understanding of how the level of replication 
                         in terms of the number of individuals and samples per individual 
                         influence the estimation of the among-individual variance in intercepts $(V_",NOT$devI,")$, 
                         slopes $(V_{",NOT$devS,"})$ and their correlation $(Cor_{",NOT$devI,",",NOT$devS,"})$."),
@@ -1927,25 +1921,25 @@ text <- list(
 
 "portal_txt" = list(
   "parag0_title"         = "SQuID goal",
-  "parag0_contents_1"    = "<b>SQuID</b> stands for <b>S</b>tatistical <b>Qu</b>antification of <b>I</b>ndividual <b>D</b>ifferences and is the 
-                                product of the SQuID working group. The package aims to help scholars who, 
-                                like us, are interested in understanding patterns of phenotypic variance. 
-                                Individual differences are the raw material for natural selection to act 
-                                on and hence the basis of evolutionary adaptation. Understanding the sources 
-                                of phenotypic variance is thus a most essential feature of biological investigation 
-                                and mixed effects models offer a great, albeit challenging tool. 
-                                Disseminating the properties, potentials and interpretational challenges 
-                                in the research community is thus a foremost goal of SQuID.",
-  "parag0_contents_2"    = "The squid package has two main objectives: First, it provides an educational 
-                                tool useful for students, teachers and researchers who want to learn to use 
-                                mixed-effects models. Users can experience how the mixed-effects model framework 
-                                can be used to understand distinct biological phenomena by interactively 
-                                exploring simulated multilevel data. Second, squid offers research opportunities 
-                                to those who are already familiar with mixed-effects models, as squid enables 
-                                the generation of datasets that users may download and use for a range of simulation-based 
-                                statistical analyses such as power and sensitivity analysis of multilevel and multivariate data.",
+  "parag0_contents_1"    = "<b>SQuID</b> stands for <b>S</b>tatistical <b>Qu</b>antification of <b>I</b>ndividual <b>D</b>ifferences, and is the 
+                                product of the SQuID working group. The basic idea of SQuID revolves around the exploration of statistical models
+                                , and sampling designs for studies, using artificially generated datasets.
+                                This app aims to provide a course which aids scholars who, 
+                                like us, are interested in understanding patterns of phenotypic variation. To that end, 
+                                we provide an educational tool useful for students, educators and researchers who want to learn to use 
+                                mixed-effects models for their study of individual differences. Individual differences are the raw material 
+                                for natural selection to act on and hence the basis of evolutionary adaptation. Understanding sources
+                                of phenotypic variance is thus a most essential feature of biological investigation, 
+                                and mixed-effects models offer a great, albeit challenging tool. 
+                                In this app you can experience how the mixed-effects model framework 
+                                can be used to understand biological phenomena by interactively exploring simulated multilevel data.",
+  "parag0_contents_2"    = "In this app we make use of two \\texttt{R}-packages that SQuID has developed for simulation and dessimination of 
+                            knowledge on mixed-effects models: <a href='https://cran.r-project.org/web/packages/squid/index.html'>squid: Statistical QUantification of Individual Differences</a>
+                            and <a href='https://github.com/squidgroup/squidSim'>squidSim: a tool for simulating data from multi-level models</a>.
+                                Through these \\texttt{R}-packages we enable the generation of datasets that you may download and use for a range of simulation-based 
+                                statistical analyses, such as power and sensitivity analysis.",
   "parag1_title"         = "SQuID biological goals",
-  "patag1_image"         = '<img id="logo" src="images/squid_logo.png" align="left" alt="SQuID" width=120px heigth=120px>',
+  "parag1_image"         = '<img id="logo" style="padding: 1%; right-padding: 2%;" src="images/squid_logo.png" align="left" alt="SQuID" width=120px heigth=120px>',
   "parag1_contents"      = 'SQuID seeks to understand patterns of phenotypic variance, which is the material 
                                 on which natural selection is acting, and thus is a most essential feature of 
                                 biological investigation. Different sources of variations are at the origin of 
@@ -1961,11 +1955,11 @@ text <- list(
                                 changes in the environment, which represents an interaction between the among- and the 
                                 within-individual levels. Selection can act differently on these different components of 
                                 variance in the phenotypes of a trait, and this is why it is important to estimate them. 
-                                Mixed models are very flexible statistical tools that provide a way to estimate the 
+                                mixed-effects models are very flexible statistical tools that provide a way to estimate the 
                                 variation at these different levels, and represent the general statistical framework 
                                 for evolutionary biology. Because of the progress in computational capacities mixed 
                                 models have become increasingly popular among ecologists and evolutionary biologists 
-                                over the last decade. However, running mixed model is not a straightforward exercise, 
+                                over the last decade. However, running mixed-effects model is not a straightforward exercise, 
                                 and the way data are sampled among and within individuals can have strong implications 
                                 on the outcome of the model. This is why we considered it was necessary to produce a 
                                 simulation tool that could help new users interested in decomposing phenotypic variance 
@@ -1993,45 +1987,42 @@ text <- list(
                                 This represents an interaction between the among- and the within-individual levels of variation. 
                                 The patterns of variation can, thus, be very complex. Selection can act differently on these different 
                                 components of variance in the phenotypes of a trait, and this is why it is important to quantify their magnitude.",
-  "background_content_2" = "Mixed models are very flexible statistical tools that provide a way to estimate the 
+  "background_content_2" = "mixed-effects models are very flexible statistical tools that provide a way to estimate the 
                                 variation at these different levels, and represent the general statistical framework for evolutionary biology.
-                                Because of the progress in computational capacities mixed models have become increasingly 
+                                Because of the progress in computational capacities mixed-effects models have become increasingly 
                                 popular among ecologists and evolutionary biologists over the last decade. However, 
-                                fitting mixed model is not a straightforward exercise, and the way data are sampled among 
+                                fitting mixed-effects model is not a straightforward exercise, and the way data are sampled among 
                                 and within individuals can have strong implications on the outcome of the model. 
                                 This is why we created the squid simulation tool that could help new users interested 
                                 in decomposing phenotypic variance to get more familiar with the concept of hierarchical 
-                                organization of traits, with mixed models and to avoid pitfalls caused by inappropriate sampling.",
+                                organization of traits, with mixed-effects models and to avoid pitfalls caused by inappropriate sampling.",
   "parag2_title"         = "History of the project",
   "parag2_contents"      =  "It all started in Hannover in November 2013 at the occasion of a workshop on 
                                 personality organised by Susanne Foitzik, Franjo Weissing, and Niels Dingemanse and funded 
                                 by the Volkswagen Foundation. During this workshop, a group of researchers discussed the 
                                 potential issues related to sampling designs on the estimation of components of the phenotypic 
                                 variance and covariance. It became obvious that there was an urgent need to develop a 
-                                simulation package to help anyone interested in using a mixed model approach at getting 
+                                simulation package to help anyone interested in using a mixed-effects model approach at getting 
                                 familiar with this methods and avoiding the pitfalls related to the interpretation of the results. 
                                 A first model and a working version of the package were created in January 2014, 
                                 during a meeting at Universit&eacute; du Qu&eacute;bec &agrave; Montr&eacute;al. The current version was produced during a workshop 
                                 in November 2014, at the Max Plank Institute for Ornithology in Seewiesen.",
-  "parag3_title"         = "Brief description of modules",
-  "parag3_contents1"     = "<b>SQuID</b> is made to help researchers to become familiar with multilevel variation, and to 
-                                build up sampling designs for their study. SQuID is built up as a series of modules that guide 
-                                the user into situations of increasing complexity to explore the dynamics between the way 
-                                records are collected and estimates of parameters of specific interest; The last module 
-                                is the <b><i>full model simulation package</i></b> that allows the user to generate data sets that can then be 
-                                used to run analyses in the statistical package of their choice for specific research questions.",
-  "parag3_contents2"     = paste0("<b>SQuID</b> is based on a mathematical model that creates a group of individuals (i.e. study population) 
+  "parag3_title"         = "Brief description of the modules",
+  "parag3_contents1"     = "<b>SQuID</b> is made to help you to become familiar with multilevel variation, and to 
+                                build up sampling designs for your study. This course is built up as a series of modules that guide 
+                                you through those concepts, by increasing complexity, so that you can explore the dynamics between the way 
+                                records are collected and estimates of parameters of specific interest.",
+  "parag3_contents2"     = paste0("The concepts here are based on a mathematical model that creates a group of individuals (i.e. the study population) 
                                 repeatedly expressing phenotypes, for one or different traits, in uniform time. Phenotypic 
                                 values of traits are generated following the general principle of the phenotypic equation 
-                                (<a href='http://onlinelibrary.wiley.com/doi/10.1111/1365-2656.12013/abstract' target='_blank'>Dingemanse & Dochtermann 2013, Journal of Animal Ecology</a>): 
-                                phenotypic variance ($V_",NOT$total,"$) is assumed to be the sum of a series of components (see the full model). 
-                                The user has thus the flexibility to add different variance components that will form the phenotype 
-                                of the individual at each time step, and to set up the relative importance of each component. 
-                                SQuiD then allows the user to collect a subsample of phenotypes for each simulated individual 
-                                (i.e. operational data set), according to a specific sampling design. For most of the modules, the 
-                                operational data set generated is automatically fed into a statistical model in R and the main results 
-                                of the analysis shown in an output. For the full model the user has the opportunity to download 
-                                the operational data set for further analyses."),
+                                (<a href='http://onlinelibrary.wiley.com/doi/10.1111/1365-2656.12013/abstract' target='_blank'>Dingemanse & Dochtermann 2013, Journal of Animal Ecology</a>), 
+                                where phenotypic variance ($V_",NOT$total,"$) is assumed to be the sum of a series of components (the full model). 
+                                You thus have the flexibility to add different variance components that will form the phenotype 
+                                of an individual at each time step, and to set up the relative importance of each component. 
+                                The SQuID \\texttt{R}-packages then allow you to articifially 'collect' a subsample of phenotypes for each individual 
+                                (i.e. sample from a simulated population), according to some sampling design. For most of the modules, the 
+                                operational data set generated is automatically fed into a statistical model in \\texttt{R}, and the results 
+                                of the analysis are shown as output."),
   "parag4_title"         = "SQuID team",
   "parag4_contents"      = "Hassen Allegue (Universit&eacute; du Qu&eacute;bec &Agrave; Montr&eacute;al, Montreal, Canada)<br>
                                 Yimen G. Araya-Ajoy (Norwegian University of Science and Technology, Trondheim, Norway)<br>
@@ -2043,36 +2034,32 @@ text <- list(
                                 Holger Schielzeth (University of Bielefeld, Bielefeld, Germany)<br>
                                 David F. Westneat (University of Kentucky, Lexington, USA)<br>",
   "patag3_image"         = '<div style="clear:both"><img id="logo" src="images/modules.png" align="center" alt="Modules" width=80% height=80%></div>',
-  "beginners"            = paste0("The SQuID modules are designed for users who have some but not a 
-                                lot of statistical background, particularly with linear mixed models. 
-                                We strongly recommend that if you are in this category, you begin with 
-                                the module 	&ldquo;Basic Lessons&rdquo;. That should be followed by the module 
-                                &ldquo;Non-stochastic environments&rdquo;. You will need to be very comfortable with 
-                                the ideas here before moving on. Which module you choose next depends 
-                                on your interests but Step 1 in module &ldquo;Multidimensional Plasticity&rdquo; 
+  "beginners"            = paste0("The SQuID modules are designed for those who have some (but not a 
+                                lot) of background in statistical modeling, particularly with linear mixed-effects models. 
+                                We strongly recommend to being with the module <i>",Module_titles$mod1,"</i>, if you fall in this category.
+                                That should be followed by the module <i>",Module_titles$mod3,"</i>. Which module you choose next depends 
+                                on your interests, but Step 1 in the module <i>",Module_titles$mod5,"</i> 
                                 introduces multiple regression. The module &ldquo;",Module_titles$mod6,"&rdquo; 
                                 may also be good to do after module &ldquo;Non-stochastic environments&rdquo;."),
-  "teachers"             = "The SQuID modules can be very useful for teaching statistical concepts, 
-                                especially ones related to linear mixed models. Which module to use 
-                                depends on your students and what you want them to learn. 
-                                Brief descriptors of each module are available on this page 
-                                (instructions to see them). We also recommend that you skim some of 
-                                the modules or visit the full equation step-by-step page to better 
-                                understand how SQuID works.",
+  "teachers"             = "The SQuID modules can be very useful in teaching statistical concepts, 
+                                especially ones related to linear mixed-effects models. Which module to use 
+                                depends on your students' prior knowledge, and their learning goals. 
+                                Brief descriptions of each module are available on this page below. We also recommend that you skim some of 
+                                the modules to better understand how SQuID works.",
   "experts"              = "SQuID was designed to provide a user-friendly and web-based program 
-                                to simulate data for testing a variety of ideas about sampling and 
-                                bias in hierarchical mixed modeling. For those very familiar with 
-                                these approaches and curious about SQuID, we recommend initially 
-                                using the module &ldquo;Full model&rdquo; and the option &ldquo;Step-by-step&rdquo;. 
+                                for the simulation of data and for the testing a variety of ideas about sampling and 
+                                bias in mixed-effects modeling. For those very familiar with 
+                                these approaches and curious about SQuID, we recommend to explore the 'full model' section
+                                in <a href='https://squid-group.shinyapps.io/shiny-squid/'>the original SQuID app</a>. 
                                 Once you understand how SQuID works, the &ldquo;Express model&rdquo; version 
-                                will work best. Finally, we have SQuID available as an R function 
-                                &ldquo;squidR()&rdquo; for those interested in doing efficient simulations.",
+                                will work best. Finally, if you are interested in simulation in a reproducible framework,
+                                we suggest you check out the \\texttt{squidSim R}-package.",
   "references_title"    = "References",
   "references_content"  = "Allegue, H., Araya-Ajoy, Y.G., Dingemanse, N.J., Dochtermann N.A., Garamszegi, 
                               L.Z., Nakagawa, S., R&eacute;ale, D., Schielzeth, H. and Westneat, D.F. (2016). 
                               SQuID - Statistical Quantification of Individual Differences: an educational 
                               and statistical tool for understanding multi-level phenotypic data 
-                              in the mixed modelling framework. Methods in Ecology and Evolution, 
+                              in the mixed-effects modelling framework. Methods in Ecology and Evolution, 
                               8:257-267.<br><br>
                               Dingemanse, N.J. and Dochtermann N.A. (2013). Quantifying individual variation in behaviour: 
                               mixed-effect modelling approaches. Journal of Animal Ecology, 82:39-54."
@@ -2083,7 +2070,7 @@ text <- list(
 # Step 1 --------------
 "Mod7Step1_txt" = list(  
   "title" = "Step 1: Adding multiple slopes that vary among individuals",
-  "subgoal" = "<b>Sub-goal:</b> Can we statistically test for individual variation in interaction 
+  "goal" = "<b>Goal:</b> Can we statistically test for individual variation in interaction 
          terms and what sampling regimes might improve the ability to do so?",
   
   "intro" = paste0("<b>Introduction:</b> Multidimensional phenotypic plasticity is a widespread feature of most living organisms. 
@@ -2197,7 +2184,7 @@ text <- list(
            However, the population mean plane could be warped due to an interaction between 
            the two $",NOT$env,"$ variables. Because it appears that such warping is adaptive in real organisms, 
            this would imply that individual variation in the extent of warping is possible. 
-           Here we add that last random effect term to the phenotypic equation.",
+           Here we add that last random-effect term to the phenotypic equation.",
 
 "para1" = paste0("This now expands the phenotypic equation to include three slope terms, $",EQ1$dev1,"$, 
            $",EQ1$dev2,"$, and $",EQ1$dev12,"$, which are the individual deviation from the population 
@@ -2207,7 +2194,7 @@ text <- list(
                      "} + (",EQ1$mean2,"+",EQ1$dev2,")",NOT$env,"_{2",NOT$time,NOT$ind,"} + (",EQ1$mean12,"+",EQ1$dev12,")",NOT$env,"_{1",NOT$time,NOT$ind,"}",
                      NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
   
-"para2" = "As above, the addition of another random effect expands the variance-covariance once again. 
+"para2" = "As above, the addition of another random-effect expands the variance-covariance once again. 
     It now is an ugly beast, but if you move through it systematically, you will see it is just 
     a ledger sheet that accounts for every possibility:",
 "para2_eq1" = paste0("$$ \\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\\\ ",EQ1$dev2," \\\\ ",EQ1$dev12,"\\end{pmatrix} \\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,
@@ -2244,7 +2231,7 @@ text <- list(
            the graph where they would experience an extreme in both $",NOT$env,"$ distributions."),
 
 "conclusion" = "<b>Conclusion:</b> The effect of interactions between environments on phenotypes has three important characteristics. First, it seems biologically likely given 
-the complexity of the environment and it in fact exists in many traits. Second, these effects can be modelled using mixed models, including the random effects 
+the complexity of the environment and it in fact exists in many traits. Second, these effects can be modelled using mixed-effects models, including the random-effects 
 of individual on the response to each environment and in theory on the interaction term itself. The third characteristic is that these models are exceedingly complex. At this point, you 
 don't have in your mental pocket the full phenotypic equation. There are many more complexities to explore, but you now have all the basic tools. 
          The SQuID platform can now be explored so you can assess what sampling regimes and experimental designs will allow you to effectively 

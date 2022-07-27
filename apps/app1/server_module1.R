@@ -53,7 +53,7 @@ c(
     											geom_density(alpha = 0.1) +
     											geom_rug(aes(col=lines)) +
     											ggtitle("Distribution of total and individual phenotype values") +
-    											xlab("Phenotype values") +
+    											xlab("Simluated phenotype values") +
     											ylab("Density") +
                           theme(legend.title    = element_blank(),
                                          legend.position = "bottom")
@@ -72,15 +72,20 @@ c(
         
           data <- Mod1Step1_output()
         
-          myTable <- data.frame(
-            "True"= c(paste("Total Phenotypic variance ($V_",NOT$total,"$) = 1",sep=""),
-                      paste("Individual Variance ($V_",NOT$devI,"$) = ",1-input$Mod1Step1_Ve,sep=""),
-                      paste("Measurement error variance ($V_",NOT$mError,"$) = ",input$Mod1Step1_Ve,sep=""),
-                      "mean of the trait ($\\mu$) = 0"),
-            "Estimated" = c(paste("Total Sampled Phenotypic variance ($V'_",NOT$total,"$) = ",ifelse(!is.null(data),data$Vp,"..."),sep=""),
+          myTable <- data.frame("Parameter" = c(
+          paste0("Total Phenotypic variance ($V_",NOT$total,"$) ="),
+          paste0("Individual Variance ($V_",NOT$devI,"$) = "),
+          paste0("Measurement error variance ($V_",NOT$mError,"$) = "),
+          "Mean of the trait ($\\mu$)"
+          ),
+            "Truth"= c(1,
+                      1-input$Mod1Step1_Ve,
+                      input$Mod1Step1_Ve,
+                      0),
+            "Estimated" = c(ifelse(!is.null(data),data$Vp,"..."),
                             "",
                             "",
-                            paste("Sampled mean of the trait ($\\mu'$) = ",ifelse(!is.null(data),data$phenotypeMean,"..."),sep=""))
+                            ifelse(!is.null(data),data$phenotypeMean,"..."))
             )
         
           getTable(myTable)

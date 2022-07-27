@@ -24,7 +24,6 @@ c(
         hide("Mod1Step2_summary_table")
         hide("Mod1Step2_plot2")
         
-        hide("Mod1Step2_Rep_txt")
         hide("Mod1Step2_output")
         
         hide("hide")
@@ -60,9 +59,9 @@ c(
         
         if(!is.null(data)){
           
-          Vp        <- paste("V'",NOT$total," = " , data$Vp)
-          Vi        <- paste("V'",NOT$devI, " = " , data$Vi)
-          Ve        <- paste("V'",NOT$mError," = ", data$Ve)
+          Vp        <- bquote(hat(V)[.(NOT$total)] == .(data$Vp))
+          Vi        <- bquote(hat(V)[.(NOT$devI)] == .(data$Vi))
+          Ve        <- bquote(hat(V)[.(NOT$mError)] == .(data$Ve))
           
           myFactor  <- factor(rep(c(Vp,Vi,Ve), each=length(data$sampled_data$Phenotype)), levels=c(Vp,Vi,Ve))
           mydata    <- data.frame(dens  = c(data$sampled_data$Phenotype,data$sampled_data$I, data$sampled_data$e),
@@ -71,11 +70,13 @@ c(
            ggplot(mydata, aes(dens, fill=lines, colour=lines)) +
                      geom_density(alpha = 0.1) +
                      geom_rug(aes(col=lines)) +
-                	   facet_wrap(~ lines) +
-                     xlab("Model component values") +
+                	   facet_wrap(~ lines, labeller=label_parsed) +
+                     xlab("Simulated values") +
                      ylab("Density") +
-                     theme(legend.title    = element_blank(),
-                                    legend.position = "bottom")
+                    scale_fill_discrete(labels=c(Vp, Vi, Ve))+
+                    scale_colour_discrete(labels=c(Vp, Vi, Ve))+
+                    theme(legend.title    = element_blank(),
+                    legend.position = "bottom")
           
 
         }else{
@@ -84,6 +85,9 @@ c(
                 
       }),
       
+  # display results: repeatability (text)
+  output$Mod1Step2_Rep_txt   <- renderText({ HTML(paste("Your repeatability is ", ifelse(!is.null(Mod1Step2_output()), 
+                                                                                         Mod1Step2_output()$R,"...")))}),
     #button to show extra results, keeps things clean
     observeEvent(input$show, {
       
@@ -92,23 +96,24 @@ c(
         
         data <- Mod1Step2_output()
         
-        myTable <- data.frame("True"     = c(paste("Total phenotypic variance ($V_",NOT$total,"$) = 1"),
-                                            paste("Individual variance ($V_",NOT$devI,"$) =",1-input$Mod1Step2_Ve),
-                                            paste("Measurement error variance ($V_",NOT$mError,"$) =",input$Mod1Step2_Ve),
-                                            "Mean of the trait ($\\mu$) = 0"),
-                              "Estimated"= c(paste("Total sampled Phenotypic variance ($V'_",NOT$total,"$) = ",ifelse(!is.null(data),data$Vp,"...")),
-                                             paste("Sampled individual variance ($V'_",NOT$devI,"$) = ",ifelse(!is.null(data),data$Vi,"...")),
-                                             paste("Measurement error in sample ($V'_",NOT$mError,"$) = ",ifelse(!is.null(data),data$Ve,"...")),
-                                             paste("Sampled mean of the trait ($\\mu'$) = ",ifelse(!is.null(data),data$phenotypeMean,"...")))
+        myTable <- data.frame("Parameter"=c(paste("Total phenotypic variance", "($V_",NOT$total,"$) ="),
+                                            paste("Individual variance","($V_",NOT$devI,"$) ="),
+                                            paste("Measurement error variance","($V_",NOT$mError,"$) ="),
+                              paste("Mean of the trait",")$\\mu$) = ")),
+                              "Truth"     = c(1,
+                                            1-input$Mod1Step2_Ve,
+                                            input$Mod1Step2_Ve,
+                                            0),
+                              "Estimated"= c(ifelse(!is.null(data),data$Vp,"..."),
+                                             ifelse(!is.null(data),data$Vi,"..."),
+                                             ifelse(!is.null(data),data$Ve,"..."),
+                                             ifelse(!is.null(data),data$phenotypeMean,"..."))
                               )
                   
         getTable(myTable)
         
       })
 
-      # display results: repeatability (text)
-      output$Mod1Step2_Rep_txt   <- renderText({ HTML(paste("Your repeatability is ", ifelse(!is.null(Mod1Step2_output()), 
-                                                                                             Mod1Step2_output()$R,"...")))})
       # Display repeatability result (graph)
       output$Mod1Step2_plot2 <- renderPlot({ 
         
@@ -122,7 +127,7 @@ c(
           ggplot(data_plot, aes(x=phen_time1, y=phen_time2)) + 
           	   geom_point(size=3, color=color$color2) +
 	          	 xlab("First measurement")  +
-	          	 ylab("Second measurement")
+	          	 ylab("Second measurement") + ggtitle("Measurement error variance (spread)")
           
         }else{defaultPlot()}
         
@@ -130,7 +135,6 @@ c(
       show("Mod1Step2_summary_table")
       show("Mod1Step2_plot2")
       
-      show("Mod1Step2_Rep_txt")
       show("Mod1Step2_output")
       
       hide("show")
@@ -142,7 +146,6 @@ c(
 observeEvent(input$hide, {
   hide("Mod1Step2_summary_table")
   hide("Mod1Step2_plot2")
-  hide("Mod1Step2_Rep_txt")
   hide("Mod1Step2_output")
   
   hide("hide")

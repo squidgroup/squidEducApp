@@ -5,6 +5,8 @@
 shinyUI(
   fluidPage(
     useShinyjs(),
+    withMathJax(),
+    
     #### Header  ####
     #### CSS and Javascipt file ####  
     tags$head(

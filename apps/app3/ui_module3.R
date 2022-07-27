@@ -30,8 +30,12 @@ span(
     uiOutput("Mod1Step3_hidden")
   ),
   
+  
+
   # Simulation run button
   fluidRow(align="center",
+           # Repeatability output
+           textOutput("Mod1Step3_Rep_txt"),
   actionButton("Mod1Step3_Run", label = Modules_VAR$Run$label, icon= Modules_VAR$Run$icon, class="runButton"),
   runningIndicator(),
   sim_msg(),
@@ -47,9 +51,7 @@ span(
   actionButton("show", label = Modules_VAR$Show$label),
   actionButton("hide", label = Modules_VAR$Hide$label)
   ),
-  
-  # Repeatability output
-  textOutput("Mod1Step3_Rep_txt"),
+
   
     # Table : display true and measured values (Vp, Vi, Vme and mean)
     uiOutput("Mod1Step3_summary_table", style = "display: inline-block;"),

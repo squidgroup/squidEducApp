@@ -53,8 +53,8 @@ c(
  	  myTable <- data.frame("True"       = c(paste("Individual variance ($V_",NOT$devI,"$) =",input$Mod3Step1_Vi),
  	                                         paste("Measurement error variance ($V_",NOT$mError,"$) =",input$Mod3Step1_Ve),
  	                                         paste("Environmental variance ($V_",NOT$envEffect,"$) =",input$Mod3Step1_Vbx)),
- 	                        "Estimated" = c(paste("Individual variance in sample ($V'_",NOT$devI,"$) = ",ifelse(!is.null(data),data$Vi,"...")),
- 	                                        paste("Residual variance of sample ($V'_",NOT$residualUpper,"$) = ",ifelse(!is.null(data),data$Vr,"...")),
+ 	                        "Estimated" = c(paste("Individual variance in sample ($\\hat{V}_",NOT$devI,"$) = ",ifelse(!is.null(data),data$Vi,"...")),
+ 	                                        paste("Residual variance of sample ($\\hat{V}_",NOT$residualUpper,"$) = ",ifelse(!is.null(data),data$Vr,"...")),
  	                                        "") 
  	  ) 
  	  getTable(myTable) 
