@@ -920,7 +920,7 @@ text <- list(
   
   
   # Step 1 --------------
-  "Mod3Step1_txt" = list(
+  "Mod6Step1_txt" = list(
     "title" = "Step 1: Phenotypic correlations between two repeatedly expressed traits that are not different between individuals.",
     
     "goal" = "Now we consider within-individual correlation, and variance-covariance matrices more generally.",
@@ -984,7 +984,7 @@ text <- list(
   
   # Step 2 --------------
   
-  "Mod3Step2_txt" = list(
+  "Mod6Step2_txt" = list(
     "title" = "Step 2: Phenotypic correlations between two repeatedly expressed traits that also differ between individuals.",
     "goal" = "We continue to explore phenotypic correlations, but instead of  assuming correlation between traits of an individual, we now also consider correlation between individuals.",
     "intro" = paste0("<b>Background</b><br> In step one, we focussed on within-individual correlations caused by trade-offs 
@@ -1085,7 +1085,7 @@ text <- list(
   ),
   
   # Step 3 --------------
-  "Mod3Step3_txt" = list(
+  "Mod6Step3_txt" = list(
     "title" = "Step 3: Level-specific correlations.",
     "goal" = "Adding another level of complexity, we here further study the role of level-specific correlations in shaping 
 				 phenotypic correlations in repeatedly expressed traits.",
@@ -1160,7 +1160,7 @@ text <- list(
   ),
   
   # Step 4 --------------
-  "Mod3Step4_txt" = list(
+  "Mod6Step4_txt" = list(
     "title" = "Step 4: The Bivariate mixed-effects model.",
     "goal" = "Now that we have covered multiple traits, the next step is to nderstandg the difference between a univariate and a multivariate mixed-effects model,
      so that you can model level-specific correlations.",
@@ -1221,7 +1221,7 @@ text <- list(
   ),
   
   # Step 5 -------------- 
-  "Mod3Step5_txt" = list(
+  "Mod6Step5_txt" = list(
     "title" = "Step 5: Environmentally-induced correlations.",
     "goal" = "In this step we introduce integration of plasticity as a mechanism causing correlations.",
     
@@ -1420,7 +1420,7 @@ text <- list(
   
   
   # Step 1 --------------
-  "Mod5Step1_txt" = list(
+  "Mod3Step1_txt" = list(
     
     "title"      = "Step 1: Introduction to random slopes",
     "goal"    = "<b>Goal:</b> to develop understanding of hierarchies in variance when individuals 
@@ -1515,7 +1515,7 @@ text <- list(
   ),
   
   # Step 2 --------------
-  "Mod5Step2_txt" = list(    
+  "Mod3Step2_txt" = list(    
     "title"      = "Step 2: Intercept-slope correlation",
     "goal"    = "<b>Goal:</b> To introduce and understand correlation (covariance) between intercepts and slopes.",
     "intro"      = "<b>Background:</b> Up until this point, we have been making the hidden and simplifying 
@@ -1589,7 +1589,7 @@ text <- list(
   ),
   
   # Step 3 --------------
-  "Mod5Step3_txt" = list(  
+  "Mod3Step3_txt" = list(  
     "title"      = "Step 3: Sample size and precision",
     "goal"    = paste0("<b>Goal:</b> to develop understanding of how the level of replication 
                         in terms of the number of individuals and samples per individual 
@@ -1795,7 +1795,7 @@ text <- list(
   ),
   
   # Step 1 --------------
-  "Mod6Step1_txt" = list(  
+  "Mod5Step1_txt" = list(  
     "title" = "Step 1: Adding multiple slopes that vary among individuals",
     "goal" = "<b>Goal:</b> Can we statistically test for individual variation in interaction 
          terms and what sampling regimes might improve the ability to do so?",
@@ -1903,7 +1903,7 @@ text <- list(
   ),
   
   # Step 2 --------------
-  "Mod6Step2_txt" = list(
+  "Mod5Step2_txt" = list(
     "title" = "Step 2: Adding the random interaction term",
     "intro" = "Step 1 above layered on the random slopes for each $",NOT$env,"$ predictor, 
            and these served to tip the population mean plane in various directions in environmental space, 

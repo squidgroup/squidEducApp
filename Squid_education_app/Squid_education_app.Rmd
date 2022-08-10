@@ -438,13 +438,13 @@ cat(placeholder_image)
 
 ## Module 2: Non-stochastic environments
 
-```{r mod3_step1_title, results="asis"}
+```{r mod2_step1_title, results="asis"}
 
 cat("###", Mod2Step1_txt$title)
 
 ```
 
-```{r mod3_step1, results="asis"}
+```{r mod2_step1, results="asis"}
   cat(Mod2Step1_txt$goal)    # Text: goal
   cat(Mod2Step1_txt$intro)      # Text: introduction
   cat(Mod2Step1_txt$exercise)   # Text: exercise
@@ -471,7 +471,7 @@ cat("###", Mod2Step1_txt$title)
   cat(Mod2Step1_txt$para5_eq1)       
 ```
 
-```{r mod3_step1_con, results="asis"}
+```{r mod2_step1_con, results="asis"}
   cat(Mod2Step1_txt$para6)       # Text: para8
   
   cat(Mod2Step1_txt$conclusion)  # Text: conclusion
@@ -479,11 +479,11 @@ cat("###", Mod2Step1_txt$title)
   cat(Mod2Step1_txt$para7)       # Text: para9
 ```
 
-```{r mod3_step2_title, results="asis"}
+```{r mod2_step2_title, results="asis"}
 cat("###", Mod2Step2_txt$title)
 ```
 
-```{r mod3_step2, results="asis"}
+```{r mod2_step2, results="asis"}
   cat(Mod2Step2_txt$goal)    # Text: goal
   cat(Mod2Step2_txt$intro)      # Text: introduction
   cat(Mod2Step2_txt$exercise)   # Text: exercise
@@ -507,11 +507,11 @@ cat("###", Mod2Step2_txt$title)
   cat(Mod2Step2_txt$para8)      # Text: paragraph 8
 ```
 
-```{r mod3_step3_title, results="asis"}
+```{r mod2_step3_title, results="asis"}
 cat("###", Mod2Step3_txt$title)
 ```
 
-```{r mod3_step3, results="asis"}
+```{r mod2_step3, results="asis"}
   cat(Mod2Step3_txt$goal)    # Text: goal
   cat(Mod2Step3_txt$intro)      # Text: introduction
   cat(Mod2Step3_txt$exercise1)  # Text: exercise 1
@@ -526,7 +526,6 @@ cat("###", Mod2Step3_txt$title)
   
   cat(Mod2Step3_txt$results_eq1)
 ```
-
 
 ```{r ex4-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
@@ -561,7 +560,7 @@ LMM <- lmer(Phenotype ~ 1 + (1|Individual), data = data)
 summary(LMM)
 ```
 
-```{r mod3_step3_con, results="asis"}
+```{r mod2_step3_con, results="asis"}
   cat(Mod2Step3_txt$para4)      # Text: paragraph 4
   
   cat(Mod2Step3_txt$para4_eq1)
@@ -582,21 +581,21 @@ summary(LMM)
 
 ## Module 3: Random-slope regression
 
-```{r mod6_step1_title, results="asis"}
-  cat("###",Mod5Step1_txt$title)
+```{r mod3_step1_title, results="asis"}
+  cat("###",Mod3Step1_txt$title)
 ```
-```{r mod6_step1, results="asis"}
-    cat(Mod5Step1_txt$goal)
-    cat(Mod5Step1_txt$intro)
-    cat(Mod5Step1_txt$exercise)
+```{r mod3_step1, results="asis"}
+    cat(Mod3Step1_txt$goal)
+    cat(Mod3Step1_txt$intro)
+    cat(Mod3Step1_txt$exercise)
     
-    cat(Mod5Step1_txt$exercise_eq1)
+    cat(Mod3Step1_txt$exercise_eq1)
 
-    displayRCode(Mod5Step1_txt$RCode1)
+    displayRCode(Mod3Step1_txt$RCode1)
     
-    cat(Mod5Step1_txt$para1)
+    cat(Mod3Step1_txt$para1)
     
-    cat(Mod5Step1_txt$para1_eq1)
+    cat(Mod3Step1_txt$para1_eq1)
 ```    
 
 ```{r ex9-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -635,23 +634,23 @@ LMM <- lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data)
 summary(LMM)
 ```
 
-```{r mod6_step1_con, results="asis"}
-    cat(Mod5Step1_txt$para2)
+```{r mod3_step1_con, results="asis"}
+    cat(Mod3Step1_txt$para2)
     
     cat(placeholder_image)
     
-    cat(Mod5Step1_txt$para3)
+    cat(Mod3Step1_txt$para3)
     
-    cat(Mod5Step1_txt$results)
+    cat(Mod3Step1_txt$results)
     
-    cat(Mod5Step1_txt$para4)
+    cat(Mod3Step1_txt$para4)
     
-    cat(Mod5Step1_txt$point)
+    cat(Mod3Step1_txt$point)
     
-    cat(Mod5Step1_txt$point_eq1)
-    cat(Mod5Step1_txt$point_eq2)
+    cat(Mod3Step1_txt$point_eq1)
+    cat(Mod3Step1_txt$point_eq2)
     
-    cat(Mod5Step1_txt$para5)
+    cat(Mod3Step1_txt$para5)
 ```
 
 ```{r ex10-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -697,43 +696,43 @@ summary(LMM)
 ```
 
 
-```{r mod6_step2_title, results="asis"}
+```{r mod3_step2_title, results="asis"}
 
-cat("###",Mod5Step2_txt$title)
+cat("###",Mod3Step2_txt$title)
 ```
-```{r mod6_step2, results="asis"}
-    cat(Mod5Step2_txt$goal)
-    cat(Mod5Step2_txt$intro)
-    cat(Mod5Step2_txt$para1)
+```{r mod3_step2, results="asis"}
+    cat(Mod3Step2_txt$goal)
+    cat(Mod3Step2_txt$intro)
+    cat(Mod3Step2_txt$para1)
     
-    cat(Mod5Step2_txt$para1_eq1)
+    cat(Mod3Step2_txt$para1_eq1)
     
-    cat(Mod5Step2_txt$para2)
+    cat(Mod3Step2_txt$para2)
     
-    cat(Mod5Step2_txt$para2_eq1)
+    cat(Mod3Step2_txt$para2_eq1)
     
-    cat(Mod5Step2_txt$para3)
+    cat(Mod3Step2_txt$para3)
     
-    cat(Mod5Step2_txt$exercise)
+    cat(Mod3Step2_txt$exercise)
     
-    cat(Mod5Step2_txt$exercise_eq1)
+    cat(Mod3Step2_txt$exercise_eq1)
     
-    cat(Mod5Step2_txt$para4)
+    cat(Mod3Step2_txt$para4)
     
     cat(placeholder_image)
     
-    cat(Mod5Step2_txt$results)
+    cat(Mod3Step2_txt$results)
     
-    cat(Mod5Step2_txt$para5)
+    cat(Mod3Step2_txt$para5)
     
-    cat(Mod5Step2_txt$para6)
-    cat(Mod5Step2_txt$point)
+    cat(Mod3Step2_txt$para6)
+    cat(Mod3Step2_txt$point)
     
-   cat(Mod5Step2_txt$point_eq1)
+   cat(Mod3Step2_txt$point_eq1)
     p("where")
-    cat(Mod5Step2_txt$point_eq2)
+    cat(Mod3Step2_txt$point_eq2)
     
-    cat(Mod5Step2_txt$para7)
+    cat(Mod3Step2_txt$para7)
 ```
 
 ```{r ex11-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -779,344 +778,37 @@ LMM <- lmer(Phenotype ~ 1 + X1  + (1+X1|Individual), data = data)
 summary(LMM)
 ```
 
-```{r mod6_step3_title, results="asis"}
-    cat("###",Mod5Step3_txt$title)
+```{r mod3_step3_title, results="asis"}
+    cat("###",Mod3Step3_txt$title)
 ```
-```{r mod6_step3, results="asis"}
-    cat(Mod5Step3_txt$goal)
-    cat(Mod5Step3_txt$intro)
-    cat(Mod5Step3_txt$exercise)
+```{r mod3_step3, results="asis"}
+    cat(Mod3Step3_txt$goal)
+    cat(Mod3Step3_txt$intro)
+    cat(Mod3Step3_txt$exercise)
     
-    cat(Mod5Step3_txt$exercise_eq1)
+    cat(Mod3Step3_txt$exercise_eq1)
     
     cat(placeholder_image)
     
-    cat(Mod5Step3_txt$para1)
-    cat(Mod5Step3_txt$para2)
+    cat(Mod3Step3_txt$para1)
+    cat(Mod3Step3_txt$para2)
   
-    cat(Mod5Step3_txt$para3)
+    cat(Mod3Step3_txt$para3)
     
     cat(placeholder_image)
            
-    cat(Mod5Step3_txt$para4)
+    cat(Mod3Step3_txt$para4)
 ```
 
-## Module 4: Multiple traits
+
+## Module 4: Multi-dimensional Phenotypic Plasticity (MDPP)
 
 ```{r mod4_step1_title, results="asis"}
-cat("###", Mod3Step1_txt$title)
-```
-
-```{r mod4_step1, results="asis"}
-  # Sub-goal
-  cat(Mod3Step1_txt$goal)
-
-    # Introduction
-  cat(Mod3Step1_txt$intro)
-  
-  cat(Mod3Step1_txt$para1)
-
-  cat(Mod3Step1_txt$exercise_eq1)
-  
-  cat(Mod3Step1_txt$para2)
-
-  cat(Mod3Step1_txt$para2_eq1)
-
-  # Exercise
-  cat(Mod3Step1_txt$exercise)
-
-  cat(Mod3Step1_txt$para3)
-
-  cat(placeholder_image) #app 17
-  
-  cat(Mod3Step1_txt$para4)
-  
-  cat(Mod3Step1_txt$para4_eq1)
-
-  cat(Mod3Step1_txt$para5)
-  
-  cat(Mod3Step1_txt$conclusion)
-```
-
-```{r mod4_step2_title, results="asis"}
-cat("###",Mod3Step2_txt$title)
-```
-
-```{r mod4_step2, results="asis"}
-  # Sub-goal
-  cat(Mod3Step2_txt$goal)
-  
-  # Introduction
-	cat(Mod3Step2_txt$intro)
-
-	### Model equations
-	cat(Mod3Step2_txt$intro_eq1)
-	
-	cat(Mod3Step2_txt$para1)
-
-  ####### eq 1
-  cat(Mod3Step2_txt$para1_eq1)
-  
-  cat(Mod3Step2_txt$para2)
-  
-  ####### eq 2 
-  cat(Mod3Step2_txt$para2_eq1)
-  
-  cat(Mod3Step2_txt$para3)
-  
-  cat(Mod3Step2_txt$para4)
-  
-  cat(Mod3Step2_txt$para4_eq1)
-  
-  cat(Mod3Step2_txt$exercise)
-
-  cat(placeholder_image) #18
-
-  cat(Mod3Step2_txt$para5)
-  cat(Mod3Step2_txt$para5_eq1)
- 
-  cat(Mod3Step2_txt$para6)
-  cat(Mod3Step2_txt$para6_eq1)
-
-  cat(Mod3Step2_txt$para7)
-  
-  ####### eq 1
-  cat(Mod3Step2_txt$para1_eq1)
-
-  cat(Mod3Step2_txt$para8)
-  
-  cat(Mod3Step2_txt$para8_eq1)
-  
-  cat(Mod3Step2_txt$para9)
-  
-  cat(Mod3Step2_txt$conclusion)
-  
-  p(strong("References"))
-  p(HTML("Dingemanse, N.J. & Dochtermann, N.A. (2013) Quantifying individual variation in behaviour: 
-         mixed-effect modelling approaches. <i>Journal of Animal Ecology</i>, 82, 39-54.
-         <a href='https://doi.org/10.1111/1365-2656.12013' target='_blank'>doi: 10.1111/1365-2656.12013</a>"))
-  p(HTML('Dingemanse, N.J., Dochtermann, N.A. & Nakagawa, S. (2012) Defining behavioural syndromes and the role of 
-         "syndrome deviation" to study its evolution. <i>Behavioral Ecology and Sociobiology</i>, 66, 1543-1548.
-         <a href="https://doi.org/10.1007/s00265-012-1416-2" target="_blank">doi: 10.1007/s00265-012-1416-2</a>'))
-  p(HTML("Nicolaus, M., Brommer, J.E., Ubels, R., Tinbergen, J.M. & Dingemanse, N.J. (2013) 
-          Exploring patterns of variation in clutch size-density reaction norms in a wild passerine bird. 
-          <i>Journal of Evolutionary Biology</i>, 26, 2031-2043.
-          <a href='https://doi.org/10.1111/jeb.12210' target='_blank'>doi: 10.1111/jeb.12210</a>"))
-	
-```
-
-```{r mod4_step3_title, results="asis"}
-cat("###",Mod3Step3_txt$title)
-```
-
-```{r Mod3Step3, results="asis"}
-	# Sub-goal
-  cat(Mod3Step3_txt$goal)	
-	
- cat(Mod3Step3_txt$intro)
-	
-	# Exercise
-  cat(Mod3Step3_txt$exercise)	
-
-  cat(placeholder_image) # app 19
-
-	cat(Mod3Step3_txt$results)
-	cat(Mod3Step3_txt$results_eq1)
-	
-	cat(Mod3Step3_txt$para1)
-	cat(Mod3Step3_txt$para1_eq1)
-
-
-	cat(Mod3Step3_txt$para2)
-	
-	cat(Mod3Step3_txt$para2_eq1)
-	
-	cat(Mod3Step3_txt$para3)
-	
-	cat(Mod3Step3_txt$para4)
-
-	cat(Mod3Step3_txt$conclusion)
-
-	p(strong("References"))
-	p(HTML("van Noordwijk, A.J. & de Jong, G. (1986) Acquisition and allocation of resources - 
-	       Their influence on variation in life-history tactics. <i>American Naturalist</i>, 128, 137-142.
-	       <a href='https://doi.org/10.1086/284547' target='_blank'>doi: 10.1086/284547</a>"))
-```
-
-```{r mod4_step4_title,results="asis"}
-cat("###",Mod3Step4_txt$title)
-```
-
-```{r mod4_step4,results="asis"}
-	# Sub-goal
-	cat(Mod3Step4_txt$goal)
-	
-	
-	cat(Mod3Step4_txt$intro)
-	
-	cat(Mod3Step4_txt$intro_eq1)
-	
-	cat(Mod3Step4_txt$para1)
-	
-	cat(Mod3Step4_txt$para1_eq1)
-	
-	cat(Mod3Step4_txt$para2)
-	
-	cat(Mod3Step4_txt$para2_eq1)
-	
-	cat(Mod3Step4_txt$para3)
-
-	cat(Mod3Step4_txt$para3_eq1)
-	
-  cat(Mod3Step4_txt$para4)
-	
-	
-	cat(Mod3Step4_txt$para4_eq1)
-	
-	cat(Mod3Step4_txt$para5)
-	
-	cat(Mod3Step4_txt$para5_eq1)
-	
-	cat(Mod3Step4_txt$para6)
-	
-	cat(Mod3Step4_txt$para6_eq1)
-	
-	cat(Mod3Step4_txt$para7)
-	
-	cat(Mod3Step4_txt$para7_eq1)
-	
-	cat(Mod3Step4_txt$para8)
-	
-	cat(Mod3Step4_txt$para8_eq1)
-	
-	cat(Mod3Step4_txt$conclusion)
-```
-
-```{r mod4_step5_title, results = "asis"}
-	cat("###",Mod3Step5_txt$title)
-```
-
-```{r mod4_step5, results = "asis"}
-	# Sub-goal
-	cat(Mod3Step5_txt$goal)
-
-	# Introduction
-	cat(Mod3Step5_txt$intro)
-
-	cat(Mod3Step5_txt$intro_eq1)
-	
-  cat(Mod3Step5_txt$para1)
-	
-	cat(Mod3Step5_txt$para1_eq1)
-
-	cat(Mod3Step5_txt$para2)
-	
-	# Exercise
-	cat(Mod3Step5_txt$exercise)
-    
-	cat(placeholder_image) # app 21
-	
-	cat(Mod3Step5_txt$para3)
-	
-	cat(Mod3Step5_txt$para3_eq1)
-	
-	cat(Mod3Step5_txt$para4)
-
-	cat(Mod3Step5_txt$para4_eq1)
-```
-
-```{r ex5-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
-library(brms)
-library(squidSim)
-
-get_data <- function(n,r,Vi,Vr){
-  if(n>1000)stop("Please don't make our server hamsters work that hard..")
-  squid_data <- simulate_population(
-  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
-  n_response = 2,
-  parameters=list(
-    observation = list(
-    names = "food_availability",
-    beta = matrix(c(2,1),ncol=2)
-    ),
-    Individual = list(
-      vcov = matrix(c(1,Vi,Vi,1),nrow=2,ncol=2)
-    ),
-    residual = list(
-      vcov = matrix(c(1,Vr,Vr,1),nrow = 2,ncol = 2)
-    )
-  ),
-    response_names = c("Phenotype_1","Phenotype_2")
-)
-  data <- get_population_data(squid_data)
-  return(data)
-
-}
-```
-
-```{r ex5, exercise=TRUE, exercise.timelimit	= 300}
-data <- get_data(n = 50, r = 2,  
-                 Vi = 0.5, Vr = 0.5)
-bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ (1|Individual), data = data, silent = 0)
-summary(bLMM)
-```
-
-```{r mod4_step5_con,results="asis"}
-	cat(Mod3Step5_txt$para5)
-	
-	cat(Mod3Step5_txt$para5_eq1)
-```
-
-```{r ex5a-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
-library(brms)
-library(squidSim)
-
-get_data <- function(n,r,Vi,Vr){
-  if(n>1000)stop("Please don't make our server hamsters work that hard..")
-  squid_data <- simulate_population(
-  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
-  n_response = 2,
-  parameters=list(
-    observation = list(
-    names = "food_availability",
-    beta = matrix(c(2,1),ncol=2)
-    ),
-    Individual = list(
-      vcov = matrix(c(1,Vi,Vi,1),nrow=2,ncol=2)
-    ),
-    residual = list(
-      vcov = matrix(c(1,Vr,Vr,1),nrow = 2,ncol = 2)
-    )
-  ),
-    response_names = c("Phenotype_1","Phenotype_2")
-)
-  data <- get_population_data(squid_data)
-  return(data)
-
-}
-```
-
-```{r ex5a, exercise=TRUE, exercise.timelimit	= 300}
-data <- get_data(n = 50, r = 2,  
-                 Vi = 0.5, Vr = 0.5)
-bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ food_availability + (1|Individual), data = data, silent = 0)
-summary(bLMM)
-```
-
-```{r mod4_step5_con2, results="asis"}
-	cat(Mod3Step5_txt$para6)
-	
-	cat(Mod3Step5_txt$conclusion)
-```
-
-## Module 5: Multi-dimensional Phenotypic Plasticity (MDPP)
-
-```{r mod5_step1_title, results="asis"}
 cat("###", Mod4Step1_txt$title)
 ```
 
 
-```{r mod5_step1, results="asis"}
+```{r mod4_step1, results="asis"}
   # Sub-goal
   cat(Mod4Step1_txt$goal)
 
@@ -1175,7 +867,7 @@ LMM <- lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data)
 summary(LMM)
 ```
 
-```{r mod5_step1_con, results="asis"}
+```{r mod4_step1_con, results="asis"}
 
 	cat(Mod4Step1_txt$para3)
 
@@ -1224,7 +916,7 @@ LMM <- lmer(Phenotype ~ 1 + X1 + X2 + (1|Individual), data = data)
 summary(LMM)
 ```
 
-```{r mod5_step1_con2, results="asis"}
+```{r mod4_step1_con2, results="asis"}
 
 
 	cat(Mod4Step1_txt$para5)
@@ -1249,11 +941,11 @@ summary(LMM)
   
 ```
 
-```{r mod5_step2_title, results="asis"}
+```{r mod4_step2_title, results="asis"}
 cat("###",Mod4Step2_txt$title)
 ```
 
-```{r mod5_step2, results="asis"}
+```{r mod4_step2, results="asis"}
 # Sub-goal
   cat(Mod4Step2_txt$goal)
 
@@ -1275,7 +967,7 @@ cat("###",Mod4Step2_txt$title)
                  LMM <- lme4::lmer(Phenotype ~ 1 + X1 + X2 + (1|Individual), data = sampled_data)")
 ```
 
-```{r mod5_step2_con, results="asis"}
+```{r mod4_step2_con, results="asis"}
 
   cat(Mod4Step2_txt$para1)
 
@@ -1325,7 +1017,7 @@ LMM <- lmer(Phenotype ~ 1 + X1 * X2 + (1|Individual), data = data)
 summary(LMM)
 ```
 
-```{r mod5_step2_con2, results="asis"}
+```{r mod4_step2_con2, results="asis"}
   cat(Mod4Step2_txt$para2)
 
   cat(Mod4Step2_txt$para3)
@@ -1333,31 +1025,32 @@ summary(LMM)
   cat(Mod4Step2_txt$conclusion)
 ```
 
-## Module 6: MDPP and random regression
 
-```{r mod7_step1_title, results="asis"}
-cat("###",Mod6Step1_txt$title)
+## Module 5: MDPP and random regression
+
+```{r mod5_step1_title, results="asis"}
+cat("###",Mod5Step1_txt$title)
 ```
-```{r mod7_step1, results="asis"}
+```{r mod5_step1, results="asis"}
   # Sub-goal
-  cat(Mod6Step1_txt$goal)
+  cat(Mod5Step1_txt$goal)
 
   # Introduction
-  cat(Mod6Step1_txt$intro)
+  cat(Mod5Step1_txt$intro)
 
   # Exercise
-  cat(Mod6Step1_txt$exercise)
+  cat(Mod5Step1_txt$exercise)
 
   # Equation
-  cat(Mod6Step1_txt$exercise_eq1)
+  cat(Mod5Step1_txt$exercise_eq1)
   
-  cat(Mod6Step1_txt$para1)
+  cat(Mod5Step1_txt$para1)
   
-  cat(Mod6Step1_txt$para2)
+  cat(Mod5Step1_txt$para2)
   
-  cat(Mod6Step1_txt$para3)
+  cat(Mod5Step1_txt$para3)
 
-  cat(Mod6Step1_txt$para4)
+  cat(Mod5Step1_txt$para4)
   
   cat(placeholder_image)
 ```
@@ -1411,28 +1104,28 @@ data2 <- get_data(n = 300, r = 100,
 LMM2 <- lmer(Phenotype ~ 1 + X1*X2 + (1 + X1|Individual), data = data2)
 ```
 
-```{r mod7_step1_con, results="asis"}
-  cat(Mod6Step1_txt$para5)
-  cat(Mod6Step1_txt$para6)
+```{r mod5_step1_con, results="asis"}
+  cat(Mod5Step1_txt$para5)
+  cat(Mod5Step1_txt$para6)
     
-  cat(Mod6Step1_txt$para7)
+  cat(Mod5Step1_txt$para7)
 
-  cat(Mod6Step1_txt$para8)
+  cat(Mod5Step1_txt$para8)
 
   # Exercise
-  cat(Mod6Step1_txt$exercise)
+  cat(Mod5Step1_txt$exercise)
   
-  cat(Mod6Step1_txt$exercise_eq1)
+  cat(Mod5Step1_txt$exercise_eq1)
   
-  cat(Mod6Step1_txt$para9)
+  cat(Mod5Step1_txt$para9)
   
-  cat(Mod6Step1_txt$para9_eq1)
+  cat(Mod5Step1_txt$para9_eq1)
 
-  cat(Mod6Step1_txt$para10)
+  cat(Mod5Step1_txt$para10)
   
   cat(placeholder_image)
   
-  cat(Mod6Step1_txt$para11)
+  cat(Mod5Step1_txt$para11)
 
 ```
 ```{r ex13-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -1480,34 +1173,34 @@ LMM <- lmer(Phenotype ~ 1 + X1*X2 + (1 + X1 + X2|Individual), data = data)
 summary(LMM)
 ```
 
-```{r mod7_step1_con2, results="asis"}
-  cat(Mod6Step1_txt$para12)
+```{r mod5_step1_con2, results="asis"}
+  cat(Mod5Step1_txt$para12)
 ```
-```{r mod7_step2_title, results="asis"}
-cat("###",Mod6Step2_txt$title)
+```{r mod5_step2_title, results="asis"}
+cat("###",Mod5Step2_txt$title)
 ```
-```{r mod7_step2, results="asis"}
-  cat(Mod6Step2_txt$intro)
+```{r mod5_step2, results="asis"}
+  cat(Mod5Step2_txt$intro)
 
 
-  cat(Mod6Step2_txt$para1)
-  cat(Mod6Step2_txt$para1_eq1)
+  cat(Mod5Step2_txt$para1)
+  cat(Mod5Step2_txt$para1_eq1)
   
-  cat(Mod6Step2_txt$para2)
-  cat(Mod6Step2_txt$para2_eq1)
+  cat(Mod5Step2_txt$para2)
+  cat(Mod5Step2_txt$para2_eq1)
   
-  cat(Mod6Step2_txt$para3)
+  cat(Mod5Step2_txt$para3)
   
-  cat(Mod6Step2_txt$para4)
+  cat(Mod5Step2_txt$para4)
   cat(placeholder_image)
 
-  cat(Mod6Step2_txt$para5)
-  cat(Mod6Step2_txt$para5_eq1)
+  cat(Mod5Step2_txt$para5)
+  cat(Mod5Step2_txt$para5_eq1)
 ```
 
-```{r mod7_step2_con, results="asis"}
-  cat(Mod6Step2_txt$para6)
-  cat(Mod6Step2_txt$para6_eq1)
+```{r mod5_step2_con, results="asis"}
+  cat(Mod5Step2_txt$para6)
+  cat(Mod5Step2_txt$para6_eq1)
 
 ```
 
@@ -1556,16 +1249,323 @@ summary(LMM)
 
 ```
 
-
-
-```{r mod7_step2_con2, results="asis"}
+```{r mod5_step2_con2, results="asis"}
 ##Q from text:
 #"Run this simulation several times with different values for the interaction term and the covariance terms. Where does the interaction term create the most phenotypic variance and how do covariances affect this?"
 
-  cat(Mod6Step2_txt$para7)
+  cat(Mod5Step2_txt$para7)
 
   # Conclusion
-  cat(Mod6Step2_txt$conclusion)
+  cat(Mod5Step2_txt$conclusion)
+```
+
+
+## Module 6: Multiple traits
+
+```{r mod6_step1_title, results="asis"}
+cat("###", Mod6Step1_txt$title)
+```
+
+```{r mod6_step1, results="asis"}
+# Sub-goal
+cat(Mod6Step1_txt$goal)
+
+# Introduction
+cat(Mod6Step1_txt$intro)
+
+cat(Mod6Step1_txt$para1)
+
+cat(Mod6Step1_txt$exercise_eq1)
+
+cat(Mod6Step1_txt$para2)
+
+cat(Mod6Step1_txt$para2_eq1)
+
+# Exercise
+cat(Mod6Step1_txt$exercise)
+
+cat(Mod6Step1_txt$para3)
+
+cat(placeholder_image) #app 17
+
+cat(Mod6Step1_txt$para4)
+
+cat(Mod6Step1_txt$para4_eq1)
+
+cat(Mod6Step1_txt$para5)
+
+cat(Mod6Step1_txt$conclusion)
+```
+
+```{r mod6_step2_title, results="asis"}
+cat("###",Mod6Step2_txt$title)
+```
+
+```{r mod6_step2, results="asis"}
+# Sub-goal
+cat(Mod6Step2_txt$goal)
+
+# Introduction
+cat(Mod6Step2_txt$intro)
+
+### Model equations
+cat(Mod6Step2_txt$intro_eq1)
+
+cat(Mod6Step2_txt$para1)
+
+####### eq 1
+cat(Mod6Step2_txt$para1_eq1)
+
+cat(Mod6Step2_txt$para2)
+
+####### eq 2 
+cat(Mod6Step2_txt$para2_eq1)
+
+cat(Mod6Step2_txt$para3)
+
+cat(Mod6Step2_txt$para4)
+
+cat(Mod6Step2_txt$para4_eq1)
+
+cat(Mod6Step2_txt$exercise)
+
+cat(placeholder_image) #18
+
+cat(Mod6Step2_txt$para5)
+cat(Mod6Step2_txt$para5_eq1)
+
+cat(Mod6Step2_txt$para6)
+cat(Mod6Step2_txt$para6_eq1)
+
+cat(Mod6Step2_txt$para7)
+
+####### eq 1
+cat(Mod6Step2_txt$para1_eq1)
+
+cat(Mod6Step2_txt$para8)
+
+cat(Mod6Step2_txt$para8_eq1)
+
+cat(Mod6Step2_txt$para9)
+
+cat(Mod6Step2_txt$conclusion)
+
+p(strong("References"))
+p(HTML("Dingemanse, N.J. & Dochtermann, N.A. (2013) Quantifying individual variation in behaviour: 
+         mixed-effect modelling approaches. <i>Journal of Animal Ecology</i>, 82, 39-54.
+         <a href='https://doi.org/10.1111/1365-2656.12013' target='_blank'>doi: 10.1111/1365-2656.12013</a>"))
+p(HTML('Dingemanse, N.J., Dochtermann, N.A. & Nakagawa, S. (2012) Defining behavioural syndromes and the role of 
+         "syndrome deviation" to study its evolution. <i>Behavioral Ecology and Sociobiology</i>, 66, 1543-1548.
+         <a href="https://doi.org/10.1007/s00265-012-1416-2" target="_blank">doi: 10.1007/s00265-012-1416-2</a>'))
+p(HTML("Nicolaus, M., Brommer, J.E., Ubels, R., Tinbergen, J.M. & Dingemanse, N.J. (2013) 
+          Exploring patterns of variation in clutch size-density reaction norms in a wild passerine bird. 
+          <i>Journal of Evolutionary Biology</i>, 26, 2031-2043.
+          <a href='https://doi.org/10.1111/jeb.12210' target='_blank'>doi: 10.1111/jeb.12210</a>"))
+
+```
+
+```{r mod6_step3_title, results="asis"}
+cat("###",Mod6Step3_txt$title)
+```
+
+```{r Mod6Step3, results="asis"}
+# Sub-goal
+cat(Mod6Step3_txt$goal)	
+
+cat(Mod6Step3_txt$intro)
+
+# Exercise
+cat(Mod6Step3_txt$exercise)	
+
+cat(placeholder_image) # app 19
+
+cat(Mod6Step3_txt$results)
+cat(Mod6Step3_txt$results_eq1)
+
+cat(Mod6Step3_txt$para1)
+cat(Mod6Step3_txt$para1_eq1)
+
+
+cat(Mod6Step3_txt$para2)
+
+cat(Mod6Step3_txt$para2_eq1)
+
+cat(Mod6Step3_txt$para3)
+
+cat(Mod6Step3_txt$para4)
+
+cat(Mod6Step3_txt$conclusion)
+
+p(strong("References"))
+p(HTML("van Noordwijk, A.J. & de Jong, G. (1986) Acquisition and allocation of resources - 
+	       Their influence on variation in life-history tactics. <i>American Naturalist</i>, 128, 137-142.
+	       <a href='https://doi.org/10.1086/284547' target='_blank'>doi: 10.1086/284547</a>"))
+```
+
+```{r mod6_step4_title,results="asis"}
+cat("###",Mod6Step4_txt$title)
+```
+
+```{r mod6_step4,results="asis"}
+# Sub-goal
+cat(Mod6Step4_txt$goal)
+
+
+cat(Mod6Step4_txt$intro)
+
+cat(Mod6Step4_txt$intro_eq1)
+
+cat(Mod6Step4_txt$para1)
+
+cat(Mod6Step4_txt$para1_eq1)
+
+cat(Mod6Step4_txt$para2)
+
+cat(Mod6Step4_txt$para2_eq1)
+
+cat(Mod6Step4_txt$para3)
+
+cat(Mod6Step4_txt$para3_eq1)
+
+cat(Mod6Step4_txt$para4)
+
+
+cat(Mod6Step4_txt$para4_eq1)
+
+cat(Mod6Step4_txt$para5)
+
+cat(Mod6Step4_txt$para5_eq1)
+
+cat(Mod6Step4_txt$para6)
+
+cat(Mod6Step4_txt$para6_eq1)
+
+cat(Mod6Step4_txt$para7)
+
+cat(Mod6Step4_txt$para7_eq1)
+
+cat(Mod6Step4_txt$para8)
+
+cat(Mod6Step4_txt$para8_eq1)
+
+cat(Mod6Step4_txt$conclusion)
+```
+
+```{r mod6_step5_title, results = "asis"}
+cat("###",Mod6Step5_txt$title)
+```
+
+```{r mod6_step5, results = "asis"}
+# Sub-goal
+cat(Mod6Step5_txt$goal)
+
+# Introduction
+cat(Mod6Step5_txt$intro)
+
+cat(Mod6Step5_txt$intro_eq1)
+
+cat(Mod6Step5_txt$para1)
+
+cat(Mod6Step5_txt$para1_eq1)
+
+cat(Mod6Step5_txt$para2)
+
+# Exercise
+cat(Mod6Step5_txt$exercise)
+
+cat(placeholder_image) # app 21
+
+cat(Mod6Step5_txt$para3)
+
+cat(Mod6Step5_txt$para3_eq1)
+
+cat(Mod6Step5_txt$para4)
+
+cat(Mod6Step5_txt$para4_eq1)
+```
+
+```{r ex5-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(brms)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+    data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+    n_response = 2,
+    parameters=list(
+      observation = list(
+        names = "food_availability",
+        beta = matrix(c(2,1),ncol=2)
+      ),
+      Individual = list(
+        vcov = matrix(c(1,Vi,Vi,1),nrow=2,ncol=2)
+      ),
+      residual = list(
+        vcov = matrix(c(1,Vr,Vr,1),nrow = 2,ncol = 2)
+      )
+    ),
+    response_names = c("Phenotype_1","Phenotype_2")
+  )
+  data <- get_population_data(squid_data)
+  return(data)
+  
+}
+```
+
+```{r ex5, exercise=TRUE, exercise.timelimit	= 300}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5)
+bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ (1|Individual), data = data, silent = 0)
+summary(bLMM)
+```
+
+```{r mod6_step5_con,results="asis"}
+cat(Mod6Step5_txt$para5)
+
+cat(Mod6Step5_txt$para5_eq1)
+```
+
+```{r ex5a-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(brms)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+    data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+    n_response = 2,
+    parameters=list(
+      observation = list(
+        names = "food_availability",
+        beta = matrix(c(2,1),ncol=2)
+      ),
+      Individual = list(
+        vcov = matrix(c(1,Vi,Vi,1),nrow=2,ncol=2)
+      ),
+      residual = list(
+        vcov = matrix(c(1,Vr,Vr,1),nrow = 2,ncol = 2)
+      )
+    ),
+    response_names = c("Phenotype_1","Phenotype_2")
+  )
+  data <- get_population_data(squid_data)
+  return(data)
+  
+}
+```
+
+```{r ex5a, exercise=TRUE, exercise.timelimit	= 300}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5)
+bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ food_availability + (1|Individual), data = data, silent = 0)
+summary(bLMM)
+```
+
+```{r mod6_step5_con2, results="asis"}
+cat(Mod6Step5_txt$para6)
+
+cat(Mod6Step5_txt$conclusion)
 ```
 
 
