@@ -10,6 +10,9 @@ library(shinyjs)
 dirs <- list.dirs("./source",recursive = F)
 dirs <- sort(dirs,decreasing = T) # ensures that variables are loaded before text
 
+# Needs to load first
+source("./source/variables/var_general.R")
+
 # Load all files in all directories
 for(i in dirs){
   files <- list.files(path = i,recursive = T)
