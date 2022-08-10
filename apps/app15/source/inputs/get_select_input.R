@@ -1,6 +1,6 @@
 # Create a select input
 
-getSelectInput <- function(inputID, inputConf, placement="top", trigger="hover", multiple=FALSE, selectize=TRUE) 
+getSelectInput <- function(inputID, inputConf, placement="top", trigger="hover") 
 {    
   
   if(inputConf$infoTxt != ""){
@@ -12,7 +12,7 @@ getSelectInput <- function(inputID, inputConf, placement="top", trigger="hover",
 	myOutput <-  span(
 		selectInput(inputID, 
 								mylabel, 
-								inputConf$value, multiple=multiple, selectize=selectize, selected = inputConf$value[1])
+								inputConf$value)
 	)
 	
 	return(myOutput)

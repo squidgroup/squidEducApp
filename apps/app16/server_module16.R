@@ -75,24 +75,31 @@ c(
     
     Mod3Step3_table <- function(data, proportion){
       
-      myTable <- data.frame("True"       = c("True",
-                                             paste("Population intercept $(",EQ3$mean0,")$ = 0"),
-                                             paste("Individual variance $(V_",NOT$devI,")$ =",input$Mod3Step3_Vi),
+      myTable <- data.frame("Parameter" = c("Parameter",
+        paste("Population intercept $(",EQ3$mean0,")$ ="),
+        paste("Individual variance $(V_",NOT$devI,")$ ="),
+        "",
+        paste("Environmental effect variance $(V_",NOT$envEffect,")$ ="),
+        paste("Mean environmental effect $(",NOT$mean,")$ =")
+      ),
+        "Truth"       = c("Truth",
+                                             0,
+                                             input$Mod3Step3_Vi,
                                              paste("Measurement error variance $(V_",NOT$mError,")$ =",input$Mod3Step3_Ve),
-                                             paste("Environmental effect variance $(V_",NOT$envEffect,")$ =",input$Mod3Step3_Vbx),
-                                             paste("Mean environmental effect $(",NOT$mean,")$ =",round(input$Mod3Step3_B[2],2))),
-                            "Totally unknown environment" = c("Totally unknown environment",
-                                                              paste("Population estimated mean $(\\hat{",NOT$mean,"})$ = ", ifelse(!is.null(data),paste(data$B0,"\U00b1", data$se.B0, sep=" "),"...")),
-                                                              paste("Individual variance $(\\hat{V}^_",NOT$devI,")$ = "      ,ifelse(!is.null(data),data$Vi,"...")),
+                                             input$Mod3Step3_Vbx,
+                                             round(input$Mod3Step3_B[2],2)),
+                            "Estimated for unknown environment" = c("Totally unknown environment",
+                                                              ifelse(!is.null(data),paste(data$B0,"\U00b1", data$se.B0, sep=" "),"..."),
+                                                              ifelse(!is.null(data),data$Vi,"..."),
                                                               paste("Residual variance $(\\hat{V}_",NOT$residualUpper,")$ = "        ,ifelse(!is.null(data),data$Vr,"...")),
                                                               "",
                                                               ""),
-                            "Environment known" = c(paste0("Environment known (proportion=",proportion,")"),
-                                                    paste("Population estimated mean $(\\hat{",NOT$mean,"}_0)$ = ", ifelse(!is.null(data),paste(data$B0_2,"\U00b1", data$se.B0_2, sep=" "),"...")),
-                                                    paste("Individual variance $(\\hat{V}_",NOT$devI,")$ = ", ifelse(!is.null(data),data$Vi_2,"...")),
+                            "Estimated for known environment" = c(paste0("Environment known (proportion=",proportion,")"),
+                                                   ifelse(!is.null(data),paste(data$B0_2,"\U00b1", data$se.B0_2, sep=" "),"..."),
+                                                   ifelse(!is.null(data),data$Vi_2,"..."),
                                                     paste("Residual variance $(\\hat{V}_",NOT$residualUpper,")$ = ", ifelse(!is.null(data),data$Vr_2,"...")),
-                                                    paste0("Estimate of known environmental variance $(\\hat{V}_{",NOT$mean," ",NOT$env,"})$ = ", ifelse(!is.null(data),data$B1_2^2,"...")),
-                                                    paste0("Mean environmental effect ($\\hat{",NOT$mean,"})$ = ", ifelse(!is.null(data),paste(data$B1_2,"\U00b1", data$se.B1_2, sep=" "),"...")))
+                                                    ifelse(!is.null(data),data$B1_2^2,"..."),
+                                                    ifelse(!is.null(data),paste(data$B1_2,"\U00b1", data$se.B1_2, sep=" "),"..."))
       )  
     
         return(getTable(myTable, header=TRUE))

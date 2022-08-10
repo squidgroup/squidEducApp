@@ -3,13 +3,8 @@ getEnvironmentInput <- function(module, step, myDefault="Stochastic"){
   return(
     span(
       # environment inputs
-
-            fluidRow(
-              div(class="line"),
-              column(12,h4(HTML("<b>Select environment input</b>"))),
-              column(6,getSelectInput(paste0("Mod",module,"Step",step,"_X_Shared"), Modules_VAR$share)),
-              column(6,getSelectInput(paste0("Mod",module,"Step",step,"_X_select"), Modules_VAR$Env_types, selectize = F))),
-            div(class="line"),
+      getCheckboxInput(paste0("Mod",module,"Step",step,"_X_Shared"), Modules_VAR$share),
+      getSelectInput(paste0("Mod",module,"Step",step,"_X_select"), Modules_VAR$Env_types),
       wellPanel(
         div(info_msg(FullModel_VAR$Env_preview)),
         fluidRow(
