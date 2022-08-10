@@ -8,20 +8,20 @@ span(
 
 	# Within-individual variances (Ve)
 	fluidRow(
-		column(6,getSliderInput("Mod4Step5_Ve1", Modules_VAR$Ve1, width="100%")),
-		column(6,getSliderInput("Mod4Step5_Ve2", Modules_VAR$Ve2, width="100%"))
+		column(6,getSliderInput("Mod4Step5_Ve1", Modules_VAR$Ve1, width="100%", value = 0.4)),
+		column(6,getSliderInput("Mod4Step5_Ve2", Modules_VAR$Ve2, width="100%", value = 0.7))
 	),
 	fluidRow(
-	  column(6,getSliderInput("Mod4Step5_Vi1", Modules_VAR$Vi1, width="100%")),
-	  column(6,getSliderInput("Mod4Step5_Vi2", Modules_VAR$Vi2, width="100%"))
+	  column(6,getSliderInput("Mod4Step5_Vi1", Modules_VAR$Vi1, width="100%", value = 0.4)),
+	  column(6,getSliderInput("Mod4Step5_Vi2", Modules_VAR$Vi2, width="100%", value = 0.7))
 	),
 	
 	fluidRow(align="center",
 	# Within-individual correlation
-	getSliderInput("Mod4Step5_Corr_e", Modules_VAR$Corr_e, width="99.5%"),
+	getSliderInput("Mod4Step5_Corr_e", Modules_VAR$Corr_e, width="99.5%", value = 0.5),
 	
 	# Among-individual correlation
-	getSliderInput("Mod4Step5_Corr_I", Modules_VAR$Corr_I, width="99.5%")
+	getSliderInput("Mod4Step5_Corr_I", Modules_VAR$Corr_I, width="99.5%", value = -0.5)
 	),
 	
 	fluidRow(
