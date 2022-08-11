@@ -587,15 +587,11 @@ summary(LMM)
 ```{r mod3_step1, results="asis"}
     cat(Mod3Step1_txt$goal)
     cat(Mod3Step1_txt$intro)
-    cat(Mod3Step1_txt$exercise)
-    
-    cat(Mod3Step1_txt$exercise_eq1)
-
-    displayRCode(Mod3Step1_txt$RCode1)
     
     cat(Mod3Step1_txt$para1)
     
     cat(Mod3Step1_txt$para1_eq1)
+
 ```    
 
 ```{r ex9-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -635,22 +631,28 @@ summary(LMM)
 ```
 
 ```{r mod3_step1_con, results="asis"}
+      
+    cat(Mod3Step1_txt$exercise)
+
     cat(Mod3Step1_txt$para2)
     
-    cat(placeholder_image)
+    cat(Mod3Step1_txt$para2_eq1)
     
     cat(Mod3Step1_txt$para3)
     
-    cat(Mod3Step1_txt$results)
+    cat(placeholder_image) #app 24
     
     cat(Mod3Step1_txt$para4)
+    
+    cat(Mod3Step1_txt$results)
+    
+    cat(Mod3Step1_txt$para5)
     
     cat(Mod3Step1_txt$point)
     
     cat(Mod3Step1_txt$point_eq1)
-    cat(Mod3Step1_txt$point_eq2)
     
-    cat(Mod3Step1_txt$para5)
+    cat(Mod3Step1_txt$para6)
 ```
 
 ```{r ex10-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -820,7 +822,7 @@ cat("###", Mod4Step1_txt$title)
 
 	cat(Mod4Step1_txt$para1)
 	
-	  cat(placeholder_image)
+	  cat(placeholder_image) #app 22
 
 	  
 	cat(Mod4Step1_txt$results)
@@ -926,7 +928,7 @@ summary(LMM)
 
 	cat(Mod4Step1_txt$para7)
 
-	cat(placeholder_image)
+	cat(placeholder_image) #app 23
 	
 	cat(Mod4Step1_txt$para8)
 

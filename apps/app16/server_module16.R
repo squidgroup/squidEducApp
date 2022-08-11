@@ -39,10 +39,10 @@ c(
         # Call app main function
         data <- squid::squidR(input, module="Mod3Step3")  
         
-        LMR      <- lme4::lmer(Phenotype ~ 1 + (1|Individual), data = data$sampled_data)
-        FIXEF    <- lme4::fixef(LMR)
-        SE.FIXEF <- arm::se.fixef(LMR)
-        RANDEF   <- as.data.frame(lme4::VarCorr(LMR))$vcov
+        LMR      <- lmer(Phenotype ~ 1 + (1|Individual), data = data$sampled_data)
+        FIXEF    <- fixef(LMR)
+        SE.FIXEF <- se.fixef(LMR)
+        RANDEF   <- as.data.frame(VarCorr(LMR))$vcov
         
         data$Vi     <- round(RANDEF[1],2)
         data$Vr     <- round(RANDEF[2],2)
@@ -55,10 +55,10 @@ c(
         myInput[["Mod3Step3_Ve"]] <- ((1-input$Mod3Step3_Vbx_proportion)*input$Mod3Step3_Vbx) + input$Mod3Step3_Ve
         data2     <- squid::squidR(myInput, module="Mod3Step3")
         
-        LMR2      <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data2$sampled_data)
-        FIXEF2    <- lme4::fixef(LMR2)
-        SE.FIXEF2 <- arm::se.fixef(LMR2)
-        RANDEF2   <- as.data.frame(lme4::VarCorr(LMR2))$vcov
+        LMR2      <- lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data2$sampled_data)
+        FIXEF2    <- fixef(LMR2)
+        SE.FIXEF2 <- se.fixef(LMR2)
+        RANDEF2   <- as.data.frame(VarCorr(LMR2))$vcov
         
         data$Vi_2      <- round(RANDEF2[1],2)
         data$Vr_2      <- round(RANDEF2[2],2)

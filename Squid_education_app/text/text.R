@@ -384,7 +384,7 @@ text <- list(
   "Mod1Step1_txt" = list(
     
     "title"      = "Step 1: Mean and variance when the trait is expressed once and does not change",
-    "goal"    = "In step 1 of this module we aim to illustrate the concepts of mean and variance, 
+    "goal"    = "In the first step of this module we aim to illustrate the concepts of mean and variance, 
                   for traits with no within-individual variance, but that include measurement error.",
     "intro"      = paste("<b>Background</b> <br>
                        Imagine a trait as it is typically measured: for a group of individuals from a population that is
@@ -429,7 +429,7 @@ text <- list(
                   we expect the variance estimate to accurately that of the true population. If we have a small sample size, or if our model is incorrectly specified,
                   this might unfortunately not b ethe case. To be able to estimate the measurement error variance, individuals need to be measured more than once.
                   Afterall, we do not expect certain traits on an individual to change between samplings, so any difference
-                  is then due to measurement error. This concept is further explained in step 2 of this module.",
+                  is then due to measurement error. This concept is further explained in step two of this module.",
     
     "statModTitle"  = "<b>Statistical model</b>",
     "statmodel1"  = "Throughout these modules we will inform you of the statistical 
@@ -460,7 +460,7 @@ text <- list(
     "title"     = "Step 2: Repeatability and measurement error",
     "goal"   = paste0("In this second step, we will focus on measurement error variance $(V_",NOT$mError,")$ 
                     in traits varying solely among individuals."),
-    "intro"     = "<b>Background</b> <br> In step 1 of this module we focussed on different sources of variance, 
+    "intro"     = "<b>Background</b> <br> In the first step of this module we focussed on different sources of variance, 
                   and variance due to measurement error in particular. From this you learned that some of the observed 
                   variation in data might be due to measurement error, 
                   which occurs when the measured trait value deviates 
@@ -501,7 +501,7 @@ text <- list(
                 to see how the number of repeated measurements per individual 
                 affects the accuracy of the estimates, how much their deviation from the true values changes.",
     
-    "point"   =  "If you tried the same inputs as for step 1 you will notice
+    "point"   =  "If you tried the same inputs as for step one you will notice
                 that we are now (more) properly estimating the individual variance. 
                 This is because we have explicitly incorporated the within-individual variance 
                 due to measurement error by measuring each individual (at least) twice.",
@@ -629,7 +629,7 @@ text <- list(
     "title"     = "Step 4: Explaining Environmental Variance",
     
     "goal"   = "Here we will go further explain the concept of environmental variance.",
-    "intro"     = paste0("<b>Background</b><br> In step 3 we introduced $V_{",NOT$mean," ",NOT$env,"}$ 
+    "intro"     = paste0("<b>Background</b><br> In the third step of this module we introduced $V_{",NOT$mean," ",NOT$env,"}$ 
                        as the variance in a phenotype due to changes in the environment. 
                        At that point we were unaware of what that effect represented (it was unmeasured). However,
                        usually we can measure the environment, and assess its influence on a phenotype. 
@@ -637,7 +637,7 @@ text <- list(
     "exercise"    = paste0("<b>Exercise</b><br> As before, we will generate a new group of individuals, 
                   with phenotypic variance due to measurement error $(V_",NOT$mError,")$, individual differences $(V_",NOT$devI,")$, but now also
                   due to measured environmental effects $(V_{",NOT$mean," ",NOT$env,"})$. 
-                  In the app below, you can set $V_",NOT$mError,"$, $V_",NOT$devI,"$ and $V_{",NOT$mean," ",NOT$env,"}$, but we suggest to use the same values as you did in Step 3.
+                  In the app below, you can set $V_",NOT$mError,"$, $V_",NOT$devI,"$ and $V_{",NOT$mean," ",NOT$env,"}$, but we suggest to use the same values as you did in step three.
                   The app requires the variances to add up to one, as this simplifies calculating the percentage of contribution to the total variance by each term in the model."),
     
     "para1"    = paste0("At this point, we will further expand on the idea of statistical models. 
@@ -726,7 +726,7 @@ text <- list(
                         and now also with the impact of an environmental predictor $",NOT$env,"$. This predictor causes phenotypic variance to increase, due 
                         to differences in the environment $(V_",NOT$envEffect,")$ between  individuals.
                         We here use $V_",NOT$envEffect,"$ to indicate variance due to the unmeasured environmental predictors, instead of $V_{",NOT$mean," ",NOT$env,"}$, 
-                        which we used in Step 3 and 4 of the module on ",Module_titles$mod1,". 
+                        which we used in step three and step four of the module on ",Module_titles$mod1,". 
                         We do this because we will soon explore what happens when only some of the environmental 
                         predictors are known, and we will use $V_{",NOT$mean," ",NOT$env,"}$ for variance due to measured environmental predictors."),
     
@@ -776,7 +776,7 @@ text <- list(
     "title"      = "Step 2: Sampling to reduce effects of non-stochastic environment",
     "goal"    = "In this step we use simulations to generate sampling regimes 
                   that limit the effects of non-stochastic environments.",
-    "intro"      = "<b>Background</b><br> Step 1 revealed a problem: non-stochastic environments 
+    "intro"      = "<b>Background</b><br> The first step of this module revealed a problem: non-stochastic environments 
                   through time and variability in the timing of sampling can create biases 
                   in estimates of among-individual variation. In this step we encourage you 
                   to adjust the sampling regime to minimize this problem. It should be obvious 
@@ -787,15 +787,15 @@ text <- list(
                   So, in this step we will get you to simulate several types of 
                   non-stochastic environments and adjust the sampling regime.",
     
-    "exercise"   = paste0("<b>Exercise</b><br> As in Step 1, we will generate a new group of individuals, 
+    "exercise"   = paste0("<b>Exercise</b><br> As in the first step of this module, we will generate a new group of individuals, 
                         with phenotypic variance due to measurement error $(V_",NOT$mError,")$, individual differences $(V_",NOT$devI,")$, 
                         and the impact of the environment $(V_",NOT$envEffect,")$."),
-    "para1"      =  "You now get to set the environment. In Step 1 of this module, we used an environment that was 
+    "para1"      =  "You now get to set the environment. In the first of this module, we used an environment that was 
     experienced similarly by all individuals (&ldquo;shared&rdquo;) and which changed systematically over time. 
                   Below, you can simulate data with different settings, e.g. to have environments that each individual experiences uniquely 
                   (&ldquo;unshared&rdquo;), or environments which change over time following some function (e.g., stochastically or 
                   with autocorrelation).",
-    "para2"      =  "As in step 1, you also must enter parameters for variance in the sampling timing 
+    "para2"      =  "As in the first step of this module, you also must enter parameters for variance in the sampling timing 
                   within and among individuals. As before, the number of expressions of the 
                   phenotype will be fixed to 100, so keep this in mind as you enter values here.",
     "para3"      =  "The figure below shows time of sampling of a subset of individuals according to the values entered.",
@@ -839,25 +839,25 @@ text <- list(
     "title"      = "Step 3: Biased sampling and known and unknown environments",
     "goal"    = " Now we introduce ways to control for biases due to the environment.",
     
-    "intro"      = paste0("<b>Background</b><br> Step 1 of this module illustrated that environmental 
+    "intro"      = paste0("<b>Background</b><br> The first step of this module illustrated that environmental 
                         effects on phenotypes can produce biases in estimates of among-individual variance $(V_",NOT$devI,")$.  
-                        Step 2 explored how altering sampling regimes can reduce this problem, but also revealed that in some circumstances adjusting the sampling regime is not sufficient. 
+                        The second step of this module explored how altering sampling regimes can reduce this problem, but also revealed that in some circumstances adjusting the sampling regime is not sufficient. 
                         Sometimes individuals experience different environments, and no sampling regime can adjust for that. 
                         However, if it is possible to measure the environment then such differences can be accounted for. 
-                        Environmental variance can be accounted for using linear mixed-effects models, as in step 4 of the 
+                        Environmental variance can be accounted for using linear mixed-effects models, as in the fourth step of the 
                         &ldquo;<i>",Module_titles$mod1,"</i>&rdquo; module. Here we demonstrate that this can, 
                         under some circumstances, solve the bias in the sampling."),
     "exercise1"  = paste0("<b>Exercise</b><br> We will generate a group of individuals with phenotypic variance due to measurement error $(V_",NOT$mError,")$, 
-                        individual differences $(V_",NOT$devI,")$, and due to the impacts of the environment $(V_",NOT$envEffect,")$. The environment can be chosen as in Step 2. 
+                        individual differences $(V_",NOT$devI,")$, and due to the impacts of the environment $(V_",NOT$envEffect,")$. The environment can be chosen as in second step of this module. 
                   Combined with the sampling regime, it will affect within- and among-individual 
                   variance in the environment. Additionally you get to set the proportion of the variance due to measured environmental effects.
                   Along with the proportion of total variance due to environmental this will determine the correlation 
-                  between the phenotype and the known environment. The results of Step 1 should 
+                  between the phenotype and the known environment. The results of step one should 
                   have shown you what happens when all the environmental variance is unknown 
                   (or not included in your statistical model). Here, we start off by assuming that all 
                   of the environmental variance is due to measured effects, but you are free to adjust that and explore the consequences."),
-    "results"    = paste0("In the module &ldquo;<i>",Module_titles$mod1,"</i>&rdquo;, 
-                        Step 4, we said the statistical model was"),
+    "results"    = paste0("In the fourth step of the module &ldquo;<i>",Module_titles$mod1,"</i>&rdquo;, 
+                        the statistical model was"),
     "results_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time,NOT$ind,"}=",EQ3$mean0,"+",NOT$devI,"_",NOT$ind,"+",NOT$mean," ",NOT$env,"+",NOT$error,"_{",NOT$time,NOT$ind,"}.$$"),
     
     "RCode1"    = "# install.packages(&quot;lme4&quot;)<br>
@@ -909,16 +909,7 @@ text <- list(
                          If so, the method we have demonstrated here will not give accurate estimates of $V_",NOT$devI,"$.")
     
   ),
-  
-  "module6_txt" = list(
-    "title"         = "Random-slope regression",
-    "goal"          = "<b>Goal:</b> To explore situations where individuals may not only differ 
-                    in their intercepts but also in the slope of their reaction to changes 
-                    in a given environmental predictor. Random slope regression is a great 
-                    tool to analyse among-individual differences in phenotypic plasticity."
-  ),
-  
-  
+
   # Step 1 --------------
   "Mod6Step1_txt" = list(
     "title" = "Step 1: Phenotypic correlations between two repeatedly expressed traits that are not different between individuals.",
@@ -1037,7 +1028,7 @@ text <- list(
   							will largely reflect the among-individual correlation, while for two traits that have 
   							a low repeatability (such as sets of behavioural traits), the phenotypic correlation will instead 
   							largely reflect the within-individual correlation (Dingemanse & Dochtermann 2013).'),
-    "para4" = paste0("In step 1 we considered a situation where two 
+    "para4" = paste0("In the first step of this module we considered a situation where two 
   	repeatedly expressed traits (egg and clutch size) were potentially negatively correlated within-individuals, but did 
   	not have any among-individual variance. You set the within-individual variances for traits $y$ and $z$, as well as their 
   				 covariance, but you assumed that the among-individual variances 
@@ -1049,7 +1040,7 @@ text <- list(
   							(i.e., $V_{",NOT$devI,"_",NOT$trait.1,"}>0$) and clutch size (i.e., $V_{",NOT$devI,"_",NOT$trait.1,"}>0$). 
   							For simplicity we will assume that the average egg size for an individual, across repeated observations,
   							is not correlated with average clutch size, i.e., 
-  							that the among-individual correlation is zero. As in step 1 above, we assume that both the number of individuals, and the number of repeated measures per individual, is 10."),
+  							that the among-individual correlation is zero. As in the first step of this module, we assume that both the number of individuals, and the number of repeated measures per individual, is 10."),
     
     "para5" = "In the app you defined the values for the among-individual matrix:",
     "para5_eq1" = paste0("$$ \\Omega_{",NOT$devI,"}=\\begin{pmatrix}V_{",NOT$devI,"_",NOT$trait.1,"} & Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,
@@ -1367,10 +1358,10 @@ text <- list(
     "title" = "Step 2: Interaction terms",
     "goal" = "<b>Goal:</b> To account for dependencies in the effect of one factor by another factor.",
     
-    "intro" = "<b>Background:</b> In step 1 above, we developed the idea that 2 or more environments 
+    "intro" = "<b>Background:</b> In the first step of this module we developed the idea that 2 or more environments 
 					might both have effects on a phenotype. In the case of parent birds feeding offspring, 
 					both offspring age and the number of offspring were hypothesized to have effects on a parent's 
-					feeding rate. The analysis in Step 1 produced a flat plane in 2-dimensional environmental 
+					feeding rate. The analysis in the first step of this module produced a flat plane in 2-dimensional environmental 
 					space that then could possibly be tilted in a variety of ways depending on the slopes to 
 					both environments. The effect of brood size and nestling age is an intriguing case because 
 					the increase in need as a nestling gets older is not merely added to the effect of brood size, 
@@ -1379,7 +1370,7 @@ text <- list(
 					predictor to be plastic in the face of other environmental predictors. This plasticity in response 
 					to one environment of a reaction norm to another (plasticity of plasticity) is a fascinating 
 					potential consequence of multidimensional environments. So far, you have explored the effect of two environmental factors that produce a flat plane. 
-  The second statistical equation in step 1 illustrates these as additive effects of the two environmental 
+  The second statistical equation in the first step of this module illustrates these as additive effects of the two environmental 
   factors. Put another way, the effects of the factors were treated as independent. Note the distinction 
   between independence of effects and independence of the factors themselves&mdash;weak to modest correlations 
   among the factors themselves do not change the independence of the effects of those factors, as will 
@@ -1390,7 +1381,7 @@ text <- list(
   interaction term. Biologically, interactive effects on a phenotype between 2 environmental factors 
   may have multiple fascinating implications.",
   
-  "exercise" = "<b>Exercise:</b> As in step 1, we need to simulate a population and the data we collect from that population.",
+  "exercise" = "<b>Exercise:</b> As in the first step of this module, we need to simulate a population and the data we collect from that population.",
   
   "results" = "<b>Results:</b> Let's analyze this simulated population by omitting the interaction term first. 
   	In the first case we assume the following statistical model:",
@@ -1405,7 +1396,7 @@ text <- list(
   	the population average plane derived from the parameter estimates in the simulated data in the space defined by both environments.",
   
   "para3" = paste0("Examine this graph carefully. The plane produced should look different than the ones you
-  				 produced in step 1. Those planes were flat but tilted in various ways. If $",EQ1$mean12,"$ is not 0,
+  				 produced in step one. Those planes were flat but tilted in various ways. If $",EQ1$mean12,"$ is not 0,
   				 the plane in this graph should look warped or bent. This is the influence of the interaction term.","Now redo the above and manipulate both the magnitude of the interaction between $",NOT$env,"_1$ and $",NOT$env,"_2$
   				 ($",EQ1$mean12,"$) and its direction relative to the other slopes to assess how this affects your
   				 results if you leave it out of your statistical analysis.", "You can also see in the graph how the parameter $",EQ1$mean12,"$ changes the warping of the plane."),
@@ -1419,76 +1410,81 @@ text <- list(
   ),
   
   
+  "module6_txt" = list(
+    "title"         = "Random-slope regression",
+    "goal"          = "<b>Goal:</b> To explore situations where individuals may not only differ 
+                    in their intercepts but also in the slope of their reaction to changes 
+                    in a given environmental predictor. Random slope regression is a great 
+                    tool to analyse among-individual differences in phenotypic plasticity."
+  ),
+  
+  
   # Step 1 --------------
   "Mod3Step1_txt" = list(
     
     "title"      = "Step 1: Introduction to random slopes",
-    "goal"    = "<b>Goal:</b> to develop understanding of hierarchies in variance when individuals 
+    "goal"    = " In this module, our goal is to explore situations where individuals may not only differ 
+                    in their intercepts but also in the slope of their reaction to changes 
+                    in a given environmental predictor. Random slope regression is a great 
+                    tool to analyse among-individual differences in phenotypic plasticity. In this step, our goal is to develop understanding of hierarchies in variance when individuals 
                   express their traits as a response to a changing environmental factor, 
                   but do so differently. In other words, 
                   individuals have variable reaction norms in both intercept and slope.",
     
-    "intro"      = paste0("<b>Background:</b> Modules &ldquo;<i>",Module_titles$mod1,"</i>&rdquo; and &ldquo;<i>",Module_titles$mod3,"</i>&rdquo; 
-                        have explored how among-individual $(V_",NOT$devI,")$ variance in mean values can be modelled. 
-                        In Step 3 of module &ldquo;<i>",Module_titles$mod1,"</i>&rdquo;, individuals also varied, to some extent, 
-                        in how an environmental factor influenced the expression of their phenotypes around this mean, 
-                        and these deviations produce within-individual variance as a response 
-                        to environmental fluctuations $(V_{",NOT$mean,"})$. Throughout all these lessons, 
+    "intro"      = paste0("<b>Background</b><br> In the modules &ldquo;<i>",Module_titles$mod1,"</i>&rdquo; and &ldquo;<i>",Module_titles$mod3,"</i>&rdquo; 
+                        you have explored how among-individual variance  $V_",NOT$devI,"$ can be modelled. Then, individuals varied to some extent
+                        in how an environmental factor influenced the expression of their phenotypes, 
+                        producing within-individual variance as a response 
+                        to environmental fluctuations $V_{",NOT$mean,"}$. So far, 
                         we have assumed that if the environment changes, individuals change their phenotype 
-                        in exactly the same way. This is a dubious assumption and in most biological situations, 
-                        it is more reasonable and often more interesting to account for the fact that individuals 
-                        might vary in how the environment affects phenotype. For example, individuals may differ 
-                        in how they cope with a stressful situation, and less tolerant individuals will alter their 
+                        in exactly the same way. This is a dubious assumption at best, since in most biological scenarios
+                        individuals vary in how the environment affects their phenotype. For example, individuals may differ 
+                        in how they cope with a stressful situation; less tolerant individuals will alter their 
                         activity to a greater degree in the presence of a stress factor (e.g. high temperature, 
                         presence of a predator, or shortage of food) than stress-tolerant conspecifics. In general, 
-                        among-individual differences in plasticity (also called individual by environment interaction; $I\\times E$) 
-                        are necessary if adaptive plasticity is to be under selection, and insofar as such differences have 
+                        among-individual differences in plasticity (also called individual by-environment-interaction; $I\\times E$) 
+                        are necessary if adaptive plasticity is to be under selection, and to the extent that differences have 
                         a genetic basis ($G\\times E$), such interactions are necessary for the evolution of plasticity. 
                         Studies of $I\\times E$ in natural populations remain relatively rare. 
                         Here we introduce random-slope regression, in which the assumption about a common within-individual 
-                        variance (and plasticity) is relaxed and we explicitly estimate among-individual variance in slope."),
-    
-    "exercise"  = paste0("<b>Exercise:</b> Here we depart from the random-intercept regression model presented in Step 4 of module 
-                       &ldquo;<i>",Module_titles$mod1,"</i>&rdquo; by introducing a parameter that allows defining individual 
-                       deviations from the population mean response to environmental changes. 
-                       The fundamental difference between the random-intercept regression and the random-slope model, 
-                       is that while the former uses individual-level &ldquo;random&rdquo; effects to model 
-                       individual-specific intercepts (i.e. that depict the among-individual variance of mean 
-                       trait values), the latter introduces an additional &ldquo;random&ldquo; effect on the slopes 
-                       (i.e. that describe how individuals respond to changing environments). 
-                       For the random-intercept regression, we used the following model to recreate 
-                       our simulated set of effects:"),
-    "exercise_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}= ",EQ3$mean0,"+",NOT$devI,"_",NOT$ind,"+ ",NOT$mean," ",NOT$env,"_{",NOT$time, NOT$ind,
+                        variance (and plasticity) is relaxed and we explicitly estimate among-individual variance in the slope parameter."),
+    "para1"= paste0("Here we depart from the random-intercept regression model as presented in step four of the module 
+                       <i>",Module_titles$mod1,"</i>. Recall, our model was:"),
+    "para1_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}= ",EQ3$mean0,"+",NOT$devI,"_",NOT$ind,"+ ",NOT$mean," ",NOT$env,"_{",NOT$time, NOT$ind,
                             "}+",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
-    
+    "exercise"  = "<b>Exercise</b><br> We now change our model by additionally introducing a parameter that allows defining individual 
+                       deviations from the population response to environmental changes. 
+                       The fundamental difference between the random-intercept regression and the random-slope model that is presented hehre, 
+                       is that while the former uses individual-level random effects to model 
+                       individual-specific intercepts (that account for the among-individual variance of mean 
+                       trait values), the latter introduces an additional random effect the slopes 
+                       (that accounts for individual responses to changing environments).",
+
     "RCode1"    = "# install.packages(&quot;lme4&quot;)<br>
                  LMM1 <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual), data = sampled_data)",
     
-    "para1"     = "We will modify this model as:",
-    "para1_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}=
-            ",EQ3$mean0,"+
-            ",NOT$devI,"_",NOT$ind,"+
-            (",NOT$mean,"+", NOT$devS,"_", NOT$ind,")", NOT$env,"_{",NOT$time, NOT$ind,"}+
-            ",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
+    "para2"     = "We will modify this model as:",
+    "para2_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+(",
+                         NOT$mean,"+", NOT$devS,"_", NOT$ind,")", NOT$env,"_{",NOT$time, NOT$ind,"}+",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
     
     "RCode2"    = "LMM2 <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual) + (0 + X1|Individual), data = sampled_data)",
-    "para2"    = paste0("in which $",NOT$devS,"_",NOT$ind,"$ is the effect of measured environment 
+    "para3"    = paste0("in which $",NOT$devS,"_",NOT$ind,"$ is the effect of measured environment 
                 $",NOT$env,"_{",NOT$time, NOT$ind,"}$
                 on the measure of phenotype in the <i>i <sup>th</sup></i> individual. 
                 Accordingly, we can apply the following parameterization regimes:"),
     "note"     = "Note: you can consider residual variance as solely measurement error variance, 
                 or you could consider that it might also include some unknown environmental 
                 variance in addition to the known environmental variance determined below.",
-    "para3"    = "Set in the background is the environmental predictor and its sampling. 
+    "para4"    = "Set in the background is the environmental predictor and its sampling. 
                 Here we should use uniform sampling, where each individual is sampled 
                 at the same time so there are no biases. By definition, 
                 our environmental predictor is also mean centered.",
     
-    "results"  = "<b>Results:</b> We estimate these parameters with a mixed-effects model:",
-    "para4"    = "Individual-specific responses can be best visualised by plotting 
+    "results"  = "We estimate these parameters with a mixed-effects model:",
+    "para5"    = "Individual-specific responses can be best visualised by plotting 
                 the individual-specific regression lines.",
     
-    "point"   = "<b>Point:</b> Again, we performed linear regression approach in a mixed-effects model framework, 
+    "point"   = "Again, we performed linear regression approach in a mixed-effects model framework, 
                 but in this case we generated multiple regression lines 
                 (by defining different intercepts and slopes) for each individual in a single model 
                 to describe the individual-specific effect of an predictor. 
@@ -1502,10 +1498,8 @@ text <- list(
                 fluctuations may be straightforward on a biological basis. This model simultaneously 
                 accommodates tests for individual personality differences (i.e. the calculation of 
                 repeatability makes sense) as well as tests for individual by environment interaction.",
-    "point_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}=",EQ3$mean0,"+ ",NOT$devI,"_",NOT$ind,"+ (",NOT$mean,"+", NOT$devS,"_", NOT$ind,")", NOT$env,"_{",
-                         NOT$time, NOT$ind,"}+ ",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
-    "point_eq2" = paste0("$$V_",NOT$total,"= V_",NOT$devI,"+ V_{",NOT$mean,"}+V_{",NOT$devS,"}+ V_",NOT$residualUpper,"$$"),
-    "para5" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^2Var(",NOT$env,")=",NOT$mean,"^2$$", "$$V_{",NOT$devS,"}=Var(",NOT$devS,")Var(",NOT$env,
+    "point_eq1" = paste0("$$V_",NOT$total,"= V_",NOT$devI,"+ V_{",NOT$mean,"}+V_{",NOT$devS,"}+ V_",NOT$residualUpper,"$$"),
+    "para6" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^2Var(",NOT$env,")=",NOT$mean,"^2$$", "$$V_{",NOT$devS,"}=Var(",NOT$devS,")Var(",NOT$env,
                      ")+E(",NOT$env,")^2Var(",NOT$devS,")=Var(",NOT$devS,").$$ Note that $Var(",NOT$env,")$ is the true variance in $",NOT$env,"$, and $E(",
                      NOT$env,")$ is the true mean of $",NOT$env,"$. Also, in SQuID each environmental predictor $(",NOT$env,")$ is standardized (i.e., $Var(",
                      NOT$env,")=1$ and $E(",NOT$env,")=0$)"),
@@ -1546,7 +1540,7 @@ text <- list(
                         but the new term introduced here is $Cov_{",NOT$devI, NOT$devS,"}$, which is the measure of 
                         how much $",NOT$devI,"_",NOT$ind,"$ and $",NOT$devS,"_",NOT$ind,"$ covary together."),
     
-    "exercise"   = "<b>Exercise:</b> We will do a very similar simulation as in Step 1, 
+    "exercise"   = "<b>Exercise:</b> We will do a very similar simulation as in step one, 
                   but you will then enter some value for the covariance between the intercept and the slope. 
                   You will enter this covariance as a standardized value by expression it as a correlation ranging between -1 and +1:",
     "exercise_eq1" = paste0("$$Cor(",NOT$devI,",",NOT$devS,")=\\frac{Cov(",NOT$devI,",",NOT$devS,")}{\\sqrt{Var(",NOT$devI,")","Var(",NOT$devS,")}}$$"),
@@ -1610,7 +1604,7 @@ text <- list(
                   size in their estimates. They also want to determine the best decision 
                   in terms of allocating effort in sampling more individuals or more repeats 
                   per individual. The use of SQuID helps researchers to determine the best 
-                  sampling design. They will use the same equation as we used in the step 2, e.g.,",
+                  sampling design. They will use the same equation as we used in the step two, e.g.,",
     "exercise_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}= ",EQ3$mean0,"+ ",NOT$devI,"_",NOT$ind,"+ (",NOT$mean,"+", NOT$devS,"_", NOT$ind,")", 
                             NOT$env,"_{",NOT$time, NOT$ind,"}+ ",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
     
@@ -1765,7 +1759,7 @@ text <- list(
                                 lot) of background in statistical modeling, particularly with linear mixed-effects models. 
                                 We strongly recommend to being with the module <i>",Module_titles$mod1,"</i>, if you fall in this category.
                                 That should be followed by the module <i>",Module_titles$mod3,"</i>. Which module you choose next depends 
-                                on your interests, but Step 1 in the module <i>",Module_titles$mod5,"</i> 
+                                on your interests, but step one in the module <i>",Module_titles$mod5,"</i> 
                                 introduces multiple regression. The module &ldquo;",Module_titles$mod6,"&rdquo; 
                                 may also be good to do after module &ldquo;Non-stochastic environments&rdquo;."),
     "teachers"             = "The SQuID modules can be very useful in teaching statistical concepts, 
@@ -1905,7 +1899,7 @@ text <- list(
   # Step 2 --------------
   "Mod5Step2_txt" = list(
     "title" = "Step 2: Adding the random interaction term",
-    "intro" = "Step 1 above layered on the random slopes for each $",NOT$env,"$ predictor, 
+    "intro" = "Step one built on the random slopes for each $",NOT$env,"$ predictor, 
            and these served to tip the population mean plane in various directions in environmental space, 
            much like a circus performer spinning plates at various heights and with variable skill. 
            However, the population mean plane could be warped due to an interaction between 

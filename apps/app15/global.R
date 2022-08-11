@@ -5,6 +5,7 @@ library(ggtext)
 library(ggplot2)
 library(shinydashboard)
 library(shinyjs)
+library(lme4)
 
 # Obtain directories in /source for loading
 dirs <- list.dirs("./source",recursive = F)
