@@ -1496,7 +1496,7 @@ text <- list(
     we can calculate the phenotypic variation as:",
     
     "conclusion_eq1" = paste0("$$V_",NOT$total,"= V_",NOT$devI,"+ V_{",NOT$mean,"}+V_{",NOT$devS,"}+ V_",NOT$residualUpper,",$$"),
-    "conclusion2" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^2var(",NOT$env,")=",NOT$mean,"^2$$", "$$V_{",NOT$devS,"}=var(",NOT$devS,")var(",NOT$env,
+    "conclusion2" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^2var(",NOT$env,")=",NOT$mean,"^2,$$","and where", "$$V_{",NOT$devS,"}=var(",NOT$devS,")var(",NOT$env,
                      ")+E(",NOT$env,")^2var(",NOT$devS,")=var(",NOT$devS,").$$ Note that $var(",NOT$env,")$ is the true variance in $",NOT$env,"$, and $E(",
                      NOT$env,")$ is the true mean of $",NOT$env,"$. In SQuID each environmental predictor $(",NOT$env,")$ is standardized (i.e., $var(",
                      NOT$env,")=1$ and $E(",NOT$env,")=0$), to make calculating the explained variation more straightforward."),
@@ -1539,7 +1539,7 @@ text <- list(
                   but it will instead also be possible to input a value for the covariance of the intercepts and the slopes. 
                   Though this represents this also represents covariance between the intercepts and slopes: 
     which is a form of standardized covariance:",
-    "exercise_eq1" = paste0("$$cor(",NOT$devI,",",NOT$devS,")=\\frac{cov(",NOT$devI,",",NOT$devS,")}{\\sqrt{var(",NOT$devI,")","var(",NOT$devS,")}}$$"),
+    "exercise_eq1" = paste0("$$cor(",NOT$devI,",",NOT$devS,")=\\frac{cov(",NOT$devI,",",NOT$devS,")}{\\sqrt{var(",NOT$devI,")","var(",NOT$devS,")}}.$$"),
     
     "para4"      = "You might want to simulate data with a negative correlation,with a positive correlation, and without any correlation at all,
    to find out how that affects the patterns of variance. In the app below, the left panel in the plot will constantly reflect the simulated individuals without
