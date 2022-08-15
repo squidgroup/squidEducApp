@@ -1,0 +1,187 @@
+
+## Module 1: Basic lessons about variance
+
+```{r mod1_step1_title, results="asis"}
+  cat("###",Mod1Step1_txt$title)
+```
+
+```{r mod1_step1, results="asis"}
+  #### goal ####
+  cat(Mod1Step1_txt$goal)   # Text: goal
+  #### Introduction ####
+  cat(Mod1Step1_txt$intro)      # Text: introduction
+
+  
+cat(Mod1Step1_txt$para1) # Text: Paragraph 1
+ 
+cat(Mod1Step1_txt$explanation1)  # Text: Notation explanation
+
+    #### Exercice ####
+    cat(Mod1Step1_txt$exercise)   # Text: exercise
+    
+```
+
+```{r app1, echo=FALSE, results="asis"}
+cat(placeholder_image) #app1
+```
+ 
+ 
+```{r quiz1_app1, echo = FALSE}
+question("Which answer describes you best?",
+  answer("Beginner: I have little knowledge of LMMs or multilevel variation.", message = "Start with Module 1", correct = TRUE),
+  answer("Intermediate user: I have prior knowledge of LMMs, multilevel variation, and/or statistical distributions.", message = "*Start with Module 2", correct = TRUE),
+  answer("Expert: I have extensive knowledge of the mixed-effects modeling framework and individual differences.", message = "Fully explore the SQuID concept with the 'full model' modules", correct = TRUE),
+  answer("Teacher: I want my student to learn about mixed-effects models and patterns of phenotypic variance. ", message = "*Please skim the module titles to assess which are of most use for your student", correct = TRUE),
+  answer("None of the above.", correct = FALSE),
+  type = "single",
+  incorrect = "Eek, this might not  be the right place for you.",
+  correct=NULL
+)
+
+```
+
+```{r mod1_step1_con, results="asis"}
+  #### Point ####
+    cat(Mod1Step1_txt$point) # Text: point
+  #### Solution ####
+  cat(Mod1Step1_txt$solutions)   # Text: solutions
+  
+  #### Statistical model ####
+  cat(Mod1Step1_txt$statModTitle)
+  cat(Mod1Step1_txt$statmodel1)        # Text: statistical model paragraph 1
+  #### Equation 1 ####
+  cat(Mod1Step1_txt$statmodel1_eq1)
+  
+  cat(Mod1Step1_txt$statmodel2) # Text: statistical model paragraph 2
+
+  cat(Mod1Step1_txt$statmodel3)  # Text: statistical model paragraph 3
+  #### Equation 2 ####
+  cat(Mod1Step1_txt$statmodel3_eq1)
+```
+
+```{r mod1_step2_title, results="asis"}
+  cat("###",Mod1Step2_txt$title)
+```
+
+```{r mod1_step2, results="asis"}
+  cat(Mod1Step2_txt$goal)    # Text: goal
+  cat(Mod1Step2_txt$intro)      # Text: introduction
+  cat(Mod1Step2_txt$exercise)   # Text: exercise
+  
+    cat(Mod1Step2_txt$para1)  # Text: paragraph 1
+    
+    cat(Mod1Step2_txt$para2)
+```
+
+```{r app2, echo=FALSE, results="asis"}
+  cat(placeholder_image) #app2
+```
+
+```{r mod1_step2_con, results="asis"}
+  cat(Mod1Step2_txt$para3)  # Text: paragraph 3
+  
+    cat(Mod1Step2_txt$point)  # Text: point
+  
+    cat(Mod1Step2_txt$para4)  # Text: paragraph 4
+    cat(Mod1Step2_txt$para4_eq1)
+    
+    cat(Mod1Step2_txt$para5)  # Text: paragraph 5
+  
+    # Scatter plot: measurements correlation
+    cat(Mod1Step2_txt$para6)  # Text: paragraph 6
+```
+
+```{r mod1_step3_title, results="asis"}
+cat("###",Mod1Step3_txt$title)
+```
+
+```{r mod1_step3, results="asis"}
+  cat(Mod1Step3_txt$goal)   # Text: goal
+  cat(Mod1Step3_txt$intro)     # Text: introduction
+  cat(Mod1Step3_txt$exercise)  # Text: exercise
+  cat(Mod1Step3_txt$exercise2) # Text: exercise 2
+```
+```{r mod1_step3_app3, results="asis"}
+  cat(placeholder_image) #app 3
+```
+
+```{r mod1_step3_con, results="asis"}
+
+  # Repeatability equation
+  cat(Mod1Step3_txt$para1)         # Text: paragraph 1
+  cat(Mod1Step3_txt$para1_eq1)
+
+  cat(Mod1Step3_txt$point)        # Text: point
+  cat(Mod1Step3_txt$point2)       # Text: point 2
+
+  cat(Mod1Step3_txt$statmodel)       # Text: statistical model 1
+  cat(Mod1Step3_txt$statmodel_eq1)
+  cat(Mod1Step3_txt$statmodel2)     # Text: statistical model 2
+  cat(Mod1Step3_txt$statmodel2_eq1)
+  p("where")
+  cat(Mod1Step3_txt$statmodel2_eq2)
+```
+
+```{r ex1-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(squidSim)
+library(lme4)
+
+get_data <- function(n,r,Vi,Vr){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+  parameters = list(
+    Individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    )
+  ),
+    response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex1, exercise=TRUE, warning=F, message=F}
+# n is the number of individuals
+# r is the number of repetitions for each individual
+# Vi is the variance for individuals
+# Vr is residual variance 
+data <- get_data(n = 50, r = 2, Vi = 0.5, Vr = 0.5)
+LMM <- lmer(Phenotype ~ 0 + (1|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod1_step4_title, results="asis"}
+  cat("###",Mod1Step4_txt$title)
+```
+
+```{r mod1_step4, results="asis"}
+  HTML(Mod1Step4_txt$goal)     # Text: goal
+  cat(Mod1Step4_txt$intro)       # Text: introduction
+  
+  cat(Mod1Step4_txt$para1)    # Text: paragraph 1
+  cat(Mod1Step4_txt$para1_eq1)
+  cat(Mod1Step4_txt$para2)      # Text: paragraph 2
+
+  cat(Mod1Step4_txt$exercise)    # Text: exercise
+    cat(Mod1Step4_txt$para5)   # Text: paragraph 5
+
+```
+  
+```{r mod1_step4_app4, results="asis"}
+cat(placeholder_image)
+```
+  
+```{r mod1_step4_con, results="asis"}      
+  cat(Mod1Step4_txt$para4)   # Text: paragraph 4
+  cat(Mod1Step4_txt$point)   # Text: point
+  
+  cat(Mod1Step1_txt$statModTitle)
+  cat(Mod1Step4_txt$statMod_eq1)
+  cat(Mod1Step4_txt$statMod_eq2)
+```

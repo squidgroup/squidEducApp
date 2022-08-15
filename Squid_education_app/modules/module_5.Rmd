@@ -1,0 +1,234 @@
+
+## Module 5: MDPP and random regression
+
+```{r mod5_step1_title, results="asis"}
+cat("###",Mod5Step1_txt$title)
+```
+```{r mod5_step1, results="asis"}
+  # Sub-goal
+  cat(Mod5Step1_txt$goal)
+
+  # Introduction
+  cat(Mod5Step1_txt$intro)
+
+  # Exercise
+  cat(Mod5Step1_txt$exercise)
+
+  # Equation
+  cat(Mod5Step1_txt$exercise_eq1)
+  
+  cat(Mod5Step1_txt$para1)
+  
+  cat(Mod5Step1_txt$para2)
+  
+  cat(Mod5Step1_txt$para3)
+
+  cat(Mod5Step1_txt$para4)
+  
+  cat(placeholder_image)
+```
+
+```{r ex12-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr,Vs, Cis, beta){
+  if(length(beta)!=3)stop("Beta should be of length 3.")
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+   parameters = list(
+    Individual = list(
+      names = c("ind_int","ind_slope"), 
+      beta = c(1,0),
+      vcov = matrix(c(Vi,Cis,Cis,Vs),ncol=2,nrow=2)
+    ),
+    observation= list(
+      names = c("X1","X2"),
+      beta = beta[1:2]
+    ), 
+    residual = list(
+      vcov = Vr
+    ),
+    interactions = list(
+      names = c("ind_slope:X1","X1:X2"),
+      beta = c(1,beta[3])
+      
+  )
+  ),
+  response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex12, exercise=TRUE}
+data <- get_data(n = 300, r = 100,  
+                 Vi = 1, Vr = 0.5, Vs = 1e-15, 
+                 Cis = 0, 
+                 beta = c(-0.4,0.5,2))
+LMM <- lmer(Phenotype ~ 1 + X1*X2 + (1 |Individual), data = data)
+data2 <- get_data(n = 300, r = 100, 
+                  Vi = 1, Vr = 0.5, Vs = 1, 
+                  Cis = 0.3, 
+                  beta = c(-0.4,0.5,2))
+LMM2 <- lmer(Phenotype ~ 1 + X1*X2 + (1 + X1|Individual), data = data2)
+```
+
+```{r mod5_step1_con, results="asis"}
+  cat(Mod5Step1_txt$para5)
+  cat(Mod5Step1_txt$para6)
+    
+  cat(Mod5Step1_txt$para7)
+
+  cat(Mod5Step1_txt$para8)
+
+  # Exercise
+  cat(Mod5Step1_txt$exercise)
+  
+  cat(Mod5Step1_txt$exercise_eq1)
+  
+  cat(Mod5Step1_txt$para9)
+  
+  cat(Mod5Step1_txt$para9_eq1)
+
+  cat(Mod5Step1_txt$para10)
+  
+  cat(placeholder_image)
+  
+  cat(Mod5Step1_txt$para11)
+
+```
+```{r ex13-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr,Vs, Cis,Css, beta){
+  if(length(beta)!=3)stop("Beta should be of length 3.")
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+   parameters = list(
+    Individual = list(
+      names = c("ind_int","ind_slope","ind_slope2"), 
+      beta = c(1,0,0),
+      vcov = matrix(c(Vi,Cis,Cis,Cis,Vs,Css,Cis,Css,Vs),ncol=3,nrow=3)
+    ),
+    observation= list(
+      names = c("X1","X2"),
+      beta = beta[1:2]
+    ), 
+    residual = list(
+      vcov = Vr
+    ),
+    interactions = list(
+      names = c("ind_slope:X1","ind_slope2:X2","X1:X2"),
+      beta = c(1,1,beta[3])
+      
+  )
+  ),
+  response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex13, exercise=TRUE}
+data <- get_data(n = 300, r = 100,  
+                 Vi = 1, Vr = 0.5, Vs = 1, 
+                 Cis = 0.3, Css = 0.5,
+                 beta = c(-0.4,0.5,2))
+LMM <- lmer(Phenotype ~ 1 + X1*X2 + (1 + X1 + X2|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod5_step1_con2, results="asis"}
+  cat(Mod5Step1_txt$para12)
+```
+```{r mod5_step2_title, results="asis"}
+cat("###",Mod5Step2_txt$title)
+```
+```{r mod5_step2, results="asis"}
+  cat(Mod5Step2_txt$intro)
+
+
+  cat(Mod5Step2_txt$para1)
+  cat(Mod5Step2_txt$para1_eq1)
+  
+  cat(Mod5Step2_txt$para2)
+  cat(Mod5Step2_txt$para2_eq1)
+  
+  cat(Mod5Step2_txt$para3)
+  
+  cat(Mod5Step2_txt$para4)
+  cat(placeholder_image)
+
+  cat(Mod5Step2_txt$para5)
+  cat(Mod5Step2_txt$para5_eq1)
+```
+
+```{r mod5_step2_con, results="asis"}
+  cat(Mod5Step2_txt$para6)
+  cat(Mod5Step2_txt$para6_eq1)
+
+```
+
+```{r ex14-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr,Vs, Vssi, Cis, Cisi, Css, Cssi, beta){
+  if(length(beta)!=3)stop("Beta should be of length 3.")
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+   parameters = list(
+    Individual = list(
+      names = c("ind_int","ind_slope","ind_slope2","ind_slope3"), 
+      beta = c(1,0,0,0),
+      vcov = matrix(c(Vi,Cis,Cis,Cisi, Cis, Vs,Css,Cssi,Cis,Css, Vs,Cssi,Cisi,Cssi,Cssi,Vssi),ncol=4,nrow=4)
+    ),
+    observation= list(
+      names = c("X1","X2"),
+      beta = beta[1:2]
+    ), 
+    residual = list(
+      vcov = Vr
+    ),
+    interactions = list(
+      names = c("ind_slope:X1","ind_slope2:X2","ind_slope3:X1:X2","X1:X2"),
+      beta = c(1,1,1,beta[3])
+  )
+  ),
+  response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex14, exercise=TRUE}
+data <- get_data(n = 100, r = 30, 
+                 Vi = 1, Vr = 0.5, Vs = 1, Vssi = 2,
+                 Cis = 0.3, Cisi = 0.2, Css = 0.5, Cssi = -0.4 , 
+                 beta = c(-0.4,0.5,2))
+LMM <- lmer(Phenotype ~ 1 + X1*X2 + (1+X1*X2|Individual), data = data)
+summary(LMM)
+
+```
+
+```{r mod5_step2_con2, results="asis"}
+##Q from text:
+#"Run this simulation several times with different values for the interaction term and the covariance terms. Where does the interaction term create the most phenotypic variance and how do covariances affect this?"
+
+  cat(Mod5Step2_txt$para7)
+
+  # Conclusion
+  cat(Mod5Step2_txt$conclusion)
+```
+

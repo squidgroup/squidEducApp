@@ -64,7 +64,7 @@ text <- list(
 													At the left of the 
                           residual term we have $",EQ$group.1,"$ that represents the deviation from the population average of 
                           trait $",NOT$trait.1,"$ for a group $",NOT$group,"$ (this means that all the individuals of a given group $",NOT$group,"$ share 
-                          the same value of $",NOT$groupV,"$ ($",NOT$groupV,"$ follows a normal distribution with a mean = 0 and variance = $Var(",NOT$groupV,")$).
+                          the same value of $",NOT$groupV,"$ ($",NOT$groupV,"$ follows a normal distribution with a mean = 0 and variance = $var(",NOT$groupV,")$).
                           The concept of grouping is wide ranging from genetic similarities (e.g. families) to spatial aggregations 
                           (e.g. territories) and diet compositions and could be specific to the each study.",sep=""),
     "modelEquation_6"     = paste("The last three components $(",EQ$mean1.1,"+",EQ$dev1.1,").",EQ$env1,"+(",EQ$mean2.1,"+",EQ$dev2.1,").",EQ$env2," 
@@ -90,20 +90,20 @@ text <- list(
                           the two traits follows a multivariate normal distribution (MNV) with a zero-mean and covariance/variance 
                           matrix structure $\\Omega_{",NOT$devI,NOT$devS,"}$. On the right hand side is shown (co)variance matrix 
                           $\\Omega_{",NOT$devI,NOT$devS,"}$. Values of variance stand along the diagonal of the matrix (i.e., respectively, 
-                          the among-individual variance in intercepts for $",NOT$trait.1,"$ $(Var(",NOT$devI,"_",NOT$trait.1,"))$, the among-individual variance in slopes 
-                          for $",NOT$trait.1,"$ $(Var(",NOT$devS,"_",NOT$trait.1,"))$, the among-individual variance in intercepts for $",NOT$trait.2,"$ $(Var(",NOT$devI,"_",NOT$trait.2,"))$ 
-                          and the among-individual variance in slopes for $",NOT$trait.2,"$ $(Var(",NOT$devS,"_",NOT$trait.2,"))$). 
-                          Covariance values between intercepts (e.g. $Cov(", EQ2$dev0.1, ",", EQ2$dev0.2,")$), 
-                          slopes (e.g. $Cov(", EQ2$dev1.1, ",", EQ2$dev1.2,")$), 
-                          and intercepts and slopes (e.g. $Cov(", EQ2$dev0.1, ",", EQ2$dev1.1,")$) lie below the diagonal. 
+                          the among-individual variance in intercepts for $",NOT$trait.1,"$ $(var(",NOT$devI,"_",NOT$trait.1,"))$, the among-individual variance in slopes 
+                          for $",NOT$trait.1,"$ $(var(",NOT$devS,"_",NOT$trait.1,"))$, the among-individual variance in intercepts for $",NOT$trait.2,"$ $(var(",NOT$devI,"_",NOT$trait.2,"))$ 
+                          and the among-individual variance in slopes for $",NOT$trait.2,"$ $(var(",NOT$devS,"_",NOT$trait.2,"))$). 
+                          Covariance values between intercepts (e.g. $cov(", EQ2$dev0.1, ",", EQ2$dev0.2,")$), 
+                          slopes (e.g. $cov(", EQ2$dev1.1, ",", EQ2$dev1.2,")$), 
+                          and intercepts and slopes (e.g. $cov(", EQ2$dev0.1, ",", EQ2$dev1.1,")$) lie below the diagonal. 
                           When building up phenotypic design the program lets you specify all of these (co)variance values. 
                           Note that in SQuID inputs the correlation/variance matrix is asked instead of the (co)variance matrix. 
                           This is more convenient for users while correlations range between -1 and 1.",sep=""),
     "environment_1"       = "SQuID allows you to generate different structures by which the environment changes over time: 
                           <ol><li>stochastic</li> <li>temporally auto-correlated</li> <li>linear</li> <li>cyclic</li></ol>",
     "environment_2"       = paste("For the first structure (<b>stochastic</b>), environmental values $",NOT$env,"_{",NOT$random,NOT$time,"}$ are 
-                          generated using a Normal distribution with mean 0 and variance $Var(",NOT$env,"_",NOT$random,")$. 
-                          $$",NOT$env,"_{",NOT$random,NOT$time,"}\\sim N(0,Var(",NOT$env,"_",NOT$random,"))$$
+                          generated using a Normal distribution with mean 0 and variance $var(",NOT$env,"_",NOT$random,")$. 
+                          $$",NOT$env,"_{",NOT$random,NOT$time,"}\\sim N(0,var(",NOT$env,"_",NOT$random,"))$$
                           This means that environmental values will be totally 
                           stochastic and uncorrelated from one time point to the next. This simple situation is not the most realistic 
                           (i.e., it is hard to think of an environmental factor that is completely stochastically distributed in time). 
@@ -113,7 +113,7 @@ text <- list(
                           are more similar than two values further apart from each other (i.e., positive autocorrelation). 
                           Environmental values $",NOT$env,"_{",NOT$autocorrelated,NOT$time,"}$ are generated 
                           as the product of a stochastic value by a decay function.
-                          $$",NOT$env,"_{",NOT$autocorrelated,NOT$time,"}\\sim N(0,Var(",NOT$env,"_",NOT$random,"))\\times e^{-\\alpha\\Delta ",NOT$time,"}$$                          
+                          $$",NOT$env,"_{",NOT$autocorrelated,NOT$time,"}\\sim N(0,var(",NOT$env,"_",NOT$random,"))\\times e^{-\\alpha\\Delta ",NOT$time,"}$$                          
                           where $\\Delta ",NOT$time,"$ is the time interval between two instances of the study period, and $\\alpha$
                           is the decay rate, a measure of how fast the correlation decays with time.
                           $$\\alpha=ln(autocor)$$
@@ -153,11 +153,11 @@ text <- list(
                           a normal distribution.",sep=""),
     "environment_8"       = paste0("Finally, in SQuID the final output of each 
 													environmental effect ($",EQ2$env1,"$, $",EQ2$env2,"$ and $",EQ2$env12,"$) is 
-													expressed in unit variance (i.e., $Var(",NOT$env,")=1$) and mean-centered (i.e., $E(",NOT$env,")=0$)."),
+													expressed in unit variance (i.e., $var(",NOT$env,")=1$) and mean-centered (i.e., $E(",NOT$env,")=0$)."),
     "groupingNerror"      = paste("The high-level grouping term ($",NOT$groupV,"$) is generated from 
-                          a normal distribution of mean 0 and variance $Var(",NOT$groupV,")$, 
+                          a normal distribution of mean 0 and variance $var(",NOT$groupV,")$, 
                           and the residual term ($",NOT$error,"$) from a normal distribution 
-                          of mean 0 and variance $Var(",NOT$error,")$.",sep=""),
+                          of mean 0 and variance $var(",NOT$error,")$.",sep=""),
     
     
     "samplingDesign_1"    = "As a second step, we retrieve a subsample of previously simulated phenotypic values according 
@@ -258,7 +258,7 @@ text <- list(
                             then add further complexity by combining multiple environmental effect types.
   													Also, remember that in SQuID the final output of each 
   													environmental effect ($",EQ2$env1,"$, $",EQ2$env2,"$ and $",EQ2$env12,"$) is 
-  													expressed in unit variance (i.e., $Var(",NOT$env,"=1)$) and mean-centered (i.e., $E(",NOT$env,")=0$).
+  													expressed in unit variance (i.e., $var(",NOT$env,"=1)$) and mean-centered (i.e., $E(",NOT$env,")=0$).
   													However, the previsualization graph below displays the generated environmental data before standardization."),
     "inputEnvironment_6"    = paste("Finally, you can add a third environmental effect corresponding to the 
                             interaction between $",EQ2$env1,"$ and $",EQ2$env2,"$. 
@@ -664,8 +664,8 @@ text <- list(
                      and $",NOT$error,"_{",NOT$time,NOT$ind,"}$ is the residual error."),
     
     "note1"    = paste0("Note that in SQuID each environmental effect $(",NOT$env,")$ is expressed in unit variance 
-                      (i.e., $Var(",NOT$env,")=1$) and mean-centered (i.e., $E(",NOT$env,")=0$).
-                      Then $V_{",NOT$mean," ",NOT$env,"}=Var(",NOT$mean," ",NOT$env,")=",NOT$mean,"^2Var(",NOT$env,")=",NOT$mean,"^2$"),
+                      (i.e., $var(",NOT$env,")=1$) and mean-centered (i.e., $E(",NOT$env,")=0$).
+                      Then $V_{",NOT$mean," ",NOT$env,"}=var(",NOT$mean," ",NOT$env,")=",NOT$mean,"^2var(",NOT$env,")=",NOT$mean,"^2$"),
     
     "para3"    = "A mixed statistical model estimates these parameters:",
     "para4"    = "The first (left-hand) plot that the app generates visualizes the effect of the simulated environment on the phenotype. 
@@ -739,7 +739,7 @@ text <- list(
     
     "para2"      = paste0("The environment for this simulation is, for convenience, set as being linear over time, 
                   affecting all individuals similarly (i.e., it is &ldquo;shared&rdquo;). 
-                  The environment is also expressed with unit variance (i.e., $Var(",NOT$env,")=1$) 
+                  The environment is also expressed with unit variance (i.e., $var(",NOT$env,")=1$) 
                   and mean-centered (i.e., $E(",NOT$env,")=0$)."),
     "para3_image" = '<div style="clear:both; text-align:center"><img id="Vit" src="images/Vit_examples.jpg" alt="Examples of among-individual variance in timing of sampling" width=80% height=80%></div>',
     "para3_image_caption" =paste("<b>Figure:</b> two examples of 4 individuals that are sampled 5 times each and that among-individual variance in timing of sampling $(",general_VAR$btwIndVarTimSamp,")$ is 0.1 (left) and 0.9 (right).<br><br>",sep=""),
@@ -937,10 +937,10 @@ text <- list(
   				  $$",NOT$trait.2,"_{",NOT$time,NOT$ind,"} = ",NOT$error,"_{",NOT$trait.2,NOT$time,NOT$ind,"},$$ i.e. here we assume the traits to be equal to the residual in a model."),
     
     
-    "para2" = paste0('Because we expect these two traits to be correlated, we represent the properties of these two traits with the usual within-individual variances $V_{',NOT$error,"_",NOT$trait.1,"}$ and $V_{",NOT$error,"_",NOT$trait.2,"}$, and additionally with covariance $Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,'}$. These parameters form the elements of a 
+    "para2" = paste0('Because we expect these two traits to be correlated, we represent the properties of these two traits with the usual within-individual variances $V_{',NOT$error,"_",NOT$trait.1,"}$ and $V_{",NOT$error,"_",NOT$trait.2,"}$, and additionally with covariance $cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,'}$. These parameters form the elements of a 
     within-individual variance-covariance matrix. This matrix holds the variances of the two traits on the diagonals and their covariance on the off-diagonals:'),
-    "para2_eq1" = paste0("$$ \\Omega_{",NOT$error,"}=	\\begin{pmatrix}	V_{",NOT$error,"_",NOT$trait.1,"} & Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} \\\\
-		  	Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} & V_{", NOT$error,"_",NOT$trait.2,"} \\\\
+    "para2_eq1" = paste0("$$ \\Omega_{",NOT$error,"}=	\\begin{pmatrix}	V_{",NOT$error,"_",NOT$trait.1,"} & cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} \\\\
+		  	cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} & V_{", NOT$error,"_",NOT$trait.2,"} \\\\
 		  	\\end{pmatrix} .$$"),
     
     "exercise" = paste0("<b>Exercise</b><br> The app below
@@ -951,15 +951,15 @@ text <- list(
   			 We will consider a scenario where the two traits are examined simultaneously for multiple individuals. 
   			 All individuals are examined (sampled) repeatedly, but always at the same time. For the moment, we assume our studies includes 10 individuals that we examine 10 times.",
     
-    "para4" = paste0("Note that you did not enter the covariance of the traits $Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}$ in the app.
+    "para4" = paste0("Note that you did not enter the covariance of the traits $cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}$ in the app.
                     Later on in this module you will learn that  covariances are important for various calculations, which is why we introduced them here. 
                    However, correlation and covariance are related: if we standardized the covariance matrix so that the variances equal one (i.e. divide the columns of the matrix by the variances),
                    the off-diagonals express the correlation of the traits. This therefore results in a standardized metric that can be compared 
                    across samples that differ in their variances. The relationship between the within-individual correlation ($r_{",NOT$error,"_",NOT$trait.1,",",
-  				 NOT$error,"_",NOT$trait.2,"}$) and covariance ($Cov_{",NOT$error,"_",NOT$trait.1,",",
+  				 NOT$error,"_",NOT$trait.2,"}$) and covariance ($cov_{",NOT$error,"_",NOT$trait.1,",",
   				 NOT$error,"_",NOT$trait.2,"}$) is:"),
     "para4_eq1"  = paste0("$$r_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}=
-             \\frac{Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}}
+             \\frac{cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}}
   				 {\\sqrt{V_{",NOT$error,"_",NOT$trait.1,"}","V_{",NOT$error,"_",NOT$trait.2,"}}}.$$"),
     
     "para5" = "The relationship between the two traits is negative for a negative correlation, and this relationship exists within individuals. 
@@ -1043,8 +1043,8 @@ text <- list(
   							that the among-individual correlation is zero. As in the first step of this module, we assume that both the number of individuals, and the number of repeated measures per individual, is 10."),
     
     "para5" = "In the app you defined the values for the among-individual matrix:",
-    "para5_eq1" = paste0("$$ \\Omega_{",NOT$devI,"}=\\begin{pmatrix}V_{",NOT$devI,"_",NOT$trait.1,"} & Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,
-                         "}\\\\Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"} & V_{", NOT$devI,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
+    "para5_eq1" = paste0("$$ \\Omega_{",NOT$devI,"}=\\begin{pmatrix}V_{",NOT$devI,"_",NOT$trait.1,"} & cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,
+                         "}\\\\cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"} & V_{", NOT$devI,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
     
     "para6" = paste0("As you set both the among- and within-individual variances, you consequently defined the repeatabilities of both traits. 
   	As detailed in the module on <i>",Module_titles$mod1,"</i>, repeatability ranges between zero and one and is calculated as:"),
@@ -1103,12 +1103,12 @@ text <- list(
 		Again, we have already set both the number of individuals, and the number of repeated measures per individual, to 10.",
     
     "results" = 'As in the first step of this module, you defined the elements of the within-individual variance-covariance matrix:',
-    "results_eq1" = paste0("$$ \\Omega_{",NOT$error,"}=\\begin{pmatrix}V_{",NOT$error,"_",NOT$trait.1,"} & Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,
-                           "_",NOT$trait.2,"}  \\\\Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} & V_{", NOT$error,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
+    "results_eq1" = paste0("$$ \\Omega_{",NOT$error,"}=\\begin{pmatrix}V_{",NOT$error,"_",NOT$trait.1,"} & cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,
+                           "_",NOT$trait.2,"}  \\\\cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} & V_{", NOT$error,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
     
     "para1" = "In addition, you now also defined the elements of the among-individual variance-covariance matrix:",
-    "para1_eq1" = paste0("$$ \\Omega_{",NOT$devI,"}=\\begin{pmatrix}V_{",NOT$devI,"_",NOT$trait.1,"} & Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",
-                         NOT$trait.2,"}  \\\\Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"} & V_{", NOT$devI,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
+    "para1_eq1" = paste0("$$ \\Omega_{",NOT$devI,"}=\\begin{pmatrix}V_{",NOT$devI,"_",NOT$trait.1,"} & cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",
+                         NOT$trait.2,"}  \\\\cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"} & V_{", NOT$devI,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
     
     "para2" = "We will now again return to the equation that describes the components which affect the phenotypic correlation:",
     "para2_eq1" = paste0("$$ r_{",NOT$total,"_",NOT$trait.1,",",NOT$total,"_",NOT$trait.2,"} = r_{",NOT$devI,"_" ,NOT$trait.1,",",NOT$devI,"_" ,NOT$trait.2,
@@ -1181,14 +1181,14 @@ text <- list(
 					 intercepts nor the residual errors, while in the univariate mixed-effects model we did assume the errors to be independent.
 					 Instead, here we assume the random intercepts to follow a multivariate normal distribution with a variance-covariance matrix 
 					 $\\Omega_{",NOT$devI,"}$, which includes the among-individual variances $V_{",NOT$devI,"_",NOT$trait.1,"}$ and $V_{",NOT$devI,"_",NOT$trait.2,"}$, 
-					 and the among-individual covariance between the two random intercept terms $Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"}$: "),
-    "para4_eq1" = paste0("$$ \\Omega_{",NOT$devI,"}=\\begin{pmatrix}V_{",NOT$devI,"_",NOT$trait.1,"} & Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",
-                         NOT$trait.2,"}\\\\Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"} & V_{", NOT$devI,"_",NOT$trait.2,"}\\\\\\end{pmatrix}.$$"),
+					 and the among-individual covariance between the two random intercept terms $cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"}$: "),
+    "para4_eq1" = paste0("$$ \\Omega_{",NOT$devI,"}=\\begin{pmatrix}V_{",NOT$devI,"_",NOT$trait.1,"} & cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",
+                         NOT$trait.2,"}\\\\cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,"} & V_{", NOT$devI,"_",NOT$trait.2,"}\\\\\\end{pmatrix}.$$"),
     
     "para5" = paste0("The errors $",NOT$error,"_{",NOT$time,NOT$ind,"}$ have within-individual variances $V_{",NOT$error,"_",NOT$trait.1,"}$ and $V_{",NOT$error,"_",NOT$trait.2,"}$, and within-individual 
-		covariances $Cov_{",NOT$error,"_{",NOT$trait.1,"},",NOT$error,"_{",NOT$trait.2,"}}$:"),
-		"para5_eq1" = paste0("$$ \\Omega_{",NOT$error,"}=\\begin{pmatrix}V_{",NOT$error,"_",NOT$trait.1,"} & Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",
-		                     NOT$trait.2,"}  \\\\Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} & V_{", NOT$error,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
+		covariances $cov_{",NOT$error,"_{",NOT$trait.1,"},",NOT$error,"_{",NOT$trait.2,"}}$:"),
+		"para5_eq1" = paste0("$$ \\Omega_{",NOT$error,"}=\\begin{pmatrix}V_{",NOT$error,"_",NOT$trait.1,"} & cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",
+		                     NOT$trait.2,"}  \\\\cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"} & V_{", NOT$error,"_",NOT$trait.2,"} \\\\\\end{pmatrix}.$$"),
 		
 		"para6" = "From these covariance matrices we can calculate the phenotypic variances for each trait by adding up the variances estimated at each level:",
 		"para6_eq1" = paste0("$$V_{",NOT$total,"_",NOT$trait.1,"} = V_{",NOT$devI,"_",NOT$trait.1,"} + V_{",NOT$error,"_",NOT$trait.1,"},$$
@@ -1196,12 +1196,12 @@ text <- list(
 		
 		"para7" = "In the same fashion, we can calculate the phenotypic covariance between the 
 		two traits by adding up the covariances estimated at each level:",
-		"para7_eq1" = paste0("$$Cov_{",NOT$total,"_",NOT$trait.1,", ",NOT$total,"_",NOT$trait.2,"} = Cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,
-		                     "} +  Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}.$$"),
+		"para7_eq1" = paste0("$$cov_{",NOT$total,"_",NOT$trait.1,", ",NOT$total,"_",NOT$trait.2,"} = cov_{",NOT$devI,"_",NOT$trait.1,",",NOT$devI,"_",NOT$trait.2,
+		                     "} +  cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}.$$"),
 		
 		"para8" = "With this information in hand, we can now calculate the overall phenotypic correlation in the data:",
 		"para8_eq1" = paste0("$$r_{",NOT$total,"_",NOT$trait.1,", ",NOT$total,"_",NOT$trait.2,"} = 
-					 \\frac{Cov_{",NOT$total,"_",NOT$trait.1,",",NOT$total,"_",NOT$trait.2,"}}
+					 \\frac{cov_{",NOT$total,"_",NOT$trait.1,",",NOT$total,"_",NOT$trait.2,"}}
 					 {\\sqrt{V_{",NOT$total,"_",NOT$trait.1,"}V_{",NOT$total,"_",NOT$trait.2,"}}}.$$"),
 		
 		"conclusion" = "<b>Conclusion</b><br>Bivariate mixed-effects models differ distinctly from univariate mixed-effects 
@@ -1271,7 +1271,7 @@ text <- list(
 		                     "_{",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$trait.2,NOT$time,NOT$ind,"}$$"),
 		
 		"para6" = paste0("This new model should properly recover the effect of food availability on $y$ and $z$. 
-					 You will notice that the residual within-individual covariance ($Cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}$) 
+					 You will notice that the residual within-individual covariance ($cov_{",NOT$error,"_",NOT$trait.1,",",NOT$error,"_",NOT$trait.2,"}$) 
 					 should now also better resemble the estimate that you would have expected based on 
 					 the within-individual correlation that you entered previously. This is because 
 					 the within-individual covariance is now explained by the fixed-effect covariate, 
@@ -1307,7 +1307,7 @@ text <- list(
 		whole population (e.g., spring temperature) and the values are random from one measurement period 
 		to the next. The environment thus has an intercept effect on phenotype of 0, and a slope that 
 		you can input (we recommend at first that the slope be >> 0). Each environment contributes 
-		the value $[slope]^2Var(",NOT$env,")$ to the total phenotypic variance (see Table 1 in Allegue <i>et al.</i> 2016), 
+		the value $[slope]^2var(",NOT$env,")$ to the total phenotypic variance (see Table 1 in Allegue <i>et al.</i> 2016), 
 		so by specifying the slope (positive or negative), you will affect the total phenotypic variance. 
 		Note that in SQuID each environmental effect is standardized (i.e. mean = 0 and variance = 1)."),
 		
@@ -1431,7 +1431,7 @@ text <- list(
                   but do so differently. In other words, 
                   individuals have variable reaction norms in both intercept and slope.",
     
-    "intro"      = paste0("<b>Background</b><br> In the modules &ldquo;<i>",Module_titles$mod1,"</i>&rdquo; and &ldquo;<i>",Module_titles$mod3,"</i>&rdquo; 
+    "intro"      = paste0("<b>Background</b><br> In the modules titled <i>",Module_titles$mod1,"</i> and <i>",Module_titles$mod3,"</i> 
                         you have explored how among-individual variance  $V_",NOT$devI,"$ can be modelled. Then, individuals varied to some extent
                         in how an environmental factor influenced the expression of their phenotypes, 
                         producing within-individual variance as a response 
@@ -1451,58 +1451,55 @@ text <- list(
     "para1"= paste0("Here we depart from the random-intercept regression model as presented in step four of the module 
                        <i>",Module_titles$mod1,"</i>. Recall, our model was:"),
     "para1_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}= ",EQ3$mean0,"+",NOT$devI,"_",NOT$ind,"+ ",NOT$mean," ",NOT$env,"_{",NOT$time, NOT$ind,
-                            "}+",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
+                            "}+",NOT$error,"_{",NOT$time, NOT$ind,"}.$$"),
     "exercise"  = "<b>Exercise</b><br> We now change our model by additionally introducing a parameter that allows defining individual 
                        deviations from the population response to environmental changes. 
                        The fundamental difference between the random-intercept regression and the random-slope model that is presented hehre, 
                        is that while the former uses individual-level random effects to model 
                        individual-specific intercepts (that account for the among-individual variance of mean 
                        trait values), the latter introduces an additional random effect the slopes 
-                       (that accounts for individual responses to changing environments).",
+                       (that accounts for individual responses to changing environments). Our model thus becomes:",
 
     "RCode1"    = "# install.packages(&quot;lme4&quot;)<br>
                  LMM1 <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual), data = sampled_data)",
     
-    "para2"     = "We will modify this model as:",
-    "para2_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+(",
-                         NOT$mean,"+", NOT$devS,"_", NOT$ind,")", NOT$env,"_{",NOT$time, NOT$ind,"}+",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
+    "exercise_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}=",NOT$devI,"_",NOT$ind,"+(",
+                         NOT$mean,"+", NOT$devS,"_", NOT$ind,")", NOT$env,"_{",NOT$time, NOT$ind,"}+",NOT$error,"_{",NOT$time, NOT$ind,"},$$"),
     
     "RCode2"    = "LMM2 <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual) + (0 + X1|Individual), data = sampled_data)",
-    "para3"    = paste0("in which $",NOT$devS,"_",NOT$ind,"$ is the effect of measured environment 
+    
+    "para2"    = paste0("in which $",NOT$devS,"_",NOT$ind,"$ is the effect of measured environment 
                 $",NOT$env,"_{",NOT$time, NOT$ind,"}$
-                on the measure of phenotype in the <i>i <sup>th</sup></i> individual. 
-                Accordingly, we can apply the following parameterization regimes:"),
-    "note"     = "Note: you can consider residual variance as solely measurement error variance, 
+                on the measure of phenotype in the <i>i <sup>th</sup></i> individual. In the following app, you are able to set the
+                number of individuals and trait expressions, the among-individual variance of the random-intercept $V_{",NOT$devI,"}$, the variance of the residuals $V_{",NOT$residualUpper,"}$, the variance due to the population mean effect $V_{",NOT$mean,"}$, 
+                and the among-individual variance $V_{",NOT$devS,"}$ in the environment due to the predictor $x$, to explore the effects of parameter estimation in a linear mixed-effects model. Note, here you can consider residual variance as solely measurement error variance, 
                 or you could consider that it might also include some unknown environmental 
-                variance in addition to the known environmental variance determined below.",
-    "para4"    = "Set in the background is the environmental predictor and its sampling. 
+                variance in addition to the known environmental variance determined below."),
+    "para3"    = "Set in the background is the environmental predictor and its sampling. 
                 Here we should use uniform sampling, where each individual is sampled 
-                at the same time so there are no biases. By definition, 
-                our environmental predictor is also mean centered.",
+                at the same time so there are no biases. By design, 
+                the environmental predictor is mean centered.",
     
-    "results"  = "We estimate these parameters with a mixed-effects model:",
-    "para5"    = "Individual-specific responses can be best visualised by plotting 
-                the individual-specific regression lines.",
+    "para4"    = "In the app, individual-specific responses are visualised by plotting 
+                the regression line for each individual, where the y-axis represents the phenotype and the x-axis the environment. This allows
+    to clearly distinguish the differences in the phenotype for individuals as a function of the environment, and the variance therein. Below follows a chunk of \\texttt{R}-code to fit this model.",
     
-    "point"   = "Again, we performed linear regression approach in a mixed-effects model framework, 
-                but in this case we generated multiple regression lines 
-                (by defining different intercepts and slopes) for each individual in a single model 
-                to describe the individual-specific effect of an predictor. 
-                Individual-specific responses to changes that occur along an environmental 
-                gradient form &ldquo;reaction norms&rdquo;. These reaction norms, if the environmental 
-                gradient is centred around zero, can be characterized by their intercept that 
+    "conclusion"   = "<b>Conclusion</b><br>Individual-specific responses to changes that occur along an environmental 
+                gradient form &ldquo;reaction norms&rdquo;. These reaction norms (if the predictor $x$ is centered around zero) can be characterized by their intercept that 
                 describes individual mean expression values, and by their slope that expresses 
                 the plasticity of traits within individuals. Statistically, one can evaluate whether 
-                the random-intercept or the random-slope model fits the data at hand better. 
+                the random-intercept or the random-slope model fits the data at hand better using, e.g., information criteria (though we do not discuss those here). 
                 However, the consideration of differences in how individuals respond to environmental 
                 fluctuations may be straightforward on a biological basis. This model simultaneously 
                 accommodates tests for individual personality differences (i.e. the calculation of 
-                repeatability makes sense) as well as tests for individual by environment interaction.",
-    "point_eq1" = paste0("$$V_",NOT$total,"= V_",NOT$devI,"+ V_{",NOT$mean,"}+V_{",NOT$devS,"}+ V_",NOT$residualUpper,"$$"),
-    "para6" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^2Var(",NOT$env,")=",NOT$mean,"^2$$", "$$V_{",NOT$devS,"}=Var(",NOT$devS,")Var(",NOT$env,
-                     ")+E(",NOT$env,")^2Var(",NOT$devS,")=Var(",NOT$devS,").$$ Note that $Var(",NOT$env,")$ is the true variance in $",NOT$env,"$, and $E(",
-                     NOT$env,")$ is the true mean of $",NOT$env,"$. Also, in SQuID each environmental predictor $(",NOT$env,")$ is standardized (i.e., $Var(",
-                     NOT$env,")=1$ and $E(",NOT$env,")=0$)"),
+                repeatability makes sense) as well as tests for individual by environment interaction. Then, given independence of the model terms, 
+    we can calculate the phenotypic variation as:",
+    
+    "conclusion_eq1" = paste0("$$V_",NOT$total,"= V_",NOT$devI,"+ V_{",NOT$mean,"}+V_{",NOT$devS,"}+ V_",NOT$residualUpper,",$$"),
+    "conclusion2" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^2var(",NOT$env,")=",NOT$mean,"^2$$", "$$V_{",NOT$devS,"}=var(",NOT$devS,")var(",NOT$env,
+                     ")+E(",NOT$env,")^2var(",NOT$devS,")=var(",NOT$devS,").$$ Note that $var(",NOT$env,")$ is the true variance in $",NOT$env,"$, and $E(",
+                     NOT$env,")$ is the true mean of $",NOT$env,"$. In SQuID each environmental predictor $(",NOT$env,")$ is standardized (i.e., $var(",
+                     NOT$env,")=1$ and $E(",NOT$env,")=0$), to make calculating the explained variation more straightforward."),
     
     "RCode"    = "# install.packages(&quot;lme4&quot;)<br>
                LMM <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual) + (0 + X1|Individual), data = sampled_data)"
@@ -1511,68 +1508,58 @@ text <- list(
   # Step 2 --------------
   "Mod3Step2_txt" = list(    
     "title"      = "Step 2: Intercept-slope correlation",
-    "goal"    = "<b>Goal:</b> To introduce and understand correlation (covariance) between intercepts and slopes.",
-    "intro"      = "<b>Background:</b> Up until this point, we have been making the hidden and simplifying 
-                  assumption that each term in our variance partitioning is independent of other terms. 
-                  In other words, we have assumed, for example, that measurement error is not correlated with 
-                  individual intercept or environment. For the most part, we will continue to make these assumptions, 
-                  but the introduction of random slopes means we have two variances, in intercepts and slopes, 
+    "goal"    = "In this second step, our goal is to introduce and understand correlation between intercepts and slopes.",
+    "intro"      = "<b>Background</b><br> Up until this point, we have been making the 
+                  assumption that each term in our model is independent of other terms. 
+                  In other words, we have for example assumed that the measurement error is not correlated with 
+                  the intercept or with responses to the environment. For the most part, we will continue with our prior assumptions, 
+                  but the introduction of random slopes means we now have two variances, one for the intercepts and one for the slopes, 
                   that are part of phenotypic variance and attributes of individuals. Biologically, 
                   it becomes very interesting if there is a correlation between intercepts and slopes. 
-                  That correlation can be either positive or negative, and we will have you simulate data 
-                  both ways so you can see what the sign of the correlation does to the pattern of variance 
-                  within and among individuals.",
+                  That correlation can be either positive or negative, which deermines the pattern of variance within and among individuals.",
     
-    "para1"      = "We use the same equation as before, e.g.,",
+    "para1"      = "We use the same model as before:",
     "para1_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}=",EQ3$mean0,"+",NOT$devI,"_",NOT$ind,"+ (",NOT$mean,"+", NOT$devS,"_", NOT$ind,")", NOT$env,"_{",
-                         NOT$time, NOT$ind,"}+",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
+                         NOT$time, NOT$ind,"}+",NOT$error,"_{",NOT$time, NOT$ind,"},$$"),
     
-    "para2"      = "but now we make the formally hidden assumption explicit with some new nomenclature:",
+    "para2"      = "but additionally introduce new nomenclature:",
     "para2_eq1" = paste0("$$ \\begin{pmatrix}", NOT$devI,"_",NOT$ind , "\\\\", NOT$devS,"_",NOT$ind , "\\\\ \\end{pmatrix}\\sim MNV(0,\\Omega_{",NOT$devI, NOT$devS,
-                         "}): \\Omega_{",NOT$devI, NOT$devS,"}= \\begin{pmatrix}Var(", NOT$devI,") & Cov(", NOT$devI, ",", NOT$devS ,") \\\\Cov(", NOT$devI, ",", 
-                         NOT$devS ,") & Var(", NOT$devS, ")\\\\\\end{pmatrix} $$"),
+                         "}), \\qquad \\text{where} \\qquad \\Omega_{",NOT$devI, NOT$devS,"}= \\begin{pmatrix}var(", NOT$devI,") & cov(", NOT$devI, ",", NOT$devS ,") \\\\cov(", NOT$devI, ",", 
+                         NOT$devS ,") & var(", NOT$devS, ")\\\\\\end{pmatrix}. $$"),
     
-    "para3"      = paste0("This means that the intercept value of the <i>i <sup>th</sup></i> individual $(",NOT$devI,"_",NOT$ind,")$ 
-                        and the slope of that individual $(",NOT$devS,"_",NOT$ind,")$ are distributed as multivariate 
-                        normal with means for each attribute of 0 and a variance-covariance structure 
-                        of $\\Omega_{",NOT$devI,NOT$devS,"}$. We then specify the variance-covariance structure in a 2 by 2 matrix. 
-                        You have seen the variance terms ($V_",NOT$devI,"$  and $V_",NOT$devS,"$ ) before, 
-                        but the new term introduced here is $Cov_{",NOT$devI, NOT$devS,"}$, which is the measure of 
-                        how much $",NOT$devI,"_",NOT$ind,"$ and $",NOT$devS,"_",NOT$ind,"$ covary together."),
+    "para3"      = paste0("This represents that the intercept value of the <i>i <sup>th</sup></i> individual $(",NOT$devI,"_",NOT$ind,")$ 
+                        and the slope of that same individual $(",NOT$devS,"_",NOT$ind,")$ are distributed as multivariate 
+                        normal with means of 0 and a variance-covariance matrix $\\Omega_{",NOT$devI,NOT$devS,"}$. 
+                        Here, as there are two terms, this is a 2-by-2 matrix. 
+                        The variance terms $V_",NOT$devI,"$ and $V_",NOT$devS,"$ have also occured in other modules, 
+                        so that the new term introduced here is $cov(",NOT$devI,",", NOT$devS,")$, which represents the magnitude to which
+                        the intercepts $",NOT$devI,"_",NOT$ind,"$ and slopes $",NOT$devS,"_",NOT$ind,"$ vary together."),
     
-    "exercise"   = "<b>Exercise:</b> We will do a very similar simulation as in step one, 
-                  but you will then enter some value for the covariance between the intercept and the slope. 
-                  You will enter this covariance as a standardized value by expression it as a correlation ranging between -1 and +1:",
-    "exercise_eq1" = paste0("$$Cor(",NOT$devI,",",NOT$devS,")=\\frac{Cov(",NOT$devI,",",NOT$devS,")}{\\sqrt{Var(",NOT$devI,")","Var(",NOT$devS,")}}$$"),
+    "exercise"   = "<b>Exercise</b><br> The simulation here will be similar to that the first step of this module, 
+                  but it will instead also be possible to input a value for the covariance of the intercepts and the slopes. 
+                  Though this represents this also represents covariance between the intercepts and slopes: 
+    which is a form of standardized covariance:",
+    "exercise_eq1" = paste0("$$cor(",NOT$devI,",",NOT$devS,")=\\frac{cov(",NOT$devI,",",NOT$devS,")}{\\sqrt{var(",NOT$devI,")","var(",NOT$devS,")}}$$"),
     
-    "para4"      = "We will then examine the appearance of the resulting data.",
+    "para4"      = "You might want to simulate data with a negative correlation,with a positive correlation, and without any correlation at all,
+   to find out how that affects the patterns of variance. In the app below, the left panel in the plot will constantly reflect the simulated individuals without
+   covarince between the intercept and slope terms, whereas the panel on the right incorporates the selected covariance.
+   The patterns of variance can be inspected visually by plotting the simulated data.",
     
-    "results"    = "<b>Results:</b> A mixed-effects statistical model estimates these parameters:",
-    "note1"      = paste0("Note that we have slightly changed what is presented in the table above. 
-                        Whereas earlier we presented the phenotypic variance due to a particular term 
+    "para5"      = paste0("Earlier we presented the phenotypic variance due to a particular term 
                         (e.g., the variance due to individual differences in response to an environmental 
-                        factor, or $V_{",NOT$devS,NOT$env,"}$), above we present what many statistical packages produce, 
-                        which in the case of random slope, is the variance in slope $(V_",NOT$devS,")$ 
-                        rather than the phenotypic variance due to slope."),
-    "para5"      = "The best way to develop an intuition about what the covariance represents 
-                  is to compare a graph with and without it. Below are two panels of simulated data. 
-                  The one on the left shows your simulated individuals without the covariance, 
-                  and the one on the right is the same set with the covariance you entered. 
-                  The difference will, of course, be more obvious if you entered a large covariance (correlation).",
+                        factor, or $V_{",NOT$devS,NOT$env,"}$), but now the table included what many statistical packages produce;
+                        the (marginal) variance in slopes $V_",NOT$devS,"$, rather than the phenotypic variance due to slope (i.e., variance explained)."),
     
-    "para6"      = "Try this step a couple of times to explore in particular what a negative 
-                  versus positive covariance does to the pattern of reaction norms.",
-    
-    "point"      = "<b>Point:</b> Intercept-slope covariance is an additional layer 
-                  to understanding the phenotypic equation. You will note that it 
+    "point"      = "Intercept-slope covariance is an additional layer of complexity
+                  to the phenotypic equation. You will notoce that it 
                   is not a parameter in the equation itself, but is rather describing 
-                  the relationship between two parameters in the equation—that is, 
+                  the relationship between two parameters in the equation, namely
                   how they behave across individuals. The covariance does normally appear in a partitioning of variance:",
-    "point_eq1" = paste0("$$V_",NOT$total,"=V_",NOT$devI,"+ V_{",NOT$mean,"}+ V_{",NOT$devS,"}+ 2COV_{",NOT$devI,",",NOT$devS,"}+ V_",NOT$residualUpper,"$$"),
-    "point_eq2" = paste0("$$COV_{",NOT$devI,",",NOT$devS,"}= E(",NOT$env,")Cov(",NOT$devI,",",NOT$devS,")$$"),
+    "point_eq1" = paste0("$$V_",NOT$total,"=V_",NOT$devI,"+ V_{",NOT$mean,"}+ V_{",NOT$devS,"}+ 2cov(",NOT$devI,",",NOT$devS,")+ V_",NOT$residualUpper,".$$"),
     
     "note2"      = paste0("Note: In SQuID $E(",NOT$env,")=0$ and hence the covariance does not contribute to total phenotypic variance."),
-    "para7"      = "The biology of the covariance is just beginning to be explored 
+    "conclusion"      = "<b>Conclusion</b><br>The biology of the covariance is just beginning to be explored 
                   (e.g., <a href='http://onlinelibrary.wiley.com/doi/10.1111/j.1461-0248.2011.01698.x/abstract' target='_blank'>Mathot et al. 2011</a>).
                   Undoubtedly further understanding of it will contribute to understanding 
                   the evolution of plasticity, since the covariance links variation 
@@ -1585,51 +1572,42 @@ text <- list(
   # Step 3 --------------
   "Mod3Step3_txt" = list(  
     "title"      = "Step 3: Sample size and precision",
-    "goal"    = paste0("<b>Goal:</b> to develop understanding of how the level of replication 
+    "goal"    = paste0("In this step, we conclude this module by developing an understanding of how the level of replication 
                         in terms of the number of individuals and samples per individual 
-                        influence the estimation of the among-individual variance in intercepts $(V_",NOT$devI,")$, 
-                        slopes $(V_{",NOT$devS,"})$ and their correlation $(Cor_{",NOT$devI,",",NOT$devS,"})$."),
-    "intro"      = "<b>Background:</b> Several papers have addressed the issue of sample size requirements 
-                  for random regression models. The general conclusion is that accurate estimates 
-                  of random regression parameters require relatively high sample sizes, 
-                  particularly for estimating the correlation between intercepts and slopes. 
+                        influence the estimation of the among-individual variance in intercepts $V_",NOT$devI,"$, 
+                        slopes $V_{",NOT$devS,"}$ and their correlation $cor_{",NOT$devI,",",NOT$devS,"}$."),
+    "intro"      = "<b>Background</b><br> Several studies have considered the issue of sample size requirements 
+                  for random regression models. The general conclusion is that accurate parameter estimates 
+                  in random regression require relatively high sample sizes, 
+                  even moreso so to estimate the correlation between intercepts and slopes. 
                   When planning an optimal experimental design, researchers are faced with a 
                   trade-off between the number of individuals and the number of observations 
                   per individual they can sample.",
     
-    "exercise"   = "<b>Exercise:</b> We will perform a set of simulations that will address 
-                  what is the sampling design, in terms of number of individuals and repeats 
-                  per individual, that will maximize the precision of parameter estimates. 
-                  Let's assume that some researchers want to explore the effect of sample 
-                  size in their estimates. They also want to determine the best decision 
-                  in terms of allocating effort in sampling more individuals or more repeats 
-                  per individual. The use of SQuID helps researchers to determine the best 
-                  sampling design. They will use the same equation as we used in the step two, e.g.,",
+    "exercise"   = "<b>Exercise</b><br> The app below performs a set of simulations following different sampling designz, with different numbers of individuals and repeats 
+                  per individual, so we may find the ideal set-up to find parameter estimates that accurately represent the truth. 
+                  Here, we can use SQuID to help optimize the sampling design in terms of sampling effort and precision of the parameter estimates. 
+    We will use the same model as in the step two:",
     "exercise_eq1" = paste0("$$",NOT$trait.1,"_{",NOT$time, NOT$ind,"}= ",EQ3$mean0,"+ ",NOT$devI,"_",NOT$ind,"+ (",NOT$mean,"+", NOT$devS,"_", NOT$ind,")", 
-                            NOT$env,"_{",NOT$time, NOT$ind,"}+ ",NOT$error,"_{",NOT$time, NOT$ind,"}$$"),
+                            NOT$env,"_{",NOT$time, NOT$ind,"}+ ",NOT$error,"_{",NOT$time, NOT$ind,"}.$$"),
     
     "RCode"      = "# install.packages(&quot;lme4&quot;)<br>
   
                  LMM <- lme4::lmer(Phenotype ~ 1 + X1 + (X1|Individual), data = sampled_data)",
     
-    "table"      = "The table below summarises the value of each parameter of the model:",
-    
-    "para1"      = paste0("For these simulations we are going to use a stochastic environment effect $(",NOT$env,")$. 
-                  We will also sample individual trait expressions the same number of times but 
+    "para1"      = paste0("The simulations a stochastic environment effect $",NOT$env,"$. 
+                  We will sample individual trait expressions the same number of times but 
                   at different instances of time among individuals. The among-individual variance 
                   in sampling of timing will be 0."),
     
-    "para2"     = "You should base your decision on the graphic representation of the estimates. 
-                 The figure below is a summary of parameter estimates of 100 models performed 
-                 from the 100 simulated datasets.",
-    
-    "para3"     = "For each sample size there will be three combinations: one with more individuals than repeats, 
-                one with equal number of repeats and observations, and one with more repeats than individuals.",
-    
-    "para4"     = "Each histogram shows the frequency distribution of each parameter based on the 100 simulations 
+    "para2"     = "Can you determine the optimal sampling design based on the graphic representation of the estimates in the app? 
+                 The figure below summarizes parameter estimates of 100 models fitted to 100 simulated datasets. 
+    For each different sample size there will be three combinations: one with more individuals than repeats, 
+                one with equal number of repeats and observations, and one with more repeats than individuals. 
+    Each histogram shows the frequency distribution of a parameter based on the 100 simulations 
                 that you ran for each of the three study designs. &ldquo;NI&rdquo; is the number of individuals and 
-                &ldquo;NR&rdquo; is the number of repeats per individuals. The red line represents the &ldquo;true&rdquo; 
-                value that you set for this parameter above. The histograms provide information 
+                &ldquo;NR&rdquo; is the number of repeats per individuals. The red line in each figure represents the <b>true value</b>
+                , i.e. the value that you set for the parameter in the simulation. The histograms provide information 
                 on the expected bias (inaccuracy) and imprecision that comes with each chosen study design. 
                 If the chosen study design would be perfect (i.e., resulting in highly precise and accurate estimates) 
                 your parameter estimates should be narrowly distributed around the true value. 
@@ -1829,7 +1807,7 @@ text <- list(
                          NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
     
     "para3" = paste0("where $$","\\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\end{pmatrix}","\\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,"}): \\Omega_{",
-                     NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} Var(",NOT$devI,") & Cov_{",NOT$devI,EQ3$dev1,"} \\\\  Cov_{",NOT$devI,EQ3$dev1,"} & Var(",EQ3$dev1,
+                     NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} var(",NOT$devI,") & cov_{",NOT$devI,EQ3$dev1,"} \\\\  cov_{",NOT$devI,EQ3$dev1,"} & var(",EQ3$dev1,
                      ") \\end{pmatrix}","$$"),
     
     "para4" = paste0("If you did the random regression module, you have seen this before although here we've added 
@@ -1838,15 +1816,15 @@ text <- list(
            and the slope of that individual ($",EQ1$dev1,"$) with respect to $",NOT$env,"_{1}$ are 
            distributed as multivariate normal with means for each attribute of 0 and a variance-covariance 
            structure of $\\Omega_{",NOT$devI,NOT$devS,"}$. We then specify the variance-covariance structure 
-           in a 2 by 2 matrix. $Cov_{",NOT$devI,EQ3$dev1,"}$ is the measure of how much $",EQ1$dev0,"$ and 
+           in a 2 by 2 matrix. $cov_{",NOT$devI,EQ3$dev1,"}$ is the measure of how much $",EQ1$dev0,"$ and 
            $",EQ1$dev1,"$ covary together. We will simulate data with these terms and assess one consequence of random slopes in a reaction 
            norm plane. First, we will ask where variation due to the random slope exists in the 2 environmental 
            dimensions."),
     
-    "para5" = paste0("It may be useful at first to make the $Cov_{",NOT$devI,EQ3$dev1,"}=0$, 
+    "para5" = paste0("It may be useful at first to make the $cov_{",NOT$devI,EQ3$dev1,"}=0$, 
            but later you can explore other values. Once the data are simulated, we can analyze them with R package lmer4 
            as was done in the random regression module and we will compare the full model 
-           to one without $",EQ1$dev1,"$ or $Cov_{",NOT$devI,EQ3$dev1,"}$."),
+           to one without $",EQ1$dev1,"$ or $cov_{",NOT$devI,EQ3$dev1,"}$."),
     
     "para6" = "The above should illustrate again that leaving something out of an analysis model that exists 
     in the data will produce errors in other terms. ",
@@ -1859,7 +1837,7 @@ text <- list(
     "para8" = paste0("As you can see, these planes vary in only one dimension of the environmental space. 
            Since we did not specify any variation in the reaction to $",NOT$env,"_{2}$, or to the interaction between 
            $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$, everyone is assumed to have the same plane in those directions. If you try this with several different values for the parameters 
-           $V_{",NOT$devI,"}$, $V_{",EQ3$dev1,"}$, and $Cov_{",NOT$devI,EQ3$dev1,"}$, 
+           $V_{",NOT$devI,"}$, $V_{",EQ3$dev1,"}$, and $cov_{",NOT$devI,EQ3$dev1,"}$, 
            you will see that these affect the orientation of the plane only in one dimension."),
     
     "exercise" = paste0("<b>Exercise:</b> Now we will add among-individual variation in response to $",NOT$env,"_{2}$. 
@@ -1873,9 +1851,9 @@ text <- list(
     which is the expansion of all possible combinations of 
     three terms instead of two as before:",
     "para9_eq1" = paste0("$$", "\\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\\\ ",EQ1$dev2," \\end{pmatrix}", "\\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,
-                         "}): \\Omega_{",NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} Var(",NOT$devI,") & Cov_{",NOT$devI,EQ3$dev1,"} & Cov_{",NOT$devI,EQ3$dev2,
-                         "} \\\\ Cov_{",NOT$devI,EQ3$dev1,"} & Var(",EQ3$dev1,") & Cov_{",EQ3$dev1,EQ3$dev2,"} \\\\ Cov_{",NOT$devI,EQ3$dev2,"} & Cov_{",EQ3$dev1,
-                         EQ3$dev2,"} & Var(",EQ3$dev2,")\\end{pmatrix}","$$"),
+                         "}): \\Omega_{",NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} var(",NOT$devI,") & cov_{",NOT$devI,EQ3$dev1,"} & cov_{",NOT$devI,EQ3$dev2,
+                         "} \\\\ cov_{",NOT$devI,EQ3$dev1,"} & var(",EQ3$dev1,") & cov_{",EQ3$dev1,EQ3$dev2,"} \\\\ cov_{",NOT$devI,EQ3$dev2,"} & cov_{",EQ3$dev1,
+                         EQ3$dev2,"} & var(",EQ3$dev2,")\\end{pmatrix}","$$"),
     
     "para10" = paste0("Again, let's simulate some data and visualize the results. We will start with a population of 100 individuals each measured 20 times in which 
            both $",NOT$env,"$ predictors were also measured. Both environments are random and unshared."),
@@ -1919,10 +1897,10 @@ text <- list(
     It now is an ugly beast, but if you move through it systematically, you will see it is just 
     a ledger sheet that accounts for every possibility:",
     "para2_eq1" = paste0("$$ \\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\\\ ",EQ1$dev2," \\\\ ",EQ1$dev12,"\\end{pmatrix} \\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,
-                         "}): \\Omega_{",NOT$devI,NOT$devS,"}= \\begin{pmatrix} Var(",NOT$devI,") & Cov_{",NOT$devI,EQ3$dev1,"}  & Cov_{",NOT$devI,EQ3$dev2,"}  & Cov_{",
-                         NOT$devI,EQ3$dev12,"} \\\\ Cov_{",NOT$devI,EQ3$dev1,"}  & Var(",EQ3$dev1,") & Cov_{",EQ3$dev1,EQ3$dev2,"}  & Cov_{",EQ3$dev1,EQ3$dev12,"} \\\\ Cov_{",
-                         NOT$devI,EQ3$dev2,"}  & Cov_{",EQ3$dev1,EQ3$dev2,"}  & Var(",EQ3$dev2,") & Cov_{",EQ3$dev2,EQ3$dev12,"} \\\\Cov_{",NOT$devI,EQ3$dev12,"} & Cov_{",
-                         EQ3$dev1,EQ3$dev12,"} & Cov_{",EQ3$dev2,EQ3$dev12,"} & Var(",EQ3$dev12,") \\end{pmatrix} $$"),
+                         "}): \\Omega_{",NOT$devI,NOT$devS,"}= \\begin{pmatrix} var(",NOT$devI,") & cov_{",NOT$devI,EQ3$dev1,"}  & cov_{",NOT$devI,EQ3$dev2,"}  & cov_{",
+                         NOT$devI,EQ3$dev12,"} \\\\ cov_{",NOT$devI,EQ3$dev1,"}  & var(",EQ3$dev1,") & cov_{",EQ3$dev1,EQ3$dev2,"}  & cov_{",EQ3$dev1,EQ3$dev12,"} \\\\ cov_{",
+                         NOT$devI,EQ3$dev2,"}  & cov_{",EQ3$dev1,EQ3$dev2,"}  & var(",EQ3$dev2,") & cov_{",EQ3$dev2,EQ3$dev12,"} \\\\cov_{",NOT$devI,EQ3$dev12,"} & cov_{",
+                         EQ3$dev1,EQ3$dev12,"} & cov_{",EQ3$dev2,EQ3$dev12,"} & var(",EQ3$dev12,") \\end{pmatrix} $$"),
     
     "para3" = "We will simulate data with these terms, and assess two consequences of random slopes 
     in two dimensions. First, we will ask where variation due to the interaction term 

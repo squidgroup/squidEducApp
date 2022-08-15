@@ -1,0 +1,225 @@
+
+## Module 4: Multi-dimensional Phenotypic Plasticity (MDPP)
+
+```{r mod4_step1_title, results="asis"}
+cat("###", Mod4Step1_txt$title)
+```
+
+
+```{r mod4_step1, results="asis"}
+  # Sub-goal
+  cat(Mod4Step1_txt$goal)
+
+  # Introduction
+  cat(Mod4Step1_txt$intro)
+
+  # Exercise
+  cat(Mod4Step1_txt$exercise)
+
+	cat(Mod4Step1_txt$para1)
+	
+	  cat(placeholder_image) #app 22
+
+	  
+	cat(Mod4Step1_txt$results)
+	
+	# Equation
+	cat(Mod4Step1_txt$results_eq1)
+	
+	cat(Mod4Step1_txt$para2)
+```
+
+```{r ex6-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr, beta){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+  parameters=list(
+    Individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    ),
+     observation = list(
+      names = "X1",
+      beta = beta
+    )
+  ),
+    response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex6, exercise=TRUE}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5, 
+                 beta = -0.4)
+LMM <- lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod4_step1_con, results="asis"}
+
+	cat(Mod4Step1_txt$para3)
+
+	cat(Mod4Step1_txt$para4)
+
+	# Equation
+	cat(Mod4Step1_txt$para4_eq1)
+```  
+
+
+```{r ex7-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr, beta){
+  if(length(beta)!=2)stop("beta should be of length 2")
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+  parameters=list(
+    Individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    ),
+     observation = list(
+      names = c("X1","X2"),
+      beta = beta
+    )
+  ),
+    response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+
+  return(data)
+
+}
+```
+
+```{r ex7, exercise=TRUE}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5, 
+                 beta = c(-0.4,0.2))
+LMM <- lmer(Phenotype ~ 1 + X1 + X2 + (1|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod4_step1_con2, results="asis"}
+
+
+	cat(Mod4Step1_txt$para5)
+
+
+	cat(Mod4Step1_txt$para6)
+
+	cat(Mod4Step1_txt$para7)
+
+	cat(placeholder_image) #app 23
+	
+	cat(Mod4Step1_txt$para8)
+
+  cat(Mod4Step1_txt$conclusion)
+
+  p(strong("References"))
+  p(HTML("Allegue, H., Araya-Ajoy, Y.G., Dingemanse, N.J., Dochtermann N.A., Garamszegi, L.Z., Nakagawa, S., Reale, D., Schielzeth, H.
+  			 and Westneat, D.F. (2016). SQuID - Statistical Quantification of Individual Differences: an educational and
+  			 statistical tool for understanding multi-level phenotypic data in linear mixed models.
+  			 <i>Methods in Ecology and Evolution</i>, 8, 257-267. 
+         <a href='https://doi.org/10.1111/2041-210X.12659' target='_blank'>doi: 10.1111/2041-210X.12659</a>"))
+  
+```
+
+```{r mod4_step2_title, results="asis"}
+cat("###",Mod4Step2_txt$title)
+```
+
+```{r mod4_step2, results="asis"}
+# Sub-goal
+  cat(Mod4Step2_txt$goal)
+
+  # Introduction
+  cat(Mod4Step2_txt$intro)
+  
+  
+  # Exercise
+  cat(Mod4Step2_txt$exercise)
+
+  cat(placeholder_image)
+
+  cat(Mod4Step2_txt$results)
+  
+	# Equation 1
+  cat(Mod4Step2_txt$results_eq1)
+  
+  displayRCode("# install.packages(&quot;lme4&quot;)<br>
+                 LMM <- lme4::lmer(Phenotype ~ 1 + X1 + X2 + (1|Individual), data = sampled_data)")
+```
+
+```{r mod4_step2_con, results="asis"}
+
+  cat(Mod4Step2_txt$para1)
+
+  # Equation 2
+  cat(Mod4Step2_txt$para1_eq1)
+```
+
+```{r ex8-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr, beta,beta2){
+  if(length(beta)!=2)stop("beta should be of length 2")
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+  parameters=list(
+    Individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    ),
+     observation = list(
+      names = c("X1","X2"),
+      beta = beta
+    ),
+      interactions=list(
+      names=c("X1:X2"),
+      beta = beta[3]
+    )
+  ),
+    response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+
+  return(data)
+
+}
+```
+
+```{r ex8, exercise=TRUE}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5, 
+                 beta = c(-0.4,0.2,1))
+LMM <- lmer(Phenotype ~ 1 + X1 * X2 + (1|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod4_step2_con2, results="asis"}
+  cat(Mod4Step2_txt$para2)
+
+  cat(Mod4Step2_txt$para3)
+
+  cat(Mod4Step2_txt$conclusion)
+```
+

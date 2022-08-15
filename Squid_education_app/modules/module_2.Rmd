@@ -1,0 +1,143 @@
+
+## Module 2: Non-stochastic environments
+
+```{r mod2_step1_title, results="asis"}
+
+cat("###", Mod2Step1_txt$title)
+
+```
+
+```{r mod2_step1, results="asis"}
+  cat(Mod2Step1_txt$goal)    # Text: goal
+  cat(Mod2Step1_txt$intro)      # Text: introduction
+  cat(Mod2Step1_txt$exercise)   # Text: exercise
+
+  cat(Mod2Step1_txt$para1)      # Text: paragraph 1
+
+  cat(Mod2Step1_txt$para2)       # Text: paragraph 2      
+  
+  cat(placeholder_image) #app 12
+    
+  cat(Mod2Step1_txt$para3)       # Text: paragraph 3
+  
+# Figure of 2 examples of sampling design when among-individual variance in sampling timing is 0.1 and 0.9
+  cat(Mod2Step1_txt$para3_image)
+  cat(Mod2Step1_txt$para3_image_caption)
+  
+  cat(Mod2Step1_txt$para4)       # Text: paragraph 4
+
+  cat(placeholder_image) #app 13/14
+
+  
+  cat(Mod2Step1_txt$para5)       # Text: para6
+  
+  cat(Mod2Step1_txt$para5_eq1)       
+```
+
+```{r mod2_step1_con, results="asis"}
+  cat(Mod2Step1_txt$para6)       # Text: para8
+  
+  cat(Mod2Step1_txt$conclusion)  # Text: conclusion
+  
+  cat(Mod2Step1_txt$para7)       # Text: para9
+```
+
+```{r mod2_step2_title, results="asis"}
+cat("###", Mod2Step2_txt$title)
+```
+
+```{r mod2_step2, results="asis"}
+  cat(Mod2Step2_txt$goal)    # Text: goal
+  cat(Mod2Step2_txt$intro)      # Text: introduction
+  cat(Mod2Step2_txt$exercise)   # Text: exercise
+  
+  cat(Mod2Step2_txt$para1)      # Text: paragraph 1
+  
+  cat(Mod2Step2_txt$para2)      # Text: paragraph 2
+
+   cat(Mod2Step2_txt$para4)      # Text: paragraph 4
+   cat(Mod2Step2_txt$para4_eq1)
+   cat(Mod2Step2_txt$para5)      # Text: paragraph 5
+
+  cat(placeholder_image) #app 15
+
+  cat(Mod2Step2_txt$conclusion_title) # Text: conclusion
+  
+  cat(Mod2Step2_txt$para6)      # Text: paragraph 6
+  
+  cat(Mod2Step2_txt$para7)      # Text: paragraph 7
+  
+  cat(Mod2Step2_txt$para8)      # Text: paragraph 8
+```
+
+```{r mod2_step3_title, results="asis"}
+cat("###", Mod2Step3_txt$title)
+```
+
+```{r mod2_step3, results="asis"}
+  cat(Mod2Step3_txt$goal)    # Text: goal
+  cat(Mod2Step3_txt$intro)      # Text: introduction
+  cat(Mod2Step3_txt$exercise1)  # Text: exercise 1
+  
+  cat(Mod2Step3_txt$para1)      # Text: paragraph 1
+  
+  cat(Mod2Step3_txt$para2)      # Text: paragraph 2
+  
+  cat(Mod2Step3_txt$para3)      # Text: paragraph 3
+
+  cat(Mod2Step3_txt$results)         # Text: results
+  
+  cat(Mod2Step3_txt$results_eq1)
+```
+
+```{r ex4-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+get_data <- function(n,r,Vi,Vr){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+  parameters = list(
+    Individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    )
+  ),
+  response_names = "Phenotype"
+
+)
+  data <- get_population_data(squid_data)
+  return(data)
+}
+```
+
+```{r ex4, exercise=TRUE, exercise=TRUE, warning=FALSE, message=FALSE}
+# n is the number of individuals
+# r is the number of repetitions for each individual
+# Vi is the variance for individuals
+# Vr is residual variance 
+data <- get_data(n = 50, r = 2, Vi = 0.5, Vr = 0.5)
+LMM <- lmer(Phenotype ~ 1 + (1|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod2_step3_con, results="asis"}
+  cat(Mod2Step3_txt$para4)      # Text: paragraph 4
+  
+  cat(Mod2Step3_txt$para4_eq1)
+
+  cat(Mod2Step3_txt$para5)      # Text: paragraph 6
+  
+    cat(placeholder_image) #app 16
+
+  cat(Mod2Step3_txt$reminder)   # Text: notation reminder
+  
+  cat(Mod2Step3_txt$conclusion) # Text: conclusion
+  cat(Mod2Step3_txt$conclusion2) # Text: conclusion 2
+  
+  cat(Mod2Step3_txt$finalcaveat) # Text: a final caveat
+  
+```
+

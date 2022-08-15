@@ -1,0 +1,68 @@
+## Start
+
+```{r portal, results="asis"}
+#1st section
+      cat("###",portal_txt$parag0_title)
+
+      cat(portal_txt$parag1_image)
+      HTML(portal_txt$parag0_contents_1)
+      cat(portal_txt$parag0_contents_2)
+
+      #2nd section
+      cat("###","Guidance for Users")
+            
+      fluidRow(
+        column(width = 4,
+          h5("For Beginners"),
+          HTML(portal_txt$beginners)
+        ),
+        column(width = 4,
+          h5("For Teachers"),
+          HTML(portal_txt$teachers)
+        ),
+        column(width = 4,
+          h5("For Experts"),
+          HTML(portal_txt$experts)
+        )
+      )
+      
+
+      #3rd section
+      cat("###",portal_txt$parag3_title)
+
+      HTML(portal_txt$parag3_contents1)
+      cat(portal_txt$parag3_contents2)
+
+      cat(portal_txt$patag3_image)
+
+      p(strong("References"))
+      p(HTML("Allegue, H., Araya-Ajoy, Y. G., Dingemanse, N. J., Dochtermann, N. A., Garamszegi, L. Z., 
+              Nakagawa, S., Réale, D., Schielzeth, H.& Westneat, D. F. (2016) Statistical Quantification of 
+              Individual Differences: an educational and statistical tool for understanding multi-level phenotypic 
+              data in linear mixed models. <i>Methods in Ecology and Evolution</i>, 8, 257-267.
+              <a href='https://doi.org/10.1111/2041-210X.12659' target='_blank'>doi: 10.1111/2041-210X.12659</a>"))
+      p(HTML("Dingemanse, N. J.& Dochtermann, N. A. (2013) Quantifying individual variation in behaviour: 
+              mixed-effect modelling approaches. <i>Journal of Animal Ecology</i>, 82, 39-54.
+              <a href='https://doi.org/10.1111/1365-2656.12013' target='_blank'>doi: 10.1111/1365-2656.12013</a>"))
+
+
+
+```
+
+###  Shiny
+
+We will make use of various shiny apps throughout this course to present key concepts in exploring individual differences and multilevel variation. A list,  and the code, for all shiny apps is available [on github](https://github.com/squidgroup/squidEducApp).
+
+```{r quiz1, echo = FALSE}
+question("Which answer describes you best?",
+  answer("Beginner: I have little knowledge of LMMs or multilevel variation.", message = "Start with Module 1", correct = TRUE),
+  answer("Intermediate user: I have prior knowledge of LMMs, multilevel variation, and/or statistical distributions.", message = "*Start with Module 2", correct = TRUE),
+  answer("Expert: I have extensive knowledge of the mixed-effects modeling framework and individual differences.", message = "Fully explore the SQuID concept with the 'full model' modules", correct = TRUE),
+  answer("Teacher: I want my student to learn about mixed-effects models and patterns of phenotypic variance. ", message = "*Please skim the module titles to assess which are of most use for your student", correct = TRUE),
+  answer("None of the above.", correct = FALSE),
+  type = "single",
+  incorrect = "Eek, this might not  be the right place for you.",
+  correct=NULL
+)
+
+```

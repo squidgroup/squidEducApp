@@ -1,0 +1,217 @@
+
+## Module 3: Random-slope regression
+
+```{r mod3_step1_title, results="asis"}
+  cat("###",Mod3Step1_txt$title)
+```
+```{r mod3_step1, results="asis"}
+    cat(Mod3Step1_txt$goal)
+    cat(Mod3Step1_txt$intro)
+    
+    cat(Mod3Step1_txt$para1)
+    
+    cat(Mod3Step1_txt$para1_eq1)
+
+```    
+
+```{r ex9-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr, beta){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+  parameters=list(
+    Individual = list(
+      vcov = Vi
+    ),
+    residual = list(
+      vcov = Vr
+    ),
+     observation = list(
+      names = "X1",
+      beta = beta
+    )
+  ),
+    response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex9, exercise=TRUE}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5, 
+                 beta = -0.4)
+LMM <- lmer(Phenotype ~ 1 + X1 + (1|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod3_step1_con, results="asis"}
+      
+    cat(Mod3Step1_txt$exercise)
+
+    cat(Mod3Step1_txt$exercise_eq1)
+    
+    cat(Mod3Step1_txt$para2)
+    
+    cat(placeholder_image) #app 24
+    
+    cat(Mod3Step1_txt$para3)
+    
+    cat(Mod3Step1_txt$para4)
+
+```
+
+```{r ex10-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr,Vs, Cis, beta){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+  parameters=list(
+    Individual = list(
+      names = c("ind_int","ind_slope"),
+      beta  = c(1,0), #0 for no interaction
+      vcov = c(Vi, Vs)
+    ),
+     observation = list(
+      names = "X1",
+      beta = beta[1]
+    ),
+     residual = list(
+     vcov = Vr
+    ),
+        interactions = list(
+      names = c("ind_slope:X1"),
+      beta = c(1)
+    )
+  ),
+  response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex10, exercise=TRUE}
+data <- get_data(n = 100, r = 10,  
+                 Vi = 1, Vr = 0.5, Vs = 0.5, 
+                 beta = -0.4)
+LMM <- lmer(Phenotype ~ 1 + X1 + (1 + X1||Individual), data = data)
+summary(LMM)
+```
+
+```{r mod3_step1_con2, results="asis"}
+    
+    cat(Mod3Step1_txt$conclusion)
+    
+    cat(Mod3Step1_txt$conclusion_eq1)
+    
+    cat(Mod3Step1_txt$conclusion2)
+```
+
+```{r mod3_step2_title, results="asis"}
+
+cat("###",Mod3Step2_txt$title)
+```
+```{r mod3_step2, results="asis"}
+    cat(Mod3Step2_txt$goal)
+    cat(Mod3Step2_txt$intro)
+    cat(Mod3Step2_txt$para1)
+    
+    cat(Mod3Step2_txt$para1_eq1)
+    
+    cat(Mod3Step2_txt$para2)
+    
+    cat(Mod3Step2_txt$para2_eq1)
+    
+    cat(Mod3Step2_txt$para3)
+    
+    cat(Mod3Step2_txt$exercise)
+    
+    cat(Mod3Step2_txt$exercise_eq1)
+    
+    cat(Mod3Step2_txt$para4)
+    
+    cat(placeholder_image) # app 25
+    
+    cat(Mod3Step2_txt$para5)
+    
+    cat(Mod3Step2_txt$point)
+    
+   cat(Mod3Step2_txt$point_eq1)
+    
+    cat(Mod3Step2_txt$conclusion)
+```
+
+```{r ex11-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(lme4)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr,Vs, Cis, beta){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+  data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+   parameters = list(
+    Individual = list(
+      names = c("ind_int","ind_slope"), 
+      beta = c(1,0),
+      vcov = matrix(c(Vi,Cis,Cis,Vs),ncol=2,nrow=2)
+    ),
+    observation= list(
+      names = "X1",
+      beta = beta[1]
+    ), 
+    residual = list(
+      vcov = Vr
+    ),
+    interactions = list(
+      names = c("ind_slope:X1"),
+      beta = 1
+  )
+  ),
+  response_names = "Phenotype"
+)
+  data <- get_population_data(squid_data)
+  return(data)
+
+}
+```
+
+```{r ex11, exercise=TRUE}
+data <- get_data(n = 300, r = 100,  
+                 Vi = 1, Vr = 0.5, Vs = 1, 
+                 Cis = 0.3, 
+                 beta = -0.4)
+LMM <- lmer(Phenotype ~ 1 + X1  + (1+X1|Individual), data = data)
+summary(LMM)
+```
+
+```{r mod3_step3_title, results="asis"}
+    cat("###",Mod3Step3_txt$title)
+```
+```{r mod3_step3, results="asis"}
+    cat(Mod3Step3_txt$goal)
+    cat(Mod3Step3_txt$intro)
+    cat(Mod3Step3_txt$exercise)
+    
+    cat(Mod3Step3_txt$exercise_eq1)
+    
+    cat(Mod3Step3_txt$para1)
+    cat(Mod3Step3_txt$para2)
+  
+    cat(Mod3Step3_txt$para3)
+    
+    cat(Mod3Step3_txt$para4)
+    
+        cat(placeholder_image) # app 26
+
+```
+

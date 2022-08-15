@@ -1,0 +1,309 @@
+
+## Module 6: Multiple traits
+
+```{r mod6_step1_title, results="asis"}
+cat("###", Mod6Step1_txt$title)
+```
+
+```{r mod6_step1, results="asis"}
+# Sub-goal
+cat(Mod6Step1_txt$goal)
+
+# Introduction
+cat(Mod6Step1_txt$intro)
+
+cat(Mod6Step1_txt$para1)
+
+cat(Mod6Step1_txt$exercise_eq1)
+
+cat(Mod6Step1_txt$para2)
+
+cat(Mod6Step1_txt$para2_eq1)
+
+# Exercise
+cat(Mod6Step1_txt$exercise)
+
+cat(Mod6Step1_txt$para3)
+
+cat(placeholder_image) #app 17
+
+cat(Mod6Step1_txt$para4)
+
+cat(Mod6Step1_txt$para4_eq1)
+
+cat(Mod6Step1_txt$para5)
+
+cat(Mod6Step1_txt$conclusion)
+```
+
+```{r mod6_step2_title, results="asis"}
+cat("###",Mod6Step2_txt$title)
+```
+
+```{r mod6_step2, results="asis"}
+# Sub-goal
+cat(Mod6Step2_txt$goal)
+
+# Introduction
+cat(Mod6Step2_txt$intro)
+
+### Model equations
+cat(Mod6Step2_txt$intro_eq1)
+
+cat(Mod6Step2_txt$para1)
+
+####### eq 1
+cat(Mod6Step2_txt$para1_eq1)
+
+cat(Mod6Step2_txt$para2)
+
+####### eq 2 
+cat(Mod6Step2_txt$para2_eq1)
+
+cat(Mod6Step2_txt$para3)
+
+cat(Mod6Step2_txt$para4)
+
+cat(Mod6Step2_txt$para4_eq1)
+
+cat(Mod6Step2_txt$exercise)
+
+cat(placeholder_image) #18
+
+cat(Mod6Step2_txt$para5)
+cat(Mod6Step2_txt$para5_eq1)
+
+cat(Mod6Step2_txt$para6)
+cat(Mod6Step2_txt$para6_eq1)
+
+cat(Mod6Step2_txt$para7)
+
+####### eq 1
+cat(Mod6Step2_txt$para1_eq1)
+
+cat(Mod6Step2_txt$para8)
+
+cat(Mod6Step2_txt$para8_eq1)
+
+cat(Mod6Step2_txt$para9)
+
+cat(Mod6Step2_txt$conclusion)
+
+p(strong("References"))
+p(HTML("Dingemanse, N.J. & Dochtermann, N.A. (2013) Quantifying individual variation in behaviour: 
+         mixed-effect modelling approaches. <i>Journal of Animal Ecology</i>, 82, 39-54.
+         <a href='https://doi.org/10.1111/1365-2656.12013' target='_blank'>doi: 10.1111/1365-2656.12013</a>"))
+p(HTML('Dingemanse, N.J., Dochtermann, N.A. & Nakagawa, S. (2012) Defining behavioural syndromes and the role of 
+         "syndrome deviation" to study its evolution. <i>Behavioral Ecology and Sociobiology</i>, 66, 1543-1548.
+         <a href="https://doi.org/10.1007/s00265-012-1416-2" target="_blank">doi: 10.1007/s00265-012-1416-2</a>'))
+p(HTML("Nicolaus, M., Brommer, J.E., Ubels, R., Tinbergen, J.M. & Dingemanse, N.J. (2013) 
+          Exploring patterns of variation in clutch size-density reaction norms in a wild passerine bird. 
+          <i>Journal of Evolutionary Biology</i>, 26, 2031-2043.
+          <a href='https://doi.org/10.1111/jeb.12210' target='_blank'>doi: 10.1111/jeb.12210</a>"))
+
+```
+
+```{r mod6_step3_title, results="asis"}
+cat("###",Mod6Step3_txt$title)
+```
+
+```{r Mod6Step3, results="asis"}
+# Sub-goal
+cat(Mod6Step3_txt$goal)	
+
+cat(Mod6Step3_txt$intro)
+
+# Exercise
+cat(Mod6Step3_txt$exercise)	
+
+cat(placeholder_image) # app 19
+
+cat(Mod6Step3_txt$results)
+cat(Mod6Step3_txt$results_eq1)
+
+cat(Mod6Step3_txt$para1)
+cat(Mod6Step3_txt$para1_eq1)
+
+
+cat(Mod6Step3_txt$para2)
+
+cat(Mod6Step3_txt$para2_eq1)
+
+cat(Mod6Step3_txt$para3)
+
+cat(Mod6Step3_txt$para4)
+
+cat(Mod6Step3_txt$conclusion)
+
+p(strong("References"))
+p(HTML("van Noordwijk, A.J. & de Jong, G. (1986) Acquisition and allocation of resources - 
+	       Their influence on variation in life-history tactics. <i>American Naturalist</i>, 128, 137-142.
+	       <a href='https://doi.org/10.1086/284547' target='_blank'>doi: 10.1086/284547</a>"))
+```
+
+```{r mod6_step4_title,results="asis"}
+cat("###",Mod6Step4_txt$title)
+```
+
+```{r mod6_step4,results="asis"}
+# Sub-goal
+cat(Mod6Step4_txt$goal)
+
+
+cat(Mod6Step4_txt$intro)
+
+cat(Mod6Step4_txt$intro_eq1)
+
+cat(Mod6Step4_txt$para1)
+
+cat(Mod6Step4_txt$para1_eq1)
+
+cat(Mod6Step4_txt$para2)
+
+cat(Mod6Step4_txt$para2_eq1)
+
+cat(Mod6Step4_txt$para3)
+
+cat(Mod6Step4_txt$para3_eq1)
+
+cat(Mod6Step4_txt$para4)
+
+
+cat(Mod6Step4_txt$para4_eq1)
+
+cat(Mod6Step4_txt$para5)
+
+cat(Mod6Step4_txt$para5_eq1)
+
+cat(Mod6Step4_txt$para6)
+
+cat(Mod6Step4_txt$para6_eq1)
+
+cat(Mod6Step4_txt$para7)
+
+cat(Mod6Step4_txt$para7_eq1)
+
+cat(Mod6Step4_txt$para8)
+
+cat(Mod6Step4_txt$para8_eq1)
+
+cat(Mod6Step4_txt$conclusion)
+```
+
+```{r mod6_step5_title, results = "asis"}
+cat("###",Mod6Step5_txt$title)
+```
+
+```{r mod6_step5, results = "asis"}
+# Sub-goal
+cat(Mod6Step5_txt$goal)
+
+# Introduction
+cat(Mod6Step5_txt$intro)
+
+cat(Mod6Step5_txt$intro_eq1)
+
+cat(Mod6Step5_txt$para1)
+
+cat(Mod6Step5_txt$para1_eq1)
+
+cat(Mod6Step5_txt$para2)
+
+# Exercise
+cat(Mod6Step5_txt$exercise)
+
+cat(placeholder_image) # app 21
+
+cat(Mod6Step5_txt$para3)
+
+cat(Mod6Step5_txt$para3_eq1)
+
+cat(Mod6Step5_txt$para4)
+
+cat(Mod6Step5_txt$para4_eq1)
+```
+
+```{r ex5-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(brms)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+    data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+    n_response = 2,
+    parameters=list(
+      observation = list(
+        names = "food_availability",
+        beta = matrix(c(2,1),ncol=2)
+      ),
+      Individual = list(
+        vcov = matrix(c(1,Vi,Vi,1),nrow=2,ncol=2)
+      ),
+      residual = list(
+        vcov = matrix(c(1,Vr,Vr,1),nrow = 2,ncol = 2)
+      )
+    ),
+    response_names = c("Phenotype_1","Phenotype_2")
+  )
+  data <- get_population_data(squid_data)
+  return(data)
+  
+}
+```
+
+```{r ex5, exercise=TRUE, exercise.timelimit	= 300}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5)
+bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ (1|Individual), data = data, silent = 0)
+summary(bLMM)
+```
+
+```{r mod6_step5_con,results="asis"}
+cat(Mod6Step5_txt$para5)
+
+cat(Mod6Step5_txt$para5_eq1)
+```
+
+```{r ex5a-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+library(brms)
+library(squidSim)
+
+get_data <- function(n,r,Vi,Vr){
+  if(n>1000)stop("Please don't make our server hamsters work that hard..")
+  squid_data <- simulate_population(
+    data_structure = make_structure(structure = paste0("Individual(",n,")"), repeat_obs=r),
+    n_response = 2,
+    parameters=list(
+      observation = list(
+        names = "food_availability",
+        beta = matrix(c(2,1),ncol=2)
+      ),
+      Individual = list(
+        vcov = matrix(c(1,Vi,Vi,1),nrow=2,ncol=2)
+      ),
+      residual = list(
+        vcov = matrix(c(1,Vr,Vr,1),nrow = 2,ncol = 2)
+      )
+    ),
+    response_names = c("Phenotype_1","Phenotype_2")
+  )
+  data <- get_population_data(squid_data)
+  return(data)
+  
+}
+```
+
+```{r ex5a, exercise=TRUE, exercise.timelimit	= 300}
+data <- get_data(n = 50, r = 2,  
+                 Vi = 0.5, Vr = 0.5)
+bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ food_availability + (1|Individual), data = data, silent = 0)
+summary(bLMM)
+```
+
+```{r mod6_step5_con2, results="asis"}
+cat(Mod6Step5_txt$para6)
+
+cat(Mod6Step5_txt$conclusion)
+```
+
