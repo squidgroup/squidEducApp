@@ -377,7 +377,7 @@ Modules_VAR <- list(
   								"errorTxt"    = ""
   ),
  
-  "B1122" = list(  "label"        = paste0("Mean environmental effect ($",EQ3$mean12,"$):"),
+  "B1122" = list(  "label"        = paste0("Mean interaction effect ($",EQ3$mean12,"$):"),
   								"infoTxt"     = "Population mean response to the environment.",
   								"value"       = 0,
   								"min"         = -1,
