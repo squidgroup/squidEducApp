@@ -15,6 +15,8 @@ description: >
 #devtools::install_github("rundel/learnrhash")
 library(shiny)
 library(learnr)
+library(lme4)
+library(squidSim)
 knitr::opts_chunk$set(echo = FALSE)
 source("./variables/var_general.R")
 source("./variables/var_fullmodel.R")
@@ -196,7 +198,7 @@ question("What did you explore in the above app?",
 ```{r module_3, echo=F, child = "./modules/module_3.Rmd" }
 ```
 
-<!--Multi-dimensional Phenotypic Plasticity (MDPP)-->
+<!--Multidimensional Phenotypic Plasticity (MDPP)-->
 ```{r module_4, echo=F, child = "./modules/module_4.Rmd" }
 ```
 
