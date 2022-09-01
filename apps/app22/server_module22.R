@@ -72,12 +72,20 @@ c(
       data <- Mod5Step1_output()
       
       myTable <- data.frame(
-         "True"       = c(paste0("$",EQ3$mean1,"$ = ",input$Mod5Step1_B[2]),
-                          paste0("Individual variance ($V_",NOT$devI,"$) = ",input$Mod5Step1_Vi),
-                          paste0("Measurement variance ($V_",NOT$mError,"$) = ",input$Mod5Step1_Ve)),
-         "Estimated"  = c(paste0("$\\hat{",NOT$mean,"}_1$ = ",ifelse(!is.null(data),paste(data$B1_1,"\U00b1", data$se.B1_1),"...")),
-                          paste0("Individual variance ($\\hat{V}_",NOT$devI,"$) = ", ifelse(!is.null(data),data$Vi_1,"...")),
-                          paste0("Residual variance of sample ($\\hat{V}_",NOT$residualUpper,"$) = ", ifelse(!is.null(data),data$Vr_1,"..."))))
+        "Parameter" = c(
+          paste0("$",EQ3$mean1,"$ = "),
+          paste0("$",EQ3$mean2,"$ = "),
+          paste0("Individual variance ($V_",NOT$devI,"$) = "),
+          paste0("Measurement variance ($V_",NOT$mError,"$) = ")
+        ),
+         "Truth"       = c(input$Mod5Step1_B[2],
+                           0,
+                          input$Mod5Step1_Vi,
+                          input$Mod5Step1_Ve),
+         "Estimated"  = c(ifelse(!is.null(data),paste(data$B1_1,"\U00b1", data$se.B1_1),"..."),
+                          0,
+                          ifelse(!is.null(data),data$Vi_1,"..."),
+                          ifelse(!is.null(data),data$Vr_1,"...")))
        
       getTable(myTable) 
    }),
@@ -89,14 +97,20 @@ c(
       data <- Mod5Step1_output()
       
       myTable <- data.frame(
-         "True"       = c(paste0("$",EQ3$mean1,"$ = ",input$Mod5Step1_B[2]),
-                          paste0("$",EQ3$mean2,"$ = ",input$Mod5Step1_B[3]),
-                          paste0("Individual variance ($V_",NOT$devI,"$) = ",input$Mod5Step1_Vi),
-                          paste0("Measurement variance ($V_",NOT$mError,"$) = ",input$Mod5Step1_Ve)),
-         "Estimated"  = c(paste0("$\\hat{",NOT$mean,"}_1$ = ",ifelse(!is.null(data),paste(data$B1_2,"\U00b1", data$se.B1_2),"...")),
-                          paste0("$\\hat{",NOT$mean,"}_2$ = ",ifelse(!is.null(data),paste(data$B2_2,"\U00b1", data$se.B2_2),"...")),
-                          paste0("Individual variance ($\\hat{V}_",NOT$devI,"$) = ", ifelse(!is.null(data),data$Vi_2,"...")),
-                          paste0("Residual variance of sample ($\\hat{V}_",NOT$residualUpper,"$) = ", ifelse(!is.null(data),data$Vr_2,"..."))))
+        "Parameter" = c(
+          paste0("$",EQ3$mean1,"$ = "),
+          paste0("$",EQ3$mean2,"$ = "),
+          paste0("Individual variance ($V_",NOT$devI,"$) = "),
+          paste0("Measurement variance ($V_",NOT$mError,"$) = ")
+        ),
+         "Truth"       = c(input$Mod5Step1_B[2],
+                          input$Mod5Step1_B[3],
+                          input$Mod5Step1_Vi,
+                          input$Mod5Step1_Ve),
+         "Estimated"  = c(ifelse(!is.null(data),paste(data$B1_2,"\U00b1", data$se.B1_2),"..."),
+                          ifelse(!is.null(data),paste(data$B2_2,"\U00b1", data$se.B2_2),"..."),
+                          ifelse(!is.null(data),data$Vi_2,"..."),
+                          ifelse(!is.null(data),data$Vr_2,"...")))
       
       getTable(myTable) 
    }),

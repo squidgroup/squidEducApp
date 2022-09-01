@@ -131,7 +131,7 @@ c(
                        input$Mod8Step1_2_Ve
             ),
 
-            "Estimated_full" = c("Estimated : Full",
+            "Estimated_full" = c("Estimated",
                                  "",
                                  ifelse(!is.null(data), paste(data$B0,"\U00b1", data$se.B0),"..."),
                                  ifelse(!is.null(data), paste(data$B1,"\U00b1", data$se.B1),"..."),

@@ -102,7 +102,7 @@ c(
                    input$Mod5Step2_Ve),
         
         "Estimated1"  = c("Estimated",
-                          "(ignoring interaction)",
+                          "(ommitting interaction)",
                          ifelse(!is.null(data),paste(data$B1_1,"\U00b1", data$se.B1_1),"..."),
                           ifelse(!is.null(data),paste(data$B2_1,"\U00b1", data$se.B2_1),"..."),
                           "-",
@@ -111,7 +111,7 @@ c(
                           ifelse(!is.null(data),data$Vr_1,"...")),
         
         "Estimated2"  = c("",
-                          "(from full model)",
+                          "(with interaction)",
                           ifelse(!is.null(data),paste(data$B1_2,"\U00b1", data$se.B1_2),"..."),
                           ifelse(!is.null(data),paste(data$B2_2,"\U00b1", data$se.B2_2),"..."),
                           ifelse(!is.null(data),paste(data$B12_2,"\U00b1", data$se.B12_2),"..."),

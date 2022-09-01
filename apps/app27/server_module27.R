@@ -142,8 +142,8 @@ c(
                        input$Mod8Step1_Ve
                       ),
             
-            "Estimated"      = c("Estimated : Incomplete",
-                                 "",
+            "Estimated"      = c("Estimated",
+                                 "(ommitting interaction)",
                                  ifelse(!is.null(data), paste(data$B0_2,"\U00b1", data$se.B0_2),"..."),
                                  ifelse(!is.null(data), paste(data$B1_2,"\U00b1", data$se.B1_2),"..."),
                                  ifelse(!is.null(data), paste(data$B2_2,"\U00b1", data$se.B2_2),"..."),
@@ -155,8 +155,8 @@ c(
                                  ifelse(!is.null(data), data$Vr_2,"...")
                                  ), 
             
-            "Estimated_full" = c("Estimated : Full",
-                                 "",
+            "Estimated_full" = c("Estimated",
+                                 "(with interaction)",
                                  ifelse(!is.null(data), paste(data$B0_1,"\U00b1", data$se.B0_1),"..."),
                                  ifelse(!is.null(data), paste(data$B1_1,"\U00b1", data$se.B1_1),"..."),
                                  ifelse(!is.null(data), paste(data$B2_1,"\U00b1", data$se.B2_1),"..."),
