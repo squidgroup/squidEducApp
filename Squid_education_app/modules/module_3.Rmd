@@ -57,9 +57,11 @@ summary(LMM)
     cat(Mod3Step1_txt$exercise_eq1)
     
     cat(Mod3Step1_txt$para2)
+```
+
+<object data='https://squidile.shinyapps.io/app24/' frameborder="0" style="width: 100%; height: 950px;overflow:hidden;display:block"></object> 
     
-    cat(placeholder_image) #app 24
-    
+```{r mod3_step1_app24_con, results="asis"}
     cat(Mod3Step1_txt$para3)
     
     cat(Mod3Step1_txt$para4)
@@ -139,9 +141,11 @@ cat("###",Mod3Step2_txt$title)
     cat(Mod3Step2_txt$exercise_eq1)
     
     cat(Mod3Step2_txt$para4)
-    
-    cat(placeholder_image) # app 25
-    
+```
+
+<object data='https://squidile.shinyapps.io/app25/' frameborder="0" style="width: 100%; height: 1120px;overflow:hidden;display:block"></object> 
+
+```{r mod3_step2_app25_con, results="asis"}
     cat(Mod3Step2_txt$para5)
     
     cat(Mod3Step2_txt$point)
@@ -197,6 +201,7 @@ summary(LMM)
 ```{r mod3_step3_title, results="asis"}
     cat("###",Mod3Step3_txt$title)
 ```
+
 ```{r mod3_step3, results="asis"}
     cat(Mod3Step3_txt$goal)
     cat(Mod3Step3_txt$intro)
@@ -210,8 +215,6 @@ summary(LMM)
     cat(Mod3Step3_txt$para3)
     
     cat(Mod3Step3_txt$para4)
-    
-        cat(placeholder_image) # app 26
-
 ```
 
+<object data='https://squidile.shinyapps.io/app26/' frameborder="0" style="width: 100%; height: 850px;overflow:hidden;display:block"></object> 

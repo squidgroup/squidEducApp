@@ -15,9 +15,11 @@ cat("###", Mod2Step1_txt$title)
   cat(Mod2Step1_txt$para1)      # Text: paragraph 1
 
   cat(Mod2Step1_txt$para2)       # Text: paragraph 2      
-  
-  cat(placeholder_image) #app 12
-    
+```
+
+<object data='https://squidile.shinyapps.io/app12/' frameborder="0" style="width: 100%; height: 600px;overflow:hidden;display:block"></object>
+
+```{r mod2_step1_app12_con, results="asis"}
   cat(Mod2Step1_txt$para3)       # Text: paragraph 3
   
 # Figure of 2 examples of sampling design when among-individual variance in sampling timing is 0.1 and 0.9
@@ -25,9 +27,12 @@ cat("###", Mod2Step1_txt$title)
   cat(Mod2Step1_txt$para3_image_caption)
   
   cat(Mod2Step1_txt$para4)       # Text: paragraph 4
+```
 
-  cat(placeholder_image) #app 13/14
+<!--could also be 14-->
+<object data='https://squidile.shinyapps.io/app13/' frameborder="0" style="width: 100%; height: 650px;overflow:hidden;display:block"></object> 
 
+```{r mod2_step1_app13_con, results="asis"}
   
   cat(Mod2Step1_txt$para5)       # Text: para6
   
@@ -58,11 +63,12 @@ cat("###", Mod2Step2_txt$title)
    cat(Mod2Step2_txt$para4)      # Text: paragraph 4
    cat(Mod2Step2_txt$para4_eq1)
    cat(Mod2Step2_txt$para5)      # Text: paragraph 5
+```
 
-  cat(placeholder_image) #app 15
+<object data='https://squidile.shinyapps.io/app15/' frameborder="0" style="width: 100%; height: 1350px;overflow:hidden;display:block"></object> 
 
-  cat(Mod2Step2_txt$conclusion_title) # Text: conclusion
-  
+```{r mod2_step2_app15_con, results="asis"}
+
   cat(Mod2Step2_txt$para6)      # Text: paragraph 6
   
   cat(Mod2Step2_txt$para7)      # Text: paragraph 7
@@ -129,9 +135,11 @@ summary(LMM)
   cat(Mod2Step3_txt$para4_eq1)
 
   cat(Mod2Step3_txt$para5)      # Text: paragraph 6
-  
-    cat(placeholder_image) #app 16
+```
 
+<object data='https://squidile.shinyapps.io/app16/' frameborder="0" style="width: 100%; height: 1250px;overflow:hidden;display:block"></object> 
+
+```{r mod2_step3_app16_con, results="asis"}
   cat(Mod2Step3_txt$reminder)   # Text: notation reminder
   
   cat(Mod2Step3_txt$conclusion) # Text: conclusion

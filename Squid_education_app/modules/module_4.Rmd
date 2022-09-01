@@ -1,11 +1,9 @@
 
-## Module 4: Multi-dimensional Phenotypic Plasticity (MDPP)
+## Module 4: Multidimensional Phenotypic Plasticity (MDPP)
 
 ```{r mod4_step1_title, results="asis"}
 cat("###", Mod4Step1_txt$title)
 ```
-
-
 ```{r mod4_step1, results="asis"}
   # Sub-goal
   cat(Mod4Step1_txt$goal)
@@ -13,20 +11,8 @@ cat("###", Mod4Step1_txt$title)
   # Introduction
   cat(Mod4Step1_txt$intro)
 
-  # Exercise
-  cat(Mod4Step1_txt$exercise)
-
 	cat(Mod4Step1_txt$para1)
-	
-	  cat(placeholder_image) #app 22
-
-	  
-	cat(Mod4Step1_txt$results)
-	
-	# Equation
-	cat(Mod4Step1_txt$results_eq1)
-	
-	cat(Mod4Step1_txt$para2)
+	cat(Mod4Step1_txt$para1_eq1)
 ```
 
 ```{r ex6-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -67,14 +53,8 @@ summary(LMM)
 
 ```{r mod4_step1_con, results="asis"}
 
-	cat(Mod4Step1_txt$para3)
-
-	cat(Mod4Step1_txt$para4)
-
-	# Equation
-	cat(Mod4Step1_txt$para4_eq1)
+	cat(Mod4Step1_txt$para2)
 ```  
-
 
 ```{r ex7-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
@@ -115,18 +95,19 @@ summary(LMM)
 ```
 
 ```{r mod4_step1_con2, results="asis"}
+  # Exercise
+  cat(Mod4Step1_txt$exercise)
+```
 
+<object data='https://squidile.shinyapps.io/app22/' frameborder="0" style="width: 100%; height: 1020px;overflow:hidden;display:block"></object> 
+
+```{r mod4_step1_app22_con, results="asis"}
+	cat(Mod4Step1_txt$para3)
+
+	cat(Mod4Step1_txt$para4)
 
 	cat(Mod4Step1_txt$para5)
 
-
-	cat(Mod4Step1_txt$para6)
-
-	cat(Mod4Step1_txt$para7)
-
-	cat(placeholder_image) #app 23
-	
-	cat(Mod4Step1_txt$para8)
 
   cat(Mod4Step1_txt$conclusion)
 
@@ -150,27 +131,17 @@ cat("###",Mod4Step2_txt$title)
   # Introduction
   cat(Mod4Step2_txt$intro)
   
-  
-  # Exercise
-  cat(Mod4Step2_txt$exercise)
-
-  cat(placeholder_image)
-
-  cat(Mod4Step2_txt$results)
+  cat(Mod4Step2_txt$para1)
   
 	# Equation 1
   cat(Mod4Step2_txt$results_eq1)
-  
-  displayRCode("# install.packages(&quot;lme4&quot;)<br>
-                 LMM <- lme4::lmer(Phenotype ~ 1 + X1 + X2 + (1|Individual), data = sampled_data)")
 ```
 
 ```{r mod4_step2_con, results="asis"}
-
-  cat(Mod4Step2_txt$para1)
+  cat(Mod4Step2_txt$para2)
 
   # Equation 2
-  cat(Mod4Step2_txt$para1_eq1)
+  cat(Mod4Step2_txt$para2_eq1)
 ```
 
 ```{r ex8-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -216,9 +187,16 @@ summary(LMM)
 ```
 
 ```{r mod4_step2_con2, results="asis"}
-  cat(Mod4Step2_txt$para2)
 
-  cat(Mod4Step2_txt$para3)
+  # Exercise
+  cat(Mod4Step2_txt$exercise)
+```
+  <object data='https://squidile.shinyapps.io/app23/' frameborder="0" style="width: 100%; height: 1000px;overflow:hidden;display:block"></object> 
+
+```{r mod4_step2_app23_con, results="asis"}
+    cat(Mod4Step2_txt$para3)
+
+  cat(Mod4Step2_txt$para4)
 
   cat(Mod4Step2_txt$conclusion)
 ```

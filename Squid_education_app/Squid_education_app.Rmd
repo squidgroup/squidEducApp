@@ -38,7 +38,6 @@ source("./submission.R")
 displayRCode <- function(RCode){
   return(wellPanel(class="highlight-source-r ", HTML(paste0("<h3>R code:</h3>", RCode))))
 }
-tut_reptitle <- "SQuID course"
 
 #code to allow a certain amount of retries: question_module_server_impl <- function(
 question_module_server_impl <-function (input, output, session, question, question_state = NULL) 

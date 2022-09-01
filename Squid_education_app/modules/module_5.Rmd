@@ -12,20 +12,21 @@ cat("###",Mod5Step1_txt$title)
   cat(Mod5Step1_txt$intro)
 
   # Exercise
-  cat(Mod5Step1_txt$exercise)
+  cat(Mod5Step1_txt$para1)
 
   # Equation
-  cat(Mod5Step1_txt$exercise_eq1)
-  
-  cat(Mod5Step1_txt$para1)
+  cat(Mod5Step1_txt$para1_eq1)
   
   cat(Mod5Step1_txt$para2)
   
   cat(Mod5Step1_txt$para3)
+  
+  cat(Mod5Step1_txt$para3_eq1)
 
   cat(Mod5Step1_txt$para4)
+
+  cat(Mod5Step1_txt$para5)
   
-  cat(placeholder_image)
 ```
 
 ```{r ex12-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -78,28 +79,22 @@ LMM2 <- lmer(Phenotype ~ 1 + X1*X2 + (1 + X1|Individual), data = data2)
 ```
 
 ```{r mod5_step1_con, results="asis"}
-  cat(Mod5Step1_txt$para5)
-  cat(Mod5Step1_txt$para6)
+  
+  cat(Mod5Step1_txt$exercise)
+```
+
+  <object data='https://squidile.shinyapps.io/app27/' frameborder="0" style="width: 100%; height: 1400px;overflow:hidden;display:block"></object>   
+```{r mod5_step1_app27_con, results="asis"}
+
+cat(Mod5Step1_txt$para6)
     
   cat(Mod5Step1_txt$para7)
 
+  cat(Mod5Step1_txt$para7_eq1)
+  
   cat(Mod5Step1_txt$para8)
-
-  # Exercise
-  cat(Mod5Step1_txt$exercise)
   
-  cat(Mod5Step1_txt$exercise_eq1)
-  
-  cat(Mod5Step1_txt$para9)
-  
-  cat(Mod5Step1_txt$para9_eq1)
-
-  cat(Mod5Step1_txt$para10)
-  
-  cat(placeholder_image)
-  
-  cat(Mod5Step1_txt$para11)
-
+  cat(Mod5Step1_txt$para8_eq1)
 ```
 ```{r ex13-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
@@ -147,8 +142,16 @@ summary(LMM)
 ```
 
 ```{r mod5_step1_con2, results="asis"}
-  cat(Mod5Step1_txt$para12)
+# Exercise
+  cat(Mod5Step1_txt$exercise2)
 ```
+
+  <object data='https://squidile.shinyapps.io/app28/' frameborder="0" style="width: 100%; height: 1250px;overflow:hidden;display:block"></object>   
+```{r mod5_step1_app28_con, results="asis"}
+  cat(Mod5Step1_txt$para9)
+```
+
+
 ```{r mod5_step2_title, results="asis"}
 cat("###",Mod5Step2_txt$title)
 ```
@@ -162,19 +165,6 @@ cat("###",Mod5Step2_txt$title)
   cat(Mod5Step2_txt$para2)
   cat(Mod5Step2_txt$para2_eq1)
   
-  cat(Mod5Step2_txt$para3)
-  
-  cat(Mod5Step2_txt$para4)
-  cat(placeholder_image)
-
-  cat(Mod5Step2_txt$para5)
-  cat(Mod5Step2_txt$para5_eq1)
-```
-
-```{r mod5_step2_con, results="asis"}
-  cat(Mod5Step2_txt$para6)
-  cat(Mod5Step2_txt$para6_eq1)
-
 ```
 
 ```{r ex14-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
@@ -222,11 +212,21 @@ summary(LMM)
 
 ```
 
-```{r mod5_step2_con2, results="asis"}
+```{r mod5_step2_con1, results="asis"}
 ##Q from text:
 #"Run this simulation several times with different values for the interaction term and the covariance terms. Where does the interaction term create the most phenotypic variance and how do covariances affect this?"
+  cat(Mod5Step2_txt$exercise)
+  
+  cat(Mod5Step2_txt$para3)
+  
+  cat(Mod5Step2_txt$para4)
+  cat(Mod5Step2_txt$para4_eq1)
+```
 
-  cat(Mod5Step2_txt$para7)
+  <object data='https://squidile.shinyapps.io/app29/' frameborder="0" style="width: 100%; height: 1350px;overflow:hidden;display:block"></object>   
+```{r mod5_step2_app29_con, results="asis"}
+
+  cat(Mod5Step2_txt$para5)
 
   # Conclusion
   cat(Mod5Step2_txt$conclusion)

@@ -24,9 +24,11 @@ cat(Mod6Step1_txt$para2_eq1)
 cat(Mod6Step1_txt$exercise)
 
 cat(Mod6Step1_txt$para3)
+```
 
-cat(placeholder_image) #app 17
+<object data='https://squidile.shinyapps.io/app17/' frameborder="0" style="width: 100%; height: 850px;overflow:hidden;display:block"></object> 
 
+```{r mod6_step1_app17_con, results="asis"}
 cat(Mod6Step1_txt$para4)
 
 cat(Mod6Step1_txt$para4_eq1)
@@ -67,9 +69,11 @@ cat(Mod6Step2_txt$para4)
 cat(Mod6Step2_txt$para4_eq1)
 
 cat(Mod6Step2_txt$exercise)
+```
 
-cat(placeholder_image) #18
+<object data='https://squidile.shinyapps.io/app18/' frameborder="0" style="width: 100%; height: 1080px;overflow:hidden;display:block"></object> 
 
+```{r mod6_step2_app18_con, results="asis"}
 cat(Mod6Step2_txt$para5)
 cat(Mod6Step2_txt$para5_eq1)
 
@@ -115,9 +119,11 @@ cat(Mod6Step3_txt$intro)
 
 # Exercise
 cat(Mod6Step3_txt$exercise)	
+```
 
-cat(placeholder_image) # app 19
+<object data='https://squidile.shinyapps.io/app19/' frameborder="0" style="width: 100%; height: 1350px;overflow:hidden;display:block"></object> 
 
+```{r Mod6Step3_app19_con, results="asis"}
 cat(Mod6Step3_txt$results)
 cat(Mod6Step3_txt$results_eq1)
 
@@ -211,9 +217,11 @@ cat(Mod6Step5_txt$para2)
 
 # Exercise
 cat(Mod6Step5_txt$exercise)
+```
 
-cat(placeholder_image) # app 21
+<object data='https://squidile.shinyapps.io/app21/' frameborder="0" style="width: 100%; height: 800px;overflow:hidden;display:block"></object> 
 
+```{r mod6_step5_app21_con, results = "asis"}
 cat(Mod6Step5_txt$para3)
 
 cat(Mod6Step5_txt$para3_eq1)

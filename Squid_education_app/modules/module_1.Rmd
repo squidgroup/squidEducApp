@@ -21,24 +21,7 @@ cat(Mod1Step1_txt$explanation1)  # Text: Notation explanation
     
 ```
 
-```{r app1, echo=FALSE, results="asis"}
-cat(placeholder_image) #app1
-```
- 
- 
-```{r quiz1_app1, echo = FALSE}
-question("Which answer describes you best?",
-  answer("Beginner: I have little knowledge of LMMs or multilevel variation.", message = "Start with Module 1", correct = TRUE),
-  answer("Intermediate user: I have prior knowledge of LMMs, multilevel variation, and/or statistical distributions.", message = "*Start with Module 2", correct = TRUE),
-  answer("Expert: I have extensive knowledge of the mixed-effects modeling framework and individual differences.", message = "Fully explore the SQuID concept with the 'full model' modules", correct = TRUE),
-  answer("Teacher: I want my student to learn about mixed-effects models and patterns of phenotypic variance. ", message = "*Please skim the module titles to assess which are of most use for your student", correct = TRUE),
-  answer("None of the above.", correct = FALSE),
-  type = "single",
-  incorrect = "Eek, this might not  be the right place for you.",
-  correct=NULL
-)
-
-```
+<object data='https://squidile.shinyapps.io/app1/' frameborder="0" style="width: 100%; height: 900px;overflow:hidden;display:block"></object> 
 
 ```{r mod1_step1_con, results="asis"}
   #### Point ####
@@ -73,9 +56,7 @@ question("Which answer describes you best?",
     cat(Mod1Step2_txt$para2)
 ```
 
-```{r app2, echo=FALSE, results="asis"}
-  cat(placeholder_image) #app2
-```
+<object data='https://squidile.shinyapps.io/app2/' frameborder="0" style="width: 100%; height: 1000px;overflow:hidden;display:block"></object> 
 
 ```{r mod1_step2_con, results="asis"}
   cat(Mod1Step2_txt$para3)  # Text: paragraph 3
@@ -101,9 +82,8 @@ cat("###",Mod1Step3_txt$title)
   cat(Mod1Step3_txt$exercise)  # Text: exercise
   cat(Mod1Step3_txt$exercise2) # Text: exercise 2
 ```
-```{r mod1_step3_app3, results="asis"}
-  cat(placeholder_image) #app 3
-```
+
+<object data='https://squidile.shinyapps.io/app3/' frameborder="0" style="width: 100%; height: 1150px;overflow:hidden;display:block"></object> 
 
 ```{r mod1_step3_con, results="asis"}
 
@@ -172,11 +152,9 @@ summary(LMM)
     cat(Mod1Step4_txt$para5)   # Text: paragraph 5
 
 ```
-  
-```{r mod1_step4_app4, results="asis"}
-cat(placeholder_image)
-```
-  
+
+<object data='https://squidile.shinyapps.io/app4/' frameborder="0" style="width: 100%; height: 1150px;overflow:hidden;display:block"></object> 
+
 ```{r mod1_step4_con, results="asis"}      
   cat(Mod1Step4_txt$para4)   # Text: paragraph 4
   cat(Mod1Step4_txt$point)   # Text: point
