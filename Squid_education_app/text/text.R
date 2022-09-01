@@ -64,7 +64,7 @@ text <- list(
 													At the left of the 
                           residual term we have $",EQ$group.1,"$ that represents the deviation from the population average of 
                           trait $",NOT$trait.1,"$ for a group $",NOT$group,"$ (this means that all the individuals of a given group $",NOT$group,"$ share 
-                          the same value of $",NOT$groupV,"$ ($",NOT$groupV,"$ follows a normal distribution with a mean = 0 and variance = $var(",NOT$groupV,")$).
+                          the same value of $",NOT$groupV,"$ ($",NOT$groupV,"$ follows a normal distribution with a mean = 0 and variance = $V_{",NOT$groupV,"}$).
                           The concept of grouping is wide ranging from genetic similarities (e.g. families) to spatial aggregations 
                           (e.g. territories) and diet compositions and could be specific to the each study.",sep=""),
     "modelEquation_6"     = paste("The last three components $(",EQ$mean1.1,"+",EQ$dev1.1,").",EQ$env1,"+(",EQ$mean2.1,"+",EQ$dev2.1,").",EQ$env2," 
@@ -72,10 +72,10 @@ text <- list(
                           and their interaction that you could use to generate different sources of variation 
                           for your simulations.",sep=""),
     "modelEquation_7"     = paste("These terms represent phenotypically plastic changes in the value of the trait as a function 
-                          of two environmental factors $",NOT$env,"_1$ and $",NOT$env,"_2$. In other words, that part of the equation is 
+                          of two environmental predictors $",NOT$env,"_1$ and $",NOT$env,"_2$. In other words, that part of the equation is 
                           the reaction norm of trait $",NOT$trait.1,"$ as a function of either environment $",NOT$env,"_1$ or $",NOT$env,"_2$ 
                           (or both $",NOT$env,"_1$ and $",NOT$env,"_2$). Below we will explain the equation for a given environmental 
-                          factor $",NOT$env,"$. Environment $",NOT$env,"$ can be measured and thus you can decide whether or not to include $",NOT$env,"$ 
+                          predictor $",NOT$env,"$. Environment $",NOT$env,"$ can be measured and thus you can decide whether or not to include $",NOT$env,"$ 
                           in subsequent mixed-effects models (whether you include $",NOT$env,"$ in the model or not allows you to 
                           test how unknown/unmeasured environments affect estimates of other parameters in the model). 
                           The reaction norm is itself composed of a population-level component (e.g. $",EQ$mean1.1,"$) and of 
@@ -90,30 +90,30 @@ text <- list(
                           the two traits follows a multivariate normal distribution (MNV) with a zero-mean and covariance/variance 
                           matrix structure $\\Omega_{",NOT$devI,NOT$devS,"}$. On the right hand side is shown (co)variance matrix 
                           $\\Omega_{",NOT$devI,NOT$devS,"}$. Values of variance stand along the diagonal of the matrix (i.e., respectively, 
-                          the among-individual variance in intercepts for $",NOT$trait.1,"$ $(var(",NOT$devI,"_",NOT$trait.1,"))$, the among-individual variance in slopes 
-                          for $",NOT$trait.1,"$ $(var(",NOT$devS,"_",NOT$trait.1,"))$, the among-individual variance in intercepts for $",NOT$trait.2,"$ $(var(",NOT$devI,"_",NOT$trait.2,"))$ 
-                          and the among-individual variance in slopes for $",NOT$trait.2,"$ $(var(",NOT$devS,"_",NOT$trait.2,"))$). 
-                          Covariance values between intercepts (e.g. $cov(", EQ2$dev0.1, ",", EQ2$dev0.2,")$), 
-                          slopes (e.g. $cov(", EQ2$dev1.1, ",", EQ2$dev1.2,")$), 
-                          and intercepts and slopes (e.g. $cov(", EQ2$dev0.1, ",", EQ2$dev1.1,")$) lie below the diagonal. 
+                          the among-individual variance in intercepts for $",NOT$trait.1,"$ $(V_{",NOT$devI,"_",NOT$trait.1,"})$, the among-individual variance in slopes 
+                          for $",NOT$trait.1,"$ $(V_{",NOT$devS,"_",NOT$trait.1,"})$, the among-individual variance in intercepts for $",NOT$trait.2,"$ $(V_{",NOT$devI,"_",NOT$trait.2,"})$ 
+                          and the among-individual variance in slopes for $",NOT$trait.2,"$ $(V_{",NOT$devS,"_",NOT$trait.2,"})$). 
+                          Covariance values between intercepts (e.g. $cov_{", EQ2$dev0.1, ",", EQ2$dev0.2,"}$), 
+                          slopes (e.g. $cov_{", EQ2$dev1.1, ",", EQ2$dev1.2,"}$), 
+                          and intercepts and slopes (e.g. $cov_{", EQ2$dev0.1, ",", EQ2$dev1.1,"}$) lie below the diagonal. 
                           When building up phenotypic design the program lets you specify all of these (co)variance values. 
                           Note that in SQuID inputs the correlation/variance matrix is asked instead of the (co)variance matrix. 
                           This is more convenient for users while correlations range between -1 and 1.",sep=""),
     "environment_1"       = "SQuID allows you to generate different structures by which the environment changes over time: 
                           <ol><li>stochastic</li> <li>temporally auto-correlated</li> <li>linear</li> <li>cyclic</li></ol>",
     "environment_2"       = paste("For the first structure (<b>stochastic</b>), environmental values $",NOT$env,"_{",NOT$random,NOT$time,"}$ are 
-                          generated using a Normal distribution with mean 0 and variance $var(",NOT$env,"_",NOT$random,")$. 
-                          $$",NOT$env,"_{",NOT$random,NOT$time,"}\\sim N(0,var(",NOT$env,"_",NOT$random,"))$$
+                          generated using a Normal distribution with mean 0 and variance $V_{",NOT$env,"_",NOT$random,"}$. 
+                          $$",NOT$env,"_{",NOT$random,NOT$time,"}\\sim N(0,V_{",NOT$env,"_",NOT$random,"})$$
                           This means that environmental values will be totally 
                           stochastic and uncorrelated from one time point to the next. This simple situation is not the most realistic 
-                          (i.e., it is hard to think of an environmental factor that is completely stochastically distributed in time). 
+                          (i.e., it is hard to think of an environmental predictor that is completely stochastically distributed in time). 
                           The other options are more complex but also more realistic.",sep=""),
     "environment_3"       = paste("For the <b>temporally auto-correlated</b> $",NOT$env,"_{",NOT$autocorrelated,NOT$time,"}$ 
                           we assume that two values of the environment close in time 
                           are more similar than two values further apart from each other (i.e., positive autocorrelation). 
                           Environmental values $",NOT$env,"_{",NOT$autocorrelated,NOT$time,"}$ are generated 
                           as the product of a stochastic value by a decay function.
-                          $$",NOT$env,"_{",NOT$autocorrelated,NOT$time,"}\\sim N(0,var(",NOT$env,"_",NOT$random,"))\\times e^{-\\alpha\\Delta ",NOT$time,"}$$                          
+                          $$",NOT$env,"_{",NOT$autocorrelated,NOT$time,"}\\sim N(0,V_{",NOT$env,"_",NOT$random,"})\\times e^{-\\alpha\\Delta ",NOT$time,"}$$                          
                           where $\\Delta ",NOT$time,"$ is the time interval between two instances of the study period, and $\\alpha$
                           is the decay rate, a measure of how fast the correlation decays with time.
                           $$\\alpha=ln(autocor)$$
@@ -142,8 +142,8 @@ text <- list(
                           if the environment would vary over time. In this case, only one environment ($",NOT$env,"$) 
                           will be generated using the different options described above. 
                           An unshared environment between individuals means that each individual 
-                          will experience a specific environment. For instance, if we have 3 individuals 
-                          in our population 3 different environments $",NOT$env,"_{",NOT$ind,"=a}$, $",NOT$env,"_{",NOT$ind,"=b}$, and $",NOT$env,"_{",NOT$ind,"=c}$ will be generated for 
+                          will experience a specific environment. For instance, if we have three individuals 
+                          in our population three different environments $",NOT$env,"_{",NOT$ind,"=a}$, $",NOT$env,"_{",NOT$ind,"=b}$, and $",NOT$env,"_{",NOT$ind,"=c}$ will be generated for 
                           respectively the individual a, b, and c. Although these environments are different, 
                           they follow the same general trend defined by environment options described 
                           previously (stochastic, auto-correlated, linear, and cyclic). 
@@ -153,11 +153,11 @@ text <- list(
                           a normal distribution.",sep=""),
     "environment_8"       = paste0("Finally, in SQuID the final output of each 
 													environmental effect ($",EQ2$env1,"$, $",EQ2$env2,"$ and $",EQ2$env12,"$) is 
-													expressed in unit variance (i.e., $var(",NOT$env,")=1$) and mean-centered (i.e., $E(",NOT$env,")=0$)."),
+													expressed in unit variance (i.e., $V_{",NOT$env,"}=1$) and mean-centered (i.e., $E(",NOT$env,")=0$)."),
     "groupingNerror"      = paste("The high-level grouping term ($",NOT$groupV,"$) is generated from 
-                          a normal distribution of mean 0 and variance $var(",NOT$groupV,")$, 
+                          a normal distribution of mean 0 and variance $V_{",NOT$groupV,"}$, 
                           and the residual term ($",NOT$error,"$) from a normal distribution 
-                          of mean 0 and variance $var(",NOT$error,")$.",sep=""),
+                          of mean 0 and variance $V_{",NOT$error,"}$.",sep=""),
     
     
     "samplingDesign_1"    = "As a second step, we retrieve a subsample of previously simulated phenotypic values according 
@@ -188,7 +188,7 @@ text <- list(
     "bivariateStepbyStep" = paste0("SQuID can model a bivariate phenotypic equation with random intercepts 
                                  and slopes for individual identity with respect to two environmental covariates. 
                                  SQuID enables both linear and interactive effects of these covariates on the 
-                                 bivariate phenotype (i.e., non-warped vs. warped multi-dimensional reaction 
+                                 bivariate phenotype (i.e., non-warped vs. warped multidimensional reaction 
                                  norm planes; <a href='http://onlinelibrary.wiley.com/doi/10.1111/2041-210X.12430/abstract' target='_blank'>Araya-Ajoy <i>et al.</i> 2015</a>; 
                                  <a href='http://onlinelibrary.wiley.com/doi/10.1111/brv.12131/abstract' target='_blank'>Westneat <i>et al.</i> 2015</a>) to be modelled. 
                                  Covariances in SQuID emerge due to user-defined settings in the fixed and 
@@ -258,7 +258,7 @@ text <- list(
                             then add further complexity by combining multiple environmental effect types.
   													Also, remember that in SQuID the final output of each 
   													environmental effect ($",EQ2$env1,"$, $",EQ2$env2,"$ and $",EQ2$env12,"$) is 
-  													expressed in unit variance (i.e., $var(",NOT$env,"=1)$) and mean-centered (i.e., $E(",NOT$env,")=0$).
+  													expressed in unit variance (i.e., $V_{",NOT$env,"}=1$) and mean-centered (i.e., $E(",NOT$env,")=0$).
   													However, the previsualization graph below displays the generated environmental data before standardization."),
     "inputEnvironment_6"    = paste("Finally, you can add a third environmental effect corresponding to the 
                             interaction between $",EQ2$env1,"$ and $",EQ2$env2,"$. 
@@ -269,7 +269,7 @@ text <- list(
                             the environmental values and thus will be able to use them for further analyses. 
                             Unknown environments, in contrast, represent environments that 
                             are not measured. This corresponds to the cumulative effects 
-                            of the many environmental factors on your trait that you did not 
+                            of the many environmental predictors on your trait that you did not 
                             have the opportunity to measure but that are still affecting it.",
     
     
@@ -664,8 +664,8 @@ text <- list(
                      and $",NOT$error,"_{",NOT$time,NOT$ind,"}$ is the residual error."),
     
     "note1"    = paste0("Note that in SQuID each environmental effect $(",NOT$env,")$ is expressed in unit variance 
-                      (i.e., $var(",NOT$env,")=1$) and mean-centered (i.e., $E(",NOT$env,")=0$).
-                      Then $V_{",NOT$mean," ",NOT$env,"}=var(",NOT$mean," ",NOT$env,")=",NOT$mean,"^2var(",NOT$env,")=",NOT$mean,"^2$"),
+                      (i.e., $V_{",NOT$env,"}=1$) and mean-centered (i.e., $E(",NOT$env,")=0$).
+                      Then $V_{",NOT$mean," ",NOT$env,"}=V_{",NOT$mean," ",NOT$env,"}=",NOT$mean,"^2V_{",NOT$env,"}=",NOT$mean,"^2$"),
     
     "para3"    = "A mixed statistical model estimates these parameters:",
     "para4"    = "The first (left-hand) plot that the app generates visualizes the effect of the simulated environment on the phenotype. 
@@ -739,7 +739,7 @@ text <- list(
     
     "para2"      = paste0("The environment for this simulation is, for convenience, set as being linear over time, 
                   affecting all individuals similarly (i.e., it is &ldquo;shared&rdquo;). 
-                  The environment is also expressed with unit variance (i.e., $var(",NOT$env,")=1$) 
+                  The environment is also expressed with unit variance (i.e., $V_{",NOT$env,"}=1$) 
                   and mean-centered (i.e., $E(",NOT$env,")=0$)."),
     "para3_image" = '<div style="clear:both; text-align:center"><img id="Vit" src="images/Vit_examples.jpg" alt="Examples of among-individual variance in timing of sampling" width=80% height=80%></div>',
     "para3_image_caption" =paste("<b>Figure:</b> two examples of 4 individuals that are sampled 5 times each and that among-individual variance in timing of sampling $(",general_VAR$btwIndVarTimSamp,")$ is 0.1 (left) and 0.9 (right).<br><br>",sep=""),
@@ -762,7 +762,7 @@ text <- list(
     "para6"      = paste0("However, if the unmeasured environment changes over 
                         time AND there is among-individual variance in sampling and we fit this model, then $V_",NOT$envEffect,"$ is instead absorbed by the residual variance (making residual variance larger 
                         than just measurement variance $V_",NOT$mError,"$), and some might be absorbed by $V_",NOT$devI,"$, also making it bigger than it should be."),
-    "conclusion"      = paste0("<b>Conclusion</b><br> Here we demonstrated that if you do not account for among-individual variance in timing of sampling when needed, 
+    "conclusion"      = paste0("To conclude, if you do not account for among-individual variance in timing of sampling when needed, 
                         estimates of $V_",NOT$devI,"$ will be incorrect. Sampling biases thus have the potential to produce &ldquo;pseudo-personality&rdquo; or 
                         &ldquo;pseudo-repeatability&rdquo; (<a href='http://onlinelibrary.wiley.com/doi/10.1111/1365-2656.12013/abstract' target='_blank'>Dingemanse & Dochtermann 2013</a>) 
                         and could lead to overestimation of differences between individuals."),
@@ -806,7 +806,6 @@ text <- list(
     "RCode"      = "# install.packages(&quot;lme4&quot;)<br>
                   LMM <- lme4::lmer(Phenotype ~ 0 + (1|Individual), data = sampled_data)",
     "para5"      =  "We then estimate the parameters following this misspecified model, so that we can compare them with your inputs (see the table).",
-    "conclusion_title" = "<b>Conclusion</b>",
     
     "para6"      =  paste0("The results of any given simulation may vary, but hopefuly the overall impression that emerges 
                          is that the estimates are more precise when $V_",NOT$envEffect,"$ is small, 
@@ -872,7 +871,7 @@ text <- list(
                         any bias in $V_",NOT$devI,"$ due to the biased sampling disappears."),
     "reminder"   = paste0("A brief reminder about notation: when unknown environments affect phenotypic variance, 
                         we have referred to that variance as $V_",NOT$envEffect,"$.  In the model where the environment is known $(",NOT$env,")$, 
-                        there now is a specific component of variance due to that known environmental factor, 
+                        there now is a specific component of variance due to that known environmental predictor, 
                         $V_{",NOT$mean," ",NOT$env,"}$. In the case above, $V_",NOT$envEffect,"=V_{",NOT$mean," ",NOT$env,"}$, 
                         but in the real world with many environmental predictors, 
                         $V_{",NOT$mean," ",NOT$env,"}$ will be only a fraction of $V_",NOT$envEffect,"$."),
@@ -967,7 +966,7 @@ text <- list(
   	she simultaneously decreases the size of her clutch. In other words, the changes in one trait across 
   	repeated expressions of the same individual are associated with changes in another trait.",
     
-    "conclusion" = "<b>Conclusion</b><br> Variance-covariance matrices hold information on the amount of variance 
+    "conclusion" = "Variance-covariance matrices hold information on the amount of variance 
   			 existing in each trait as well as the covariances between them. 
   			 The correlations between two traits are calculated using this information 
   			 on variances and covariances as derived metrics."
@@ -1069,7 +1068,7 @@ text <- list(
   	(of within- and among-individual variances and covariances) above produced. The second scatter plot also uses your entries but assumes that you entered zero among-individual variances. 
   	This second plot therefore depicts the correlation in your data at the within-individual level alone. The first graph should show a weaker overall phenotypic association as explained above." ,
     
-    "conclusion" = "<b>Conclusion</b><br> The phenotypic correlation reflects the within-individual correlation when 
+    "conclusion" = "The phenotypic correlation reflects the within-individual correlation when 
   			 measured for repeatedly expressed traits; however, their correspondence is a function of how 
   			 repeatable the two traits are. You may explore this idea more fully by re-running the exercise 
   			 for different levels of trait repeatabilities."
@@ -1138,7 +1137,7 @@ text <- list(
 		Lastly, for the third plot we visualize the deviation of each observation from an individual its mean value of each trait, which 
 		represents a visual of the within-individual correlation.",
 		
-		"conclusion" = "<b>Conclusion</b><br> Repeatedly expressed traits often vary across multiple levels, 
+		"conclusion" = "Repeatedly expressed traits often vary across multiple levels, 
 		such as within and among individuals. This means that the phenotypic correlation summarizes 
 		the correlations existing at different levels. The influence of the correlation at each level on phenotypic correlation is weighted
 		by the amount of variance at each level. In other words, the correlation between 
@@ -1204,7 +1203,7 @@ text <- list(
 					 \\frac{cov_{",NOT$total,"_",NOT$trait.1,",",NOT$total,"_",NOT$trait.2,"}}
 					 {\\sqrt{V_{",NOT$total,"_",NOT$trait.1,"}V_{",NOT$total,"_",NOT$trait.2,"}}}.$$"),
 		
-		"conclusion" = "<b>Conclusion</b><br>Bivariate mixed-effects models differ distinctly from univariate mixed-effects 
+		"conclusion" = "Bivariate mixed-effects models differ distinctly from univariate mixed-effects 
 		models as the former assumes multivariate normality of the errors, while the latter assumes univariate normality of the errors. 
 		Bivariate mixed-effects models estimate variances and covariances within and among each specified 
 		level from which overall phenotypic variances and covariances, and consequently correlation, 
@@ -1277,8 +1276,8 @@ text <- list(
 					 the within-individual covariance is now explained by the fixed-effect covariate, 
 					 and therefore food availability no longer contributes to the residual within-individual variances."),
 		
-		"conclusion" = "<b>Conclusion</b><br> Integration of plasticity, where the same environmental factor affects multiple phenotypic traits, 
-		leads to patterns of trait correlations in phenotypic data. Provided that such environmental factors 
+		"conclusion" = "<b>Conclusion</b><br> Integration of plasticity, where the same environmental predictor affects multiple phenotypic traits, 
+		leads to patterns of trait correlations in phenotypic data. Provided that such environmental predictors 
 		varied solely within individuals, environmental variation would cause residual within-individual correlations 
 		if not accounted for. Though not further articulated here, we can imagine that such types of environmental 
 		effects could also cause among-individual correlations in situations where the sampling design was such 
@@ -1294,61 +1293,78 @@ text <- list(
   # Step 1 -------------- 
   "Mod4Step1_txt" = list(
     "title" = "Step 1: Population level MDPP",
-    "goal" = "<b>Goal:</b> To understand average (population-level) effects of multiple environmental factors on the phenotype.",
+    "goal" = "In this step, we cover average (population-level) effects of multiple environmental predictors on the phenotype.",
+    "intro" = paste0("<b>Background</b><br> In the <i>",Module_titles$mod3,"</i> module, we accounted for the effect of a single environmental 
+                     predictor on phenotype. This process ended up describing the organism's phenotype
+      			 as a line that is constructed with the environment (the environment on the X-axis, phenotype on the Y-axis).
+      		 	 For example, parent birds typically increase the rate of food delivery to the nest as their offspring grow older.
+      			 We call this line a reaction norm, and in the case of parent birds, it makes adaptive sense because older
+      			 offspring are bigger and need a faster food intake to maintain growth. A simple reaction norm line for a single environmental predictor is a simplified scenario,
+      	because we know organisms exist in environments that have multiple environmental predictors
+      	(i.e., the environment is a multidimensional space). There is increasing evidence that multiple predictors
+      	can influence many phenotypes. In the case of parent birds increasing food delivery to
+      	older offspring, maintaining the rate of increase with age over all environmental conditions
+      	makes little sense. If, for example, brood size varies among nesting attempts,
+      	we might expect parents to respond to both nestling age and brood size.
+      	For parent birds, the environment now has two dimensions, nestling age and brood size,
+      	and instead of a reaction norm line, their behavioural response could be described by a
+      	plane in this three-dimensional space (the third dimension is the phenotype). This is what we call 'multidimensional phenotypic plasticity'
+      	abbreviated as MDPP. In theory, an organism could be responding to many environmental predictors,
+      	so they would have a reaction norm hyperplane existing in n-dimensional environmental space.
+      	It is hard for us to visualize more than three dimensions (imagine a fourth dimension as represented using e.g., the color in a figure, or as change through time), 
+      	so here we will focus on the behaviour of a reaction norm plane with just two environmental axes, but if you get comfortable with this concept,
+      	it will become easier to imagine three, or even more, environmental predictors. Our general goal is to help you
+      	gain some understanding of how specific parameter values in the phenotypic equation influence
+      	shape and orientation of a reaction norm plane. When there are multiple sources of environmental variance $V_",NOT$envEffect,"$ that affect a single trait, 
+  							expressed multiple times within individuals but measured within a single population, we instead use <i>multiple</i> regression to simultaneously
+  							relate those predictors to the trait. This is in contrast to the <i>simple</i> linear regression that we have applied so far, 
+  							as now we include a slope parameter for each of the predictors.
+  							This step illustrates some of the differences between simple and multiple regression, in addition to
+  							the simulation of more complex data structures, such as when there is correlation between environments."),
     
-    "intro" = paste0("<b>Background:</b> Here we model multiple sources of environmental variance ($V_",NOT$envEffect,"$) in a single trait, 
-  							expressed multiple times within individuals but measured within a single population. 
-  							This step illustrates some differences between simple and multiple regression, but may 
-  							also allow simulation of more complex data structures, such as correlations between environments."),
-    
-    "exercise" = paste0("<b>Exercise:</b> to explore multiple sources of $V_",NOT$envEffect,"$."),
-    
-    "para1" = paste0("Let's simulate phenotypes that are influenced by two factors, both of which are shared by the 
-		whole population (e.g., spring temperature) and the values are random from one measurement period 
-		to the next. The environment thus has an intercept effect on phenotype of 0, and a slope that 
-		you can input (we recommend at first that the slope be >> 0). Each environment contributes 
-		the value $[slope]^2var(",NOT$env,")$ to the total phenotypic variance (see Table 1 in Allegue <i>et al.</i> 2016), 
-		so by specifying the slope (positive or negative), you will affect the total phenotypic variance. 
-		Note that in SQuID each environmental effect is standardized (i.e. mean = 0 and variance = 1)."),
-		
-		"results" = "<b>Results:</b> suppose we assume that there is only one environmental effect. That is, we analyse 
-  the population we simulated using the following model:",
-  "results_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  +	",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,"} + ",
-                         NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
-  "para2" = "With a mixed statistical model we can estimate the parameters:",
+      "para1" = "When we assumed that there was only one environmental effect, we used the following model:",
+  "para1_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  +	",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,"} + ",
+                         NOT$error,"_{",NOT$time,NOT$ind,"},$$"),
+   
+    "para2" = paste0("Now, we instead add a second effect, so that our model becomes:",
+                     "$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + ",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,"} + ",
+                     EQ1$mean2,NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"},$$", 
+                     "though we could add as many predictors as our sample size allows. In this equation, there are thus three <i>dimensions</i>, namely:
+                     1) the response variable, 2) the first predictor and 3) the second predictor. Each environmental predictor contributes 
+		the value $",NOT$mean,"^2V_{",NOT$env,"}$ to the total phenotypic variance (see Table 1 in Allegue <i>et al.</i> 2016), 
+		so the slope, whether it is negative or positive, will affect the total phenotypic variance.
+		Remember that in SQuID each environmental effect is standardized (i.e. mean = 0 and variance = 1), so that the calulation for the total phenotypic variation
+		is straightforward."),
+	
+  "exercise" = paste0("<b>Exercise</b><br> In the app below we simulate phenotypes that are influenced by two environmental predictors, 
+                      both of which have the same effect on the whole population (e.g., think of spring temperature), 
+                      but the values are different from one measurement period to the next. 
+                      In the app, you are thus able to explore a model that includes multiple sources of $V_",NOT$envEffect,"$. However, the app also fits a model with only
+                      one environmental predictor (left-hand side table and plot), so that you can study what happens to the other components in the model when a predictor is erroneously omitted."),
   
+		
   "para3" = paste0("This makes the simple point, also made in Module <i>",Module_titles$mod3,"</i>,
-		that leaving out an important factor inflates other variance components. In this case
+		that leaving out an important predictor inflates other variance components. In this case
 		it was mostly the residual variance because the environment was set as random from one
 		measurement to the next and all individuals experienced it."),
-  
-  "para4" = "A reanalysis with the following model pulls the missing environmental variance out of the residual term:",
-  "para4_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + ",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,"} + ",
-                       EQ1$mean2,NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
-  
-  "para5" = "This is a multiple regression within a mixed-effects model. A 3-dimensional graph helps visualize
-		the way in which the two predictors affect a phenotype in the 2 dimensions defined by the environment.",
-  
-  "para6" = paste0("Individuals in this simulation vary in their intercept by the amount you entered previously in $V_{",NOT$devI,"}$.
+
+  "para4" = paste0("Individuals in this simulation vary in their intercept by the amount you entered previously in $V_{",NOT$devI,"}$.
 		Below we pick three individuals across the range of the intercept variance to illustrate
 		how each individual's plane sits in the space defined by the two environmental predictors.
 		You can see that the three planes are parallel or very close to parallel, and differ only
 		in their elevation. If you play around with the number of measures within an individual,
 		you will see that the resolution of these planes requires fairly large sample sizes
 		(this is covered in more detail later)."),
-  
-  "para7" = paste0("A new 3-D graph with three individuals picked from the low end of $",NOT$devI,"$,
-					 the middle, and from the high end of $",NOT$devI,"$."),
-  
-  "para8" = paste0("Run through this simulation several times using different values for $",EQ1$mean1,"$ and $",EQ1$mean2,"$,
+
+  "para5" = paste0("Run through this simulation several times using different values for $",EQ1$mean1,"$ and $",EQ1$mean2,"$,
 					 including having some slopes negative. In particular, try making the two have opposite signs.
 					 Inspect the table above and look at the two graphs so you gain a feel for how the two slopes
 					 produce a flat plane that may be tilted in various ways."),
   
-  "conclusion" = "<b>Conclusion:</b> is exercise should reinforce your understanding of where measured
-  			 and unmeasured sources of variance end up in a statistical analysis and how systematic
-  			 effects of multiple environments can be appropriately captured. In the next step,
-  			 we illustrate one important complexity."
+  "conclusion" = "To conclude, in this step we introducued the idea of multidimensional phenotypic plasticity,
+  i.e., that the expression of a phenotype can be affected by more than one predictor, and that we can model that process in a regression.
+  This then allows us to partition the phenotypic variance based on the different predictors, so that we may get a better understanding of what
+  drives phenotypic variation. In the next step, we will focus on situations where the effect of one predictor on the phenotype is affected by another."
   
   ),
   
@@ -1356,68 +1372,53 @@ text <- list(
   "Mod4Step2_txt" = list(
     
     "title" = "Step 2: Interaction terms",
-    "goal" = "<b>Goal:</b> To account for dependencies in the effect of one factor by another factor.",
+    "goal" = "We continue studying multidimensional plasticity, by learning how to account for dependencies in the effect of one predictor by another predictor, also known as 'interactions' in a regression.",
     
-    "intro" = "<b>Background:</b> In the first step of this module we developed the idea that 2 or more environments 
-					might both have effects on a phenotype. In the case of parent birds feeding offspring, 
-					both offspring age and the number of offspring were hypothesized to have effects on a parent's 
-					feeding rate. The analysis in the first step of this module produced a flat plane in 2-dimensional environmental 
-					space that then could possibly be tilted in a variety of ways depending on the slopes to 
-					both environments. The effect of brood size and nestling age is an intriguing case because 
-					the increase in need as a nestling gets older is not merely added to the effect of brood size, 
-					but rather brood size multiplies the effect of nestling age (the effect of age for 4 nestlings is 4 
-					times the effect for 1 nestling). More generally, we might expect plasticity to one environmental 
+    "intro" = "<b>Background</b><br> In the first step of this module we introduced the idea that two or more environments 
+					might both affect the expression of a phenotype. An ecological example of this is the rate at which parents feed their offspring,
+					which we can hypothesize to to be affected by both offspring age and by the number of offspring. 
+          In a regression, we thus include both predictors and study their relationship to feeding rate.      
+          However, as offspring gets older it requires larger meals, so if there are a lot of older offspring parents might feed less often but provide
+          larger meals, while parents might feed more frequently smaller meals when the offspring is younger.
+          Differently put, we might expect the response to one environmental 
 					predictor to be plastic in the face of other environmental predictors. This plasticity in response 
-					to one environment of a reaction norm to another (plasticity of plasticity) is a fascinating 
-					potential consequence of multidimensional environments. So far, you have explored the effect of two environmental factors that produce a flat plane. 
-  The second statistical equation in the first step of this module illustrates these as additive effects of the two environmental 
-  factors. Put another way, the effects of the factors were treated as independent. Note the distinction 
-  between independence of effects and independence of the factors themselves&mdash;weak to modest correlations 
-  among the factors themselves do not change the independence of the effects of those factors, as will 
-  be illustrated in a later module. However, high correlations between factors (colinearity) can have 
-  unusual effects on statistical tests of parameter estimates&mdash;we ignore that issue for now. Instead, 
-  plasticity of plasticity as described above results from non-additive effects. The factors are said 
-  to interact, the term describing them in a mixed-effects model or any related analysis (GLM) is an 
-  interaction term. Biologically, interactive effects on a phenotype between 2 environmental factors 
-  may have multiple fascinating implications.",
-  
-  "exercise" = "<b>Exercise:</b> As in the first step of this module, we need to simulate a population and the data we collect from that population.",
-  
-  "results" = "<b>Results:</b> Let's analyze this simulated population by omitting the interaction term first. 
-  	In the first case we assume the following statistical model:",
-  "results_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} =	",EQ1$mean0," +	",EQ1$dev0,"  +	",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,
-                         "} + ",EQ1$mean2,NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
-  "para1" = "The full statistical model including the interaction is:",
-  "para1_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + ",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,"} + ",
+					to one environment of a reaction norm to another (i.e., plasticity of plasticity) is a fascinating 
+					potential consequence of multidimensional environments.", 
+          
+    "para1" = "In the first step you explored the effect of two environmental predictors that produce a flat plane. 
+  The second equation in the first step of this module illustrated these as additive effects of the two environmental 
+  predictors. Put another way, the effects of the predictors were treated as separately affecting the phenotype.
+  However, the plasticity of plasticity as described above statistically results from <i>interactions</i> between predictors. In a mixed-effects model, or any regression-based analysis (e.g., GLM)
+  a multiplication of two predictors in the model is referred to as an interaction term, and this term gets its own parameter. Interactions of environmental predictors can have fascinating ecological implications.",
+
+  "para2" = "The statistical model with interaction of the predictors is:",
+  "para2_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + ",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,"} + ",
                        EQ1$mean2,NOT$env,"_{2",NOT$time,NOT$ind,"} + ",EQ1$mean12,NOT$env,"_{1",NOT$time,NOT$ind,"}",NOT$env,"_{2",
-                       NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
-  "para2" = "You should find from the above that the variance due to the interaction term, when that term is omitted,
-  	ends up mostly in the residuals, although some may end up elsewhere due to sampling issues. You can visualize the impact of the interaction term in the graph below. Here we have graphed
-  	the population average plane derived from the parameter estimates in the simulated data in the space defined by both environments.",
+                       NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}.$$"),
+
+  "exercise" = paste0("<b>Exercise</b><br> 
+                      The following app will allow you to explore models with an interaction term. As in the first step of this module, we start by simulating a population, which we 'collect' data from. 
+  This simulation follows the model with interaction term, but fits two models: one without interaction and one with interaction,
+  so that you can study the consequences of omitting interaction terms. Specifically, by manipulating both the magnitude of the interaction between $",NOT$env,"_1$ and $",NOT$env,"_2$
+    ($",EQ1$mean12,"$), and the direction relative to the other slopes, you are able to assess how this affects the
+  results when the interaction is ommitted from the model.", "The regression plane for the model with interaction is shown in a 3D-plot in the app, to give you a better impression of the interaction effect. 
+  The figure additionally allows you to examine in more detail how the parameter $",EQ1$mean12,"$ affects the warping of the plane."),
   
-  "para3" = paste0("Examine this graph carefully. The plane produced should look different than the ones you
-  				 produced in step one. Those planes were flat but tilted in various ways. If $",EQ1$mean12,"$ is not 0,
-  				 the plane in this graph should look warped or bent. This is the influence of the interaction term.","Now redo the above and manipulate both the magnitude of the interaction between $",NOT$env,"_1$ and $",NOT$env,"_2$
-  				 ($",EQ1$mean12,"$) and its direction relative to the other slopes to assess how this affects your
-  				 results if you leave it out of your statistical analysis.", "You can also see in the graph how the parameter $",EQ1$mean12,"$ changes the warping of the plane."),
+  "para3" = "Variance due to the interaction term, when that term is omitted,
+  	ends up mostly in the residuals (i.e., it makes for lack of fit), which also affects the parameter estimates for the other terms. 
+  Hopefully, you noticed that the plane produced from the model with interaction looks different from the ones that the app in the first step
+  				 produced. Those planes were flat but tilted in various ways, but here when $",EQ1$mean12,"$ is not zero,
+  				 the plane in the app looks warped or bent, which represents the effect of the interaction term.",
   
-  "conclusion" = "<b>Conclusion:</b> Multidimensionality of environmental effects on phenotypic attributes is very likely.
+  "conclusion" = "<b>Conclusion</b><br> Multidimensionality of environmental effects in phenotypic attributes is biologically very likely.
   			 It may seem redundant to keep demonstrating that leaving out an important term causes that variance to
-  			 end up in other terms. The unusual element of interactions is that the direction of the slope compared
-  			 to the main effects matters also. Moreover, interaction terms generate an array of interesting biological
+  			 end up in other terms, but it is a vital concept to statistical modeling. Fitting an incorrect model will cause lack-of-fit, which is
+  reflected in the residuals as excess variance, or when visualized, as patterns.
+        The unusual element of interactions is that the direction of the slope compared
+  			 to the main effects matters, not just the magnitude of the parameter. Interaction terms form from an array of interesting biological
   			 questions about both the way organisms integrate information about environment and the selective forces
   			 shaping the reaction norm plane."
   ),
-  
-  
-  "module6_txt" = list(
-    "title"         = "Random-slope regression",
-    "goal"          = "<b>Goal:</b> To explore situations where individuals may not only differ 
-                    in their intercepts but also in the slope of their reaction to changes 
-                    in a given environmental predictor. Random slope regression is a great 
-                    tool to analyse among-individual differences in phenotypic plasticity."
-  ),
-  
   
   # Step 1 --------------
   "Mod3Step1_txt" = list(
@@ -1427,20 +1428,20 @@ text <- list(
                     in their intercepts but also in the slope of their reaction to changes 
                     in a given environmental predictor. Random slope regression is a great 
                     tool to analyse among-individual differences in phenotypic plasticity. In this step, our goal is to develop understanding of hierarchies in variance when individuals 
-                  express their traits as a response to a changing environmental factor, 
+                  express their traits as a response to a changing environmental predictor, 
                   but do so differently. In other words, 
                   individuals have variable reaction norms in both intercept and slope.",
     
     "intro"      = paste0("<b>Background</b><br> In the modules titled <i>",Module_titles$mod1,"</i> and <i>",Module_titles$mod3,"</i> 
                         you have explored how among-individual variance  $V_",NOT$devI,"$ can be modelled. Then, individuals varied to some extent
-                        in how an environmental factor influenced the expression of their phenotypes, 
+                        in how an environmental predictor influenced the expression of their phenotypes, 
                         producing within-individual variance as a response 
                         to environmental fluctuations $V_{",NOT$mean,"}$. So far, 
                         we have assumed that if the environment changes, individuals change their phenotype 
                         in exactly the same way. This is a dubious assumption at best, since in most biological scenarios
                         individuals vary in how the environment affects their phenotype. For example, individuals may differ 
                         in how they cope with a stressful situation; less tolerant individuals will alter their 
-                        activity to a greater degree in the presence of a stress factor (e.g. high temperature, 
+                        activity to a greater degree in the presence of a stress predictor (e.g. high temperature, 
                         presence of a predator, or shortage of food) than stress-tolerant conspecifics. In general, 
                         among-individual differences in plasticity (also called individual by-environment-interaction; $I\\times E$) 
                         are necessary if adaptive plasticity is to be under selection, and to the extent that differences have 
@@ -1484,7 +1485,7 @@ text <- list(
                 the regression line for each individual, where the y-axis represents the phenotype and the x-axis the environment. This allows
     to clearly distinguish the differences in the phenotype for individuals as a function of the environment, and the variance therein. Below follows a chunk of \\texttt{R}-code to fit this model.",
     
-    "conclusion"   = "<b>Conclusion</b><br>Individual-specific responses to changes that occur along an environmental 
+    "conclusion"   = "Individual-specific responses to changes that occur along an environmental 
                 gradient form &ldquo;reaction norms&rdquo;. These reaction norms (if the predictor $x$ is centered around zero) can be characterized by their intercept that 
                 describes individual mean expression values, and by their slope that expresses 
                 the plasticity of traits within individuals. Statistically, one can evaluate whether 
@@ -1496,10 +1497,10 @@ text <- list(
     we can calculate the phenotypic variation as:",
     
     "conclusion_eq1" = paste0("$$V_",NOT$total,"= V_",NOT$devI,"+ V_{",NOT$mean,"}+V_{",NOT$devS,"}+ V_",NOT$residualUpper,",$$"),
-    "conclusion2" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^2var(",NOT$env,")=",NOT$mean,"^2,$$","and where", "$$V_{",NOT$devS,"}=var(",NOT$devS,")var(",NOT$env,
-                     ")+E(",NOT$env,")^2var(",NOT$devS,")=var(",NOT$devS,").$$ Note that $var(",NOT$env,")$ is the true variance in $",NOT$env,"$, and $E(",
-                     NOT$env,")$ is the true mean of $",NOT$env,"$. In SQuID each environmental predictor $(",NOT$env,")$ is standardized (i.e., $var(",
-                     NOT$env,")=1$ and $E(",NOT$env,")=0$), to make calculating the explained variation more straightforward."),
+    "conclusion2" = paste0("where $$V_{",NOT$mean,"}=",NOT$mean,"^V_{",NOT$env,"}=",NOT$mean,"^2,$$","and where", "$$V_{",NOT$devS,"}=V_{",NOT$devS,"}V_{",NOT$env,
+                     "}+E(",NOT$env,")^2V_{",NOT$devS,"}=V_{",NOT$devS,"}.$$ Note that $V_{",NOT$env,"}$ is the true variance in $",NOT$env,"$, and $E(",
+                     NOT$env,")$ is the true mean of $",NOT$env,"$. In SQuID each environmental predictor $(",NOT$env,")$ is standardized (i.e., $V_{",
+                     NOT$env,"}=1$ and $E(",NOT$env,")=0$), to make calculating the explained variation more straightforward."),
     
     "RCode"    = "# install.packages(&quot;lme4&quot;)<br>
                LMM <- lme4::lmer(Phenotype ~ 1 + X1 + (1|Individual) + (0 + X1|Individual), data = sampled_data)"
@@ -1524,22 +1525,22 @@ text <- list(
     
     "para2"      = "but additionally introduce new nomenclature:",
     "para2_eq1" = paste0("$$ \\begin{pmatrix}", NOT$devI,"_",NOT$ind , "\\\\", NOT$devS,"_",NOT$ind , "\\\\ \\end{pmatrix}\\sim MNV(0,\\Omega_{",NOT$devI, NOT$devS,
-                         "}), \\qquad \\text{where} \\qquad \\Omega_{",NOT$devI, NOT$devS,"}= \\begin{pmatrix}var(", NOT$devI,") & cov(", NOT$devI, ",", NOT$devS ,") \\\\cov(", NOT$devI, ",", 
-                         NOT$devS ,") & var(", NOT$devS, ")\\\\\\end{pmatrix}. $$"),
+                         "}), \\qquad \\text{where} \\qquad \\Omega_{",NOT$devI, NOT$devS,"}= \\begin{pmatrix}V_{", NOT$devI,"} & cov_{", NOT$devI, ",", NOT$devS ,"} \\\\cov_{", NOT$devI, ",", 
+                         NOT$devS ,"} & V_{", NOT$devS, "}\\\\\\end{pmatrix}. $$"),
     
     "para3"      = paste0("This represents that the intercept value of the <i>i <sup>th</sup></i> individual $(",NOT$devI,"_",NOT$ind,")$ 
                         and the slope of that same individual $(",NOT$devS,"_",NOT$ind,")$ are distributed as multivariate 
                         normal with means of 0 and a variance-covariance matrix $\\Omega_{",NOT$devI,NOT$devS,"}$. 
                         Here, as there are two terms, this is a 2-by-2 matrix. 
                         The variance terms $V_",NOT$devI,"$ and $V_",NOT$devS,"$ have also occured in other modules, 
-                        so that the new term introduced here is $cov(",NOT$devI,",", NOT$devS,")$, which represents the magnitude to which
+                        so that the new term introduced here is $cov_{",NOT$devI,",", NOT$devS,"}$, which represents the magnitude to which
                         the intercepts $",NOT$devI,"_",NOT$ind,"$ and slopes $",NOT$devS,"_",NOT$ind,"$ vary together."),
     
     "exercise"   = "<b>Exercise</b><br> The simulation here will be similar to that the first step of this module, 
                   but it will instead also be possible to input a value for the covariance of the intercepts and the slopes. 
                   Though this represents this also represents covariance between the intercepts and slopes: 
     which is a form of standardized covariance:",
-    "exercise_eq1" = paste0("$$cor(",NOT$devI,",",NOT$devS,")=\\frac{cov(",NOT$devI,",",NOT$devS,")}{\\sqrt{var(",NOT$devI,")","var(",NOT$devS,")}}.$$"),
+    "exercise_eq1" = paste0("$$cor(",NOT$devI,",",NOT$devS,")=\\frac{cov_{",NOT$devI,",",NOT$devS,"}}{\\sqrt{V_{",NOT$devI,"}","V_{",NOT$devS,"}}}.$$"),
     
     "para4"      = "You might want to simulate data with a negative correlation,with a positive correlation, and without any correlation at all,
    to find out how that affects the patterns of variance. In the app below, the left panel in the plot will constantly reflect the simulated individuals without
@@ -1548,7 +1549,7 @@ text <- list(
     
     "para5"      = paste0("Earlier we presented the phenotypic variance due to a particular term 
                         (e.g., the variance due to individual differences in response to an environmental 
-                        factor, or $V_{",NOT$devS,NOT$env,"}$), but now the table included what many statistical packages produce;
+                        predictor, or $V_{",NOT$devS,NOT$env,"}$), but now the table included what many statistical packages produce;
                         the (marginal) variance in slopes $V_",NOT$devS,"$, rather than the phenotypic variance due to slope (i.e., variance explained)."),
     
     "point"      = "Intercept-slope covariance is an additional layer of complexity
@@ -1556,7 +1557,7 @@ text <- list(
                   is not a parameter in the equation itself, but is rather describing 
                   the relationship between two parameters in the equation, namely
                   how they behave across individuals. The covariance does normally appear in a partitioning of variance:",
-    "point_eq1" = paste0("$$V_",NOT$total,"=V_",NOT$devI,"+ V_{",NOT$mean,"}+ V_{",NOT$devS,"}+ 2cov(",NOT$devI,",",NOT$devS,")+ V_",NOT$residualUpper,".$$"),
+    "point_eq1" = paste0("$$V_",NOT$total,"=V_",NOT$devI,"+ V_{",NOT$mean,"}+ V_{",NOT$devS,"}+ 2cov_{",NOT$devI,",",NOT$devS,"}+ V_",NOT$residualUpper,".$$"),
     
     "note2"      = paste0("Note: In SQuID $E(",NOT$env,")=0$ and hence the covariance does not contribute to total phenotypic variance."),
     "conclusion"      = "<b>Conclusion</b><br>The biology of the covariance is just beginning to be explored 
@@ -1769,172 +1770,149 @@ text <- list(
   # Step 1 --------------
   "Mod5Step1_txt" = list(  
     "title" = "Step 1: Adding multiple slopes that vary among individuals",
-    "goal" = "<b>Goal:</b> Can we statistically test for individual variation in interaction 
-         terms and what sampling regimes might improve the ability to do so?",
+    "goal" = "This module combine the concepts we have covered in previous modules, in order to figure out how we can statistically test for individual variation in interaction 
+         terms, and to study what sampling regimes might improve the ability to do so.",
     
-    "intro" = paste0("<b>Background:</b> Multidimensional phenotypic plasticity is a widespread feature of most living organisms. 
+    "intro" = paste0("<b>Background</b><br> Multidimensional phenotypic plasticity is a widespread feature of most living organisms. 
                 In many cases it appears to be adaptive. For example, copulating male dung flies stay in copula for 
-                a length of time that depends on the size of the female and the abundance of females in the local 
-                population, and this fits reasonably well with what we would predict given the fitness gained 
+                a length of time that depends on the size of the female, and on the abundance of females in the local 
+                population. This fits reasonably well with what we would predict given the fitness gained 
                 from staying in copula longer or leaving to search for a new female. For this to have evolved via 
                 selection, at some point there must have been among-individual variation reflecting genetic variation 
-                for multidimensionality. In other words, one individual probably had a different plane than another. 
-                In the module labelled <i>",Module_titles$mod5,"</i>, you visualized individuals who had 
-                reaction norm planes that differed by intercept. Might they differ in slope as well? And, in which 
-                dimensions? If you have done the module on random regression (we do highly recommend doing the 
-                tutorial on random regression first), you will have some idea of what individual variation in slope means, 
-                but extending it to 2 or more dimensions adds some complexity. Here we take you through the process of 
-                adding individual variation to different bits of the equation describing a reaction norm plane."),
+                for multidimensionality.
+                In the module titled <i>",Module_titles$mod5,"</i>, you fitted models where individuals had differed intercepts. 
+                And in the module titled <i>",Module_titles$mod6,"</i>, you fitted models where  individuals had different slopes for an 
+                environmental predictor. Here, we extend these ideas to regression planes with two or more dimensions, adding some complexity."),
     
-    "exercise" = paste0("<b>Exercise:</b> Let's start with the equation describing MDPP that ended the module called <i>",Module_titles$mod5,"</i>."),
-    "exercise_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + ",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,
+    "para1" = paste0("Recall that the equation describing MDPP in the last module was:"),
+    "para1_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + ",EQ1$mean1,NOT$env,"_{1",NOT$time,NOT$ind,
                             "} + ",EQ1$mean2,NOT$env,"_{2",NOT$time,NOT$ind,"} + ",EQ1$mean12,NOT$env,"_{1",NOT$time,NOT$ind,"}",NOT$env,"_{2",
-                            NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
+                            NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}.$$"),
     
-    "para1" = paste0("This equation describes a population average plane in the space described by 
-           $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$ with individuals appearing like a stack of paper—individuals 
+    "para2" = paste0("This equation describes a population average plane in the space described by 
+           $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$, with individuals appearing like a stack of planes that 
            differ only in the intercept, which is defined as the point where both 
-           $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$ are 0. Whether the plane is warped ($",EQ1$mean12,"\\neq0$) or not, 
+           $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$ are zero. Whether the plane is warped ($",EQ1$mean12,"\\neq0$) or not, 
            all individuals have the same planar shape. If they varied in 
-           some aspect of this plane, we would not detect that in this equation."),
+           some aspect of this plane, we would not detect that in this statistical model."),
     
-    "para2" = paste0("Let's add the lessons you learned about random regression in that module to this equation. 
-    There, you learned that individuals might also vary in their slope with respect to $",NOT$env,"_{1}$, and 
+    "para3" = paste0("In the module on random regression, you learned that individuals might also vary in their slope with respect to $",NOT$env,"_{1}$, and 
     that individual slope could covary with individual intercept both positively and negatively. 
-    What happens if that exists in the equation above? The equation becomes:"),
-    "para2_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
+    Combining the concepts from that module with that on interaction terms, the model equation becomes:"),
+
+    "para3_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
                          "} + ",EQ1$mean2,NOT$env,"_{2",NOT$time,NOT$ind,"} + ",EQ1$mean12,NOT$env,"_{1",NOT$time,NOT$ind,"}",NOT$env,"_{2",NOT$time,NOT$ind,"} + ",
-                         NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
+                         NOT$error,"_{",NOT$time,NOT$ind,"},$$"),
     
-    "para3" = paste0("where $$","\\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\end{pmatrix}","\\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,"}): \\Omega_{",
-                     NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} var(",NOT$devI,") & cov_{",NOT$devI,EQ3$dev1,"} \\\\  cov_{",NOT$devI,EQ3$dev1,"} & var(",EQ3$dev1,
-                     ") \\end{pmatrix}","$$"),
+    "para4" = paste0("where $$","\\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\end{pmatrix}","\\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,"}), \\quad \\text{where } \\Omega_{",
+                     NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} V_{",NOT$devI,"} & cov_{",NOT$devI,EQ3$dev1,"} \\\\  cov_{",NOT$devI,EQ3$dev1,"} & V_{",EQ3$dev1,
+                     "} \\end{pmatrix}",".$$"),
     
-    "para4" = paste0("If you did the random regression module, you have seen this before although here we've added 
-           one subscript to identify that the slopes are with respect to $",NOT$env,"_{1}$. 
-           This statement means that the intercept value of the $",NOT$ind,"^{th}$ individual ($",EQ1$dev0,"$) 
-           and the slope of that individual ($",EQ1$dev1,"$) with respect to $",NOT$env,"_{1}$ are 
-           distributed as multivariate normal with means for each attribute of 0 and a variance-covariance 
-           structure of $\\Omega_{",NOT$devI,NOT$devS,"}$. We then specify the variance-covariance structure 
-           in a 2 by 2 matrix. $cov_{",NOT$devI,EQ3$dev1,"}$ is the measure of how much $",EQ1$dev0,"$ and 
-           $",EQ1$dev1,"$ covary together. We will simulate data with these terms and assess one consequence of random slopes in a reaction 
-           norm plane. First, we will ask where variation due to the random slope exists in the 2 environmental 
-           dimensions."),
+    "para5" = paste0("A similar equation is included in the module on random regressions, though here we added 
+           a subscript to identify that the slopes are for $",NOT$env,"_{1}$. 
+           This means that the intercept of the $",NOT$ind,"^{th}$ individual ($",EQ1$dev0,"$) 
+           and the slope of that individual ($",EQ1$dev1,"$) for $",NOT$env,"_{1}$ are 
+           distributed as a multivariate normal distribution, with means of zero and a variance-covariance 
+           matrix $\\Omega_{",NOT$devI,NOT$devS,"}$. The variance-covariance matrix has four entries, of which the off-diagonal entries $cov_{",NOT$devI,EQ3$dev1,"}$ represents how much $",EQ1$dev0,"$ and 
+           $",EQ1$dev1,"$ covary."),
     
-    "para5" = paste0("It may be useful at first to make the $cov_{",NOT$devI,EQ3$dev1,"}=0$, 
-           but later you can explore other values. Once the data are simulated, we can analyze them with R package lmer4 
-           as was done in the random regression module and we will compare the full model 
-           to one without $",EQ1$dev1,"$ or $cov_{",NOT$devI,EQ3$dev1,"}$."),
+    "exercise" = "<b>Exercise</b><br>The following app will allow you to explore the aforementioned model with simulation.
+                        Once the data are simulated, two models are fitted, one which includes covariance between the intercepts and slopes,
+                        and another that ignores that covariance, so that you may explore the consequences of ignoring covariance between terms. In this app we present two figures, the first illustrates what
+    variance the random slopes can capture, and the second shows the reaction norm planes of three of the individuals picked form the data.",
     
-    "para6" = "The above should illustrate again that leaving something out of an analysis model that exists 
-    in the data will produce errors in other terms. ",
-    
-    "para7" = paste0("A key feature is that while there is a plane that describes the reaction norm in space defined 
+    "para6" = paste0("The above should illustrate again that model misspecification (e.g., leaving out terms that should be included),
+    will produce inaccurate estimates in other terms. A key feature is that while there is a plane that describes the reaction norm as defined 
            by $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$, the random slopes for $",NOT$env,"_{1}$ are measured 
-           in only one value of $",NOT$env,"_{2}$, where it is 0. Below we present another graph with 
-           the reaction norm planes of 3 individuals picked from the data."),
-    
-    "para8" = paste0("As you can see, these planes vary in only one dimension of the environmental space. 
+           in only one value of $",NOT$env,"_{2}$, where it equals zero. As you could see from the difference the two figures, these planes vary in only one dimension of the environmental space. 
            Since we did not specify any variation in the reaction to $",NOT$env,"_{2}$, or to the interaction between 
-           $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$, everyone is assumed to have the same plane in those directions. If you try this with several different values for the parameters 
+           $",NOT$env,"_{1}$ and $",NOT$env,"_{2}$, all individuals are assumed to have the same plane in those directions. If you tried this in the app with several different values for the parameters 
            $V_{",NOT$devI,"}$, $V_{",EQ3$dev1,"}$, and $cov_{",NOT$devI,EQ3$dev1,"}$, 
            you will see that these affect the orientation of the plane only in one dimension."),
     
-    "exercise" = paste0("<b>Exercise:</b> Now we will add among-individual variation in response to $",NOT$env,"_{2}$. 
-                In the phenotypic equation, we simply add $",EQ1$dev2,"$ to the part that depends on $",NOT$env,"_{2}$."),
+    "para7" = paste0("We continue by adding among-individual variation in response to $",NOT$env,"_{2}$. 
+    In the phenotypic equation, we add $",EQ1$dev2,"$ to the part that depends on $",NOT$env,"_{2}$, so that the statistical model becomes:"),
     
-    "exercise_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time, NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
+    "para7_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time, NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
                             "} + (",EQ1$mean2,"+",EQ1$dev2,")",NOT$env,"_{2",NOT$time,NOT$ind,"} + ",EQ1$mean12,NOT$env,"_{1",NOT$time,NOT$ind,"}",NOT$env,"_{2",NOT$time,NOT$ind,
-                            "} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
+                            "} + ",NOT$error,"_{",NOT$time,NOT$ind,"}.$$"),
     
-    "para9" = "However, we now have a more complex variance-covariance expression, 
-    which is the expansion of all possible combinations of 
+    "para8" = "However, we now have a more complex variance-covariance expression, 
+    which includes combinations of 
     three terms instead of two as before:",
-    "para9_eq1" = paste0("$$", "\\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\\\ ",EQ1$dev2," \\end{pmatrix}", "\\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,
-                         "}): \\Omega_{",NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} var(",NOT$devI,") & cov_{",NOT$devI,EQ3$dev1,"} & cov_{",NOT$devI,EQ3$dev2,
-                         "} \\\\ cov_{",NOT$devI,EQ3$dev1,"} & var(",EQ3$dev1,") & cov_{",EQ3$dev1,EQ3$dev2,"} \\\\ cov_{",NOT$devI,EQ3$dev2,"} & cov_{",EQ3$dev1,
-                         EQ3$dev2,"} & var(",EQ3$dev2,")\\end{pmatrix}","$$"),
     
-    "para10" = paste0("Again, let's simulate some data and visualize the results. We will start with a population of 100 individuals each measured 20 times in which 
-           both $",NOT$env,"$ predictors were also measured. Both environments are random and unshared."),
+    "para8_eq1" = paste0("$$", "\\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\\\ ",EQ1$dev2," \\end{pmatrix}", "\\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,
+                         "}), \\quad \\text{where } \\Omega_{",NOT$devI,NOT$devS,"}= ", "\\begin{pmatrix} V_{",NOT$devI,"} & cov_{",NOT$devI,EQ3$dev1,"} & cov_{",NOT$devI,EQ3$dev2,
+                         "} \\\\ cov_{",NOT$devI,EQ3$dev1,"} & V_{",EQ3$dev1,"} & cov_{",EQ3$dev1,EQ3$dev2,"} \\\\ cov_{",NOT$devI,EQ3$dev2,"} & cov_{",EQ3$dev1,
+                         EQ3$dev2,"} & V_{",EQ3$dev2,"}\\end{pmatrix}",".$$"),
     
-    "para11" = "We might recommend you set two of these covariances to 0 to start and explore what 
-    the other looks like before giving them all values. Strong covariances, either positive 
-    or negative, will be easier to visualize. Once the data are simulated, we can analyze them with lmer4 as was done in the random regression
-    module. This time we will just fit the full model and visualize the results in a graph.",
+    "exercise2" = "<b>Exercise</b><br>We will now simulate data with this extended model, and assess one consequence of random slopes in a reaction 
+           norm plane. First, we will explore where variation due to the random slope exists in the two environmental 
+           dimensions. We start with a population of 100 individuals each measured 20 times in which 
+           both predictors were also measured, and where both environments are random and unshared. Large values for the covariances, either positive 
+    or negative, will be visible in the figures more quickly. In this app, only the the correct model is fitted, and the figure is thus based on the 'true' model.",
     
-    "para12" = paste0("If you try this with several different values for the parameters 
+    "para9" = paste0("Trying several different values for the parameters 
            $V_{",NOT$devI,"}$, $V_{",EQ3$dev1,"}$, and $V_{",EQ3$dev2,"}$, 
-           and the 3 covariances, you will see that these affect the orientation of the plane 
-           around the 0 point for both environments, and its height at that spot, 
-           but any curving of the plane due to the parameter $",EQ1$mean12,"$ is the same for everyone. 
+           and the covariances, will show that these affect the orientation of the plane 
+           around the zero for both environments, and its height at that spot, 
+           but any curvature of the plane due to the parameter $",EQ1$mean12,"$ is the same for everyone. 
            As you can see, these planes now vary in both dimensions of the environmental space. If you think of the intercept as a pole in this space, the individual slopes cause 
     the planes to wobble or tip in all directions at the top of the pole relative to the population mean plane and the variation in intercept causes the plane 
-    to rise or sink at the intercept relative to the population mean plane. What do values of the covariances do? You can think of them constraining the range 
+    to rise or sink at the intercept relative to the population mean plane. Covariances can be thought of as constraining the range 
     of plane tipping in just certain directions, and the different covariances cause different constraints.")
   ),
   
   # Step 2 --------------
   "Mod5Step2_txt" = list(
     "title" = "Step 2: Adding the random interaction term",
-    "intro" = "Step one built on the random slopes for each $",NOT$env,"$ predictor, 
-           and these served to tip the population mean plane in various directions in environmental space, 
-           much like a circus performer spinning plates at various heights and with variable skill. 
+    "intro" = paste0("Step one built on concept of having the random slopes for each predictor $",NOT$env,"$, 
+           and these served to tip the population mean plane in various directions in environmental space. 
            However, the population mean plane could be warped due to an interaction between 
-           the two $",NOT$env,"$ predictors. Because it appears that such warping is adaptive in real organisms, 
+           the two predictors. Because it appears that such warping is adaptive in real organisms, 
            this would imply that individual variation in the extent of warping is possible. 
-           Here we add that last random-effect term to the phenotypic equation.",
+           Here we add that last random-effect term to the phenotypic equation. In other words, here we explore individual-specific parameters for interaction terms."),
     
-    "para1" = paste0("This now expands the phenotypic equation to include three slope terms, $",EQ1$dev1,"$, 
+    "para1" = paste0("As such, the phenotypic equation is expanded to include three slope terms, $",EQ1$dev1,"$, 
            $",EQ1$dev2,"$, and $",EQ1$dev12,"$, which are the individual deviation from the population 
            slope with respect to $",NOT$env,"_{1}$, $",NOT$env,"_{2}$, and the interaction between the 
-           two $",NOT$env,"$ predictors, respectively. The full equation is thus:"),
+           two $",NOT$env,"$ predictors, respectively. The model equation is then:"),
     "para1_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
                          "} + (",EQ1$mean2,"+",EQ1$dev2,")",NOT$env,"_{2",NOT$time,NOT$ind,"} + (",EQ1$mean12,"+",EQ1$dev12,")",NOT$env,"_{1",NOT$time,NOT$ind,"}",
-                         NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
+                         NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}.$$"),
     
-    "para2" = "As above, the addition of another random-effect expands the variance-covariance once again. 
-    It now is an ugly beast, but if you move through it systematically, you will see it is just 
-    a ledger sheet that accounts for every possibility:",
+    "para2" = "The addition of another random-effect expands the variance-covariance matrix again too. 
+    It becomes increasingly difficult to understand the variance-covariance matrix, but moving through it systematically makes it clear that it just
+    a accounts for relationships between the different parameters:",
     "para2_eq1" = paste0("$$ \\begin{pmatrix}",EQ1$dev0," \\\\ ",EQ1$dev1," \\\\ ",EQ1$dev2," \\\\ ",EQ1$dev12,"\\end{pmatrix} \\sim MVN(0, \\Omega_{",NOT$devI,NOT$devS,
-                         "}): \\Omega_{",NOT$devI,NOT$devS,"}= \\begin{pmatrix} var(",NOT$devI,") & cov_{",NOT$devI,EQ3$dev1,"}  & cov_{",NOT$devI,EQ3$dev2,"}  & cov_{",
-                         NOT$devI,EQ3$dev12,"} \\\\ cov_{",NOT$devI,EQ3$dev1,"}  & var(",EQ3$dev1,") & cov_{",EQ3$dev1,EQ3$dev2,"}  & cov_{",EQ3$dev1,EQ3$dev12,"} \\\\ cov_{",
-                         NOT$devI,EQ3$dev2,"}  & cov_{",EQ3$dev1,EQ3$dev2,"}  & var(",EQ3$dev2,") & cov_{",EQ3$dev2,EQ3$dev12,"} \\\\cov_{",NOT$devI,EQ3$dev12,"} & cov_{",
-                         EQ3$dev1,EQ3$dev12,"} & cov_{",EQ3$dev2,EQ3$dev12,"} & var(",EQ3$dev12,") \\end{pmatrix} $$"),
+                         "}), \\qquad \\text{where } \\Omega_{",NOT$devI,NOT$devS,"}= \\begin{pmatrix} V_{",NOT$devI,"} & cov_{",NOT$devI,EQ3$dev1,"}  & cov_{",NOT$devI,EQ3$dev2,"}  & cov_{",
+                         NOT$devI,EQ3$dev12,"} \\\\ cov_{",NOT$devI,EQ3$dev1,"}  & V_{",EQ3$dev1,"} & cov_{",EQ3$dev1,EQ3$dev2,"}  & cov_{",EQ3$dev1,EQ3$dev12,"} \\\\ cov_{",
+                         NOT$devI,EQ3$dev2,"}  & cov_{",EQ3$dev1,EQ3$dev2,"}  & V_{",EQ3$dev2,"} & cov_{",EQ3$dev2,EQ3$dev12,"} \\\\cov_{",NOT$devI,EQ3$dev12,"} & cov_{",
+                         EQ3$dev1,EQ3$dev12,"} & cov_{",EQ3$dev2,EQ3$dev12,"} & V_{",EQ3$dev12,"} \\end{pmatrix}.$$"),
     
-    "para3" = "We will simulate data with these terms, and assess two consequences of random slopes 
-    in two dimensions. First, we will ask where variation due to the interaction term 
+    "exercise" = "<b>Exercise</b><br>
+    We will now simulate data with this new model, and explore the situation of random slopes 
+    in two dimensions. First, we consider where variation due to the interaction term 
     ends up in a model that lacks that term. Second, we will try to visualize where 
-    variation due to warping is more likely to be seen.",
+    variation due to warping is more likely to be seen. A 3D plot of the population mean (below) provides you with a visual orientation 
+           to the average phenotype across the environmental space created by the two predictors. ",
     
-    "para4" = paste0("As the phenotypic equation is getting more complex, we will increase the number of sampled individuals to 500. 
-           As before, each individual is measured 20 times for both $",NOT$env,"$ predictors and both environments are random and unshared."),
+    "para3" = paste0("Since there are now more parameters in the model, we need more information to accurately estimates them, and thus we increase the number of sampled individuals to 500. 
+           As before, each individual is measured 20 times for both predictors and both environments are random and unshared."),
     
-    "para5" = "As before, it might be easiest to start with 0 covariances (represented as correlations) and add them in 
-    individually so you can more easily see what each does. Once the data are simulated, we can analyze them with lme4 as was done in 
-    the random regression module. For example, we can use the following equation 
-    in which the individual specific interaction term is omitted:",
-    "para5_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
+    "para4" = "By default, the app simulates assuming that there are no covariances between the parameters. Then, you can increase them one by one
+    to more easily see what each does. Once the data are simulated, we again fit the correct model, and the model without individual-specific interaction term as in the previous step, i.e., following the equation:",
+    "para4_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," + ",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
                          "} + (",EQ1$mean2,"+",EQ1$dev2,")",NOT$env,"_{2",NOT$time,NOT$ind,"} + (",EQ1$mean12,")",NOT$env,"_{1",NOT$time,NOT$ind,"}",NOT$env,"_{2",
                          NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
     
-    "para6" = "And we will compare those results with the full model:",
-    "para6_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = ",EQ1$mean0," +",EQ1$dev0,"  + (",EQ1$mean1,"+",EQ1$dev1,")",NOT$env,"_{1",NOT$time,NOT$ind,
-                         "} + (",EQ1$mean2,"+",EQ1$dev2,")",NOT$env,"_{2",NOT$time,NOT$ind,"} + (",EQ1$mean12,"+",EQ1$dev12,")",NOT$env,"_{1",NOT$time,NOT$ind,"}",
-                         NOT$env,"_{2",NOT$time,NOT$ind,"} + ",NOT$error,"_{",NOT$time,NOT$ind,"}$$"),
+    "para5" = paste0("As usual, omission of a key parameter causes variation to be placed elsewhere in the equation, 
+    in this case mostly in the residual. "),
     
-    "para7" = paste0("As usual, omission of a key parameter causes variation to be placed elsewhere in the equation, 
-    in this case mostly in the residual. A 3-d plot of the population mean (below) provides you with a visual orientation 
-           to the average phenotype across the environmental space created by the two $",NOT$env,"$ predictors. 
-           We have also plotted the values different individuals will express at the corners of 
-           the graph where they would experience an extreme in both $",NOT$env,"$ distributions."),
-    
-    "conclusion" = "<b>Conclusion:</b> The effect of interactions between environments on phenotypes has three important characteristics. First, it seems biologically likely given 
-the complexity of the environment and it in fact exists in many traits. Second, these effects can be modelled using mixed-effects models, including the random-effects 
-of individual on the response to each environment and in theory on the interaction term itself. The third characteristic is that these models are exceedingly complex. At this point, you 
-don't have in your mental pocket the full phenotypic equation. There are many more complexities to explore, but you now have all the basic tools. 
-         The SQuID platform can now be explored so you can assess what sampling regimes and experimental designs will allow you to effectively 
-         measure the attributes of most interest."
+    "conclusion" = "<b>Conclusion</b><br> The effect of interactions between environments on phenotypes has three important characteristics. First, it seems biologically likely given 
+the complexity of the environment, and it has been observed in many traits. Second, these effects can be captured using mixed-effects models, including the random-effects 
+of individuals on the response to each environment, and in theory on the interaction term itself. The third characteristic is that these models are exceedingly complex. There are many more extensions of the phenotypic equation to explore, but you now should have all the basic tools you need! 
+"
 
   ),
 
@@ -1992,7 +1970,7 @@ don't have in your mental pocket the full phenotypic equation. There are many mo
   
   "para5" = "This situation is now starting to approach what we saw with temperature-dependent sex determination. In that case,
   the trait we are measuring is always one of two conditions (e.g. female or male), the probability to get either outcome depends on an additional
-  factor: environmental condition. Many biological traits are expressed in binary terms, including e.g. expressed repeatedly over a lifetime.
+  predictor: environmental condition. Many biological traits are expressed in binary terms, including e.g. expressed repeatedly over a lifetime.
   An example of this is whether a bird mates during a particular breeding season or 
   whether a plant flowers during a particular year. This Bernoulli process can  statistically be modelled using the likenamed distribution, parameterized by the parameter we explored so far:
   the probability for a 'success'. Naturally, the larger the number of coin flips (i.e. observations) the better your estimate for
