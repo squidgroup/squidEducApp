@@ -1,8 +1,5 @@
 # UI: Module 3 Step 1
 span(
-
-  div(info_msg(c(Mod3Step1_txt$note1, Mod3Step1_txt$note2))), # Text: note
-  
   fluidRow(
     column(6,# 6 is half width
       # Among-individual variance (Vi)
