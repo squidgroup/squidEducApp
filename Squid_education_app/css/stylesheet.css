@@ -13,7 +13,8 @@
     min-width: 1px;
     margin-right: 0;
   }
-
+*/
+/* this next part formats the menu*/
   .topicsList {
     padding: 0px 10px 20px 1%;
     background-color: rgba(255, 255, 255, 0.98);
@@ -21,7 +22,7 @@
     box-shadow: 0 5px 25px 0px rgba(0, 0, 0, 0.15);
     -webkit-box-shadow: 0 5px 25px 0px rgba(0, 0, 0, 0.15);
   }
-
+/*
   .topicsList.hideFloating {
     display: none;
   }
@@ -35,6 +36,7 @@ body {
   background-color: white;
   font-size: 12;
 }
+/* this next part formats the idle buttons of the menu*/
 .topicsList .topic {
     line-height: 40px;
     font-size: 15px;
@@ -43,7 +45,7 @@ body {
     background-repeat: no-repeat;
     background-size: 2px 80px;
     background-position: left 100%;
-        background-position-y: 100%;
+    background-position-y: 100%;
     background-image: url(images/topicProgress.png);
     background-color: white;
     border-top: 1px dashed lightblue;
@@ -52,11 +54,22 @@ body {
     transition-property: background-position;
     -webkit-transition-duration: 0.25s;
     transition-duration: 0.25s;
+    border-left: 2px solid lightblue;
 }
+
+/* this next part formats the active buttons of the menu*/
 .topicsList .topic.current {
     background-color: #F5F5F5; /*#E8E8E*/
     color: #ffffff;
     border: 2px;
     border-top: 1px solid lightblue;
     border-bottom: 1px solid lightblue;
+}
+
+/* Step header */
+h2{
+  font-weight: bold;
+}
+h3 {
+  font-size: 150%;
 }
