@@ -718,7 +718,7 @@ text <- list(
                         randomly determined from one sampling period to another, and that all individuals were sampled at the same time. As a consequence,
                         all individuals experienced the same environment, and it thus had no effect on the estimate of the among-individual variance.
                         In the present module we explore what happens when we relax this assumption, for example when the environment changes during the sampling period. 
-                        If the timing of measurements differ for individuals ( we are usually unable to measure them at the same time),
+                        If the timing of measurements differ for individuals (we are usually unable to measure them at the same time),
                           how do you think this will affect the total phenotypic variance?"),
     
     "exercise"   = paste0("<b>Exercise</b><br> As in previous simulations, we will generate a new group of individuals, 
