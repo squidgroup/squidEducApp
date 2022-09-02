@@ -1218,7 +1218,7 @@ text <- list(
     "intro" = paste0("<b>Background</b><br> In the previous steps we considered a bivariate phenotypic 
 								equation where two traits correlated among- and/or within-individuals without considering 
 								plasticity as a mechanism causing this variation. This is why the double equation included no fixed-effects, apart from the intercepts:"),
-    "intro_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = (",EQ$mean0.1," + ",EQ$dev0.1,") + ",NOT$error,"_{",NOT$trait.1,NOT$time,NOT$ind,"},$$,$$",
+    "intro_eq1" = paste0("$$", NOT$trait.1,"_{",NOT$time,NOT$ind,"} = (",EQ$mean0.1," + ",EQ$dev0.1,") + ",NOT$error,"_{",NOT$trait.1,NOT$time,NOT$ind,"},$$$$",
                          NOT$trait.2,"_{",NOT$time,NOT$ind,"} = (",EQ$mean0.2," + ",EQ$dev0.2,") + ",NOT$error,"_{",NOT$trait.2,NOT$time,NOT$ind,"}.$$"),
     
     "para1"  = paste0('In the final step of this module, we investigate the role of within-individual plasticity in generating correlations 
