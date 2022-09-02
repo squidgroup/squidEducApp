@@ -219,6 +219,6 @@ submission_ui
 submission_server()
 ```
 
-<!--Non-Gaussian traits-->
-```{r extra_1, echo=F, child = "./modules/extra_1.Rmd" }
-```
+<!-- <!--Non-Gaussian traits--> -->
+<!-- ```{r extra_1, echo=F, child = "./modules/extra_1.Rmd" } -->
+<!-- ``` -->
