@@ -2,7 +2,7 @@
 This repo contains code for shiny apps included in the SQuID educational material. Each folder under /apps represents a single shiny app to be integrated in a separate app or website where students in behavior and evolutionary ecology can go to learn about applications of mixed-effects models and variance partitioning.
 
 # List of apps
-The following stand-alone shiny apps are embedded in the tutorial.
+The following stand-alone shiny apps are embedded in [the tutorial](https://squidile.shinyapps.io/SquidEducationApp/).
 
 ## Module 1
 [App 1](https://squidile.shinyapps.io/app1/) Consequences of measurement error on traits
