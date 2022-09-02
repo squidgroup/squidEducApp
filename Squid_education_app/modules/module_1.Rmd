@@ -1,5 +1,5 @@
 
-## Module 1: Basic lessons about variance
+## 1. Basic lessons about variance
 
 ```{r mod1_step1_title, results="asis"}
   cat("###",Mod1Step1_txt$title)
@@ -102,7 +102,7 @@ cat("###",Mod1Step3_txt$title)
   cat(Mod1Step3_txt$statmodel2_eq2)
 ```
 
-```{r ex1-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex1-setup, exercise=F, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(squidSim)
 library(lme4)
 
@@ -126,7 +126,7 @@ get_data <- function(n,r,Vi,Vr){
 }
 ```
 
-```{r ex1, exercise=TRUE, warning=F, message=F}
+```{r ex1, exercise=TRUE, warning=F, message=F, exercise.cap = "Code exercise."}
 # n is the number of individuals
 # r is the number of repetitions for each individual
 # Vi is the variance for individuals
@@ -153,7 +153,7 @@ summary(LMM)
 
 ```
 
-<object data='https://squidile.shinyapps.io/app4/' frameborder="0" style="width: 100%; height: 1150px;overflow:hidden;display:block"></object> 
+<object data='https://squidile.shinyapps.io/app4/' frameborder="0" style="width: 100%; height: 1130px;overflow:hidden;display:block"></object> 
 
 ```{r mod1_step4_con, results="asis"}      
   cat(Mod1Step4_txt$para4)   # Text: paragraph 4

@@ -1,5 +1,5 @@
 
-## Module 6: Multiple traits
+## 6. Multiple traits
 
 ```{r mod6_step1_title, results="asis"}
 cat("###", Mod6Step1_txt$title)
@@ -71,7 +71,7 @@ cat(Mod6Step2_txt$para4_eq1)
 cat(Mod6Step2_txt$exercise)
 ```
 
-<object data='https://squidile.shinyapps.io/app18/' frameborder="0" style="width: 100%; height: 1080px;overflow:hidden;display:block"></object> 
+<object data='https://squidile.shinyapps.io/app18/' frameborder="0" style="width: 100%; height: 1060px;overflow:hidden;display:block"></object> 
 
 ```{r mod6_step2_app18_con, results="asis"}
 cat(Mod6Step2_txt$para5)
@@ -121,7 +121,7 @@ cat(Mod6Step3_txt$intro)
 cat(Mod6Step3_txt$exercise)	
 ```
 
-<object data='https://squidile.shinyapps.io/app19/' frameborder="0" style="width: 100%; height: 1350px;overflow:hidden;display:block"></object> 
+<object data='https://squidile.shinyapps.io/app19/' frameborder="0" style="width: 100%; height: 1450px;overflow:hidden;display:block"></object> 
 
 ```{r Mod6Step3_app19_con, results="asis"}
 cat(Mod6Step3_txt$results)
@@ -231,7 +231,7 @@ cat(Mod6Step5_txt$para4)
 cat(Mod6Step5_txt$para4_eq1)
 ```
 
-```{r ex5-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex5-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(brms)
 library(squidSim)
 
@@ -260,7 +260,7 @@ get_data <- function(n,r,Vi,Vr){
 }
 ```
 
-```{r ex5, exercise=TRUE, exercise.timelimit	= 300}
+```{r ex5, exercise=TRUE, exercise.timelimit	= 300, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 50, r = 2,  
                  Vi = 0.5, Vr = 0.5)
 bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ (1|Individual), data = data, silent = 0)
@@ -273,7 +273,7 @@ cat(Mod6Step5_txt$para5)
 cat(Mod6Step5_txt$para5_eq1)
 ```
 
-```{r ex5a-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex5a-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(brms)
 library(squidSim)
 
@@ -302,7 +302,7 @@ get_data <- function(n,r,Vi,Vr){
 }
 ```
 
-```{r ex5a, exercise=TRUE, exercise.timelimit	= 300}
+```{r ex5a, exercise=TRUE, exercise.timelimit	= 300, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 50, r = 2,  
                  Vi = 0.5, Vr = 0.5)
 bLMM <- brm(mvbind(Phenotype_1, Phenotype_2) ~ food_availability + (1|Individual), data = data, silent = 0)

@@ -1,5 +1,5 @@
 
-## Module 3: Random-slope regression
+## 3. Random-slope regression
 
 ```{r mod3_step1_title, results="asis"}
   cat("###",Mod3Step1_txt$title)
@@ -14,7 +14,7 @@
 
 ```    
 
-```{r ex9-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex9-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 
@@ -42,7 +42,7 @@ get_data <- function(n,r,Vi,Vr, beta){
 }
 ```
 
-```{r ex9, exercise=TRUE}
+```{r ex9, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 50, r = 2,  
                  Vi = 0.5, Vr = 0.5, 
                  beta = -0.4)
@@ -68,7 +68,7 @@ summary(LMM)
 
 ```
 
-```{r ex10-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex10-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 
@@ -102,7 +102,7 @@ get_data <- function(n,r,Vi,Vr,Vs, Cis, beta){
 }
 ```
 
-```{r ex10, exercise=TRUE}
+```{r ex10, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 100, r = 10,  
                  Vi = 1, Vr = 0.5, Vs = 0.5, 
                  beta = -0.4)
@@ -143,7 +143,7 @@ cat("###",Mod3Step2_txt$title)
     cat(Mod3Step2_txt$para4)
 ```
 
-<object data='https://squidile.shinyapps.io/app25/' frameborder="0" style="width: 100%; height: 1120px;overflow:hidden;display:block"></object> 
+<object data='https://squidile.shinyapps.io/app25/' frameborder="0" style="width: 100%; height: 1090px;overflow:hidden;display:block"></object> 
 
 ```{r mod3_step2_app25_con, results="asis"}
     cat(Mod3Step2_txt$para5)
@@ -155,7 +155,7 @@ cat("###",Mod3Step2_txt$title)
     cat(Mod3Step2_txt$conclusion)
 ```
 
-```{r ex11-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex11-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 
@@ -189,7 +189,7 @@ get_data <- function(n,r,Vi,Vr,Vs, Cis, beta){
 }
 ```
 
-```{r ex11, exercise=TRUE}
+```{r ex11, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 300, r = 100,  
                  Vi = 1, Vr = 0.5, Vs = 1, 
                  Cis = 0.3, 

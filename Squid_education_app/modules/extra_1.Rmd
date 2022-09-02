@@ -115,7 +115,7 @@ cat("###", extra$Extra1Step3_txt$title)
   
 ```
 
-```{r ex2, exercise=TRUE, warning=F, message=F}
+```{r ex2, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 # number of values generated
 n <- 10000
 # Use the Gaussian distribution to generate n values
@@ -157,7 +157,7 @@ y <- rbinom(n, size = 1, prob = p)
 
 ```
 
-```{r ex3-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex3-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 get_data <- function(n,r,Vi,Vr){
@@ -181,7 +181,7 @@ get_data <- function(n,r,Vi,Vr){
 }
 ```
 
-```{r ex3, exercise=TRUE, exercise=TRUE, warning=FALSE, message=FALSE}
+```{r ex3, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 # n is the number of individuals
 # r is the number of repetitions for each individual
 # Vi is the variance for individuals

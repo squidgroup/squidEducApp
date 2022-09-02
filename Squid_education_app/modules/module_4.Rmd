@@ -1,5 +1,5 @@
 
-## Module 4: Multidimensional Phenotypic Plasticity (MDPP)
+## 4. Multidimensional Phenotypic Plasticity (MDPP)
 
 ```{r mod4_step1_title, results="asis"}
 cat("###", Mod4Step1_txt$title)
@@ -15,7 +15,7 @@ cat("###", Mod4Step1_txt$title)
 	cat(Mod4Step1_txt$para1_eq1)
 ```
 
-```{r ex6-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex6-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 
@@ -43,7 +43,7 @@ get_data <- function(n,r,Vi,Vr, beta){
 }
 ```
 
-```{r ex6, exercise=TRUE}
+```{r ex6, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 50, r = 2,  
                  Vi = 0.5, Vr = 0.5, 
                  beta = -0.4)
@@ -56,7 +56,7 @@ summary(LMM)
 	cat(Mod4Step1_txt$para2)
 ```  
 
-```{r ex7-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex7-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 
@@ -86,7 +86,7 @@ get_data <- function(n,r,Vi,Vr, beta){
 }
 ```
 
-```{r ex7, exercise=TRUE}
+```{r ex7, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 50, r = 2,  
                  Vi = 0.5, Vr = 0.5, 
                  beta = c(-0.4,0.2))
@@ -99,7 +99,7 @@ summary(LMM)
   cat(Mod4Step1_txt$exercise)
 ```
 
-<object data='https://squidile.shinyapps.io/app22/' frameborder="0" style="width: 100%; height: 1020px;overflow:hidden;display:block"></object> 
+<object data='https://squidile.shinyapps.io/app22/' frameborder="0" style="width: 100%; height: 1070px;overflow:hidden;display:block"></object> 
 
 ```{r mod4_step1_app22_con, results="asis"}
 	cat(Mod4Step1_txt$para3)
@@ -144,7 +144,7 @@ cat("###",Mod4Step2_txt$title)
   cat(Mod4Step2_txt$para2_eq1)
 ```
 
-```{r ex8-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex8-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 
@@ -178,7 +178,7 @@ get_data <- function(n,r,Vi,Vr, beta,beta2){
 }
 ```
 
-```{r ex8, exercise=TRUE}
+```{r ex8, exercise=TRUE, exercise.cap = "Code exercise.", warning=FALSE, message=FALSE}
 data <- get_data(n = 50, r = 2,  
                  Vi = 0.5, Vr = 0.5, 
                  beta = c(-0.4,0.2,1))

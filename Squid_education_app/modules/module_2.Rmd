@@ -1,5 +1,5 @@
 
-## Module 2: Non-stochastic environments
+## 2. Non-stochastic environments
 
 ```{r mod2_step1_title, results="asis"}
 
@@ -96,7 +96,7 @@ cat("###", Mod2Step3_txt$title)
   cat(Mod2Step3_txt$results_eq1)
 ```
 
-```{r ex4-setup, exercise=TRUE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
+```{r ex4-setup, exercise=FALSE, warning=FALSE, message=FALSE, echo=TRUE, exercise.cap = "Set-up for exercise code chunk."}
 library(lme4)
 library(squidSim)
 get_data <- function(n,r,Vi,Vr){
@@ -119,7 +119,7 @@ get_data <- function(n,r,Vi,Vr){
 }
 ```
 
-```{r ex4, exercise=TRUE, exercise=TRUE, warning=FALSE, message=FALSE}
+```{r ex4, exercise=TRUE, warning=FALSE, message=FALSE, exercise.cap = "Code exercise."}
 # n is the number of individuals
 # r is the number of repetitions for each individual
 # Vi is the variance for individuals
@@ -137,7 +137,7 @@ summary(LMM)
   cat(Mod2Step3_txt$para5)      # Text: paragraph 6
 ```
 
-<object data='https://squidile.shinyapps.io/app16/' frameborder="0" style="width: 100%; height: 1250px;overflow:hidden;display:block"></object> 
+<object data='https://squidile.shinyapps.io/app16/' frameborder="0" style="width: 100%; height: 1230px;overflow:hidden;display:block"></object> 
 
 ```{r mod2_step3_app16_con, results="asis"}
   cat(Mod2Step3_txt$reminder)   # Text: notation reminder
